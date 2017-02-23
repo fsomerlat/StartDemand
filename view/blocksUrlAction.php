@@ -1,5 +1,7 @@
-<?php session_start(); $verificaAcessoUrl = $_SESSION['logado'] == 0; if($verificaAcessoUrl) {
+ <?php session_start(); $verificaAcessoUrl = empty(($_SESSION['logado'])); 
+
+// if($verificaAcessoUrl) {
 	  	
-	  	header("location:index.php");
-}
+// 	  	header("location:index.php");
+// }
 	

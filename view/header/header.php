@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
 	
 	</head>
 	
@@ -12,7 +13,7 @@
 			<div class="col-md-6">
 					<ul class="breadcrumb">
 						<li>
-							<b>Bem vindo <?php echo $_SESSION["cpNome"] ." !";?></b> 
+							<b>Bem vindo <?php echo $_SESSION["cpNome"]." !";?></b> 
 						</li>
 						<li>
 							Hoje é dia - <b class="dataHoje"></b>
@@ -39,10 +40,10 @@
 									 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pedidos<strong class="caret"></strong></a>
 									<ul class="dropdown-menu">
 										<li>
-											<a href="#">Gerar</a>
+											<a href="Pedido.php?panel=193158">Gerar</a>
 										</li>
 										<li>
-											<a href="#">Listar</a>
+											<a href="listarPedidos.php">Listar</a>
 										</li>
 										<li class="divider">
 										</li>
@@ -58,10 +59,10 @@
 									 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produtos<strong class="caret"></strong></a>
 									<ul class="dropdown-menu">
 										<li>
-											<a href="#">Cadastrar</a>
+											<a href="Produto.php?panel=193157">Cadastrar</a>
 										</li>
 										<li>
-											<a href="#">Listar</a>
+											<a href="Produto.php?panel=571586">Listar</a>
 										</li>
 										<li class="divider">
 										</li>
@@ -92,6 +93,7 @@
 						</div>
 						
 					</nav>
-				</div>	
-				
+				</div>
+			</div>	
+							
 				

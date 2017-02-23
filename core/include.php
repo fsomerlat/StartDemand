@@ -2,20 +2,23 @@
 		
 		$diretorios = [
 						'../model/',
-						//'../controller/',
-						//'../view/'
-					  ];
+						'../controller/'
+						
+					   ];
 		
 		foreach($diretorios as $key => $dir):
-			
-			try {
-			
-				require_once $dir . $className . '.php';
 		
-			} catch (PDOException $e) {
+			if(file_exists($dir.$className.'.php')) {
+				try {
+				
+					require_once $dir . $className . '.php';
 			
-				echo 'Erro no arquivo '.$e->getFile().' referente a mensagem '.$e->getMessage().' na linha '.$e->getLine();
+				} catch (PDOException $e) {
+				
+					echo 'Erro no arquivo '.$e->getFile().' referente a mensagem '.$e->getMessage().' na linha '.$e->getLine();
+				}
 			}
-		
+			
 		endforeach;
+		
 }

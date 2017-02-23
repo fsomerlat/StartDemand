@@ -6,8 +6,6 @@
 		
 		$nome = addslashes($_REQUEST["cpNome"]);
 	    $senha = addslashes($_REQUEST["cpSenha"]);
-	    $status = addslashes($_REQUEST["cpStatus"]);
-	    $nivelAcesso = addslashes($_REQUEST["cpNivelAcesso"]);
 	   
 	    $getInfoUser = $acesso->getInfoUser($nome, $senha);
 	    
@@ -35,7 +33,7 @@
 		    switch($nivel):
 		    
 				case "A": header("location:../view/Usuario.php"); $_SESSION["logado"] = true; break;
-				case "S": header("location:../view/Pedido.php"); $_SESSION["logado"] = true; break;
+				case "S": header("location:../view/Pedido.php");  $_SESSION["logado"] = true; break;
 				case "C": header("location:../view/Produto.php"); $_SESSION["logado"] = true; break;
 				default: $_SESSION['logado'] = false;
 			endswitch;
