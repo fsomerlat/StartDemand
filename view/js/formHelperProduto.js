@@ -26,6 +26,11 @@ var FormHelperProduto = (function() {
 	var bindEvents = function() {
 		
 		expandePainel(verificaUrl());
+		
+		$(document).on('click','.excluirProduto' ,function() {
+			
+			return confirm("Tem certeza que deseja excluit esse registro ?");
+		});
 	}
 	
 	return {

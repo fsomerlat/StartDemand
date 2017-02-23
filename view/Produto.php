@@ -1,4 +1,20 @@
-<?php  require_once 'header/header.php'; ?>
+<?php  require_once 'header/header.php'; require_once '../core/include.php'; 
+		
+        $prod = new Produto();
+        
+		if($_GET["acao"]=="editar"):
+			$acao="atualizar";
+		    $id=(int)$_GET["id"];
+		    
+		    $edit = $prod->listId($id);
+		    
+		    
+		    else:
+		    	
+		    	$_GET["acao"] = "";
+;		endif;
+?>
+
 <div class="row">
 	<div class="col-md-5">
 		<div class="panel-group" id="panel-615651">
@@ -8,24 +24,24 @@
 				</div>
 				<div id="panel-element_193157" class="panel-collapse collapse">
 					<div class="panel-body">
-						<form name="formProduto" id="formProduto" action="../controller/Produto_Controller.php" method="POST">
+						<form name="formProduto" id="formProduto" action="../controller/Produto_Controller.php" method="GET">
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="Produto">Nome produto</label>
-									<input type="text" name="cpNomeProduto" id="cpNomeProduto" class="form-control" />
+									<input type="text" name="cpNomeProduto" value="<?php echo (isset($_GET["id"])) ? $edit->cpNomeProduto : "";?>" id="cpNomeProduto" class="form-control" />
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="Produto">Quantidade produto</label>
-									<input type="text" name="cpQtdProduto" id="cpQtdProduto" class="form-control" />
+									<input type="text" name="cpQtdProduto" value="<?php echo (isset($_GET["id"])) ? $edit->cpQtdProduto :""; ?>" id="cpQtdProduto" class="form-control" />
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="Produto">Nome produto</label>
+									<label for="Produto">Tipo produto</label>
 									<select name="cpTipoProduto" id="cpTipoProduto" class="form-control" >
-										<option value="0">Selecione</option>
+										<option value="0"><?php echo (isset($_GET["id"])) ? $edit->cpTipoProduto : "selecione";?></option>
 										<option value="Industrializado">Industrializado</option>
 										<option value="Caseiro">Caseiro</option>
 									</select>
@@ -34,19 +50,20 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="Produto">Valor produto</label>
-									<input type="text" name="cpValorProduto" id="cpValorProduto" class="form-control" />
+									<input type="text" name="cpValorProduto" value="<?php echo (isset($_GET["id"])) ? $edit->cpValorProduto : ""; ?>" id="cpValorProduto" class="form-control" />
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 								<label for="Observacao">Observação</label>
-									<textarea name="cpObservacaoProduto" id="cpObservacaoProduto" class="form-control"></textarea>
+									<textarea name="cpObservacaoProduto" id="cpObservacaoProduto" class="form-control"><?php echo (isset($_GET["id"])) ? $edit->cpObservacaoProduto : ""; ?></textarea>
 								</div>
 							</div>
 							
 							<div class="col-md-4">
 								<div class="form-group">
-									<input type="submit" name="acao" value="cadastrar" id="btnCadastrarProduto" value="enviar" class="btn btn-info form-control" />
+									<input type="hidden" name="id" value="<?php echo (isset($_GET["id"])) ? $id : ""; ?>" />
+									<input type="submit" name="acao" value="<?php echo (isset($_GET["id"])) ? $acao : "cadastrar";?>" id="btnCadastrarProduto" class="btn btn-info form-control" />
 								</div>
 							</div>
 							<div class="col-md-4">
@@ -61,25 +78,6 @@
 		</div>
 	</div>
 	
-	<div class="col-md-7">
-		<div class="form-group">
-			<ul class="nav nav-pills">
-				<li class="active">
-					 <a href="#"> <span class="badge pull-right">42</span> cadastrados</a>
-				</li>
-				<li class="active">
-					 <a href="#"> <span class="badge pull-right">16</span>Hoje</a>
-				</li>
-				<li class="active">
-					 <a href="#"> <span class="badge pull-right">16</span> finalizados</a>
-				</li>
-				<li class="active">
-					 <a href="#"> <span class="badge pull-right">16</span> baixados</a>
-				</li>
-			</ul>
-		</div>	
-	</div>	
-	
 	<div class="col-md-6">
 		<div class="panel-group" id="panel-754764">
 			<div class="panel panel-default">
@@ -88,14 +86,16 @@
 				</div>
 				<div id="panel-element_571586" class="panel-collapse collapse">
 					<div class="panel-body">
-						<table class="table table-hover">
+					<h4 class="listaProdutos"></h4>
+						<table class="table table-hover" id="tableProduto">
 							<thead>
 								<tr class="warning">
 									<th>Id</th>
 									<th>Nome</th>
-									<th>Tipo</th>
 									<th>Quantidade</th>
+									<th>Tipo</th>
 									<th>Valor</th>
+									<th>Observação</th>
 									<th></th>
 									<th></th>
 								</tr>

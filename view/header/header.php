@@ -1,4 +1,4 @@
-<?php  require_once 'blocksUrlAction.php'; ?>
+<?php  require_once 'blocksUrlAction.php'; $nome =  (isset($_SESSION["cpNome"])) ? $_SESSION["cpNome"] : ""; ?>
 <html>
 	<head>
 		<meta charset="UTF-8" />
@@ -13,7 +13,7 @@
 			<div class="col-md-6">
 					<ul class="breadcrumb">
 						<li>
-							<b>Bem vindo <?php echo $_SESSION["cpNome"]." !";?></b> 
+							<b>Bem vindo <?php echo  $nome." !";?></b> 
 						</li>
 						<li>
 							Hoje é dia - <b class="dataHoje"></b>
