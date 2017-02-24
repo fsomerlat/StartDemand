@@ -9,6 +9,7 @@
 				$cpQtdProduto,
 				$cpTipoProduto,
 				$cpValorProduto,
+				$cpTipoObservacao,
 				$cpObservacaoProduto;
 		
 		
@@ -25,15 +26,16 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table
-				 	(cpNomeProduto,cpQtdProduto,cpTipoProduto,cpValorProduto,cpObservacaoProduto)
+				 	(cpNomeProduto,cpQtdProduto,cpTipoProduto,cpValorProduto,cpTipoObservacao,cpObservacaoProduto)
 				 VALUES 
-				 (:cpNomeProduto,:cpQtdProduto,:cpTipoProduto,:cpValorProduto,:cpObservacaoProduto)";
+				 (:cpNomeProduto,:cpQtdProduto,:cpTipoProduto,:cpValorProduto,:cpTipoObservacao,:cpObservacaoProduto)";
 			
 			$in=DB::prepare($sql);
 			$in->bindParam(":cpNomeProduto",$this->cpNomeProduto,PDO::PARAM_STR);
 			$in->bindParam(":cpQtdProduto",$this->cpQtdProduto,PDO::PARAM_STR);
 			$in->bindParam(":cpTipoProduto",$this->cpTipoProduto,PDO::PARAM_STR);
 			$in->bindParam(":cpValorProduto",$this->cpValorProduto,PDO::PARAM_STR);
+			$in->bindParam(":cpTipoObservacao",$this->cpTipoObservacao, PDO::PARAM_STR);
 			$in->bindParam(":cpObservacaoProduto",$this->cpObservacaoProduto,PDO::PARAM_STR);
 			
 			try {
@@ -50,7 +52,7 @@
 			
 			$sql="SELECT 
 					
-					idProduto,cpNomeProduto,cpQtdProduto,cpTipoProduto,cpValorProduto,cpObservacaoProduto
+					idProduto,cpNomeProduto,cpQtdProduto,cpTipoProduto,cpValorProduto,cpTipoObservacao,cpObservacaoProduto
 						
 				  FROM $this->table";
 			
@@ -72,7 +74,7 @@
 		public function listId($id) {
 			
 			$sql="SELECT 
-					cpNomeProduto, cpQtdProduto,cpTipoProduto,cpValorProduto,cpObservacaoProduto
+					cpNomeProduto, cpQtdProduto,cpTipoProduto,cpValorProduto,cpTipoObservacao,cpObservacaoProduto
 				  FROM 
 				  	$this->table
 				  WHERE 
@@ -97,7 +99,7 @@
 			$sql="UPDATE $this->table 
 			      
 			      SET cpNomeProduto=:cpNomeProduto,cpQtdProduto=:cpQtdProduto,cpTipoProduto=:cpTipoProduto,
-			      cpValorProduto=:cpValorProduto,cpObservacaoProduto=:cpObservacaoProduto
+			      cpValorProduto=:cpValorProduto,cpTipoObservacao=:cpTipoObservacao,cpObservacaoProduto=:cpObservacaoProduto
 				 
 				 WHERE  idProduto=:idProduto";
 			
@@ -107,6 +109,7 @@
 			$up->bindParam(":cpQtdProduto", $this->cpQtdProduto,PDO::PARAM_INT);
 			$up->bindParam(":cpTipoProduto", $this->cpTipoProduto,PDO::PARAM_STR);
 			$up->bindParam(":cpValorProduto", $this->cpValorProduto,PDO::PARAM_INT);
+			$up->bindParam(":cpTipoObservacao",$this->cpTipoObservacao,PDO::PARAM_STR);
 			$up->bindParam(":cpObservacaoProduto", $this->cpObservacaoProduto,PDO::PARAM_STR);
 			
 			try {
@@ -136,6 +139,7 @@
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 			}
 		}
+
 	}
 
 		

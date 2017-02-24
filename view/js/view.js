@@ -5,10 +5,8 @@
 $(document).ready(function(){
 	
 	Utils.bindEvents();
-	
-	FormHelperProduto.bindEvents();
 	FormHelperPedido.bindEvents();
-	
+	FormHelperProduto.bindEvents();
 })
 
 $(document).ready(function(){
@@ -21,4 +19,27 @@ $(document).ready(function(){
 		
 		console.log(e);
 	}	
+	
+	try {
+		
+		Service_Generico.carregaInfoProdutoAjaxGenericoDB();
+	
+	}catch(e) {
+		
+		console.log(e);
+	}
+	
+	try {  
+		
+		Service_Pedido.carregaInfoProdutosDisponiveisPedido();
+	
+	}catch(e) {
+		
+		console.log(e);
+	}
+	
+	
+		
+
 })
+

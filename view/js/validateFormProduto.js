@@ -20,6 +20,7 @@ document.getElementById("btnCadastrarProduto").onclick = function() {
 	valida('cpNomeProduto','È necessário preencher o campo [ NOME ] !');
 	valida('cpQtdProduto','È necessário preencher o campo [ QUANTIDADE ] !');
 	valida('cpTipoProduto','È necessário preencher o campo [ TIPO ] !');
+	valida('cpValorEstimado','È necessário selecione o campo [ VALOR ESTIMADO ] !');
 	valida('cpValorProduto','È necessário preencher o campo [ VALOR ] !');
 
 	

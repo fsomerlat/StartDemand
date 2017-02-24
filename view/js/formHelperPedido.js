@@ -19,14 +19,16 @@ var FormHelperPedido = (function() {
 				"panel" : itens[0]
 		}
 		
-		return getIntesUrl.panel.substring(6,12);
+		return getItensUrl.panel.substring(6,12);
 	}
 	
 	
 	var bindEvents =  function() {
 		
 		expandePainel(verificaUrl());
+		
 	}
+		
 	
 	return  {
 		

@@ -41,7 +41,7 @@
 								<div class="form-group">
 									<label for="Produto">Tipo produto</label>
 									<select name="cpTipoProduto" id="cpTipoProduto" class="form-control" >
-										<option value="0"><?php echo (isset($_GET["id"])) ? $edit->cpTipoProduto : "selecione";?></option>
+										<option value=""><?php echo (isset($_GET["id"])) ? $edit->cpTipoProduto : "selecione";?></option>
 										<option value="Industrializado">Industrializado</option>
 										<option value="Caseiro">Caseiro</option>
 									</select>
@@ -49,13 +49,33 @@
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
+									<label for="valor estimado">Selecione um valor estimado</label>
+									<select name="cpValorEstimado" id="cpValorEstimado"  class="form-control">
+										<option value="0">Selecione</option>
+										<option value="1">Até 99.00</option>
+										<option value="2">Acima de 100</option> 
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
 									<label for="Produto">Valor produto</label>
-									<input type="text" name="cpValorProduto" value="<?php echo (isset($_GET["id"])) ? $edit->cpValorProduto : ""; ?>" id="cpValorProduto" class="form-control" />
+									<input type="text" name="cpValorProduto" maxlength="5" value="<?php echo (isset($_GET["id"])) ? $edit->cpValorProduto : ""; ?>" id="cpValorProduto" class="form-control" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="Tipo de Observacao">Tipo de observação</label>
+									<select name="cpTipoObservacao" id="cpTipoObservacao" class="form-control">
+										<option value="">Selecione</option>
+										<option value="Produto">Produto</option>
+										<option value="Acrescimo">Acrescimo</option> 
+									</select>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-								<label for="Observacao">Observação</label>
+								<label for="Observacao">Observação <tipoObs></tipoObs></label>
 									<textarea name="cpObservacaoProduto" id="cpObservacaoProduto" class="form-control"><?php echo (isset($_GET["id"])) ? $edit->cpObservacaoProduto : ""; ?></textarea>
 								</div>
 							</div>
@@ -95,6 +115,7 @@
 									<th>Quantidade</th>
 									<th>Tipo</th>
 									<th>Valor</th>
+									<th>Tipo Observacao</th>
 									<th>Observação</th>
 									<th></th>
 									<th></th>

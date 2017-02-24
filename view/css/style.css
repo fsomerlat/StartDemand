@@ -4,7 +4,9 @@
 	margin-top:40px;	
 }
 
-.listaPedidos{
+.listaPedidos,
+.ProdutosDisponiveisPedido,
+.listaProdutos{
 	
 	text-align: center;
 }
@@ -14,10 +16,7 @@
 	text-align:center;
 }
 
-.listaProdutos {
-	
-	text-align:center;
-}
+
 .table {
   width: 100%;
   max-width: 100%;

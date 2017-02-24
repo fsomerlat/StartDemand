@@ -18,6 +18,9 @@
 	<script type="text/javascript" src="js/formHelperPedido.js"></script>
 	<script type="text/javascript" src="js/formHelperProduto.js"></script>
 	<script type="text/javascript" src="js/carregaServicoProduto.js"></script>
+	<script type="text/javascript" src="js/carregaServicoPedido.js"></script>
+	<script type="text/javascript" src="js/carregaServicoGenericoProduto.js"></script>
+	<script type="text/javascript" src="js/maskinput.js"></script>
 	<script type="text/javascript" src="js/view.js"></script>
 
 	

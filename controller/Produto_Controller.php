@@ -8,13 +8,56 @@
 		$prod->__set("cpQtdProduto", addslashes($_REQUEST["cpQtdProduto"]));
 		$prod->__set("cpTipoProduto", addslashes($_REQUEST["cpTipoProduto"]));
 		$prod->__set("cpValorProduto", addslashes($_REQUEST["cpValorProduto"]));
+		$prod->__set("cpTipoObservacao", addslashes($_REQUEST["cpTipoObservacao"]));
 		$prod->__set("cpObservacaoProduto", addslashes($_REQUEST["cpObservacaoProduto"]));
 		
-		$prod->INSERT();
-		echo "<script language='javascript'>
-					window.alert('Registro inserido com sucesso !');
-					window.location.href='../view/Produto.php?panel=571586';
-				</script>";
+		$validaNome = empty($prod->__get("cpNomeProduto"));
+		$validaQtd  = empty($prod->__get("cpQtdProduto"));
+		$validaValorEstimado = $_REQUEST["cpValorEstimado"];
+		$validaValorProduto = empty($prod->__get("cpValorProduto"));
+		
+		if($validaNome):
+		
+			echo "<script language='javascript'>
+						window.alert('È necessário preencher o campo [ 	NOME PRODUTO ] !');
+						window.history.go(-1);
+					</script>";
+		
+		elseif($validaQtd):
+		
+			echo "<script language='javascript'>
+							window.alert('È necessário preencher o campo [ 	QUANTIDADE PRODUTO ] !');
+							window.history.go(-1);
+						</script>";
+		
+		elseif($_REQUEST["cpTipoProduto"] == ""):
+		
+			echo "<script language='javascript'>
+								window.alert('È necessário preencher o campo [ 	TIPO PRODUTO ] !');
+								window.history.go(-1);
+							</script>";
+		
+		elseif($validaValorEstimado == 0):
+		
+			echo "<script language='javascript'>
+							window.alert('È necessário preencher o campo [ 	VALOR ESTIMADO ] ! !');
+							window.history.go(-1);
+						</script>";
+		
+		elseif($validaValorProduto):
+		
+			echo "<script language='javascript'>
+								window.alert('È necessário preencher o campo [ 	VALOR PRODUTO ] ! !');
+								window.history.go(-1);
+							</script>";
+		else:
+			$prod->INSERT();
+			echo "<script language='javascript'>
+						window.alert('Registro inserido com sucesso !');
+						window.location.href='../view/Produto.php?panel=571586';
+					</script>";
+	
+		endif;		
 	endif;
 	
 	
@@ -26,6 +69,7 @@
 		$prod->__set("cpQtdProduto", addslashes($_REQUEST["cpQtdProduto"]));
 		$prod->__set("cpTipoProduto", addslashes($_REQUEST["cpTipoProduto"]));
 		$prod->__set("cpValorProduto", addslashes($_REQUEST["cpValorProduto"]));
+		$prod->__set("cpTipoObservacao", addslashes($_REQUEST["cpTipoObservacao"]));
 		$prod->__set("cpObservacaoProduto", addslashes(trim($_REQUEST["cpObservacaoProduto"])));
 	
 	
