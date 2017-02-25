@@ -43,7 +43,7 @@
 											<a href="Pedido.php?panel=193158">Gerar</a>
 										</li>
 										<li>
-											<a href="listarPedidos.php">Listar</a>
+											<a href="listarPedidos.php" target="_blank">Listar</a>
 										</li>
 										<li class="divider">
 										</li>

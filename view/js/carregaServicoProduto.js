@@ -34,7 +34,7 @@ var Service_Produto = (function() {
 						itens += "<td>" +retorno[i].cpNomeProduto+"</td>";
 						itens += "<td>" +retorno[i].cpQtdProduto+ "</td>";
 						itens += "<td>" +retorno[i].cpTipoProduto+"</td>";
-						itens += "<td>" +retorno[i].cpValorProduto+"</td>";
+						itens += "<td> R$ " +retorno[i].cpValorProduto+"</td>";
 						itens += "<td>" +retorno[i].cpTipoObservacao+"</td>";
 						itens += "<td>" +retorno[i].cpObservacaoProduto+"</td>"; 
 						itens += "<td><a href='Produto.php?panel=193157&acao=editar&id="+retorno[i].idProduto+"'><span class='glyphicon glyphicon-pencil super'  aria-hidden='true'></span></a></td>";

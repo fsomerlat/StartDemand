@@ -4,7 +4,7 @@
 
 var Service_Pedido = (function() {
 	
-	var carregaProdutosDisponiveis = function() {
+	var carregaInfoProdutosDisponiveisPedido = function() {
 		
 		itens = "";
 		$.ajax({
@@ -27,7 +27,7 @@ var Service_Pedido = (function() {
 					$(".ProdutosDisponiveisPedido").html(retorno[0].erro);
 				
 				} else {
-					 
+					
 					setTimeout(function() {
 						
 						for(var i=0; i < retorno.length; i++) {
@@ -35,24 +35,20 @@ var Service_Pedido = (function() {
 							itens += "<tr>";
 							itens += "<td>" +retorno[i].cpNomeProduto+ "</td>"; 
 							itens += "<td>" +retorno[i].cpTipoObservacao+ "</td>";
-							itens += "<td>" +retorno[i].cpValorProduto+"</td>";
+							itens += "<td> R$ " +retorno[i].cpValorProduto+"</td>";
 							itens += "<td>" +retorno[i].cpObservacaoProduto+"</td>";
 							itens += "</tr>";
 
 							$("#tableProdutosDisponiveisPedido tbody").html(itens);
 							$(".ProdutosDisponiveisPedido").html("");
-						}						
+						}		
+						
 					},1200);
 				}
 			}
 		});
 	}
 	
-	var carregaInfoProdutosDisponiveisPedido = function() {
-		
-		carregaProdutosDisponiveis();
-		
-	}
 	
 	return {
 		

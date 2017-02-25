@@ -5,13 +5,13 @@
 		<div class="form-group">
 			<ul class="nav nav-pills">
 				<li class="active">
-					 <a href="#"> <span class="badge pull-right">16</span>Hoje</a>
+					 <a href="#"> <span class="badge pull-right">16</span>Pedidos de hoje</a>
 				</li>
 				<li class="active">
-					 <a href="#"> <span class="badge pull-right">16</span> finalizados</a>
+					 <a href="#"> <span class="badge pull-right">16</span>Pedidos finalizados</a>
 				</li>
 				<li class="active">
-					 <a href="#"> <span class="badge pull-right">16</span> baixados</a>
+					 <a href="#"> <span class="badge pull-right">16</span>Pedidos baixados</a>
 				</li>
 			</ul>
 		</div>	
@@ -27,9 +27,11 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label for="Produto">Nome do produto</label>
-									<select name="cptuProduto_idProduto" id="cptuProduto_idProduto" class="form-control ">
+									<select name="cptuProduto_idProduto" id="cptuProduto_idProduto" class="form-control">
 										<!-- LISTA PRODUTOS VIA AJAX -->
 									</select>
+									
+									<msgErroProdutoPedido></msgErroProdutoPedido>
 								</div>
 							</div>
 							<div class="col-md-2">
@@ -146,7 +148,7 @@
 							<div class="col-md-2">
 								<div class="form-group">
 									<label for="Valor acrescimo">Valor acréscimo</label>
-									<input type="text" name="cpValorAcrescimo" id="cpValorAcrescimo" class="form-control" />
+									<input type="text" name="cpValorAcrescimo" id="cpValorAcrescimo" readonly class="form-control" />
 								</div>
 							</div>												
 							<div class="col-md-2">
