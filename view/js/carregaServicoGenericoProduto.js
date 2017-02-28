@@ -7,8 +7,7 @@ var Service_Generico = (function() {
 	
 	var carregaInProduto = function() {
 		
-		var option = "",
-			options = "";
+		var option = "", options = "";
 		
 		$.ajax({
 			
@@ -17,12 +16,12 @@ var Service_Generico = (function() {
 			dataType:"json",
 			beforeSend: function(){
 				
-				$("#cpAcrescimo").html("<option value='0'>Aguarde carregando...</option>");
+			    $("#cpAcrescimo").html("<option value='0'>Aguarde carregando...</option>");
 				$("#cptuProduto_idProduto").html("<option value='0'>Aguarde, carregando...</option>");
 			},
 			error: function() {
 				
-				$("msgErroAcrescimo").html("Houve um erro com a fonte de dados !")
+				$("msgErroAcrescimo").html("Houve um erro com a fonte de dados !");
 				$("msgErroProdutoPedido").html("Houve um erro com a fonte de dados !");
 		
 			},
@@ -31,13 +30,14 @@ var Service_Generico = (function() {
 				if(retorno[0].erro) {
 					
 					$("msgErroAcrescimo").html(retorno[0].erro);
-					$("msgErroProdutoPedido").html("Houve um erro com a fonte de dados !");
+					$("msgErroProdutoPedido").html(retorno[0].erro);
 				} else {
-					
+				
+				
 				setTimeout(function() { 
 					
-					option  += "<option value=''>Selecione</option>";
-					options += "<option value=''>Selecione</option>";
+					option   += "<option value=''>Selecione</option>";
+					options  += "<option value=''>Selecione</option>";
 					
 					for(var i=0; i < retorno.length; i++) {
 						
@@ -45,20 +45,13 @@ var Service_Generico = (function() {
 							
 							option += "<option value='"+retorno[i].cpNomeProduto+"'>" +retorno[i].cpNomeProduto+"</option>";							
 						
-						}
-						else if(retorno[i].cpTipoObservacao == "Produto") {
+						} else if(retorno[i].cpTipoObservacao == "Produto") {
 							
-							options =+ "<option value='"+retorno[i].idProduto+"'>"+retorno[i].cpNomeProduto+"</option>";
+							options += "<option value='"+retorno[i].idProduto+"'>"+retorno[i].cpNomeProduto+"</option>";
 						}
 					}	
-					try {
-						
-						$("#cpAcrescimo").html(option);
-					}catch(e) {
-						
-						console.log(e)
-					}	
-					try {
+					try {						
+						    $("#cpAcrescimo").html(option);
 							$("#cptuProduto_idProduto").html(options);
 							
 						}catch(e) {
@@ -73,8 +66,8 @@ var Service_Generico = (function() {
 	}
 	
 	var carregaInfoProdutoAjaxGenericoDB = function() {
-		
-		carregaInProduto();
+	
+			carregaInProduto();
 	}
 	
 	return {

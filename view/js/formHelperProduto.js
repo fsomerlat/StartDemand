@@ -78,7 +78,7 @@ var FormHelperProduto = (function() {
 		$("#cpTipoObservacao").change(function() {
 			
 			tipoObservacao(this.value);
-		})
+		});
 	}	
 	
 	

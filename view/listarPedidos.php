@@ -27,6 +27,7 @@
 											<th>QTDA acréscimo</th>
 											<th>Hora criação</th>
 											<th>Observação pedido</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>

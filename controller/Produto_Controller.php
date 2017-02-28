@@ -7,7 +7,7 @@
 		$prod->__set("cpNomeProduto",  addslashes($_REQUEST["cpNomeProduto"]));
 		$prod->__set("cpQtdProduto", addslashes($_REQUEST["cpQtdProduto"]));
 		$prod->__set("cpTipoProduto", addslashes($_REQUEST["cpTipoProduto"]));
-		$prod->__set("cpValorProduto", addslashes($_REQUEST["cpValorProduto"]));
+		$prod->__set("cpValorProduto",  addslashes($_REQUEST["cpValorProduto"]));
 		$prod->__set("cpTipoObservacao", addslashes($_REQUEST["cpTipoObservacao"]));
 		$prod->__set("cpObservacaoProduto", addslashes($_REQUEST["cpObservacaoProduto"]));
 		

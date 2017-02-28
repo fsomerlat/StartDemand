@@ -22,10 +22,8 @@ var FormHelperPedido = (function() {
 		return getItensUrl.panel.substring(6,12);
 	}
 	
-	/****MARACUTAIA****/ 
-	var getAjaxProduto = function(nomeProduto) {
-		
-		var infoProdutos = [];
+
+	var getAjaxValorAcrescimo = function(nomeProduto) {
 		
 		$.ajax({
 			
@@ -34,35 +32,162 @@ var FormHelperPedido = (function() {
 			dataType:"json",
 			success:function(retorno) {
 					
-			var arry = retorno.map(function(dados) {
+			retorno.map(function(dados) {
 					
 					if(dados.cpNomeProduto == nomeProduto) {
-						
+					
 						$("#cpValorAcrescimo").val(dados.cpValorProduto);
-					}
+						$("#cpValorBaseAcrescimo").val(dados.cpValorProduto);
+					} 
 				});
-
-			infoProdutos.push(arry);
 			}
 		});
-		return infoProdutos;
 	}
 	
-	var preencheAcrescimoPedido = function() {
+	
+	var getAjaxValorProduro = function(cptuProduto_idProduto) {
 		
-		$(document).on('change','#cpAcrescimo',function(ev) {
+		$.ajax({
 			
-			getAjaxProduto(ev.target.value);
+			url:"http://localhost/startDemand/service/Service_Produto.php",
+			cache:false,
+			dataType:"json",
+			success:function(retorno) {
+				  
+			retorno.map(function(dados){
+					   
+					if(dados.idProduto == cptuProduto_idProduto) {	
+						
+						$("#cpValorProduto").val(dados.cpValorProduto);
+						$("#cpValorBaseProduto").val(dados.cpValorProduto);
+					}
+				});
+			}
+		});
+	}
+	
+	var getValorBaseAcrescimo =  function() {
+		
+		return $("#cpValorBaseAcrescimo").val();
+	}
+	
+	var getValorBaseProduto =  function() {
+		
+		return $("#cpValorBaseProduto").val();
+	}
+
+	var preencheAcrescimoPedido = function() {
+
+		$("#cpQtdAcrescimo").change(function() {
+			
+			var valorAcrescimo = $("#cpAcrescimo").val();
+			if(valorAcrescimo == '') {
+				
+				this.value = 0;
+				window.alert("È necessário selecionar o campo [ ACRÉSCIMO ] !");
+			    $("#cpAcrescimo").focus(); return false;
+				
+			} else if(this.value == 0) {
+				
+				$('.toClearAcrescimo').val("");
+				
+			} else {
+				
+				var result = this.value * getValorBaseAcrescimo();
+				$("#cpValorAcrescimo").val(result);
+				$("#cpValorTotalPedido").val(getSomaTotalPedido());
+			}
+		});
+	}
+	
+	var recalculaValorPedido = function() {
+		
+		return getSomaTotalPedido();
+	}
+	
+	var preencheValorProduto = function() {
+		
+		$("#cpQtdProduto").change(function() {
+			
+			var nomeProduto = $("#cptuProduto_idProduto").val();
+			if(nomeProduto == '') {
+					
+				this.value = 0;
+				window.alert("È necessário selecionar o campo  [ NOME DO PRODUTO ] !");
+				$("#cptuProduto_idProduto").focus() ; return false;
+				
+			} else if(this.value ==  0) { 
+				
+				$(".toClearProduto").val("");
+				
+			} else {
+				
+				var result = this.value * getValorBaseProduto();
+				$("#cpValorProduto").val(result);
+				$("#cpValorTotalPedido").val(getSomaTotalPedido());
+			}
+		});
+	}
+	
+	var getSomaTotalPedido = function() {
+		
+	
+		var valorAcrescimo = $("#cpValorAcrescimo").val(),
+			valorProduto = $("#cpValorProduto").val(),
+			somaTotalPedido ='';
+		if(valorAcrescimo != '' || valorProduto != '') {
+			
+			(valorAcrescimo == '') ? valorAcrescimo = 0 :false;
+			(valorProduto == '') ? valorProduto = 0 : false;			
+			
+			somaTotalPedido = parseFloat(valorAcrescimo) + parseFloat(valorProduto);
+		}	
+		return somaTotalPedido;
+	}
+	
+	var postCamposAcrescimo = function() {
+		
+		var campoAcrescimo = $("#cpAcrescimo").val(),
+			valBaseAcrescimo = $("#cpValorBaseAcrescimo").val(),
+			qtdAcrescimo = $("#cpQtdAcrescimo").val(),
+			valAcrescimo = $("#cpValorAcrescimo").val();
+		
+		var arryValores = [campoAcrescimo,qtdAcrescimo,valAcrescimo];
+		
+		//,acrescimo: campoAcrescimo,valorBase: valBaseAcrescimo,qtdaAcrescimo:qtdAcrescimoc
+		$.post("http://localhost/startDemand/controller/Pedido_Controller.php",{campos: arryValores}, function(retorno) {
+			
+			$(".successAddAcrescimo").html(retorno);
 		});
 	}
 	
 	var bindEvents =  function() {
 		
 		expandePainel(verificaUrl());
-		
 		preencheAcrescimoPedido();
-	
+		preencheValorProduto();
+		
+		$(document).on('change','#cptuProduto_idProduto', function(ev) {
+			
+			getAjaxValorProduro(ev.target.value);
+		});
+		
+		$(document).on('change','#cpAcrescimo',function(ev) {
+
+			getAjaxValorAcrescimo(ev.target.value);
+		});
+		
+//		$("#cptuProduto_idProduto,#cpAcrescimo").change(function() {
+//		
+//			recalculaValorPedido(); 
+//		});
+		
+		$("#btnAddAcrescimo").click(function() {
+			
+			postCamposAcrescimo();
+		});
 	}
+	
 	
 	return  {
 
@@ -70,3 +195,5 @@ var FormHelperPedido = (function() {
 		
 	}
 })();
+	    
+	    

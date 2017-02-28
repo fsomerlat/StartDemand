@@ -23,11 +23,21 @@
 				</div>
 				<div id="panel-element_193158" class="panel-collapse collapse">
 					<div class="panel-body">
-						<form name="formProduto" id="formProduto" action="" method="POST">
-							<div class="col-md-3">
+						<form name="formProduto" id="formProduto" action="../controller/Pedido_Controller.php" method="POST">
+						<div class="col-md-2">
+							<div class="form-group">
+								<label for="Status">Status</label>
+								<select name="cpStatusPedido" id="cpStatusPedido" class="form-control btn btn-success">
+									<option value="">Selecione</option>
+									<option value="A" selected>Em andamento</option>
+									<option value="C">Cancelado</option>
+								</select>
+							</div>
+						</div>
+							<div class="col-md-2">
 								<div class="form-group">
 									<label for="Produto">Nome do produto</label>
-									<select name="cptuProduto_idProduto" id="cptuProduto_idProduto" class="form-control">
+									<select name="cptuProduto_idProduto" id="cptuProduto_idProduto" class="form-control toClearProduto">
 										<!-- LISTA PRODUTOS VIA AJAX -->
 									</select>
 									
@@ -36,20 +46,30 @@
 							</div>
 							<div class="col-md-2">
 								<div class="form-group">
-									<label for="Produto">Quantidade pedido</label>
-									<select name="cpQtdPedido" id="cpQtdPedido" class="form-control ">
+									<label for="Valor base produto">Valor base produto</label>
+									<input type="text" name="cpValorBaseProduto" readonly id="cpValorBaseProduto" class="form-control" />
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group">
+									<label for="Produto">Quantidade produto</label>
+									<select name="cpQtdProduto" id="cpQtdProduto" class="form-control">
 										<option value="0">Selecione</option>
 										<option valur="1">1</option>
 										<option valur="2">2</option>
-										<option valur="2">2</option>
-										<option valur="3">4</option>
+										<option valur="3">3</option>
+										<option valur="4">4</option>
 										<option valur="5">5</option>
-										<option valur="6">7</option>
-										<option valur="9">8</option>
+										<option valur="6">6</option>
+										<option valur="7">7</option>
+										<option valur="8">8</option>
+										<option valur="9">9</option>
 										<option valur="10">10</option>
 										<option valur="11">11</option>
-										<option valur="12">13</option>
-										<option valur="15">14</option>
+										<option valur="12">12</option>
+										<option valur="13">13</option>
+										<option valur="14">14</option>
+										<option valur="15">15</option>
 										<option valur="16">16</option>
 										<option valur="17">17</option>
 										<option valur="18">18</option>
@@ -62,7 +82,7 @@
 								<div class="form-group">
 									<label for="ComplementoUm">1º Complemento</label>
 									<select name="cpComplementoUm" id="cpComplementoUm" class="form-control " >
-										<option value="0">Selecione</option>
+										<option value="">Selecione</option>
 										<optgroup label="Frutas">
 											<option value="Banana">Banana</option>
 											<option value="Morando">Morango</option>
@@ -91,8 +111,8 @@
 							<div class="col-md-2">
 								<div class="form-group">
 									<label for="ComplementoDois">2º Complemento</label>
-									<select name="cpComplementodois" id="cpComplementodois" class="form-control ">
-										<option value="0">Selecione</option>
+									<select name="cpComplementoDois" id="cpComplementoDois" class="form-control ">
+										<option value="">Selecione</option>
 										<optgroup label="Frutas">
 											<option value="Banana">Banana</option>
 											<option value="Morando">Morango</option>
@@ -116,13 +136,15 @@
 												<option value="Achocolatado">Achocolatado</option>												
 										</optgroup>
 									</select>
-									
 								</div>
-							</div>	
-							<div class="col-md-3">
+							</div>		
+							<div class="col-md-12 successAddAcrescimo">
+							
+							</div>
+							<div class="col-md-2">
 								<div class="form-group">
 									<label for="Complemento">Acréscimo</label>
-									<select name="cpAcrescimo" id="cpAcrescimo" class="form-control">
+									<select name="cpAcrescimo" id="cpAcrescimo" class="form-control toClearAcrescimo">
 											<!-- CARREGA VIA AJAX -->
 									</select>
 									<msgErroAcrescimo></msgErroAcrescimo>
@@ -130,8 +152,14 @@
 							</div>	
 							<div class="col-md-2">
 								<div class="form-group">
+									<label for="Valor base acrescimo">Valor base acréscimo</label>
+									<input type="text" name="cpValorBaseAcrescimo" id="cpValorBaseAcrescimo" readonly class="form-control"/>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
 									<label for="Quantidade Acrescimo">Quantidade Acréscimo</label>
-									<select name="cpQtaAcrescimo" id="cpQtaAcrescimo" class="form-control ">
+									<select name="cpQtdAcrescimo" id="cpQtdAcrescimo" class="form-control ">
 										<option value="0">Selecione</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -147,21 +175,31 @@
 							</div>
 							<div class="col-md-2">
 								<div class="form-group">
-									<label for="Valor acrescimo">Valor acréscimo</label>
-									<input type="text" name="cpValorAcrescimo" id="cpValorAcrescimo" readonly class="form-control" />
+									<label for="Valor acrescimo">Valor total acréscimo</label>
+									<input type="text" name="cpValorAcrescimo" id="cpValorAcrescimo" readonly class="form-control toClearAcrescimo" />
 								</div>
-							</div>												
-							<div class="col-md-2">
+							</div>	
+							<div class="col-md-3">
 								<div class="form-group">
-									<label for="Produto">Valor produto</label>
-									<input type="text" name="cpValorProduto" id="cpValorProduto" readonly class="form-control " />
+									<input type="button" name="acao" value="adicionar acréscimo" id="btnAddAcrescimo" class="form-control btn btn-info btnAcrescimo" />
+								</div>
+							</div>									
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="Produto">Valor total produto</label>
+									<input type="text" name="cpValorProduto" id="cpValorProduto" readonly class="form-control toClearProduto" />
 								</div>
 							</div>
-							
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="Valor total">Valor total pedido</label>
+									<input type="text" name="cpValorTotalPedido" id="cpValorTotalPedido" readonly class="form-control"/>
+								</div>
+							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 								<label for="Observacao">Observação</label>
-									<textarea name="cpObservacaoProduto" rows="2" id="cpObservacaoProduto" class="form-control "></textarea>
+									<textarea name="cpObservacaoPedido" rows="2" id="cpObservacaoPedido" class="form-control "></textarea>
 								</div>
 							</div>
 							
@@ -187,7 +225,7 @@
 	<div class="panel-group" id="panel-615652">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				 <div class="panel-title" data-toggle="collapse" data-parent="#panel-615652" href="#panel-element_193159">Produtos disponíveis</div>
+				 <div class="panel-title" data-toggle="collapse" data-parent="#panel-615652" href="#panel-element_193159">Tabela de produtos disponíveis</div>
 			</div>
 			<div id="panel-element_193159" class="panel-collapse collapse in">
 				<div class="panel-body">
