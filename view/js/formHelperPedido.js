@@ -36,7 +36,7 @@ var FormHelperPedido = (function() {
 					
 					if(dados.cpNomeProduto == nomeProduto) {
 					
-						$("#cpValorAcrescimo").val(dados.cpValorProduto);
+						$("#cpValorTotalAcrescimo").val(dados.cpValorProduto);
 						$("#cpValorBaseAcrescimo").val(dados.cpValorProduto);
 					} 
 				});
@@ -94,7 +94,7 @@ var FormHelperPedido = (function() {
 			} else {
 				
 				var result = this.value * getValorBaseAcrescimo();
-				$("#cpValorAcrescimo").val(result);
+				$("#cpValorTotalAcrescimo").val(result);
 				$("#cpValorTotalPedido").val(getSomaTotalPedido());
 			}
 		});
@@ -132,7 +132,7 @@ var FormHelperPedido = (function() {
 	var getSomaTotalPedido = function() {
 		
 	
-		var valorAcrescimo = $("#cpValorAcrescimo").val(),
+		var valorAcrescimo = $("#cpValorTotalAcrescimo").val(),
 			valorProduto = $("#cpValorProduto").val(),
 			somaTotalPedido ='';
 		if(valorAcrescimo != '' || valorProduto != '') {
@@ -150,12 +150,13 @@ var FormHelperPedido = (function() {
 		var campoAcrescimo = $("#cpAcrescimo").val(),
 			valBaseAcrescimo = $("#cpValorBaseAcrescimo").val(),
 			qtdAcrescimo = $("#cpQtdAcrescimo").val(),
-			valAcrescimo = $("#cpValorAcrescimo").val();
+			valTotalAcrescimo = $("#cpValorTotalAcrescimo").val();
 		
-		var arryValores = [campoAcrescimo,qtdAcrescimo,valAcrescimo];
+		//,qtdAcrescimo: qtdAcrescimo,valAcrescimo: valAcrescimo
+		
 		
 		//,acrescimo: campoAcrescimo,valorBase: valBaseAcrescimo,qtdaAcrescimo:qtdAcrescimoc
-		$.post("http://localhost/startDemand/controller/Pedido_Controller.php",{campos: arryValores}, function(retorno) {
+		$.post("http://localhost/startDemand/controller/Pedido_Controller.php",{nomeAcrescimo: campoAcrescimo,qtdAcrescimo:qtdAcrescimo,valBaseAcrescimo:valBaseAcrescimo,valTotalAcrescimo:valTotalAcrescimo}, function(retorno) {
 			
 			$(".successAddAcrescimo").html(retorno);
 		});

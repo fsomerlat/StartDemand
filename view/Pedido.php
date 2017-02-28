@@ -176,12 +176,13 @@
 							<div class="col-md-2">
 								<div class="form-group">
 									<label for="Valor acrescimo">Valor total acréscimo</label>
-									<input type="text" name="cpValorAcrescimo" id="cpValorAcrescimo" readonly class="form-control toClearAcrescimo" />
+									<input type="text" name="cpValorTotalAcrescimo" id="cpValorTotalAcrescimo" readonly class="form-control toClearAcrescimo" />
 								</div>
 							</div>	
 							<div class="col-md-3">
 								<div class="form-group">
 									<input type="button" name="acao" value="adicionar acréscimo" id="btnAddAcrescimo" class="form-control btn btn-info btnAcrescimo" />
+								<hr/>	
 								</div>
 							</div>									
 							<div class="col-md-6">
@@ -218,38 +219,58 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	
-	<div class="col-md-4">
-
-	<div class="panel-group" id="panel-615652">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				 <div class="panel-title" data-toggle="collapse" data-parent="#panel-615652" href="#panel-element_193159">Tabela de produtos disponíveis</div>
-			</div>
-			<div id="panel-element_193159" class="panel-collapse collapse in">
-				<div class="panel-body">
-					<h4 class="ProdutosDisponiveisPedido"></h4>
-					<table class="table table-hover" id="tableProdutosDisponiveisPedido">
-						<thead>
+		
+		<div class="panel-group" id="panel-402239">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					 <div class="panel-title" data-toggle="collapse" data-parent="#panel-402239" href="#panel-element_655955">Acréscimo a ser incluído</div>
+				</div>
+				<div id="panel-element_655955" class="panel-collapse collapse">
+					<div class="panel-body">
+						<table class="table table-hover">
 							<tr class="warning">
-								<th>Produto</th>
-								<th>Tipo</th>
+								<th>Nome acréscimo</th>
+								<th>QTDA</th>
+								<th>Valor total</th>
 								<th>Valor</th>
-								<th>Observação</th>
 							</tr>
-						</thead>
+						</table>
 						<tbody>
-							<!-- CARREGA VIA AJAX -->
+							<!-- LISTA ACRÉSCIMOS VIA AJAX -->
 						</tbody>
-					</table>
-				</div><!-- FIM PANEL-BODY -->
-			</div><!-- FIM PANEL-COLLAPSE -->
-		</div><!-- FIM PANEL DEFAULT -->
-	</div><!-- FIM PANEL-GROUP -->
-	
-	
-</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="panel-group" id="panel-615652">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					 <div class="panel-title" data-toggle="collapse" data-parent="#panel-615652" href="#panel-element_193159">Tabela de produtos disponíveis</div>
+				</div>
+				<div id="panel-element_193159" class="panel-collapse collapse in">
+					<div class="panel-body">
+						<h4 class="ProdutosDisponiveisPedido"></h4>
+						<table class="table table-hover" id="tableProdutosDisponiveisPedido">
+							<thead>
+								<tr class="warning">
+									<th>Produto</th>
+									<th>Tipo</th>
+									<th>Valor</th>
+									<th>Observação</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- CARREGA VIA AJAX -->
+							</tbody>
+						</table>
+					</div><!-- FIM PANEL-BODY -->
+				</div><!-- FIM PANEL-COLLAPSE -->
+			</div><!-- FIM PANEL DEFAULT -->
+		</div><!-- FIM PANEL-GROUP -->
+	</div>	
 
 
 <?php require_once 'footer/footer.php';?>

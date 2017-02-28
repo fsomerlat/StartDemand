@@ -1,6 +1,7 @@
 <?php require_once '../core/include.php'; 
 	
 	$ped = new Pedido();
+	$acrescimo = new Acrescimo();
 		
 	if($_REQUEST["acao"] == "gerar pedido"):
 	
@@ -8,9 +9,6 @@
 		$ped->__set("cpQtdProduto", addslashes($_REQUEST["cpQtdProduto"]));
 		$ped->__set("cpComplementoUm", addslashes($_REQUEST["cpComplementoUm"]));
 		$ped->__set("cpComplementoDois", addslashes($_REQUEST["cpComplementoDois"]));
-		$ped->__set("cpAcrescimo", addslashes($_REQUEST["cpAcrescimo"]));
-		$ped->__set("cpQtdAcrescimo", addslashes($_REQUEST["cpQtdAcrescimo"]));
-		$ped->__set("cpValorAcrescimo", addslashes($_REQUEST["cpValorAcrescimo"]));
 		$ped->__set("cpValorTotalPedido", addslashes($_REQUEST["cpValorTotalPedido"]));
 		$ped->__set("cpStatusPedido", addslashes($_REQUEST["cpStatusPedido"]));
 		$ped->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
@@ -23,15 +21,18 @@
 		
 	endif;
 	
-	if(isset($_REQUEST["campos"])):
+	if(isset($_REQUEST["nomeAcrescimo"])):
 		
-		$valores = $_REQUEST["campos"];
+		$nomeAcrescimo = $_REQUEST["nomeAcrescimo"];
+		$qtdAcrescimo = $_REQUEST["qtdAcrescimo"];
+		$valAcrescimo = $_REQUEST["valTotalAcrescimo"];
+		$valBaseAcrescimo = $_REQUEST["valBaseAcrescimo"];
 		
+		$acrescimo->__set("cpAcrescimo", addslashes($nomeAcrescimo));
+		$acrescimo->__set("cpValorBaseAcrescimo",addslashes($valBaseAcrescimo));
+		$acrescimo->__set("cpQtdAcrescimo", addslashes($qtdAcrescimo));
+		$acrescimo->__set("cpValorTotalAcrescimo",addslashes($valAcrescimo));
 		
-		foreach($valores as $key => $res):
-			
-			echo $res;
-		
-		endforeach;
+		echo $nomeAcrescimo.' - '.$qtdAcrescimo.' - '.$valAcrescimo;
 		
 	endif;
