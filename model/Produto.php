@@ -54,7 +54,7 @@
 					
 					idProduto,cpNomeProduto,cpQtdProduto,cpTipoProduto,cpValorProduto,cpTipoObservacao,cpObservacaoProduto
 						
-				  FROM $this->table";
+				  FROM $this->table ORDER BY cpTipoObservacao";
 			
 			$s=DB::prepare($sql);
 			$s->execute();

@@ -6,7 +6,8 @@
 
 .listaPedidos,
 .ProdutosDisponiveisPedido,
-.listaProdutos{
+.listaProdutos,
+.listaAcrescimo{
 	
 	text-align: center;
 }

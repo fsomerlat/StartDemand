@@ -98,7 +98,7 @@
 		</div>
 	</div>
 	
-	<div class="col-md-6">
+	<div class="col-md-7">
 		<div class="panel-group" id="panel-754764">
 			<div class="panel panel-default">
 				<div class="panel-heading">

@@ -22,30 +22,7 @@ var FormHelperPedido = (function() {
 		return getItensUrl.panel.substring(6,12);
 	}
 	
-
-	var getAjaxValorAcrescimo = function(nomeProduto) {
-		
-		$.ajax({
-			
-			url: "http://localhost/startDemand/service/Service_Produto.php",
-			cache: false,
-			dataType:"json",
-			success:function(retorno) {
-					
-			retorno.map(function(dados) {
-					
-					if(dados.cpNomeProduto == nomeProduto) {
-					
-						$("#cpValorTotalAcrescimo").val(dados.cpValorProduto);
-						$("#cpValorBaseAcrescimo").val(dados.cpValorProduto);
-					} 
-				});
-			}
-		});
-	}
-	
-	
-	var getAjaxValorProduro = function(cptuProduto_idProduto) {
+	var getAjaxValorProduto = function(cptuProduto_idProduto) {
 		
 		$.ajax({
 			
@@ -58,7 +35,7 @@ var FormHelperPedido = (function() {
 					   
 					if(dados.idProduto == cptuProduto_idProduto) {	
 						
-						$("#cpValorProduto").val(dados.cpValorProduto);
+						$("#cpValorTotalProduto").attr("value",dados.cpValorProduto);
 						$("#cpValorBaseProduto").val(dados.cpValorProduto);
 					}
 				});
@@ -66,46 +43,14 @@ var FormHelperPedido = (function() {
 		});
 	}
 	
-	var getValorBaseAcrescimo =  function() {
-		
-		return $("#cpValorBaseAcrescimo").val();
-	}
-	
 	var getValorBaseProduto =  function() {
 		
 		return $("#cpValorBaseProduto").val();
 	}
-
-	var preencheAcrescimoPedido = function() {
-
-		$("#cpQtdAcrescimo").change(function() {
-			
-			var valorAcrescimo = $("#cpAcrescimo").val();
-			if(valorAcrescimo == '') {
-				
-				this.value = 0;
-				window.alert("È necessário selecionar o campo [ ACRÉSCIMO ] !");
-			    $("#cpAcrescimo").focus(); return false;
-				
-			} else if(this.value == 0) {
-				
-				$('.toClearAcrescimo').val("");
-				
-			} else {
-				
-				var result = this.value * getValorBaseAcrescimo();
-				$("#cpValorTotalAcrescimo").val(result);
-				$("#cpValorTotalPedido").val(getSomaTotalPedido());
-			}
-		});
-	}
-	
-	var recalculaValorPedido = function() {
-		
-		return getSomaTotalPedido();
-	}
 	
 	var preencheValorProduto = function() {
+		
+		$("#valorTotalPedido").html("R$ 0,0");
 		
 		$("#cpQtdProduto").change(function() {
 			
@@ -119,81 +64,71 @@ var FormHelperPedido = (function() {
 			} else if(this.value ==  0) { 
 				
 				$(".toClearProduto").val("");
+				$("#valorTotalPedido").html("R$ 0,0");
 				
 			} else {
 				
 				var result = this.value * getValorBaseProduto();
-				$("#cpValorProduto").val(result);
+				$("#cpValorTotalProduto").attr("value",result);
 				$("#cpValorTotalPedido").val(getSomaTotalPedido());
 			}
 		});
 	}
 	
+	
+	/**SERA UTILZADO APÓS O PEDIDO JA ESTIVER LISTADO NA TELA**/
 	var getSomaTotalPedido = function() {
 		
 	
-		var valorAcrescimo = $("#cpValorTotalAcrescimo").val(),
-			valorProduto = $("#cpValorProduto").val(),
-			somaTotalPedido ='';
+		var valorAcrescimo = $("#cpValorTotalAcrescimo").val(), // NÃO ESTÁ BINDANDO O VALOR ACRESCIMO POIS ESTA EM OUTRO ARQUIVO
+			valorProduto = $("#cpValorTotalProduto").val(),
+			somaTotalPedido = '';
+	
 		if(valorAcrescimo != '' || valorProduto != '') {
 			
 			(valorAcrescimo == '') ? valorAcrescimo = 0 :false;
 			(valorProduto == '') ? valorProduto = 0 : false;			
 			
 			somaTotalPedido = parseFloat(valorAcrescimo) + parseFloat(valorProduto);
+			$("#valorTotalPedido").html(valorProduto);
 		}	
-		return somaTotalPedido;
+		return somaTotalPedido; //RETORNANDO NAN =  ERRO
 	}
 	
-	var postCamposAcrescimo = function() {
+	var defineTipoPedido = function(value) { 
 		
-		var campoAcrescimo = $("#cpAcrescimo").val(),
-			valBaseAcrescimo = $("#cpValorBaseAcrescimo").val(),
-			qtdAcrescimo = $("#cpQtdAcrescimo").val(),
-			valTotalAcrescimo = $("#cpValorTotalAcrescimo").val();
-		
-		//,qtdAcrescimo: qtdAcrescimo,valAcrescimo: valAcrescimo
-		
-		
-		//,acrescimo: campoAcrescimo,valorBase: valBaseAcrescimo,qtdaAcrescimo:qtdAcrescimoc
-		$.post("http://localhost/startDemand/controller/Pedido_Controller.php",{nomeAcrescimo: campoAcrescimo,qtdAcrescimo:qtdAcrescimo,valBaseAcrescimo:valBaseAcrescimo,valTotalAcrescimo:valTotalAcrescimo}, function(retorno) {
+		if(value == "comAcrescimo") {
 			
-			$(".successAddAcrescimo").html(retorno);
-		});
+			$("#btnCadastrarPedido").attr("value","gerar pedido com acrescimo");
+			
+		} else if(value == "semAcrescimo") {
+			
+			$("#btnCadastrarPedido").attr("value","gerar pedido");
+		}
 	}
 	
 	var bindEvents =  function() {
 		
 		expandePainel(verificaUrl());
-		preencheAcrescimoPedido();
 		preencheValorProduto();
 		
 		$(document).on('change','#cptuProduto_idProduto', function(ev) {
 			
-			getAjaxValorProduro(ev.target.value);
+			getAjaxValorProduto(ev.target.value);
 		});
 		
-		$(document).on('change','#cpAcrescimo',function(ev) {
-
-			getAjaxValorAcrescimo(ev.target.value);
-		});
-		
-//		$("#cptuProduto_idProduto,#cpAcrescimo").change(function() {
-//		
-//			recalculaValorPedido(); 
-//		});
-		
-		$("#btnAddAcrescimo").click(function() {
+		$("input[name=tipoPedido]").click(function() {
 			
-			postCamposAcrescimo();
+			defineTipoPedido(this.value);
 		});
+
 	}
 	
 	
 	return  {
 
-		bindEvents: bindEvents
-		
+		bindEvents: bindEvents,
+		getSomaTotalPedido: getSomaTotalPedido
 	}
 })();
 	    

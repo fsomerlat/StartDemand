@@ -2,28 +2,28 @@
 
 	<div class="col-md-8">
 	
-		<div class="form-group">
-			<ul class="nav nav-pills">
-				<li class="active">
-					 <a href="#"> <span class="badge pull-right">16</span>Pedidos de hoje</a>
-				</li>
-				<li class="active">
-					 <a href="#"> <span class="badge pull-right">16</span>Pedidos finalizados</a>
-				</li>
-				<li class="active">
-					 <a href="#"> <span class="badge pull-right">16</span>Pedidos baixados</a>
-				</li>
-			</ul>
-		</div>	
-	
 		<div class="panel-group" id="panel-615651">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					 <div class="panel-title" data-toggle="collapse" data-parent="#panel-615651" href="#panel-element_193158">Gerar pedidos</div>
+					 <div class="panel-title" data-toggle="collapse" data-parent="#panel-615651" href="#panel-element_193158">Criar pedidos</div>
 				</div>
 				<div id="panel-element_193158" class="panel-collapse collapse">
 					<div class="panel-body">
-						<form name="formProduto" id="formProduto" action="../controller/Pedido_Controller.php" method="POST">
+						<form name="formProduto" id="formProduto" action="../controller/Pedido_Controller.php" method="GET">
+						
+						<input type="hidden" name="cpValorTotalPedido" value="0" />
+						<input type="hidden" name="cptuAcrescimo_idAcrescimo" value="0" /> 
+						<input type="hidden" name="cpValorTotalAcrescimo" value="0" />
+						
+						
+						
+						<div class="col-md-12">
+							<div class="form-group">
+								Pedido sem acréscimo <input type="radio" name="tipoPedido" value="semAcrescimo" checked/>
+								Pedido com acréscimo <input type="radio" name="tipoPedido" value="comAcrescimo" />
+								<hr/>
+							</div>
+						</div>
 						<div class="col-md-2">
 							<div class="form-group">
 								<label for="Status">Status</label>
@@ -34,7 +34,7 @@
 								</select>
 							</div>
 						</div>
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="form-group">
 									<label for="Produto">Nome do produto</label>
 									<select name="cptuProduto_idProduto" id="cptuProduto_idProduto" class="form-control toClearProduto">
@@ -46,8 +46,10 @@
 							</div>
 							<div class="col-md-2">
 								<div class="form-group">
-									<label for="Valor base produto">Valor base produto</label>
-									<input type="text" name="cpValorBaseProduto" readonly id="cpValorBaseProduto" class="form-control" />
+								<label for="Codigo pedido">Còdigo pedido</label>
+									<select name="cpCodPedido" id="cpCodPedido" class="form-control">
+										<!-- CARREGA VIA JQUERY DE 1 A 100 -->
+									</select>
 								</div>
 							</div>
 							<div class="col-md-2">
@@ -55,29 +57,35 @@
 									<label for="Produto">Quantidade produto</label>
 									<select name="cpQtdProduto" id="cpQtdProduto" class="form-control">
 										<option value="0">Selecione</option>
-										<option valur="1">1</option>
-										<option valur="2">2</option>
-										<option valur="3">3</option>
-										<option valur="4">4</option>
-										<option valur="5">5</option>
-										<option valur="6">6</option>
-										<option valur="7">7</option>
-										<option valur="8">8</option>
-										<option valur="9">9</option>
-										<option valur="10">10</option>
-										<option valur="11">11</option>
-										<option valur="12">12</option>
-										<option valur="13">13</option>
-										<option valur="14">14</option>
-										<option valur="15">15</option>
-										<option valur="16">16</option>
-										<option valur="17">17</option>
-										<option valur="18">18</option>
-										<option valur="19">19</option>
-										<option valur="20">20</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
 									</select>
 								</div>
 							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="Valor base produto">Valor base produto</label>
+									<input type="text" name="cpValorBaseProduto" readonly id="cpValorBaseProduto" class="form-control" />
+								</div>
+							</div>						
 							<div class="col-md-2">
 								<div class="form-group">
 									<label for="ComplementoUm">1º Complemento</label>
@@ -137,76 +145,22 @@
 										</optgroup>
 									</select>
 								</div>
-							</div>		
-							<div class="col-md-12 successAddAcrescimo">
-							
-							</div>
-							<div class="col-md-2">
-								<div class="form-group">
-									<label for="Complemento">Acréscimo</label>
-									<select name="cpAcrescimo" id="cpAcrescimo" class="form-control toClearAcrescimo">
-											<!-- CARREGA VIA AJAX -->
-									</select>
-									<msgErroAcrescimo></msgErroAcrescimo>
-								</div>
-							</div>	
-							<div class="col-md-2">
-								<div class="form-group">
-									<label for="Valor base acrescimo">Valor base acréscimo</label>
-									<input type="text" name="cpValorBaseAcrescimo" id="cpValorBaseAcrescimo" readonly class="form-control"/>
-								</div>
-							</div>
+							</div>								
 							<div class="col-md-3">
-								<div class="form-group">
-									<label for="Quantidade Acrescimo">Quantidade Acréscimo</label>
-									<select name="cpQtdAcrescimo" id="cpQtdAcrescimo" class="form-control ">
-										<option value="0">Selecione</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>								
-									</select>
-								</div>
-							</div>
-							<div class="col-md-2">
-								<div class="form-group">
-									<label for="Valor acrescimo">Valor total acréscimo</label>
-									<input type="text" name="cpValorTotalAcrescimo" id="cpValorTotalAcrescimo" readonly class="form-control toClearAcrescimo" />
-								</div>
-							</div>	
-							<div class="col-md-3">
-								<div class="form-group">
-									<input type="button" name="acao" value="adicionar acréscimo" id="btnAddAcrescimo" class="form-control btn btn-info btnAcrescimo" />
-								<hr/>	
-								</div>
-							</div>									
-							<div class="col-md-6">
 								<div class="form-group">
 									<label for="Produto">Valor total produto</label>
-									<input type="text" name="cpValorProduto" id="cpValorProduto" readonly class="form-control toClearProduto" />
+									<input type="text" name="cpValorTotalProduto" id="cpValorTotalProduto" readonly class="form-control toClearProduto" />
 								</div>
 							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="Valor total">Valor total pedido</label>
-									<input type="text" name="cpValorTotalPedido" id="cpValorTotalPedido" readonly class="form-control"/>
-								</div>
-							</div>
-							<div class="col-md-12">
+							<div class="col-md-5">
 								<div class="form-group">
 								<label for="Observacao">Observação</label>
 									<textarea name="cpObservacaoPedido" rows="2" id="cpObservacaoPedido" class="form-control "></textarea>
 								</div>
-							</div>
-							
+							</div>							
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="submit" name="acao" value="gerar pedido" id="btnCadastrarProduto" value="enviar" class="btn btn-info form-control" />
+									<input type="submit" name="acao" value="gerar pedido" id="btnCadastrarPedido" value="enviar" class="btn btn-info form-control" />
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -219,31 +173,7 @@
 				</div>
 			</div>
 		</div>
-		
-		<div class="panel-group" id="panel-402239">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					 <div class="panel-title" data-toggle="collapse" data-parent="#panel-402239" href="#panel-element_655955">Acréscimo a ser incluído</div>
-				</div>
-				<div id="panel-element_655955" class="panel-collapse collapse">
-					<div class="panel-body">
-						<table class="table table-hover">
-							<tr class="warning">
-								<th>Nome acréscimo</th>
-								<th>QTDA</th>
-								<th>Valor total</th>
-								<th>Valor</th>
-							</tr>
-						</table>
-						<tbody>
-							<!-- LISTA ACRÉSCIMOS VIA AJAX -->
-						</tbody>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
-
 	<div class="col-md-4">
 		<div class="panel-group" id="panel-615652">
 			<div class="panel panel-default">

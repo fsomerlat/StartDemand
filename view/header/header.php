@@ -8,10 +8,10 @@
 	</head>
 	
 	<body>
-
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6">
+			<div class="form-group">
 					<ul class="breadcrumb">
 						<li>
 							<b>Bem vindo <?php echo  $nome." !";?></b> 
@@ -21,9 +21,26 @@
 						</li>
 					</ul>
 					<div class="page-header">
-						<h1>
+						<h4>
 							StartDemand - <small>Sistema para gestão de demandas !</small>
-						</h1>
+						</h4>
+					</div>
+					 </div>
+					 <div class="form-group">
+						<ul class="nav nav-pills">
+							<li class="active">
+								 <a href="#"> <span class="badge pull-right">16</span>Pedidos de hoje</a>
+							</li>
+							<li class="active">
+								 <a href="#"> <span class="badge pull-right">16</span>Pedidos finalizados</a>
+							</li>
+							<li class="active">
+								 <a href="#"> <span class="badge pull-right"><i>3</i></span>Pedidos cancelados</a>
+							</li>
+							<li class="active">
+								 <a href="#"> <span class="badge pull-right"><i id="valorTotalPedido"></i></span>Valor total do pedido atual</a>
+							</li>
+						</ul>
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -95,6 +112,21 @@
 						
 					</nav>
 				</div>
-			</div>	
-							
-				
+								
+				<div class="col-md-12">
+					<div class="form-group">
+						<div>
+							<ul class="nav nav-tabs nav-hover subMenuPedido">
+								<li class="active">
+									<a href="Pedido.php?panel=193158" >Criar pedido</a>
+								</li>
+								<li class="default">
+									<a href="PreparaPedidoAcrescimo.php?panel=655955">Adicionar acréscimo</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 successAddAcrescimo"></div>
+								
+		</div>			
