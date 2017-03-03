@@ -26,5 +26,6 @@
 		$id = (int)$_REQUEST["id"];
 		$acrescimo->DELETE($id);
 		
-		echo "Regsitro excluido com sucesso";
+		header("location:../view/PreparaPedidoAcrescimo.php?panel=655955");
+		
 	endif;

@@ -22,6 +22,7 @@
 	<script type="text/javascript" src="js/carregaServicoPedido.js"></script>
 	<script type="text/javascript" src="js/carregaServicoAcrescimo.js"></script>
 	<script type="text/javascript" src="js/carregaServicoGenericoProduto.js"></script>
+	<script type="text/javascript" src="js/carregaServicoPreparaPedido.js"></script>
 	<script type="text/javascript" src="js/maskinput.js"></script>
 	<script type="text/javascript" src="js/view.js"></script>
 

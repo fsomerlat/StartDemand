@@ -33,4 +33,31 @@
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine(); 
 			}
 		}
+	
+	
+		public function getInfoJSON(){
+			
+			$sql="SELECT
+					cptuProduto_idProduto,cptuAcrescimo_idAcrescimo,cpCodPedido,cpQtdProduto,cpComplementoUm,
+					cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpObservacaoPedido
+				  FROM 
+					$this->table";
+			
+			$s=DB::prepare($sql);
+			$s->execute();
+			
+			try {
+				
+				$assoc = PDO::FETCH_ASSOC;
+				$all = $s->fetchAll($assoc);
+				
+				$json = json_encode($all,JSON_PRETTY_PRINT);
+				
+				echo $json;
+			
+			} catch(PDOException $e) {
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}
 	}

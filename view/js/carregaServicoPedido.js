@@ -4,7 +4,35 @@
 
 var Service_Pedido = (function() {
 	
-	var carregaInfoProdutosDisponiveisPedido = function() {
+	var carregaInfoPedidoAjaxDB =  function(url) {
+		
+		var itens= "";
+		$.ajax({
+			
+			url:url,
+			cache:false,
+			dataType:"json",
+			error:function(){
+				
+				$(".listaPedidos").html("Houve algum erro com a fonte de dados !");
+			},
+			success: function(retorno) {
+				
+				if(retorno[0].erro) {
+					
+					retorno.map(function(dados) {
+						
+						itens += "<tr>";
+						itens += "<td>"+dados+"</td>"
+						itens += "</tr>";
+					});
+				}
+			}
+		})
+		
+	}
+	
+	var carregaInfoProdutosDisponiveisAjaxPedido = function() {
 		
 		itens = "";
 		$.ajax({
@@ -52,7 +80,8 @@ var Service_Pedido = (function() {
 	
 	return {
 		
-		carregaInfoProdutosDisponiveisPedido: carregaInfoProdutosDisponiveisPedido
+		carregaInfoProdutosDisponiveisAjaxPedido: carregaInfoProdutosDisponiveisAjaxPedido,
+		carregaInfoPedidoAjaxDB: carregaInfoPedidoAjaxDB
 		
 	}
 })();

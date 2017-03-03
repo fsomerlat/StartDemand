@@ -14,7 +14,8 @@
 						</div>
 						<div id="panel-element-907441" class="panel-collapse collapse in">
 							<div class="panel-body">
-								<table class="table table-hover">
+							<h4 class="listaPedidos">></h4>
+								<table class="table table-hover" id="tabledPedidos">
 									<thead>
 										<tr class="success">
 											<th>Status</th>

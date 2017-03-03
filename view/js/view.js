@@ -21,19 +21,17 @@ $(document).ready(function(){
 		
 		console.log(e);
 	}	
-	
 	try {
 		
-		Service_Generico.carregaInfoProdutoAjaxGenericoDB();
+		Service_Generico.carregaInfoProdutoGenericoAjaxDB();
 	
 	}catch(e) {
 		
 		console.log(e);
 	}
-	
 	try {  
 		
-		Service_Pedido.carregaInfoProdutosDisponiveisPedido();
+		Service_Pedido.carregaInfoProdutosDisponiveisAjaxPedido();
 	
 	}catch(e) {
 		
@@ -41,8 +39,16 @@ $(document).ready(function(){
 	}
 	try {
 		
-		Service_Acrescimo.bindEvents();
+		Service_Acrescimo.carregaInfoAcrescimoAjaxDB();
 	
+	}catch(e) {
+		
+		console.log(e);
+	}
+	try {
+		
+		Service_Prepara_Pedido.carregaInfoPedidoAjaxDB()
+		
 	}catch(e) {
 		
 		console.log(e);

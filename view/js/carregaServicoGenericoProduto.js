@@ -65,14 +65,14 @@ var Service_Generico = (function() {
 		});
 	}
 	
-	var carregaInfoProdutoAjaxGenericoDB = function() {
+	var carregaInfoProdutoGenericoAjaxDB = function() {
 	
 			carregaInProduto();
 	}
 	
 	return {
 		
-		carregaInfoProdutoAjaxGenericoDB: carregaInfoProdutoAjaxGenericoDB
+		carregaInfoProdutoGenericoAjaxDB: carregaInfoProdutoGenericoAjaxDB
 	}
 	
 })();

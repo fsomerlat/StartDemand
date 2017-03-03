@@ -1,18 +1,5 @@
 var Service_Acrescimo = (function() {
 	
-	var mySet = new Set();
-	
-	var postAcaoExcluir = function(url,id) {
-		
-		var acao = "deletar";
-		var submeter = $.post(url,{acao: acao,id: id},function(retorno) {
-			
-			$(".listaAcrescimo").html(retorno);
-		});
-		
-		return submeter;
-	}
-	
 	var carregaInfoAcrescimo = function(url) {
 		
 		var itens = "";
@@ -27,7 +14,7 @@ var Service_Acrescimo = (function() {
 			},
 			error: function() {
 			
-				$(".listaAcrescimo").html("Houve algum erro com a fonte de i !");
+				$(".listaAcrescimo").html("Houve algum erro com a fonte de dados !");
 			},
 			success: function(retorno) {
 				
@@ -48,8 +35,8 @@ var Service_Acrescimo = (function() {
 							itens += "<td>"+dados.cpQtdAcrescimo+"</td>";
 							itens += "<td>"+dados.cpValorBaseAcrescimo+"</td>";
 							itens += "<td>"+dados.cpValorTotalAcrescimo+"</td>";
-							itens += "<td><a href='#?id="+dados.idAcrescimo+"'><span class='glyphicon glyphicon-pencil super'  aria-hidden='true'></span></a></td>";
-							itens += "<td><a hre='#?id="+dados.idAcrescimo+"'><span class='glyphicon glyphicon-trash super excluirAcrescimo' aria-hidden='true'></span></a></td>";
+							itens += "<td><a href='PreparaPedidoAcrescimo.php?panel=655955&acao=editar&id="+dados.idAcrescimo+"'><span class='glyphicon glyphicon-pencil super'  aria-hidden='true'></span></a></td>";
+							itens += "<td><a href='../controller/Prepara_Pedido_Acrescimo_Controller.php?acao=deletar&id="+dados.idAcrescimo+"'><span class='glyphicon glyphicon-trash super excluirAcrescimo' aria-hidden='true'></span></a></td>";
 							itens += "</tr>";	
 							
 						});
@@ -61,23 +48,13 @@ var Service_Acrescimo = (function() {
 		});
 	}
 	
-	var carregaInfoAcrescimoDB = function() {
+	var carregaInfoAcrescimoAjaxDB = function() {
 		
 		carregaInfoAcrescimo("http://localhost/startDemand/service/Service_Acrescimo.php");
 	}
 	
-	var bindEvents = function(){
-		
-		carregaInfoAcrescimoDB();
-		
-		$(document).on("click",".excluirAcrescimo", function() {
-			
-			postAcaoExcluir();
-		});
-	}
-	
 	return {
 		
-		bindEvents: bindEvents
+		carregaInfoAcrescimoAjaxDB: carregaInfoAcrescimoAjaxDB
 	}
 })(); 

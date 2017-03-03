@@ -77,7 +77,9 @@
 		</div>
 		<div id="panel-element_655957" class="panel-collapse collapse in">
 			<div class="panel-body">
-				<table class="table table-hover">
+			<h4 class="listaPreparaPedido"></h4>
+				<table class="table table-hover" id="tablePreparaPedido">
+				<thead>
 					<tr class="warning">
 						<th>CodPedido</th>
 						<th>QTDA</th>
@@ -85,10 +87,11 @@
 						<th>Total</th>
 						<th>Observação</th>
 					</tr>
-				</table>
+				</thead>
 				<tbody>
 					<!-- LISTA ACRÉSCIMOS VIA AJAX -->
 				</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
