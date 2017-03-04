@@ -9,7 +9,7 @@
 			<div class="panel-body">
 				<form action="../controller/Prepara_Pedido_Acrescimo_Controller.php" name="formAcrescimo" id="formAcrescimo" method="">
 					
-					<input type="hidden" name="idAcrescimo" id="idAcrescimo"/>
+					<input type="hidden" name="cptuPedido_codPedido"/>
 				<!-- INSERT TABLE PREPARE PEDIDO -->
 					<input type="hidden" name="cptuProduto_idProduto" />
 					<input type="hidden" name="cpCodPedido" />
@@ -86,6 +86,8 @@
 						<th>Valor</th>
 						<th>Total</th>
 						<th>Observação</th>
+						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>

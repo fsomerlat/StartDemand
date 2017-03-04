@@ -43,3 +43,17 @@
 		header("location:../view/PreparaPedidoAcrescimo.php?panel=655955");
 	
 	endif;
+	
+	if($_REQUEST["acao"] == "cancelar"):
+		
+		$cod = $_REQUEST["cod"];
+		$ped->__set("cpStatusPedido","C");
+		
+		$ped->UPDATESTATUS($cod);
+		
+		header("location:../view/listarPedidos.php");
+		
+	endif;
+	
+	
+	

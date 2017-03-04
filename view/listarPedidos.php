@@ -1,3 +1,4 @@
+<?php ?>
 <html>
 	<head>
 		<meta charset="UTF-8" />
@@ -5,40 +6,43 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 	</head>
 <body>
-
+<div class="container-fluid">
+	<div class="row">
 			<div class="col-md-12">
-				<div class="panel-group" id="panel-172687">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							 <div class="panel-title" data-toggle="collapse" data-parent="#panel-172687" href="#panel-element-907441">Lista de pedidos</div>
-						</div>
-						<div id="panel-element-907441" class="panel-collapse collapse in">
-							<div class="panel-body">
-							<h4 class="listaPedidos">></h4>
-								<table class="table table-hover" id="tabledPedidos">
-									<thead>
-										<tr class="success">
-											<th>Status</th>
-											<th>Id</th>
-											<th>Produto</th>
-											<th>QTDA</th>
-											<th>1º complemento</th>
-											<th>2ª complemento</th>
-											<th>Acréscimo</th>
-											<th>QTDA acréscimo</th>
-											<th>Hora criação</th>
-											<th>Observação pedido</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-										<!-- CARREGA VIA AJAX -->
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
+			<h3 class="listaPedidoProduto"></h3>
+				<table class="table table-hover" id="tablePedidoProdutos">
+					<thead>
+						<tr class="success">
+							<th>Status</th>
+							<th>Id</th>
+							<th class="danger">Código pedido</th>
+							<th class="info">Produto</th>
+							<th class="danger">QTDA</th>
+							<th class="warning">1º complemento</th>
+							<th class="success">2ª complemento</th>
+							<th class="warning">Hora criação</th>
+							<th class="success">Observação pedido</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- CARREGA PRODUTOS VIA AJAX -->
+					</tbody>
+				</table>
+				<h3 class="listaPedidoAcrescimo"></h3>
+				<table class="table table-hover" id="tablePedidoAcrescimo">
+					<thead>
+						<tr>
+							<th class="danger">código pedido</th>
+							<th class="info">Acréscimo</th>
+							<th class="warning">Quantidade acréscimo</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- CARREGA ACRÉSCIMOS VIA AJAX -->
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

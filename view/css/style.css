@@ -5,13 +5,23 @@
 }
 
 .listaPedidos,
+.tituloListaPedidos,
 .ProdutosDisponiveisPedido,
 .listaProdutos,
 .listaAcrescimo,
-.listaPreparaPedido{
+.listaPreparaPedido,
+.listaPedidoProduto,
+.listaPedidoAcrescimo{
 	
 	text-align: center;
 }
+
+.listaPedidoAcrescimo,
+.listaPedidoProduto {
+	
+	background-color:#FFCC99;
+}
+
 
 .login{
 	margin-top:100px;	
@@ -23,10 +33,53 @@
 	margin-top:20px;
 }
 
-.table {
+#tablePedidoProdutos {
+	
   width: 100%;
   max-width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 5px;	
+}
+
+
+#tablePedidoAcrescimo {
+	
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 5px;	
+}
+
+#tablePedidoAcrescimo > thead > tr > th ,
+#tablePedidoAcrescimo > tbody > tr > th,
+#tablePedidoAcrescimo > tfoot > tr > th,
+#tablePedidoAcrescimo > thead > tr > td,
+#tablePedidoAcrescimo > tbody > tr > td,
+#tablePedidoAcrescimo > tfoot > tr > td{
+
+  padding: 2px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
+  font-size: 20px;
+}
+
+
+#tablePedidoProdutos > thead > tr > th ,
+#tablePedidoProdutos > tbody > tr > th,
+#tablePedidoProdutos > tfoot > tr > th,
+#tablePedidoProdutos > thead > tr > td,
+#tablePedidoProdutos > tbody > tr > td,
+#tablePedidoProdutos > tfoot > tr > td{
+	
+  padding: 2px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
+  font-size: 20px;
+}
+
+.table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dddddd;
 }
 
 .table > thead > tr > th,
@@ -42,9 +95,5 @@
   font-size: 14px;
 }
 
-.table > thead > tr > th {
-  vertical-align: bottom;
-  border-bottom: 2px solid #dddddd;
-}
 
 

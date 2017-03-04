@@ -35,8 +35,8 @@ var Service_Acrescimo = (function() {
 							itens += "<td>"+dados.cpQtdAcrescimo+"</td>";
 							itens += "<td>"+dados.cpValorBaseAcrescimo+"</td>";
 							itens += "<td>"+dados.cpValorTotalAcrescimo+"</td>";
-							itens += "<td><a href='PreparaPedidoAcrescimo.php?panel=655955&acao=editar&id="+dados.idAcrescimo+"'><span class='glyphicon glyphicon-pencil super'  aria-hidden='true'></span></a></td>";
-							itens += "<td><a href='../controller/Prepara_Pedido_Acrescimo_Controller.php?acao=deletar&id="+dados.idAcrescimo+"'><span class='glyphicon glyphicon-trash super excluirAcrescimo' aria-hidden='true'></span></a></td>";
+							itens += "<td><a href='PreparaPedidoAcrescimo.php?panel=655955&acao=editar&id="+dados.idAcrescimo+"' title='editar'><span class='glyphicon glyphicon-pencil super'  aria-hidden='true'></span></a></td>";
+							itens += "<td><a href='../controller/Prepara_Pedido_Acrescimo_Controller.php?acao=deletarAcrescimo&id="+dados.idAcrescimo+"' title='excluir'><span class='glyphicon glyphicon-trash super excluirAcrescimo' aria-hidden='true'></span></a></td>";
 							itens += "</tr>";	
 							
 						});

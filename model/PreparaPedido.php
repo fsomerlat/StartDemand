@@ -38,7 +38,7 @@
 		public function getInfoJSON(){
 			
 			$sql="SELECT
-					cptuProduto_idProduto,cptuAcrescimo_idAcrescimo,cpCodPedido,cpQtdProduto,cpComplementoUm,
+					idPreparaPedido,cptuProduto_idProduto,cptuAcrescimo_idAcrescimo,cpCodPedido,cpQtdProduto,cpComplementoUm,
 					cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpObservacaoPedido
 				  FROM 
 					$this->table";
@@ -58,6 +58,37 @@
 			} catch(PDOException $e) {
 				
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}
+		
+
+		public function listId($id) {
+				
+			$sql="SELECT 
+					cptuAcrescimo_idAcrescimo,cpCodPedido,cpQtdProduto,cpComplementoUm,
+					cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpObservacaoPedido
+				  FROM 
+				  	$this->table
+				  WHERE idPreparaPedido=:idPreparaPedido";
+			
+			$list=DB::prepare($sql);
+			
+		}
+		
+		public function DELETE($id) {
+			
+			$sql="DELETE FROM $this->table WHERE idPreparaPedido=:idPreparaPedido";
+			$del=DB::prepare($sql);
+			$del->bindParam(":idPreparaPedido",$id,PDO::PARAM_INT);
+	
+			
+			try {
+				
+				return $del->execute();
+			
+			}catch(PDOException $e) {
+				
+				echo "Erro no arquvio ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 			}
 		}
 	}

@@ -34,6 +34,8 @@ var Service_Prepara_Pedido = (function() {
 							itens += "<td>"+i.cpValorTotalProduto+"</td>";
 							itens += "<td>"+i.cpValorTotalPedido+"</td>";
 							itens += "<td>"+i.cpObservacaoPedido+"</td>";
+							itens += "<td><a href='Pedido.php?panel=193158&acao=editar&id="+i.idPreparaPedido+"' title='editar'><span class='glyphicon glyphicon-pencil super'  aria-hidden='true'></span></a></td>";
+							itens += "<td><a href='../controller/Prepara_Pedido_Acrescimo_Controller.php?acao=deletarProdPedido&id="+i.idPreparaPedido+"' title='excluir'><span class='glyphicon glyphicon-trash super excluirProdPreparaPedido' aria-hidden='true'></span></a></td>";
 							itens += "</tr>";
 						});
 						

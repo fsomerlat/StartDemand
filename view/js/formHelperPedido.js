@@ -112,6 +112,11 @@ var FormHelperPedido = (function() {
 		expandePainel(verificaUrl());
 		preencheValorProduto();
 		
+		$(document).on("click","#pedidoCancelado", function() {
+			
+			return confirm("Deseja cancelar esse pedido ?");
+		});
+		
 		$(document).on('change','#cptuProduto_idProduto', function(ev) {
 			
 			getAjaxValorProduto(ev.target.value);
@@ -121,8 +126,8 @@ var FormHelperPedido = (function() {
 			
 			defineTipoPedido(this.value);
 		});
-
 	}
+	
 	
 	
 	return  {

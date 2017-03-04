@@ -112,10 +112,6 @@ var FormHelperAcrescimo = (function(){
 		$("#cpCodPedido").html(addOptions());
 	}
 	
-	var confirmExclusao = function() {
-		
-		return confirm("Tem certeza que deseja excluir esse acréscimo ?");
-	}
 	
 	var bindEvents =  function() {
 		
@@ -130,8 +126,14 @@ var FormHelperAcrescimo = (function(){
 				
 		$(document).on('click','.excluirAcrescimo',function(){
 			
-			confirmExclusao();
+			return confirm("Tem certeza que deseja excluir esse acréscimo ?");
 		});
+		
+		$(document).on("click",".excluirProdPreparaPedido", function() {
+			
+			return confirm("Tem certeza que deseja excluir esse produto ?");
+		});
+	
 		
 		$("#btnAddAcrescimo").bind('click',function() {
 							

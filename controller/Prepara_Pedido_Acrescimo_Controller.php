@@ -1,6 +1,7 @@
 <?php require_once '../core/include.php';
 
 	$acrescimo = new Acrescimo();
+	$preparaPed = new PreparaPedido();
 
 	if(isset($_REQUEST["cpAcrescimo"])):
 		
@@ -21,11 +22,20 @@
 
 	endif;
 	
-	if($_REQUEST["acao"] == "deletar"):
+	if($_REQUEST["acao"] == "deletarProdPedido"):
 	
 		$id = (int)$_REQUEST["id"];
-		$acrescimo->DELETE($id);
+		$preparaPed->DELETE($id);
 		
 		header("location:../view/PreparaPedidoAcrescimo.php?panel=655955");
 		
 	endif;
+	
+	if($_REQUEST["acao"] == "deletarAcrescimo"):
+		
+		$id = (int)$_GET["id"];
+	
+		$acrescimo->DELETE($id);
+		header("location:../view/PreparaPedidoAcrescimo.php?panel=655955");
+	endif;
+	

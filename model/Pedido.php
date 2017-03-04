@@ -57,10 +57,10 @@
 		public function getInfoPedido() {
 			
 			$sql="SELECT
-					cptuProduto_idProduto,cptuAcrescimo_idAcrescimo,cpCodPedido,cpQtdProduto,cpComplementoUm,
-					cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpObservacaoPedido
+					ped.idPedido,p.cpNomeProduto,cptuAcrescimo_idAcrescimo,ped.cpCodPedido,ped.cpQtdProduto,ped.cpComplementoUm,
+					ped.cpComplementoDois,ped.cpValorTotalProduto,ped.cpValorTotalPedido,ped.cpStatusPedido,ped.cpObservacaoPedido
 				  FROM 
-					$this->table";
+					$this->table as ped INNER JOIN tuProduto as p ON p.idProduto = ped.cptuProduto_idProduto";
 			
 			$s=DB::prepare($sql);
 			$s->execute();
@@ -77,4 +77,28 @@
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 			}
 		}
+		
+		public function UPDATESTATUS ($cod) {
+			
+			$sql = "UPDATE 
+						$this->table 
+					SET 
+						cpStatusPedido=:cpStatusPedido 
+					WHERE 
+						cpCodPedido=:cpCodPedido";
+			$up=DB::prepare($sql);
+			$up->bindParam(":cpCodPedido",$cod,PDO::PARAM_INT);
+			$up->bindParam(":cpStatusPedido",$this->cpStatusPedido,PDO::PARAM_STR);
+			
+			try {
+				
+				return $up->execute();
+				
+			}catch(PDOException $e) {
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+			
+		}
+
 	}

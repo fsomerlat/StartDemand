@@ -1,4 +1,12 @@
-<?php require_once 'header/header.php';?>
+<?php require_once 'header/header.php';
+	 
+	 if ($_GET[acao] == "editar"):
+	 
+	 	$acao = "atualizar";
+	 	$id = (int)$_GET["id"];
+	 	
+	 endif;
+?>
 
 	<div class="col-md-8">
 	
@@ -30,6 +38,7 @@
 								<select name="cpStatusPedido" id="cpStatusPedido" class="form-control btn btn-success">
 									<option value="">Selecione</option>
 									<option value="A" selected>Em andamento</option>
+									<option value="L">Liberado</option>
 									<option value="C">Cancelado</option>
 								</select>
 							</div>
@@ -160,7 +169,7 @@
 							</div>							
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="submit" name="acao" value="gerar pedido" id="btnCadastrarPedido" value="enviar" class="btn btn-info form-control" />
+									<input type="submit" name="acao" value="<?php echo (!empty($_GET["id"])) ? $acao : "gerar pedido" ;?>" id="btnCadastrarPedido" value="enviar" class="btn btn-info form-control" />
 								</div>
 							</div>
 							<div class="col-md-6">

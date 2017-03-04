@@ -39,6 +39,14 @@ $(document).ready(function(){
 	}
 	try {
 		
+		Service_Pedido.carregaInfoPedidoAjaxDB();
+	
+	}catch(e) {
+		
+		console.log(e);
+	}
+	try {
+		
 		Service_Acrescimo.carregaInfoAcrescimoAjaxDB();
 	
 	}catch(e) {

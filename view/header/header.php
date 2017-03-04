@@ -122,7 +122,7 @@
 								</li>
 								<li class="default">
 									<a href="PreparaPedidoAcrescimo.php?panel=655955">Adicionar acréscimo</a>
-								</li>
+	 							</li>
 							</ul>
 						</div>
 					</div>
