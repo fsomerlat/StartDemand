@@ -22,6 +22,20 @@
 	background-color:#FFCC99;
 }
 
+.statusCancelPedido{
+	
+	color:red;
+}
+
+.statusFinalizadoPedido{
+	
+	color:green;
+}
+
+.statusAndamentoPedido {
+	
+	color:blue;
+}
 
 .login{
 	margin-top:100px;	

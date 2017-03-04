@@ -169,7 +169,7 @@
 							</div>							
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="submit" name="acao" value="<?php echo (!empty($_GET["id"])) ? $acao : "gerar pedido" ;?>" id="btnCadastrarPedido" value="enviar" class="btn btn-info form-control" />
+									<input type="submit" name="acao" value="<?php echo (!empty($_GET["id"])) ? $acao : "gerar pedido" ;?>" id="btnCadastrarPedido"  class="btn btn-info form-control" />
 								</div>
 							</div>
 							<div class="col-md-6">

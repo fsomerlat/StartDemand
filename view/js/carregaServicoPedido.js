@@ -26,30 +26,54 @@ var Service_Pedido = (function() {
 				} else {
 					
 					retorno.map(function(dados) {
+					
+						var status = dados.cpStatusPedido,
+							opcaoStatus = "";
 						
-						var status = dados.cpStatusPedido;
-						(status == "C") ? status = "Cancelado" : "Em andamento";
-						(status == 'A') ? status = "Em andamento" : "Cancelado";
+						(status == "C") ? opcaoStatus = "Cancelado" :"";
+						(status == "A") ? opcaoStatus = "Em andamento" : "";
+						(status == "F") ? opcaoStatus = "Finalizado" : "";
 						
-						itensProdutos += "<tr>";
-						itensProdutos += "<td class='status'>"+status+"</td>";
-						itensProdutos += "<td>"+dados.idPedido+"</td>";
-						itensProdutos += "<td class='danger'>"+dados.cpCodPedido+"</td>";
-						itensProdutos += "<td class='info'>"+dados.cpNomeProduto+"</td>";
-						itensProdutos += "<td class='danger'>"+dados.cpQtdProduto+"</td>";
-						itensProdutos += "<td class='warning'>"+dados.cpComplementoUm+"</td>";
-						itensProdutos += "<td class='success'>"+dados.cpComplementoDois+"</td>";
-						itensProdutos  += "<td class='warning'>Hora da criação</td>";
-						itensProdutos += "<td class='success'>"+dados.cpObservacaoPedido+"</td>";
-						itensProdutos += "<td class='info'><button type='button' id='pedidoLeberado' class='btn btn-success'>baixar</button></td>";
-						itensProdutos += "<td class='danger'><a href='../controller/Pedido_Controller.php?acao=cancelar&cod="+dados.cpCodPedido+"' title='cancelar pedido'><button type='button' id='pedidoCancelado' class='btn btn-danger'>Cancelar</button></a></td>";
-						itensProdutos += "</tr>";
 						
-						itensAcrescimo += "<tr>";
-						itensAcrescimo += "<td class='danger'>"+dados.cpCodPedido+"</td>";
-						itensAcrescimo += "<td class='info'>Nome acrescimo</td>";
-						itensAcrescimo += "<td class='warning'>Qtd acrescimo</td>";
-						itensAcrescimo += "</tr>";
+						var dataHrPedido = dados.cpHoraPedido,
+							hora = dataHrPedido.substring(11,20),	
+							objDate = 	dataHrPedido.substring(0,11).split("-");
+						
+						dia  = objDate[2];
+						mes  = objDate[1];
+						ano  = dataHrPedido.substring(0,5); 
+							
+						dataPedido = dia+'/'+mes+'/'+ano+ hora;
+							
+						//if(dados.cpStatusPedido != "C") {
+							
+							itensProdutos += "<tr>";
+							
+							switch(opcaoStatus){
+								
+								case "Cancelado": itensProdutos += "<td class='statusCancelPedido'>"+opcaoStatus+"</td>"; break;
+								case "Em andamento" : itensProdutos += "<td class='statusAndamentoPedido'>"+opcaoStatus+"</td>"; break;
+								case "Finalizado" : itensProdutos += "<td class='statusFinalizadoPedido'>"+opcaoStatus+"</td>";break;
+							}			
+							itensProdutos += "<td>"+dados.idPedido+"</td>";
+							itensProdutos += "<td class='danger'>"+dados.cpCodPedido+"</td>";
+							itensProdutos += "<td class='info'>"+dados.cpNomeProduto+"</td>";
+							itensProdutos += "<td class='danger'>"+dados.cpQtdProduto+"</td>";
+							itensProdutos += "<td class='warning'>"+dados.cpComplementoUm+"</td>";
+							itensProdutos += "<td class='success'>"+dados.cpComplementoDois+"</td>";
+							itensProdutos  += "<td class='warning'>"+dataPedido+"</td>";
+							itensProdutos += "<td class='success'>"+dados.cpObservacaoPedido+"</td>";
+							itensProdutos += "<td class='info'><button type='button' id='pedidoBaixado' class='btn btn-info'>baixar</button></td>";
+							itensProdutos += "<td class='success'><a href='../controller/Pedido_Controller.php?acao=finalizar&cod="+dados.cpCodPedido+"' title='Cancelar pedido'><button type='button' id='pedidoLiberado' class='btn btn-success'>Finalizado</button></a></td>";
+							itensProdutos += "<td class='danger'><a href='../controller/Pedido_Controller.php?acao=cancelar&cod="+dados.cpCodPedido+"' title='Finalizar pedido'><button type='button' id='pedidoCancelado' class='btn btn-danger'>Cancelar</button></a></td>";
+							itensProdutos += "</tr>";
+							
+							itensAcrescimo += "<tr>";
+							itensAcrescimo += "<td class='danger'>"+dados.cpCodPedido+"</td>";
+							itensAcrescimo += "<td class='info'>Nome acrescimo</td>";
+							itensAcrescimo += "<td class='warning'>Qtd acrescimo</td>";
+							itensAcrescimo += "</tr>";
+						//}
 					});
 					$("#tablePedidoProdutos tbody").html(itensProdutos);
 					$("#tablePedidoAcrescimo tbody").html(itensAcrescimo);

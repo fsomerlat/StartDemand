@@ -122,6 +122,11 @@ var FormHelperPedido = (function() {
 			getAjaxValorProduto(ev.target.value);
 		});
 		
+		$(document).on("click","#pedidoLiberado",function(){
+			
+			return confirm("O pedido foi finalizado ?");
+		});
+		
 		$("input[name=tipoPedido]").click(function() {
 			
 			defineTipoPedido(this.value);

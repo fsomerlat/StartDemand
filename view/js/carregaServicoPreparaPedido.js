@@ -11,18 +11,19 @@ var Service_Prepara_Pedido = (function() {
 			beforeSend: function() {
 				
 				$(".listaPreparaPedido").html("Carregando pedido para preparação...");
+				
 			},
 			error:function() {
 				
 				$(".listaPreparaPedido").html("Houve algum erro com a fonte de dados !");
 			},
 			success:function(retorno) {
-//				
-//				if(retorno[0].erro) {
-//					
-//					$(".listaPreparaPedido").html(retorno[0].erro);
-//				
-//				} else {
+				
+				if(retorno[0].erro) {
+					
+					$(".listaPreparaPedido").html(retorno[0].erro);
+				
+				}else {
 				
 				setTimeout(function() {
 					
@@ -40,10 +41,11 @@ var Service_Prepara_Pedido = (function() {
 						});
 						
 						$("#tablePreparaPedido tbody").html(itens);
-						$(".listaPreparaPedido").html("Pedido sendo preparado");	
+						$(".listaPreparaPedido").html("Pedido sendo preparado");
+						
 					},1200);
 				}
-			//}
+			}
 		});
 	}
 	

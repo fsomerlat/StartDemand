@@ -28,9 +28,9 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table
-					(cptuProduto_idProduto,cptuAcrescimo_idAcrescimo,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpObservacaoPedido)
+					(cptuProduto_idProduto,cptuAcrescimo_idAcrescimo,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpHoraPedido,cpObservacaoPedido)
 				  VALUES
-					(:cptuProduto_idProduto,:cptuAcrescimo_idAcrescimo,:cpCodPedido,:cpQtdProduto,:cpComplementoUm,:cpComplementoDois,:cpValorTotalProduto,:cpValorTotalPedido,:cpStatusPedido,:cpObservacaoPedido)";
+					(:cptuProduto_idProduto,:cptuAcrescimo_idAcrescimo,:cpCodPedido,:cpQtdProduto,:cpComplementoUm,:cpComplementoDois,:cpValorTotalProduto,:cpValorTotalPedido,:cpStatusPedido,now(),:cpObservacaoPedido)";
 			
 			$in=DB::prepare($sql);
 			$in->bindParam(":cptuProduto_idProduto",$this->cptuProduto_idProduto,PDO::PARAM_INT);
@@ -57,10 +57,11 @@
 		public function getInfoPedido() {
 			
 			$sql="SELECT
-					ped.idPedido,p.cpNomeProduto,cptuAcrescimo_idAcrescimo,ped.cpCodPedido,ped.cpQtdProduto,ped.cpComplementoUm,
+					ped.idPedido,p.cpNomeProduto,cptuAcrescimo_idAcrescimo,ped.cpCodPedido,ped.cpQtdProduto,ped.cpHoraPedido,ped.cpComplementoUm,
 					ped.cpComplementoDois,ped.cpValorTotalProduto,ped.cpValorTotalPedido,ped.cpStatusPedido,ped.cpObservacaoPedido
 				  FROM 
-					$this->table as ped INNER JOIN tuProduto as p ON p.idProduto = ped.cptuProduto_idProduto";
+					$this->table as ped INNER JOIN tuProduto as p ON p.idProduto = ped.cptuProduto_idProduto
+				  ORDER BY ped.cpHoraPedido ASC";
 			
 			$s=DB::prepare($sql);
 			$s->execute();
@@ -78,7 +79,7 @@
 			}
 		}
 		
-		public function UPDATESTATUS ($cod) {
+		public function UPDATESTATUS($cod) {
 			
 			$sql = "UPDATE 
 						$this->table 
@@ -98,7 +99,5 @@
 				
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 			}
-			
 		}
-
 	}

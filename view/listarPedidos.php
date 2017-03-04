@@ -24,6 +24,7 @@
 							<th class="success">Observação pedido</th>
 							<th></th>
 							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -46,5 +47,6 @@
 			</div>
 		</div>
 	</div>
+	<br/><br/><br/><br/>
 
 <?php require_once 'footer/footer.php'; ?>

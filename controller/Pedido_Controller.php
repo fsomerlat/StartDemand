@@ -20,7 +20,7 @@
 		$ped->INSERT();
 		echo "<script language='javascript'>
 					window.alert('Pedido gerado com sucesso !');
-					window.location.href='../view/listarPedidos.php';
+					window.location.href='../view/Pedido.php?panel=193158';
 				</script>";
 		
 	endif;
@@ -53,6 +53,16 @@
 		
 		header("location:../view/listarPedidos.php");
 		
+	endif;
+	
+	if($_REQUEST["acao"] == "finalizar"):
+		
+		$cod = $_REQUEST["cod"];
+	
+		$ped->__set("cpStatusPedido", "F");
+		
+		$ped->UPDATESTATUS($cod);
+		header("location:../view/listarPedidos.php");
 	endif;
 	
 	
