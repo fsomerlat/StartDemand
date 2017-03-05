@@ -117,7 +117,7 @@ var FormHelperPedido = (function() {
 			return confirm("Deseja cancelar esse pedido ?");
 		});
 		
-		$(document).on('change','#cptuProduto_idProduto', function(ev) {
+		$(document).on('change','#tuProduto_idProduto', function(ev) {
 			
 			getAjaxValorProduto(ev.target.value);
 		});

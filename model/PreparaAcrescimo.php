@@ -30,7 +30,7 @@
 		public function getInfoAcrescimoJSON() {
 			
 			$sql="SELECT 
-					idPreparaAcrescimo,cpAcrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo
+					idPreparaAcrescimo,cpAcrescimo,cpQtdACrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo
 				  FROM 
 					$this->table";
 			 $s=DB::prepare($sql);
@@ -48,4 +48,22 @@
 			 }
 			
 		}
+		 public function DELETE($id) {
+		 	
+		 	$sql="DELETE FROM 
+		 			$this->table 
+		 		  WHERE
+		 			idPreparaAcrescimo=:idPreparaAcrescimo";
+		 	$del=DB::prepare($sql);
+		 	$del->bindParam(":idPreparaAcrescimo",$id,PDO::PARAM_INT);
+		 	 
+		 	try{
+		 		
+		 		return $del->execute();
+		 	
+		 	}catch(PDOException $e) {
+		 		
+		 		echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+		 	}
+		 }
 	}

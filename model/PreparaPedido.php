@@ -8,20 +8,19 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table
-						(cptuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpObservacaoPedido)
+						(tuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpStatusPedido,cpObservacaoPedido)
 				  	VALUES 
-				  		(:cptuProduto_idProduto,:cpCodPedido,:cpQtdProduto,:cpComplementoUm,:cpComplementoDois,:cpValorTotalProduto,:cpValorTotalPedido,:cpStatusPedido,:cpObservacaoPedido)";
+				  		(:tuProduto_idProduto,:cpCodPedido,:cpQtdProduto,:cpComplementoUm,:cpComplementoDois,:cpValorTotalProduto,:cpStatusPedido,:cpObservacaoPedido)";
 			
 			$in=DB::prepare($sql);
-			$in->bindParam(":cptuProduto_idProduto",$this->cptuProduto_idProduto,PDO::PARAM_INT);
-			$in->bindParam(":cpCodPedido",$this->cpCodPedido,PDO::PARAM_INT);
-			$in->bindParam(":cpQtdProduto",$this->cpQtdProduto,PDO::PARAM_INT);
-			$in->bindParam(":cpComplementoUm",$this->cpComplementoUm,PDO::PARAM_STR);
-			$in->bindParam(":cpComplementoDois",$this->cpComplementoDois,PDO::PARAM_STR);
-			$in->bindParam(":cpValorTotalProduto",$this->cpValorTotalProduto,PDO::PARAM_STR);
-			$in->bindParam(":cpValorTotalPedido",$this->cpValorTotalPedido,PDO::PARAM_STR);
-			$in->bindParam(":cpStatusPedido",$this->cpStatusPedido,PDO::PARAM_STR);
-			$in->bindParam(":cpObservacaoPedido",$this->cpObservacaoPedido,PDO::PARAM_STR);
+			$in->bindParam(":tuProduto_idProduto", $this->tuProduto_idProduto,PDO::PARAM_INT);
+			$in->bindParam(":cpCodPedido", $this->cpCodPedido,PDO::PARAM_INT);
+			$in->bindParam(":cpQtdProduto", $this->cpQtdProduto,PDO::PARAM_INT);
+			$in->bindParam(":cpComplementoUm", $this->cpComplementoUm,PDO::PARAM_STR);
+			$in->bindParam(":cpComplementoDois", $this->cpComplementoDois,PDO::PARAM_STR);
+			$in->bindParam(":cpValorTotalProduto", $this->cpValorTotalProduto,PDO::PARAM_STR);;
+			$in->bindParam(":cpStatusPedido", $this->cpStatusPedido,PDO::PARAM_STR);
+			$in->bindParam(":cpObservacaoPedido", $this->cpObservacaoPedido,PDO::PARAM_STR);
 			
 			try {
 				
@@ -37,10 +36,13 @@
 		public function getInfoJSON(){
 			
 			$sql="SELECT
-					idPreparaPedido,cptuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,
-					cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpObservacaoPedido
+					prep.idPreparaPedido,prep.tuProduto_idProduto,prep.cpCodPedido,prep.cpQtdProduto,prep.cpComplementoUm,
+					prep.cpComplementoDois,prep.cpValorTotalProduto,prep.cpStatusPedido,prep.cpObservacaoPedido,
+					prod.cpValorProduto
 				  FROM 
-					$this->table";
+					$this->table as prep INNER JOIN tuProduto as prod 
+			     ON prod.idProduto = prep.tuProduto_idProduto		
+				";
 			
 			$s=DB::prepare($sql);
 			$s->execute();
@@ -65,7 +67,7 @@
 				
 			$sql="SELECT 
 					cpCodPedido,cpQtdProduto,cpComplementoUm,
-					cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpObservacaoPedido
+					cpComplementoDois,cpValorTotalProduto,cpStatusPedido,cpObservacaoPedido
 				  FROM 
 				  	$this->table
 				  WHERE idPreparaPedido=:idPreparaPedido";
@@ -89,5 +91,28 @@
 				
 				echo "Erro no arquvio ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 			}
+		}
+		
+		public function getRow($fk) {
+			
+			$sql="SELECT 	
+					tuProduto_idProduto  
+				  FROM
+					$this->table
+				 WHERE  tuProduto_idProduto = ?";
+			
+			$row=DB::prepare($sql);
+			$row->bindParam(":tuProduto_idProduto",$fk,PDO::PARAM_INT);
+			$row->execute(array($this->tuProduto_idProduto));
+			
+			try {
+				
+				return $row->rowCount();
+			
+			}catch(PDOException $e) {
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		   
 		}
 	}

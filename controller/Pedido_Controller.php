@@ -6,8 +6,7 @@
 		
 	if($_REQUEST["acao"] == "gerar pedido"):
 	
-		$ped->__set("cptuProduto_idProduto", addslashes($_REQUEST["cptuProduto_idProduto"]));
-		$ped->__set("cptuAcrescimo_idAcrescimo", $_REQUEST["cptuAcrescimo_idAcrescimo"]);
+		$ped->__set("tuProduto_idProduto", addslashes($_REQUEST["tuProduto_idProduto"]));
 		$ped->__set("cpCodPedido", $_REQUEST["cpCodPedido"]);
 		$ped->__set("cpQtdProduto", addslashes($_REQUEST["cpQtdProduto"]));
 		$ped->__set("cpComplementoUm", addslashes($_REQUEST["cpComplementoUm"]));
@@ -26,22 +25,30 @@
 	endif;
 	
 	if($_REQUEST["acao"] == "gerar pedido com acrescimo"):
-	
-		$preparaPedido->__set("cptuProduto_idProduto", addslashes($_REQUEST["cptuProduto_idProduto"]));
-		$preparaPedido->__set("cptuAcrescimo_idAcrescimo", addslashes($_REQUEST["cptuAcrescimo_idAcrescimo"]));
-		$preparaPedido->__set("cpCodPedido", $_REQUEST["cpCodPedido"]);
+		
+		$fk = addslashes($_REQUEST["tuProduto_idProduto"]);
+		$preparaPedido->__set("tuProduto_idProduto", $fk);
+		$preparaPedido->__set("cpCodPedido", addslashes($_REQUEST["cpCodPedido"]));
 		$preparaPedido->__set("cpQtdProduto", addslashes($_REQUEST["cpQtdProduto"]));
 		$preparaPedido->__set("cpComplementoUm", addslashes($_REQUEST["cpComplementoUm"]));
 		$preparaPedido->__set("cpComplementoDois", addslashes($_REQUEST["cpComplementoDois"]));
-		$preparaPedido->__set("cpValorTotalProduto", $_REQUEST["cpValorTotalProduto"]);
-		$preparaPedido->__set("cpValorTotalPedido", addslashes($_REQUEST["cpValorTotalPedido"]));
+		$preparaPedido->__set("cpValorTotalProduto", addslashes($_REQUEST["cpValorTotalProduto"]));
 		$preparaPedido->__set("cpStatusPedido", addslashes($_REQUEST["cpStatusPedido"]));
 		$preparaPedido->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
 			
-		$preparaPedido->INSERT();
 		
-		header("location:../view/PreparaPedidoAcrescimo.php?panel=655955");
-	
+		if($preparaPedido->getRow($fk) > 0):
+			
+			echo "<script language='javascript'>
+						window.alert('Um pedido já está sendo preparado.Finalize-o para continuar !');
+						window.location.href='../view/PreparaPedidoAcrescimo.php';
+					</script>";
+		else:
+			
+			$preparaPedido->INSERT();
+			
+			header("location:../view/PreparaPedidoAcrescimo.php?panel=655955");
+		endif;
 	endif;
 	
 	if($_REQUEST["acao"] == "cancelar"):

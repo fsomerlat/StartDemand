@@ -119,8 +119,8 @@
 		</div>
 		<div id="panel-element_655956" class="panel-collapse collapse in">
 			<div class="panel-body">
-			<h4 class="listaAcrescimo"></h4>
-				<table class="table table-hover" id="tableAcrescimo">
+			<h4 class="listaPreparaAcrescimo"></h4>
+				<table class="table table-hover" id="tablePreparaAcrescimo">
 				<thead>
 					<tr class="warning">
 						<td>id</td>

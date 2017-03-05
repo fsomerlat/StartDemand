@@ -1,6 +1,6 @@
 <?php require_once 'header/header.php';
 	 
-	 if ($_GET[acao] == "editar"):
+ if ($_GET["acao"] == "editar"):
 	 
 	 	$acao = "atualizar";
 	 	$id = (int)$_GET["id"];
@@ -19,11 +19,7 @@
 					<div class="panel-body">
 						<form name="formProduto" id="formProduto" action="../controller/Pedido_Controller.php" method="GET">
 						
-						<input type="hidden" name="cpValorTotalPedido" value="0" />
-						<input type="hidden" name="cptuAcrescimo_idAcrescimo" value="0" /> 
-						<input type="hidden" name="cpValorTotalAcrescimo" value="0" />
-						
-						
+						<input type="hidden" name="cpValorTotalPedido" />
 						
 						<div class="col-md-12">
 							<div class="form-group">
@@ -36,17 +32,14 @@
 							<div class="form-group">
 								<label for="Status">Status</label>
 								<select name="cpStatusPedido" id="cpStatusPedido" class="form-control btn btn-success">
-									<option value="">Selecione</option>
 									<option value="A" selected>Em andamento</option>
-									<option value="L">Liberado</option>
-									<option value="C">Cancelado</option>
 								</select>
 							</div>
 						</div>
 							<div class="col-md-3">
 								<div class="form-group">
 									<label for="Produto">Nome do produto</label>
-									<select name="cptuProduto_idProduto" id="cptuProduto_idProduto" class="form-control toClearProduto">
+									<select name="tuProduto_idProduto" id="tuProduto_idProduto" class="form-control toClearProduto">
 										<!-- LISTA PRODUTOS VIA AJAX -->
 									</select>
 									

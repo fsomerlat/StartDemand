@@ -17,7 +17,7 @@ var Service_Generico = (function() {
 			beforeSend: function(){
 				
 			    $("#cpAcrescimo").html("<option value='0'>Aguarde carregando...</option>");
-				$("#cptuProduto_idProduto").html("<option value='0'>Aguarde, carregando...</option>");
+				$("#tuProduto_idProduto").html("<option value='0'>Aguarde, carregando...</option>");
 			},
 			error: function() {
 				
@@ -52,7 +52,7 @@ var Service_Generico = (function() {
 					}	
 					try {						
 						    $("#cpAcrescimo").html(option);
-							$("#cptuProduto_idProduto").html(options);
+							$("#tuProduto_idProduto").html(options);
 							
 						}catch(e) {
 							

@@ -11,7 +11,8 @@
 .listaAcrescimo,
 .listaPreparaPedido,
 .listaPedidoProduto,
-.listaPedidoAcrescimo{
+.listaPedidoAcrescimo,
+.listaPreparaAcrescimo{
 	
 	text-align: center;
 }

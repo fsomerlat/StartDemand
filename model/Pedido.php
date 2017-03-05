@@ -4,8 +4,7 @@
 		
 		protected $table = "tuPedido";
 		protected $idPedido,
-				  $cptuProduto_idProduto,
-				  $cptuAcrescimo_idAcrescimo,
+				  $tuProduto_idProduto,
 				  $cpCodPedido,
 				  $cpQtdProduto,
 				  $cpComplementoUm,
@@ -28,13 +27,12 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table
-					(cptuProduto_idProduto,cptuAcrescimo_idAcrescimo,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpHoraPedido,cpObservacaoPedido)
+					(tuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpHoraPedido,cpObservacaoPedido)
 				  VALUES
-					(:cptuProduto_idProduto,:cptuAcrescimo_idAcrescimo,:cpCodPedido,:cpQtdProduto,:cpComplementoUm,:cpComplementoDois,:cpValorTotalProduto,:cpValorTotalPedido,:cpStatusPedido,now(),:cpObservacaoPedido)";
+					(:tuProduto_idProduto,:cpCodPedido,:cpQtdProduto,:cpComplementoUm,:cpComplementoDois,:cpValorTotalProduto,:cpValorTotalPedido,:cpStatusPedido,now(),:cpObservacaoPedido)";
 			
 			$in=DB::prepare($sql);
-			$in->bindParam(":cptuProduto_idProduto",$this->cptuProduto_idProduto,PDO::PARAM_INT);
-			$in->bindParam(":cptuAcrescimo_idAcrescimo",$this->cptuAcrescimo_idAcrescimo,PDO::PARAM_INT);
+			$in->bindParam(":tuProduto_idProduto",$this->tuProduto_idProduto,PDO::PARAM_INT);
 			$in->bindParam(":cpCodPedido", $this->cpCodPedido,PDO::PARAM_INT);
 			$in->bindParam(":cpQtdProduto", $this->cpQtdProduto,PDO::PARAM_INT);
 			$in->bindParam(":cpComplementoUm", $this->cpComplementoUm,PDO::PARAM_STR);
@@ -57,10 +55,10 @@
 		public function getInfoPedido() {
 			
 			$sql="SELECT
-					ped.idPedido,p.cpNomeProduto,cptuAcrescimo_idAcrescimo,ped.cpCodPedido,ped.cpQtdProduto,ped.cpHoraPedido,ped.cpComplementoUm,
+					ped.idPedido,p.cpNomeProduto,ped.cpCodPedido,ped.cpQtdProduto,ped.cpHoraPedido,ped.cpComplementoUm,
 					ped.cpComplementoDois,ped.cpValorTotalProduto,ped.cpValorTotalPedido,ped.cpStatusPedido,ped.cpObservacaoPedido
 				  FROM 
-					$this->table as ped INNER JOIN tuProduto as p ON p.idProduto = ped.cptuProduto_idProduto
+					$this->table as ped INNER JOIN tuProduto as p ON p.idProduto = ped.tuProduto_idProduto
 				  ORDER BY ped.cpHoraPedido ASC";
 			
 			$s=DB::prepare($sql);

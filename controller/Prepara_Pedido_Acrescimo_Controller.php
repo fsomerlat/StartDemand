@@ -31,7 +31,7 @@
 		
 	endif;
 	
-	if($_REQUEST["acao"] == "deletarAcrescimo"):
+	if($_REQUEST["acao"] == "deletarPreparaAcrescimo"):
 		
 		$id = (int)$_GET["id"];
 	

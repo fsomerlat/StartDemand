@@ -76,7 +76,7 @@ var Service_Pedido = (function() {
 						//}
 					});
 					$("#tablePedidoProdutos tbody").html(itensProdutos);
-					$("#tablePedidoAcrescimo tbody").html(itensAcrescimo);
+					//$("#tablePedidoAcrescimo tbody").html(itensAcrescimo);
 					$(".h3listaPedidoProduto").html("Lista de produtos");
 					$(".h3listaPedidoAcrescimo").html("Lista de acréscimo");
 				}
