@@ -9,7 +9,7 @@
 <div class="container-fluid">
 	<div class="row">
 			<div class="col-md-12">
-			<h3 class="listaPedidoProduto"></h3>
+			<h3 class="listaPedidoProduto"><b class="h3listaPedidoProduto"></b></h3>
 				<table class="table table-hover" id="tablePedidoProdutos">
 					<thead>
 						<tr class="success">
@@ -31,7 +31,7 @@
 						<!-- CARREGA PRODUTOS VIA AJAX -->
 					</tbody>
 				</table>
-				<h3 class="listaPedidoAcrescimo"></h3>
+				<h3 class="listaPedidoAcrescimo"><b class="h3listaPedidoAcrescimo"></b></h3>
 				<table class="table table-hover" id="tablePedidoAcrescimo">
 					<thead>
 						<tr>

@@ -1,5 +1,5 @@
 <?php require_once 'header/header.php'; ?>
-<div class="col-md-7">
+<div class="col-md-8">
 <div class="panel-group" id="panel-402239">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -9,7 +9,6 @@
 			<div class="panel-body">
 				<form action="../controller/Prepara_Pedido_Acrescimo_Controller.php" name="formAcrescimo" id="formAcrescimo" method="">
 					
-					<input type="hidden" name="cptuPedido_codPedido"/>
 				<!-- INSERT TABLE PREPARE PEDIDO -->
 					<input type="hidden" name="cptuProduto_idProduto" />
 					<input type="hidden" name="cpCodPedido" />
@@ -20,7 +19,12 @@
 					<input type="hidden" name="cpValorProduto" />
 					<input type="hidden" name="cpObservacaoPedido" />
 				<!-- INSERT TABLE PREPARE PEDIDO -->
-				
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="Codifo do pedido">Códido do pedido selecionado</label>
+							<input type="text" name="cptuPedido_cpCodPedido" id="cptuPedido_cpCodPedido" class="form-control" readonly />
+						</div>
+					</div>
 					<div class="col-md-3">
 						<div class="form-group">
 							<label for="Complemento">Acréscimo</label>
@@ -30,7 +34,8 @@
 							<msgErroAcrescimo></msgErroAcrescimo>
 						</div>
 					</div>	
-					<div class="col-md-3">
+					
+					<div class="col-md-2">
 						<div class="form-group">
 							<label for="Quantidade Acrescimo">Quantidade</label>
 							<select name="cpQtdAcrescimo" id="cpQtdAcrescimo" class="form-control ">
@@ -50,21 +55,27 @@
 					<div class="col-md-2">
 						<div class="form-group">
 							<label for="Valor base acrescimo">Valor base</label>
-							<input type="text" name="cpValorBaseAcrescimo" id="cpValorBaseAcrescimo" readonly class="form-control"/>
+							<input type="text" name="cpValorBaseAcrescimo" id="cpValorBaseAcrescimo" value="" readonly class="form-control"/>
 						</div>
 					</div>							
 					<div class="col-md-2">
 						<div class="form-group">
 							<label for="Valor acrescimo">Valor total</label>
-							<input type="text" name="cpValorTotalAcrescimo" id="cpValorTotalAcrescimo" readonly class="form-control" />
+							<input type="text" name="cpValorTotalAcrescimo" id="cpValorTotalAcrescimo" value="" readonly class="form-control" />
 						</div>
 					</div>	
-					<div class="col-md-2">
+					<div class="col-md-6">
 						<div class="form-group">
-							<input type="button" name="acao" value="adicionar" id="btnAddAcrescimo" class="form-control btn btn-info btnAcrescimo" />
+							<input type="button" name="acao" value="adicionar" id="btnAddAcrescimo" class="form-control btn btn-info" />
 						<hr/>	
 						</div>
-					</div>	
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<input type="reset" value="limpar" class="form-control btn btn-warning" />
+						<hr/>	
+						</div>
+					</div>		
 				</form>	
 			</div>
 		</div>
@@ -100,7 +111,7 @@
 </div>
 </div>
 
-<div class="col-md-5">
+<div class="col-md-4">
 <div class="panel-group" id="panel-402239">
 	<div class="panel panel-default">
 		<div class="panel-heading">

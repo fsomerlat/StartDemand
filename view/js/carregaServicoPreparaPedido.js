@@ -1,6 +1,6 @@
 var Service_Prepara_Pedido = (function() {
 	
-	var carregaInfoPedido = function(url) {
+	var carregaInfoProdPedido = function(url) {
 		
 		var itens = "";
 		$.ajax({
@@ -38,6 +38,8 @@ var Service_Prepara_Pedido = (function() {
 							itens += "<td><a href='Pedido.php?panel=193158&acao=editar&id="+i.idPreparaPedido+"' title='editar'><span class='glyphicon glyphicon-pencil super'  aria-hidden='true'></span></a></td>";
 							itens += "<td><a href='../controller/Prepara_Pedido_Acrescimo_Controller.php?acao=deletarProdPedido&id="+i.idPreparaPedido+"' title='excluir'><span class='glyphicon glyphicon-trash super excluirProdPreparaPedido' aria-hidden='true'></span></a></td>";
 							itens += "</tr>";
+							
+							$("#cptuPedido_cpCodPedido").attr("value",i.cpCodPedido).focus();
 						});
 						
 						$("#tablePreparaPedido tbody").html(itens);
@@ -49,9 +51,48 @@ var Service_Prepara_Pedido = (function() {
 		});
 	}
 	
+	
+	var carregaInfoAcrescimoPedido = function(url) {
+		
+		var itens = "";
+		$.ajax({
+			
+			url:url,
+			cache:false,
+			dataType:"json",
+			beforeSend:function(){
+				
+				$(".").html("Carregando acréscimos para ser incluídos no pedido... ");
+			},
+			error:function(){
+				
+				$(".").html("Houve algum erro com a fonte de dados !");
+			},
+			success:function(retorno) {
+				
+				if(retorno[0].erro) {
+					
+					$(".").html(retorno[0].erro)
+				}else {
+					
+					retorno.map(function(dados) {
+						
+						itens += "<tr>";
+						itens += "<td>"+dados.idPreparaAcrescimo+"</td>";
+						itens += "<td>"+dados.cpAcrescimo+"</td>";
+						itens += "<td>"+dados,cp+"</td>";
+						itens += "<td></td>";
+						itens += "<td></td>";
+						itens += "</tr>";
+					});
+				}
+			}
+		});
+	}
+	
 	var carregaInfoPedidoAjaxDB = function() {
 		
-		carregaInfoPedido("http://localhost/startDemand/service/Service_Prepara_Pedido.php");
+		carregaInfoProdPedido("http://localhost/startDemand/service/Service_Prepara_Pedido.php");
 	}
 		
 	return  {

@@ -1,7 +1,7 @@
 <?php require_once '../core/include.php';
 
-	$acrescimo = new Acrescimo();
-	$preparaPed = new PreparaPedido();
+	$preparaAcrescimo = new PreparaAcrescimo();
+	$preparaProdPed = new PreparaPedido();
 
 	if(isset($_REQUEST["cpAcrescimo"])):
 		
@@ -10,12 +10,12 @@
 		$qtdAcrescimo = $_REQUEST["cpQtdAcrescimo"];
 		$valTotalAcrescimo = $_REQUEST["cpValorTotalAcrescimo"];
 		
-		$acrescimo->__set("cpAcrescimo", addslashes($nmacrescimo));
-		$acrescimo->__set("cpValorBaseAcrescimo",addslashes($valBaseAcrescimo));
-		$acrescimo->__set("cpQtdAcrescimo", addslashes($qtdAcrescimo));
-		$acrescimo->__set("cpValorTotalAcrescimo", addslashes($valTotalAcrescimo));
+		$preparaAcrescimo->__set("cpAcrescimo", addslashes($nmacrescimo));
+		$preparaAcrescimo->__set("cpValorBaseAcrescimo",addslashes($valBaseAcrescimo));
+		$preparaAcrescimo->__set("cpQtdAcrescimo", addslashes($qtdAcrescimo));
+		$preparaAcrescimo->__set("cpValorTotalAcrescimo", addslashes($valTotalAcrescimo));
 		
-		$acrescimo->INSERT();
+		$preparaAcrescimo->INSERT();
 		
 		echo "Acréscimo inserido com sucesso !";
 		
@@ -25,7 +25,7 @@
 	if($_REQUEST["acao"] == "deletarProdPedido"):
 	
 		$id = (int)$_REQUEST["id"];
-		$preparaPed->DELETE($id);
+		$preparaProdPed->DELETE($id);
 		
 		header("location:../view/PreparaPedidoAcrescimo.php?panel=655955");
 		
@@ -35,7 +35,7 @@
 		
 		$id = (int)$_GET["id"];
 	
-		$acrescimo->DELETE($id);
+		$preparaAcrescimo->DELETE($id);
 		header("location:../view/PreparaPedidoAcrescimo.php?panel=655955");
 	endif;
 	

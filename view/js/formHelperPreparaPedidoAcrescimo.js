@@ -43,7 +43,7 @@ var FormHelperAcrescimo = (function(){
 					if(dados.cpNomeProduto == nomeProduto) {
 					
 						$("#cpValorTotalAcrescimo").val(dados.cpValorProduto);
-						$("#cpValorBaseAcrescimo").attr("value",dados.cpValorProduto);
+						$("#cpValorBaseAcrescimo").val(dados.cpValorProduto);
 					} 
 				});
 			}
@@ -82,6 +82,7 @@ var FormHelperAcrescimo = (function(){
 			cpValorTotalAcrescimo = $("#cpValorTotalAcrescimo").val();
 		
 	    $.post("http://localhost/startDemand/controller/Prepara_Pedido_Acrescimo_Controller.php", {
+	    	
 	    	cpAcrescimo: cpAcrescimo,
 	    	cpValorBaseAcrescimo: cpValorBaseAcrescimo,
 	    	cpQtdAcrescimo: cpQtdAcrescimo,

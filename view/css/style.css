@@ -19,9 +19,13 @@
 .listaPedidoAcrescimo,
 .listaPedidoProduto {
 	
-	background-color:#FFCC99;
+	background-color:black;
 }
-
+.h3listaPedidoProduto,
+.h3listaPedidoAcrescimo {
+	
+	color:white;
+}
 .statusCancelPedido{
 	
 	color:red;
@@ -42,10 +46,6 @@
 	text-align:center;
 }
 
-.btnAcrescimo {
-	
-	margin-top:20px;
-}
 
 #tablePedidoProdutos {
 	

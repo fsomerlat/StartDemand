@@ -8,13 +8,12 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table
-						(cptuProduto_idProduto,cptuAcrescimo_idAcrescimo,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpObservacaoPedido)
+						(cptuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpObservacaoPedido)
 				  	VALUES 
-				  		(:cptuProduto_idProduto,:cptuAcrescimo_idAcrescimo,:cpCodPedido,:cpQtdProduto,:cpComplementoUm,:cpComplementoDois,:cpValorTotalProduto,:cpValorTotalPedido,:cpStatusPedido,:cpObservacaoPedido)";
+				  		(:cptuProduto_idProduto,:cpCodPedido,:cpQtdProduto,:cpComplementoUm,:cpComplementoDois,:cpValorTotalProduto,:cpValorTotalPedido,:cpStatusPedido,:cpObservacaoPedido)";
 			
 			$in=DB::prepare($sql);
 			$in->bindParam(":cptuProduto_idProduto",$this->cptuProduto_idProduto,PDO::PARAM_INT);
-			$in->bindParam(":cptuAcrescimo_idAcrescimo",$this->cptuAcrescimo_idAcrescimo,PDO::PARAM_INT);
 			$in->bindParam(":cpCodPedido",$this->cpCodPedido,PDO::PARAM_INT);
 			$in->bindParam(":cpQtdProduto",$this->cpQtdProduto,PDO::PARAM_INT);
 			$in->bindParam(":cpComplementoUm",$this->cpComplementoUm,PDO::PARAM_STR);
@@ -38,7 +37,7 @@
 		public function getInfoJSON(){
 			
 			$sql="SELECT
-					idPreparaPedido,cptuProduto_idProduto,cptuAcrescimo_idAcrescimo,cpCodPedido,cpQtdProduto,cpComplementoUm,
+					idPreparaPedido,cptuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,
 					cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpObservacaoPedido
 				  FROM 
 					$this->table";
@@ -65,7 +64,7 @@
 		public function listId($id) {
 				
 			$sql="SELECT 
-					cptuAcrescimo_idAcrescimo,cpCodPedido,cpQtdProduto,cpComplementoUm,
+					cpCodPedido,cpQtdProduto,cpComplementoUm,
 					cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpObservacaoPedido
 				  FROM 
 				  	$this->table

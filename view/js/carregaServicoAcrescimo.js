@@ -10,17 +10,17 @@ var Service_Acrescimo = (function() {
 			dataType:"json",
 			beforeSend: function(){
 				
-				$(".listaAcrescimo").html("Carregando lista de acréscimos...");
+				$("").html("Carregando lista de acréscimos...");
 			},
 			error: function() {
 			
-				$(".listaAcrescimo").html("Houve algum erro com a fonte de dados !");
+				$("").html("Houve algum erro com a fonte de dados !");
 			},
 			success: function(retorno) {
 				
 				if(retorno[0].erro) {
 					
-					$(".listaAcrescimo").html(retorno[0].erro);
+					$("").html(retorno[0].erro);
 				
 				}else{
 				
@@ -40,8 +40,8 @@ var Service_Acrescimo = (function() {
 							itens += "</tr>";	
 							
 						});
-							$("#tableAcrescimo tbody").html(itens);
-							$(".listaAcrescimo").html("");
+							$("").html(itens);
+							$("").html("");
 					},1500);
 				}
 			}
