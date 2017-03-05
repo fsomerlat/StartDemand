@@ -2,6 +2,7 @@
 	
 	$ped = new Pedido();
 	$preparaPedido =  new PreparaPedido();
+	
 
 		
 	if($_REQUEST["acao"] == "gerar pedido"):
@@ -26,7 +27,7 @@
 	
 	if($_REQUEST["acao"] == "gerar pedido com acrescimo"):
 		
-		$fk = addslashes($_REQUEST["tuProduto_idProduto"]);
+		$fk =  $_REQUEST["tuProduto_idProduto"];
 		$preparaPedido->__set("tuProduto_idProduto", $fk);
 		$preparaPedido->__set("cpCodPedido", addslashes($_REQUEST["cpCodPedido"]));
 		$preparaPedido->__set("cpQtdProduto", addslashes($_REQUEST["cpQtdProduto"]));
@@ -37,11 +38,11 @@
 		$preparaPedido->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
 			
 		
-		if($preparaPedido->getRow($fk) > 0):
+		if($preparaPedido->getRow() > 0):
 			
 			echo "<script language='javascript'>
 						window.alert('Um pedido já está sendo preparado.Finalize-o para continuar !');
-						window.location.href='../view/PreparaPedidoAcrescimo.php';
+						window.location.href='../view/PreparaPedidoAcrescimo.php?panel=655955';
 					</script>";
 		else:
 			
@@ -70,6 +71,26 @@
 		
 		$ped->UPDATESTATUS($cod);
 		header("location:../view/listarPedidos.php");
+	endif;
+	
+	if($_REQUEST["acao"] == "atualizar"):
+	 
+	$id = (int)$_GET["id"];
+	 
+	$preparaPedido->__set("tuProduto_idProduto", addslashes($_REQUEST["tuProduto_idProduto"]));
+	$preparaPedido->__set("cpQtdProduto", addslashes($_REQUEST["cpQtdProduto"]));
+	$preparaPedido->__set("cpComplementoUm", addslashes($_REQUEST["cpComplementoUm"]));
+	$preparaPedido->__set("cpComplementoDois", addslashes($_REQUEST["cpComplementoDois"]));
+	$preparaPedido->__set("cpValorTotalProduto", addslashes($_REQUEST["cpValorTotalProduto"]));
+	$preparaPedido->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
+		
+	$preparaPedido->UPDATE($id);
+	 
+	echo "<script language='javascript'>
+   					window.alert('Registro atualizado com sucesso !');
+   					window.location.href='../view/PreparaPedidoAcrescimo.php?panel=655955';
+   				</script>";
+	
 	endif;
 	
 	

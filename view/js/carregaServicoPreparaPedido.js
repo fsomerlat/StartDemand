@@ -17,13 +17,14 @@ var Service_Prepara_Pedido = (function() {
 				
 				$(".listaPreparaPedido").html("Houve algum erro com a fonte de dados !");
 			},
-			success:function(retorno) {
+    		success:function(retorno) {
 				
 				if(retorno[0].erro) {
 					
 					$(".listaPreparaPedido").html(retorno[0].erro);
 				
-				}else{
+				}
+				else{
 				
 				setTimeout(function() {
 					
@@ -68,7 +69,7 @@ var Service_Prepara_Pedido = (function() {
 				
 				$(".listaPreparaAcrescimo").html("Houve algum erro com a fonte de dados !");
 			},
-			success:function(retorno) {
+		   success:function(retorno) {
 				
 				if(retorno[0].erro) {
 					
@@ -84,7 +85,6 @@ var Service_Prepara_Pedido = (function() {
 							itens += "<td>"+dados.cpQtdACrescimo+"</td>";
 							itens += "<td>"+dados.cpValorBaseAcrescimo+"</td>";
 							itens += "<td>"+dados.cpValorTotalAcrescimo+"</td>";
-							itens += "<td><a href='PreparaPedidoAcrescimo.php?panel=655955&acao=editar&id="+dados.idAcrescimo+"' title='editar'><span class='glyphicon glyphicon-pencil super'  aria-hidden='true'></span></a></td>";
 							itens += "<td><a href='../controller/Prepara_Pedido_Acrescimo_Controller.php?acao=deletarPreparaAcrescimo&id="+dados.idPreparaAcrescimo+"' title='excluir'><span class='glyphicon glyphicon-trash super excluirAcrescimo' aria-hidden='true'></span></a></td>";
 							itens += "</tr>";
 						});

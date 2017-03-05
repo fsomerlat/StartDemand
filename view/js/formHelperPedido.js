@@ -70,7 +70,7 @@ var FormHelperPedido = (function() {
 				
 				var result = this.value * getValorBaseProduto();
 				$("#cpValorTotalProduto").attr("value",result);
-				$("#cpValorTotalPedido").val(getSomaTotalPedido());
+				
 			}
 		});
 	}

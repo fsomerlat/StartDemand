@@ -1,10 +1,13 @@
-<?php require_once 'header/header.php';
-	 
+<?php require_once 'header/header.php'; require_once '../core/include.php';
+	
+	$prep = new PreparaPedido();
+	
  if ($_GET["acao"] == "editar"):
-	 
-	 	$acao = "atualizar";
-	 	$id = (int)$_GET["id"];
-	 	
+		 $acao = "atualizar";
+		 $id = (int)$_GET["id"];
+ 
+	    $edit = $prep->listId($id);
+ 	 	
 	 endif;
 ?>
 
@@ -19,7 +22,7 @@
 					<div class="panel-body">
 						<form name="formProduto" id="formProduto" action="../controller/Pedido_Controller.php" method="GET">
 						
-						<input type="hidden" name="cpValorTotalPedido" />
+						<input type="hidden" name="cpValorTotalPedido" id="cpValorTotalPedido" value="0"/><!-- SERÁ ATUALIZADO AO COMPLETAR O PEDIDO NO FINAL -->
 						
 						<div class="col-md-12">
 							<div class="form-group">
@@ -54,11 +57,11 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="form-group">
 									<label for="Produto">Quantidade produto</label>
 									<select name="cpQtdProduto" id="cpQtdProduto" class="form-control">
-										<option value="0">Selecione</option>
+										<option value="0">Selecione  <?php echo (!empty($_GET["id"])) ? " | Anterior - ". $edit->cpQtdProduto : "";?></option>
 										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
@@ -82,17 +85,17 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<div class="form-group">
 									<label for="Valor base produto">Valor base produto</label>
-									<input type="text" name="cpValorBaseProduto" readonly id="cpValorBaseProduto" class="form-control" />
+									<input type="text" name="cpValorBaseProduto" value="<?php echo (!empty($_GET["id"])) ? $edit->cpValorProduto :""; ?>" readonly id="cpValorBaseProduto" class="form-control" />
 								</div>
 							</div>						
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="form-group">
 									<label for="ComplementoUm">1º Complemento</label>
 									<select name="cpComplementoUm" id="cpComplementoUm" class="form-control " >
-										<option value="">Selecione</option>
+										<option value="">Selecione <?php echo (!empty($_GET["id"]))? " | Anterior - ".$edit->cpComplementoUm :"";?></option>
 										<optgroup label="Frutas">
 											<option value="Banana">Banana</option>
 											<option value="Morando">Morango</option>
@@ -118,11 +121,11 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="form-group">
 									<label for="ComplementoDois">2º Complemento</label>
 									<select name="cpComplementoDois" id="cpComplementoDois" class="form-control ">
-										<option value="">Selecione</option>
+										<option value="">Selecione <?php echo (!empty($_GET["id"])) ? " | Anterior - ".$edit->cpComplementoDois : ""; ?></option>
 										<optgroup label="Frutas">
 											<option value="Banana">Banana</option>
 											<option value="Morando">Morango</option>
@@ -148,21 +151,22 @@
 									</select>
 								</div>
 							</div>								
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<div class="form-group">
 									<label for="Produto">Valor total produto</label>
-									<input type="text" name="cpValorTotalProduto" id="cpValorTotalProduto" readonly class="form-control toClearProduto" />
+									<input type="text" name="cpValorTotalProduto" id="cpValorTotalProduto" value="<?php echo (!empty($_GET["id"])) ? $edit->cpValorTotalProduto : ""; ?>" readonly class="form-control toClearProduto" />
 								</div>
 							</div>
-							<div class="col-md-5">
+							<div class="col-md-4">
 								<div class="form-group">
 								<label for="Observacao">Observação</label>
-									<textarea name="cpObservacaoPedido" rows="2" id="cpObservacaoPedido" class="form-control "></textarea>
+									<textarea name="cpObservacaoPedido" rows="2" id="cpObservacaoPedido" class="form-control "><?php echo(!empty($_GET["id"])) ? $edit->cpObservacaoPedido: "";?></textarea>
 								</div>
 							</div>							
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="submit" name="acao" value="<?php echo (!empty($_GET["id"])) ? $acao : "gerar pedido" ;?>" id="btnCadastrarPedido"  class="btn btn-info form-control" />
+									<input type="hidden" name="id" value="<?php echo (!empty($_GET["id"])) ? $id : "";?>" />
+									<input type="submit" name="acao" value="<?php echo (!empty($_GET["id"])) ? $acao : "gerar pedido"; ?>" id="btnCadastrarPedido"  class="btn btn-info form-control" />
 								</div>
 							</div>
 							<div class="col-md-6">

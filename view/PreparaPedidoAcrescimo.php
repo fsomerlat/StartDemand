@@ -21,7 +21,7 @@
 				<!-- INSERT TABLE PREPARE PEDIDO -->
 					<div class="col-md-3">
 						<div class="form-group">
-							<label for="Codifo do pedido">Códido do pedido selecionado</label>
+							<label for="Codifo do pedido">Códido do pedido atual</label>
 							<input type="text" name="cptuPedido_cpCodPedido" id="cptuPedido_cpCodPedido" class="form-control" readonly />
 						</div>
 					</div>
