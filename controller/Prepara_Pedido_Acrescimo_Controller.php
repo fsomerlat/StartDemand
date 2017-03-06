@@ -15,11 +15,25 @@
 		$preparaAcrescimo->__set("cpQtdAcrescimo", addslashes($qtdAcrescimo));
 		$preparaAcrescimo->__set("cpValorTotalAcrescimo", addslashes($valTotalAcrescimo));
 		
-		$preparaAcrescimo->INSERT();
+		if(empty($_REQUEST["cpAcrescimo"])):
+			
+			echo "<script language='javascript'>
+						window.alert('O campo [ ACRÉSCIMO  ] DEVE SER PREENCHIDO  !');
+						window.location.href='../view/PreparaPedidoAcrescimo.php?panel=655955';
+					</script>";
 		
-		echo "Acréscimo inserido com sucesso !";
+		elseif($_REQUEST["cpQtdAcrescimo"]== 0):
 		
-
+			echo "<script language='javascript'>
+							window.alert('O campo [ QUANTIDADE ] DEVE SER SELECIONADO !');
+							window.location.href='../view/PreparaPedidoAcrescimo.php?panel=655955';
+						</script>";
+		else:
+		
+			$preparaAcrescimo->INSERT();	
+			echo "Acréscimo inserido com sucesso !";
+		
+		endif;
 	endif;
 	
 	if($_REQUEST["acao"] == "deletarProdPedido"):

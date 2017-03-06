@@ -37,7 +37,7 @@ var Service_Generico = (function() {
 				setTimeout(function() { 
 					
 					option   += "<option value=''>Selecione</option>";
-					options  += "<option value=''>Selecione</option>";
+					options  += "<option value='0'>Selecione</option>";
 					
 					for(var i=0; i < retorno.length; i++) {
 						

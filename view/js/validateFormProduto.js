@@ -34,4 +34,4 @@ document.getElementById("btnCadastrarProduto").onclick = function() {
 		
 		window.alert(msg); return false;
 	}
-}
+};

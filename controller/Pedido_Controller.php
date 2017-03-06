@@ -17,12 +17,48 @@
 		$ped->__set("cpStatusPedido", addslashes($_REQUEST["cpStatusPedido"]));
 		$ped->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
 		
+		if($_REQUEST["tuProduto_idProduto"] == 0):
+		
+			echo "<script language='javascript'>
+						window.alert('È necessário selecionar o campo [ NOME PRODUTO ] ! ');
+						window.history.go(-1);
+					</script>";
+		
+		elseif ($_REQUEST["cpCodPedido"] == 0):
+		
+			echo "<script language='javascript'>
+							window.alert('È necessário selecionar o campo [ CÓDIGO PRODUTO ] !');
+							window.history.go(-1);
+						</script>";
+		
+		elseif ($_REQUEST["cpQtdProduto"] == 0):
+		
+			echo "<script language='javascript'>
+								window.alert('È necessário selecionar o campo [ QUANTIDADE PRODUTO ] !');
+								window.history.go(-1);
+							</script>";
+		
+		elseif ($_REQUEST["cpComplementoUm"] == ''):
+		
+			echo "<script language='javascript'>
+								window.alert('È necessário selecionar o campo [ 1ª COMPLEMENETO ] !');
+								window.history.go(-1);
+							</script>";
+		
+		elseif ($_REQUEST["cpComplementoDois"] == ''):
+		
+			echo "<script language='javascript'>
+								window.alert('È necessário selecionar o campo [ 2ª COMPLEMENETO ] !');
+								window.history.go(-1);
+							</script>";
+		else:
+		
 		$ped->INSERT();
 		echo "<script language='javascript'>
 					window.alert('Pedido gerado com sucesso !');
 					window.location.href='../view/Pedido.php?panel=193158';
 				</script>";
-		
+		endif;
 	endif;
 	
 	if($_REQUEST["acao"] == "gerar pedido com acrescimo"):

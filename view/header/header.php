@@ -112,7 +112,11 @@
 						
 					</nav>
 				</div>
-								
+				<div class="col-md-6">
+					<div class="form-group">
+						<div class="successAddAcrescimo"></div>
+					</div>
+				</div>				
 				<div class="col-md-12">
 					<div class="form-group">
 						<div>
@@ -127,6 +131,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-12 successAddAcrescimo"></div>
+				
 								
 		</div>			
