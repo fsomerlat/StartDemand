@@ -22,7 +22,7 @@
 					<div class="panel-body">
 						<form name="formProduto" id="formProduto" action="../controller/Pedido_Controller.php" method="GET">
 						
-						<input type="hidden" name="cpValorTotalPedido" id="cpValorTotalPedido" value="0"/><!-- SERÁ ATUALIZADO AO COMPLETAR O PEDIDO NO FINAL -->
+						<!-- input type="hidden" name="cpValorTotalPedido" id="cpValorTotalPedido" value="0"/><!-- SERÁ ATUALIZADO AO COMPLETAR O PEDIDO NO FINAL -->
 						
 						<div class="col-md-12">
 							<div class="form-group">

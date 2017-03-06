@@ -27,18 +27,43 @@
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 			}
 		}
+	
+		public function getSomaTotalAcrescimo() {
+			
+			$sql="SELECT
+						SUM(cpValorTotalAcrescimo) AS somaTotalAcrescimo
+				   FROM 
+						$this->table";
+			$s=DB::prepare($sql);
+			$s->execute();
+			
+			try {
+				
+				$assoc = PDO::FETCH_ASSOC;
+				$all = $s->fetchAll($asso);
+				
+				echo json_encode($all,JSON_PRETTY_PRINT);
+			
+			}catch(PDOException $e) {
+				
+				echo "Error no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}
+		
 		public function getInfoAcrescimoJSON() {
 			
 			$sql="SELECT 
 					idPreparaAcrescimo,cpAcrescimo,cpQtdACrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo
-				  FROM 
-					$this->table";
-			 $s=DB::prepare($sql);
+				  FROM  
+				  	$this->table";
+						
+			 $s = DB::prepare($sql);						
 			 $s->execute();
 			 
 			 try {
 			 	
 			 	$assoc = PDO::FETCH_ASSOC;
+			 	
 			 	$all = $s->fetchAll($assoc);
 			 	echo json_encode($all, JSON_PRETTY_PRINT);
 			 	

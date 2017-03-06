@@ -5,7 +5,7 @@
 document.getElementById("btnCadastrarProduto").onclick = function() {
 	
 	var Errors = [];
-	
+		
 	var valida =  function(campo,msg) {
 		
 		(returnId(campo) == '' || returnId(campo) == 0) ? Errors.push(msg) : false;

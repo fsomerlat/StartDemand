@@ -7,19 +7,21 @@ document.getELementById("btnCadastrarPedido").onclick = function() {
 	
 	var Errors = [];
 	
+	console.log(this.value);
+	
 	var valida = function(campo,msg) {
 		
-		if(returnId(campo) == 0) {
+		if(returnId(campo) == 0 || retunrId(campo) == '') {
 			
 			Errors.push(msg);
 		}
-	};
+	}
 	
 	var returnId = function(Nids) {
 		
 		var id =  document.getElementById(Nids);
 		return id.value;
-	};
+	}
 	
 	valida("tuProduto_idProduto","È necessário selecionar o campo [ NOME PRODUTO ] !");
 	valida("cpCodPedido","È necessário selecionar o campo [ CÓDIGO PEDIDO ] !");
@@ -29,11 +31,11 @@ document.getELementById("btnCadastrarPedido").onclick = function() {
 	
 	if(Errors.length > 0) {
 		
-		var msg =  Errors.reduce(function(a,b){
+		var msg =  Errors.reduce(function(a,b) {
 			
 			return a + b + '\n';
 		},'');
 		
 		window.alert(msg); return false;
-	};
-};
+	}
+}

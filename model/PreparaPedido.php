@@ -152,4 +152,25 @@
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 			}
 		}
+		
+		public function getSomeProduto() {
+			
+			$sql="SELECT 
+						SUM(cpValorTotalProduto) as somaTotalProduto 
+				  FROM 
+					$this->table";
+			$s=DB::prepare($sql);
+			$s->execute();
+			
+			try {
+				
+				$assoc = PDO::FETCH_ASSOC;
+				$all = $s->fetchAll($assoc);
+				echo json_encode($all,JSON_PRETTY_PRINT);
+			
+			}catch(PDOException $e) {
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}
 	}

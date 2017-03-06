@@ -9,6 +9,9 @@
 			<div class="panel-body">
 				<form action="../controller/Prepara_Pedido_Acrescimo_Controller.php" name="formAcrescimo" id="formAcrescimo" method="">
 					
+					<input type="hidden" name="valTotalPreparaProduto" id="valTotalPreparaProduto"/>
+					<input type="hidden" name="valTotalPreparaAcrescimo" id="valTotalPreparaAcrescimo"/>
+					
 				<!-- INSERT TABLE PREPARE PEDIDO -->
 					<input type="hidden" name="cptuProduto_idProduto" />
 					<input type="hidden" name="cpCodPedido" />
@@ -67,13 +70,11 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<input type="button" name="acao" value="adicionar" id="btnAddAcrescimo" class="form-control btn btn-info" />
-						<hr/>	
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<input type="reset" value="limpar" class="form-control btn btn-warning" />
-						<hr/>	
 						</div>
 					</div>		
 				</form>	
@@ -102,7 +103,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<!-- LISTA ACRÉSCIMOS VIA AJAX -->
+					<!-- LISTA PRODUTOS VIA AJAX -->
 				</tbody>
 				</table>
 			</div>
@@ -111,7 +112,34 @@
 </div>
 </div>
 
+
 <div class="col-md-4">
+<div class="panel-group" id="panel-402239">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			 <div class="panel-title" data-toggle="collapse" data-parent="#panel-402239" href="#panel-element_655960">Confirme o pedido</div>
+		</div>
+		<div id="panel-element_655960" class="panel-collapse collapse in">
+			<div class="panel-body">
+
+				<div class="col-md-6 btnConfirmGeracaoPedido">
+					<div class="form-group">
+						<button type="button"  id="confirmarPedido"  class="form-control btn btn-info">confirma pedido</button>
+					</div>
+				</div>
+				<div class="col-md-6 totalPedidoPegPrepara">
+					<div class="form-group">
+						<label for="valor totaPedido">Valor total do pedido</label>
+						<input type="text" name="cpTotalPedidoPagPrepara" id="cpTotalPedidoPagPrepara" readonly class="form-control" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
+<div class="form-group">
+	<div class="successAddAcrescimo"></div>
+</div>	
 <div class="panel-group" id="panel-402239">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -139,7 +167,8 @@
 			</div>
 		</div>
 	</div>
+	</div>
 </div>
-</div>
+
 
 <?php require_once 'footer/footer.php'; ?>

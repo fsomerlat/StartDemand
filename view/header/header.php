@@ -29,16 +29,13 @@
 					 <div class="form-group">
 						<ul class="nav nav-pills">
 							<li class="active">
-								 <a href="#"> <span class="badge pull-right">16</span>Pedidos de hoje</a>
+								 <a href="#"> <span class="badge pull-right"><i class="pedidosDeHoje"></i>16</span>Pedidos de hoje</a>
 							</li>
 							<li class="active">
-								 <a href="#"> <span class="badge pull-right">16</span>Pedidos finalizados</a>
+								 <a href="#"> <span class="badge pull-right"><i class="pedidosFinalizados"></i>16</span>Pedidos finalizados</a>
 							</li>
 							<li class="active">
-								 <a href="#"> <span class="badge pull-right"><i>3</i></span>Pedidos cancelados</a>
-							</li>
-							<li class="active">
-								 <a href="#"> <span class="badge pull-right"><i id="valorTotalPedido"></i></span>Valor total do pedido atual</a>
+								 <a href="#"> <span class="badge pull-right"><i class="pedidosCancelados">3</i></span>Pedidos cancelados</a>
 							</li>
 						</ul>
 					</div>
@@ -111,12 +108,7 @@
 						</div>
 						
 					</nav>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<div class="successAddAcrescimo"></div>
-					</div>
-				</div>				
+				</div>			
 				<div class="col-md-12">
 					<div class="form-group">
 						<div>

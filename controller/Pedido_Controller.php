@@ -13,7 +13,7 @@
 		$ped->__set("cpComplementoUm", addslashes($_REQUEST["cpComplementoUm"]));
 		$ped->__set("cpComplementoDois", addslashes($_REQUEST["cpComplementoDois"]));
 		$ped->__set("cpValorTotalProduto", $_REQUEST["cpValorTotalProduto"]);
-		$ped->__set("cpValorTotalPedido", addslashes($_REQUEST["cpValorTotalPedido"]));
+// 		$ped->__set("cpValorTotalPedido", addslashes($_REQUEST["cpValorTotalPedido"]));
 		$ped->__set("cpStatusPedido", addslashes($_REQUEST["cpStatusPedido"]));
 		$ped->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
 		

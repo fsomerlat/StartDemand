@@ -27,9 +27,9 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table
-					(tuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpValorTotalPedido,cpStatusPedido,cpHoraPedido,cpObservacaoPedido)
+					(tuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpStatusPedido,cpHoraPedido,cpObservacaoPedido)
 				  VALUES
-					(:tuProduto_idProduto,:cpCodPedido,:cpQtdProduto,:cpComplementoUm,:cpComplementoDois,:cpValorTotalProduto,:cpValorTotalPedido,:cpStatusPedido,now(),:cpObservacaoPedido)";
+					(:tuProduto_idProduto,:cpCodPedido,:cpQtdProduto,:cpComplementoUm,:cpComplementoDois,:cpValorTotalProduto,:cpStatusPedido,now(),:cpObservacaoPedido)";
 			
 			$in=DB::prepare($sql);
 			$in->bindParam(":tuProduto_idProduto",$this->tuProduto_idProduto,PDO::PARAM_INT);
@@ -38,7 +38,7 @@
 			$in->bindParam(":cpComplementoUm", $this->cpComplementoUm,PDO::PARAM_STR);
 			$in->bindParam(":cpComplementoDois", $this->cpComplementoDois,PDO::PARAM_STR);
 			$in->bindParam(":cpValorTotalProduto",$this->cpValorTotalProduto,PDO::PARAM_STR);
-			$in->bindParam(":cpValorTotalPedido", $this->cpValorTotalPedido,PDO::PARAM_STR);
+			//$in->bindParam(":cpValorTotalPedido", $this->cpValorTotalPedido,PDO::PARAM_STR);
 			$in->bindParam(":cpStatusPedido",$this->cpStatusPedido,PDO::PARAM_STR);
 			$in->bindParam(":cpObservacaoPedido", $this->cpObservacaoPedido,PDO::PARAM_STR);
 			

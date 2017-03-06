@@ -4,6 +4,6 @@
 	header("Content-Type: application/json");
 	
 	$preparaAcrescimo->getInfoAcrescimoJSON();
-	
+
 	
  

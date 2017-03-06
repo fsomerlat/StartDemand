@@ -1,4 +1,3 @@
-<?php ?>
 <html>
 	<head>
 		<meta charset="UTF-8" />
@@ -14,7 +13,7 @@
 					<thead>
 						<tr class="success">
 							<th>Status</th>
-							<th>Id</th>
+							<th class="info">Id</th>
 							<th class="danger">Código pedido</th>
 							<th class="info">Produto</th>
 							<th class="danger">QTDA</th>

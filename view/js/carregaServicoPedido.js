@@ -26,7 +26,7 @@ var Service_Pedido = (function() {
 				} else {
 					
 					retorno.map(function(dados) {
-					
+						
 						var status = dados.cpStatusPedido,
 							opcaoStatus = "";
 						
@@ -45,7 +45,12 @@ var Service_Pedido = (function() {
 							
 						dataPedido = dia+'/'+mes+'/'+ano+ hora;
 							
-						//if(dados.cpStatusPedido != "C") {
+						if(dados.cpStatusPedido == "C") { 
+							
+							
+						}
+						
+						
 							
 							itensProdutos += "<tr>";
 							
@@ -55,7 +60,7 @@ var Service_Pedido = (function() {
 								case "Em andamento" : itensProdutos += "<td class='statusAndamentoPedido'>"+opcaoStatus+"</td>"; break;
 								case "Finalizado" : itensProdutos += "<td class='statusFinalizadoPedido'>"+opcaoStatus+"</td>";break;
 							}			
-							itensProdutos += "<td>"+dados.idPedido+"</td>";
+							itensProdutos += "<td class='idPedido'>"+dados.idPedido+"</td>";
 							itensProdutos += "<td class='danger'>"+dados.cpCodPedido+"</td>";
 							itensProdutos += "<td class='info'>"+dados.cpNomeProduto+"</td>";
 							itensProdutos += "<td class='danger'>"+dados.cpQtdProduto+"</td>";
@@ -73,7 +78,7 @@ var Service_Pedido = (function() {
 							itensAcrescimo += "<td class='info'>Nome acrescimo</td>";
 							itensAcrescimo += "<td class='warning'>Qtd acrescimo</td>";
 							itensAcrescimo += "</tr>";
-						//}
+						
 					});
 					$("#tablePedidoProdutos tbody").html(itensProdutos);
 					//$("#tablePedidoAcrescimo tbody").html(itensAcrescimo);

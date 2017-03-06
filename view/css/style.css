@@ -4,6 +4,14 @@
 	margin-top:40px;	
 }
 
+.totalPedidoPegPrepara{
+	
+	margin-top:50px;
+}
+.btnConfirmGeracaoPedido {
+	
+	margin-top:74px;
+}
 .listaPedidos,
 .tituloListaPedidos,
 .ProdutosDisponiveisPedido,
@@ -17,6 +25,7 @@
 	text-align: center;
 }
 
+
 .listaPedidoAcrescimo,
 .listaPedidoProduto {
 	
@@ -26,6 +35,11 @@
 .h3listaPedidoAcrescimo {
 	
 	color:white;
+}
+
+.idPedido {
+	
+	color:red;
 }
 .statusCancelPedido{
 	
