@@ -29,10 +29,8 @@
 							window.location.href='../view/PreparaPedidoAcrescimo.php?panel=655955';
 						</script>";
 		else:
-		
-			$preparaAcrescimo->INSERT();	
-			echo "Acréscimo inserido com sucesso !";
-		
+				$preparaAcrescimo->INSERT();	
+				echo "Acréscimo inserido com sucesso !";
 		endif;
 	endif;
 	

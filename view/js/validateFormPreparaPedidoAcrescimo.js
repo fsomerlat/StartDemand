@@ -28,7 +28,8 @@ document.getElementById("btnAddAcrescimo").onclick = function() {
 			return a + b + '\n';
 		},'');
 		
-		window.alert(msg); return false;
+		window.alert(msg); 
+		return false;
 		
 	}
 };

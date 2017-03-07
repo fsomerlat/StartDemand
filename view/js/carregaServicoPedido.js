@@ -44,14 +44,7 @@ var Service_Pedido = (function() {
 						ano  = dataHrPedido.substring(0,5); 
 							
 						dataPedido = dia+'/'+mes+'/'+ano+ hora;
-							
-						if(dados.cpStatusPedido == "C") { 
-							
-							
-						}
-						
-						
-							
+								
 							itensProdutos += "<tr>";
 							
 							switch(opcaoStatus){
@@ -134,10 +127,32 @@ var Service_Pedido = (function() {
 		});
 	}
 	
+	var getAjaxValorProduto = function(cptuProduto_idProduto) {
+		
+		$.ajax({
+			
+			url:"http://localhost/startDemand/service/Service_Produto.php",
+			cache:false,
+			dataType:"json",
+			success:function(retorno) {
+				  
+			retorno.map(function(dados){
+					   
+					if(dados.idProduto == cptuProduto_idProduto) {	
+						
+						$("#cpValorTotalProduto").attr("value",dados.cpValorProduto);
+						$("#cpValorBaseProduto").val(dados.cpValorProduto);
+					}
+				});
+			}
+		});
+	}	
+	
 	return {
 		
 		carregaInfoProdutosDisponiveisAjaxPedido: carregaInfoProdutosDisponiveisAjaxPedido,
-		carregaInfoPedidoAjaxDB: carregaInfoPedidoAjaxDB
+		carregaInfoPedidoAjaxDB: carregaInfoPedidoAjaxDB,
+		getAjaxValorProduto: getAjaxValorProduto
 		
 	}
 })();

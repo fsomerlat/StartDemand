@@ -4,6 +4,20 @@
 
 var Utils =  (function(){
 	
+	
+	var verificaUrl =  function() {
+		
+		var url = window.location.search.replace("?",""),
+			itens = url.split("&");
+		
+		var getItensUrl = {
+				
+				"panel" : itens[0]
+		}
+		
+		return getItensUrl.panel.substring(6,12);
+	}	
+	
 	var carregaDataDeHoje = function(objDate) {
 		
 		var dia = objDate.getDate(),
@@ -27,7 +41,8 @@ var Utils =  (function(){
 	
 	return {
 		
-		bindEvents: bindEvents
+		bindEvents: bindEvents,
+		verificaUrl: verificaUrl
 	};
 	
 })();

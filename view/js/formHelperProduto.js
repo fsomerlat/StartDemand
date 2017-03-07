@@ -9,19 +9,6 @@ var FormHelperProduto = (function() {
 		$("#panel-element_" + idPanel).collapse();
 	}
 	
-	var verificaUrl = function() {
-		
-		var url = window.location.search.replace("?",""),
-			itens = url.split("&");
-		
-		var getIntesUrl = {
-				
-				"panel" : itens[0]
-		}
-		
-		return getIntesUrl.panel.substring(6,12);
-	}
-	
 	var mascaraCampos = function(value) {
 		
 		if(value == 1) {
@@ -60,7 +47,7 @@ var FormHelperProduto = (function() {
 	
 	var bindEvents = function() {
 		
-		expandePainel(verificaUrl());
+		expandePainel(Utils.verificaUrl());
 		
 		$("#cpValorProduto").prop("disabled", true);
 		

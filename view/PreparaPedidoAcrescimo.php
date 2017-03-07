@@ -130,7 +130,7 @@
 				<div class="col-md-6 totalPedidoPegPrepara">
 					<div class="form-group">
 						<label for="valor totaPedido">Valor total do pedido</label>
-						<input type="text" name="cpTotalPedidoPagPrepara" id="cpTotalPedidoPagPrepara" readonly class="form-control" />
+						<input type="text" name="cpValorTotalPedido" id="cpValorTotalPedido" readonly class="form-control valTotalPedidoPagPreparaPedido" />
 					</div>
 				</div>
 			</div>
@@ -143,7 +143,7 @@
 <div class="panel-group" id="panel-402239">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			 <div class="panel-title" data-toggle="collapse" data-parent="#panel-402239" href="#panel-element_655956">Acréscimo a ser incluído no pedido atual</div>
+			 <div class="panel-title" data-toggle="collapse" data-parent="#panel-402239" href="#panel-element_655956">Lista de acréscimo</div>
 		</div>
 		<div id="panel-element_655956" class="panel-collapse collapse in">
 			<div class="panel-body">

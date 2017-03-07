@@ -39,7 +39,7 @@
 								</select>
 							</div>
 						</div>
-							<div class="col-md-3">
+							<div class="col-md-5">
 								<div class="form-group">
 									<label for="Produto">Nome do produto</label>
 									<select name="tuProduto_idProduto" id="tuProduto_idProduto" class="form-control toClearProduto">
@@ -157,7 +157,13 @@
 									<input type="text" name="cpValorTotalProduto" id="cpValorTotalProduto" value="<?php echo (!empty($_GET["id"])) ? $edit->cpValorTotalProduto : ""; ?>" readonly class="form-control toClearProduto" />
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-2">
+								<div class="form-group">
+									<label for="Valor total do pedido">Valor total do pedido</label>
+									<input type="text" name="cpValorTotalPedido" id="cpValorTotalPedido" class="form-control valTotalPedidoPagPedido" readonly/>
+								</div>
+							</div>
+							<div class="col-md-12">
 								<div class="form-group">
 								<label for="Observacao">Observação</label>
 									<textarea name="cpObservacaoPedido" rows="2" id="cpObservacaoPedido" class="form-control "><?php echo(!empty($_GET["id"])) ? $edit->cpObservacaoPedido: "";?></textarea>

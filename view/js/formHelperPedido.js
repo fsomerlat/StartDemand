@@ -4,43 +4,21 @@
 
 var FormHelperPedido = (function() {
 	
+	
+	var getValorTotalPedido = function() {
+		
+		return $(".valTotalPedidoPagPedido").val();
+	}
+	
+	var setValorTotalPedido = function(valor) {
+		
+		$(".valTotalPedidoPagPedido").val(valor);
+	}
+		
+	
 	var expandePainel = function(idPanel) {
 		
 		$("#panel-element_" + idPanel).collapse();
-	}
-	
-	var verificaUrl =  function() {
-		
-		var url = window.location.search.replace("?",""),
-			itens = url.split("&");
-		
-		var getItensUrl = {
-				
-				"panel" : itens[0]
-		}
-		
-		return getItensUrl.panel.substring(6,12);
-	}
-	
-	var getAjaxValorProduto = function(cptuProduto_idProduto) {
-		
-		$.ajax({
-			
-			url:"http://localhost/startDemand/service/Service_Produto.php",
-			cache:false,
-			dataType:"json",
-			success:function(retorno) {
-				  
-			retorno.map(function(dados){
-					   
-					if(dados.idProduto == cptuProduto_idProduto) {	
-						
-						$("#cpValorTotalProduto").attr("value",dados.cpValorProduto);
-						$("#cpValorBaseProduto").val(dados.cpValorProduto);
-					}
-				});
-			}
-		});
 	}
 	
 	var getValorBaseProduto =  function() {
@@ -50,49 +28,30 @@ var FormHelperPedido = (function() {
 	
 	var preencheValorProduto = function() {
 		
-		$("#valorTotalPedido").html("R$ 0,0");
+		$(".valTotalPedidoPagPedido").attr("placeholder","R$ 00.00");
 		
 		$("#cpQtdProduto").change(function() {
 			
-			var nomeProduto = $("#cptuProduto_idProduto").val();
-			if(nomeProduto == '') {
+			var nomeProduto = $("#tuProduto_idProduto").val();
+			if(nomeProduto == 0) {
 					
 				this.value = 0;
 				window.alert("È necessário selecionar o campo  [ NOME DO PRODUTO ] !");
-				$("#cptuProduto_idProduto").focus() ; return false;
+				$("#tuProduto_idProduto").focus() ; return false;
 				
 			} else if(this.value ==  0) { 
 				
 				$(".toClearProduto").val("");
-				$("#valorTotalPedido").html("R$ 0,0");
-				
+
 			} else {
 				
 				var result = this.value * getValorBaseProduto();
 				$("#cpValorTotalProduto").attr("value",result);
 				
+				setValorTotalPedido(result);
+				
 			}
 		});
-	}
-	
-	
-	/**SERA UTILZADO APÓS O PEDIDO JA ESTIVER LISTADO NA TELA**/
-	var getSomaTotalPedido = function() {
-		
-	
-		var valorAcrescimo = $("#cpValorTotalAcrescimo").val(), // NÃO ESTÁ BINDANDO O VALOR ACRESCIMO POIS ESTA EM OUTRO ARQUIVO
-			valorProduto = $("#cpValorTotalProduto").val(),
-			somaTotalPedido = '';
-	
-		if(valorAcrescimo != '' || valorProduto != '') {
-			
-			(valorAcrescimo == '') ? valorAcrescimo = 0 :false;
-			(valorProduto == '') ? valorProduto = 0 : false;			
-			
-			somaTotalPedido = parseFloat(valorAcrescimo) + parseFloat(valorProduto);
-			$("#valorTotalPedido").html(valorProduto);
-		}	
-		return somaTotalPedido; //RETORNANDO NAN =  ERRO
 	}
 	
 	var defineTipoPedido = function(value) { 
@@ -109,17 +68,16 @@ var FormHelperPedido = (function() {
 	
 	var bindEvents =  function() {
 		
-		expandePainel(verificaUrl());
+		expandePainel(Utils.verificaUrl());
 		preencheValorProduto();
 		
 		$(document).on("click","#pedidoCancelado", function() {
 			
 			return confirm("Deseja cancelar esse pedido ?");
 		});
-		
 		$(document).on('change','#tuProduto_idProduto', function(ev) {
 			
-			getAjaxValorProduto(ev.target.value);
+			Service_Pedido.getAjaxValorProduto(ev.target.value);
 		});
 		
 		$(document).on("click","#pedidoLiberado",function(){
@@ -133,12 +91,10 @@ var FormHelperPedido = (function() {
 		});
 	}
 	
-	
-	
 	return  {
 
 		bindEvents: bindEvents,
-		getSomaTotalPedido: getSomaTotalPedido
+	
 	}
 })();
 	    

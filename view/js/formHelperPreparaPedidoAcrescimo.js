@@ -5,23 +5,50 @@ var FormHelperAcrescimo = (function(){
 		var success = '<div class="alert alert-success" role="alert">' + mensagem + '</div>';
 		return success;
 	}
+	
+	
+	var getValorProduto = function() {
 		
+		return  $("#valTotalPreparaProduto").val();
+	}
+	
+	var getValorAcrescimo =  function() {
+		
+		return $("#valTotalPreparaAcrescimo").val();
+
+	}
+	var setValorProduto = function(valor) {
+		
+		$("#valTotalPreparaProduto").val(valor);
+	}
+	
+	var setValorAcrescimo = function(valor) {
+		
+		$("#valTotalPreparaAcrescimo").val(valor);				
+	}
+	
+	var setSomaValores = function() {
+		
+		setTimeout(function() {
+			
+		var somaProduto = getValorProduto(),
+			somaAcrescimo = getValorAcrescimo();
+		
+			if(somaProduto == 0 && somaAcrescimo == 0) {
+				
+				$(".valTotalPedidoPagPreparaPedido").attr("placeholder","R$ 00.00");
+
+			}else {
+				
+			     somaTotal = parseFloat(somaProduto) + parseFloat(somaAcrescimo);
+				 $(".valTotalPedidoPagPreparaPedido").val(somaTotal);				
+			}
+		},100);
+	}	
+	
 	var expandePainel = function(idPanel) {
 		
 		$("#panel-element_" + idPanel).collapse();
-	}
-	
-	var verificaUrl =  function() {
-		
-		var url = window.location.search.replace("?",""),
-			itens = url.split("&");
-		
-		var getItensUrl = {
-				
-				"panel" : itens[0]
-		}
-		
-		return getItensUrl.panel.substring(6,12);
 	}
 	
 	var getValorBaseAcrescimo =  function() {
@@ -69,7 +96,6 @@ var FormHelperAcrescimo = (function(){
 				
 				var result = this.value * getValorBaseAcrescimo();
 				$("#cpValorTotalAcrescimo").val(result);
-				$("#cpValorTotalPedido").val(FormHelperPedido.getSomaTotalPedido());
 			}
 		});
 	}	
@@ -116,9 +142,10 @@ var FormHelperAcrescimo = (function(){
 	
 	var bindEvents =  function() {
 		
-		expandePainel(verificaUrl());
+		expandePainel(Utils.verificaUrl());
 		preencheAcrescimoPedido();
 		preencheSelectCodigo();
+		setSomaValores();
 		
 		$(document).on('change','#cpAcrescimo',function(ev) {
 			
@@ -148,7 +175,12 @@ var FormHelperAcrescimo = (function(){
 	
 	return {
 		
-		bindEvents: bindEvents
+		bindEvents: bindEvents,
+		setValorAcrescimo: setValorAcrescimo,
+		setValorProduto: setValorProduto
+		
+		
+		
 	}
 	
 })();
