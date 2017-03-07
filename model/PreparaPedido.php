@@ -41,7 +41,7 @@
 					prod.cpValorProduto
 				  FROM 
 					$this->table as prep INNER JOIN tuProduto as prod 
-			     ON prod.idProduto = prep.tuProduto_idProduto		
+			      ON prod.idProduto = prep.tuProduto_idProduto		
 				";
 			
 			$s=DB::prepare($sql);

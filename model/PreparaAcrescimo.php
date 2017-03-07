@@ -40,7 +40,7 @@
 			try {
 				
 				$assoc = PDO::FETCH_ASSOC;
-				$all = $s->fetchAll($asso);
+				$all = $s->fetchAll($assoc);
 				
 				echo json_encode($all,JSON_PRETTY_PRINT);
 			

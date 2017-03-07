@@ -4,5 +4,5 @@
 	
 	$pedido = new Pedido();
 	
-	$pedido->getInfoPedido();
+	$pedido->getInfoPedidoJSON();
 	

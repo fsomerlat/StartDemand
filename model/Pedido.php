@@ -52,7 +52,7 @@
 			}
 		}
 		
-		public function getInfoPedido() {
+		public function getInfoPedidoJSON() {
 			
 			$sql="SELECT
 					ped.idPedido,p.cpNomeProduto,ped.cpCodPedido,ped.cpQtdProduto,ped.cpHoraPedido,ped.cpComplementoUm,
