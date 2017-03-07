@@ -115,7 +115,7 @@ var FormHelperAcrescimo = (function(){
 	    	cpValorTotalAcrescimo: cpValorTotalAcrescimo
 	    },
 		function(retorno)	{
-			
+
 			$(".successAddAcrescimo").html(msgSuccess(retorno)).collapse();
 		});
 	}
@@ -133,12 +133,10 @@ var FormHelperAcrescimo = (function(){
 		return options;
 	}
 	
-	
 	var preencheSelectCodigo = function() {
 		
 		$("#cpCodPedido").html(addOptions());
 	}
-	
 	
 	var bindEvents =  function() {
 		
@@ -178,9 +176,6 @@ var FormHelperAcrescimo = (function(){
 		bindEvents: bindEvents,
 		setValorAcrescimo: setValorAcrescimo,
 		setValorProduto: setValorProduto
-		
-		
-		
 	}
 	
 })();

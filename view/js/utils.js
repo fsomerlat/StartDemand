@@ -4,7 +4,6 @@
 
 var Utils =  (function(){
 	
-	
 	var verificaUrl =  function() {
 		
 		var url = window.location.search.replace("?",""),

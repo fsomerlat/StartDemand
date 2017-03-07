@@ -49,9 +49,9 @@ var Service_Pedido = (function() {
 							
 							switch(opcaoStatus){
 								
-								case "Cancelado": itensProdutos += "<td class='statusCancelPedido'>"+opcaoStatus+"</td>"; break;
-								case "Em andamento" : itensProdutos += "<td class='statusAndamentoPedido'>"+opcaoStatus+"</td>"; break;
-								case "Finalizado" : itensProdutos += "<td class='statusFinalizadoPedido'>"+opcaoStatus+"</td>";break;
+								case "Cancelado": itensProdutos += "<td class='statusCancelPedido'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
+								case "Em andamento" : itensProdutos += "<td class='statusAndamentoPedido'><span class='glyphicon glyphicon-option-horizontal' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
+								case "Finalizado" : itensProdutos += "<td class='statusFinalizadoPedido'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+opcaoStatus+"</td>";break;
 							}			
 							itensProdutos += "<td class='idPedido'>"+dados.idPedido+"</td>";
 							itensProdutos += "<td class='danger'>"+dados.cpCodPedido+"</td>";
