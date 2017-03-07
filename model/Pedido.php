@@ -58,10 +58,14 @@
 					ped.idPedido,p.cpNomeProduto,ped.cpCodPedido,ped.cpQtdProduto,ped.cpHoraPedido,ped.cpComplementoUm,
 					ped.cpComplementoDois,ped.cpValorTotalProduto,ped.cpValorTotalPedido,ped.cpStatusPedido,ped.cpObservacaoPedido
 				  FROM 
-					$this->table as ped INNER JOIN tuProduto as p ON p.idProduto = ped.tuProduto_idProduto
-				  ORDER BY ped.cpHoraPedido ASC";
+					$this->table as ped 
+				  
+					INNER JOIN tuProduto as p ON p.idProduto = ped.tuProduto_idProduto
+					
+				 ORDER BY ped.cpHoraPedido ASC ";
 			
 			$s=DB::prepare($sql);
+								
 			$s->execute();
 			
 			try {
@@ -77,16 +81,16 @@
 			}
 		}
 		
-		public function UPDATESTATUS($cod) {
+		public function UPDATESTATUS($id) {
 			
 			$sql = "UPDATE 
 						$this->table 
 					SET 
 						cpStatusPedido=:cpStatusPedido 
 					WHERE 
-						cpCodPedido=:cpCodPedido";
+						idPedido=:idPedido";
 			$up=DB::prepare($sql);
-			$up->bindParam(":cpCodPedido",$cod,PDO::PARAM_INT);
+			$up->bindParam(":idPedido",$id,PDO::PARAM_INT);
 			$up->bindParam(":cpStatusPedido",$this->cpStatusPedido,PDO::PARAM_STR);
 			
 			try {
@@ -99,12 +103,18 @@
 			}
 		}	
 		
+		//RETORNA SEMPRE O ULTIMO REGISTRO
 		public function getInfoPedido() {
 			
 			$sql="SELECT 
 						idPedido,cpCodPedido
 				  FROM 
-						$this->table";
+						$this->table
+				  WHERE
+				  		idPedido in
+				  (SELECT 
+						MAX(idPedido) FROM $this->table) ";
+				  
 			
 			$s=DB::prepare($sql);
 			$s->execute();
@@ -118,4 +128,5 @@
 				echo "Erro no aquivo ".$e->getFile()." referente a seguinte mensagem ".$e->getMessage()." na linha ".$e->getLine(); 
 			}
 		}
+		
 	}

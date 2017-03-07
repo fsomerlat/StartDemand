@@ -93,10 +93,8 @@
 	
 	if(isset($_REQUEST["confirm"])):
 		
-	    $somaAcrescimo = $preparaAcrescimo->getSomaTotalAcrescimo(); 
-		$somaProduto = $preparaPedido->getSomaProduto();
-		$somaTotalPedido = $somaAcrescimo + $somaProduto;
-		
+		$somaTotalPedido = $_REQUEST["valTotalPedido"];
+		$obsAcrescimo = $_REQUEST["cpObservacaoAcrescimo"];
 		
 		$getInfoPreparaPedido = $preparaPedido->getPedido();
 	    $idPreparaPedido = $getInfoPreparaPedido->idPreparaPedido;
@@ -123,7 +121,7 @@
 	    
 		$ped->INSERT();	    
 	    
-		$getInfoPedido = $ped->getInfoPedido();
+		$getInfoPedido = $ped->getInfoPedido(); //RETORNA SEMPRE O ULTIMO REGISTRO DA TABELA tsPreparaPedido
 		
 		$idPedido = $getInfoPedido->idPedido;
 		$codPedido = $getInfoPedido->cpCodPedido;
@@ -135,12 +133,14 @@
 		//SETA ACRÉSCIMO
 		foreach($arryAll as $key => $res):
 			
-			$acrescimo->__set("tuPedido_idPedido", addslashes($idPedido));
+			$acrescimo->__set("tuPedido_idPedido", addslashes($idPedido)); //AQUI É INSERIDO SEMPRE O ULTIMO ID DA TABELA tsPraparaPedido
 			$acrescimo->__set("tuPedido_cpCodPedido", addslashes($codPedido));
 			$acrescimo->__set("cpAcrescimo", addslashes($res->cpAcrescimo));
 			$acrescimo->__set("cpQtdAcrescimo", addslashes($res->cpQtdAcrescimo));
 			$acrescimo->__set("cpValorBaseAcrescimo", addslashes($res->cpValorBaseAcrescimo));
 			$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
+			$acrescimo->__set("cpObservacaoAcrescimo", addslashes($res->cpObservacaoAcrescimo));
+			
 			$acrescimo->INSERT();
 			
 		endforeach;
@@ -151,10 +151,12 @@
 	
 	if($_REQUEST["acao"] == "cancelar"):
 		
-		$cod = $_REQUEST["cod"];
+		$id = $_REQUEST["id"];
 		$ped->__set("cpStatusPedido","C");
+		$acrescimo->__set("cpStatusAcrescimo","C");
 		
-		$ped->UPDATESTATUS($cod);
+		$ped->UPDATESTATUS($id);
+		$acrescimo->UPDATESTATUS($id);
 		
 		header("location:../view/listarPedidos.php");
 		
@@ -162,12 +164,16 @@
 	
 	if($_REQUEST["acao"] == "finalizar"):
 		
-		$cod = $_REQUEST["cod"];
+		$id = $_REQUEST["id"];
 	
 		$ped->__set("cpStatusPedido", "F");
+		$acrescimo->__set("cpStatusAcrescimo", "F");
 		
-		$ped->UPDATESTATUS($cod);
+		$ped->UPDATESTATUS($id);
+		$acrescimo->UPDATESTATUS($id);
+		
 		header("location:../view/listarPedidos.php");
+		
 	endif;
 	
 	if($_REQUEST["acao"] == "atualizar"):

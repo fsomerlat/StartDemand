@@ -9,14 +9,15 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table
-					(cpAcrescimo,cpQtdAcrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo)
+					(cpAcrescimo,cpQtdAcrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo,cpObservacaoAcrescimo)
 				  VALUES 
-				  	(:cpAcrescimo,:cpQtdAcrescimo,:cpValorBaseAcrescimo,:cpValorTotalAcrescimo)";
+				  	(:cpAcrescimo,:cpQtdAcrescimo,:cpValorBaseAcrescimo,:cpValorTotalAcrescimo,:cpObservacaoAcrescimo)";
 			$in=DB::prepare($sql);
 			$in->bindParam(":cpAcrescimo",$this->cpAcrescimo,PDO::PARAM_STR);
 			$in->bindParam(":cpQtdAcrescimo",$this->cpQtdAcrescimo,PDO::PARAM_STR);
 			$in->bindParam(":cpValorBaseAcrescimo",$this->cpValorBaseAcrescimo,PDO::PARAM_STR);
 			$in->bindParam(":cpValorTotalAcrescimo",$this->cpValorTotalAcrescimo,PDO::PARAM_STR);
+			$in->bindParam(":cpObservacaoAcrescimo",$this->cpObservacaoAcrescimo,PDO::PARAM_STR);
 			
 			try {
 				
@@ -53,7 +54,7 @@
 		public function getInfoAcrescimoJSON() {
 			
 			$sql="SELECT 
-					idPreparaAcrescimo,cpAcrescimo,cpQtdACrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo
+					idPreparaAcrescimo,cpAcrescimo,cpQtdACrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo,cpObservacaoAcrescimo
 				  FROM  
 				  	$this->table";
 						
@@ -95,7 +96,7 @@
 		 public function getAll() {
 		 	
 		 	$sql="SELECT 
-		 				cpAcrescimo,cpQtdAcrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo
+		 				cpAcrescimo,cpQtdAcrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo,cpObservacaoAcrescimo
 		 		  FROM 
 		 			$this->table";
 		 	
@@ -104,6 +105,7 @@
 		 	$s->bindParam(":cpQtdAcrescimo",$this->cpQtdAcrescimo,PDO::PARAM_STR);
 		 	$s->bindParam(":cpValorBaseAcrescimo",$this->cpValorBaseAcrescimo,PDO::PARAM_STR);
 		 	$s->bindParam(":cpValorTotalAcrescimo",$this->cpValorTotalAcrescimo,PDO::PARAM_STR);
+		 	$s->bindParam(":cpObservacaoAcrescimo",$this->cpObservacaoAcrescimo,PDO::PARAM_STR);
 		 	$s->execute();
 		 	
 		 	try {

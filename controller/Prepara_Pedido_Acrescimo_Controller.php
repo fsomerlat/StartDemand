@@ -9,11 +9,13 @@
 		$valBaseAcrescimo = $_REQUEST["cpValorBaseAcrescimo"];
 		$qtdAcrescimo = $_REQUEST["cpQtdAcrescimo"];
 		$valTotalAcrescimo = $_REQUEST["cpValorTotalAcrescimo"];
+		$obsAcrescimo = $_REQUEST["cpObservacaoAcrescimo"];
 		
 		$preparaAcrescimo->__set("cpAcrescimo", addslashes($nmacrescimo));
 		$preparaAcrescimo->__set("cpValorBaseAcrescimo",addslashes($valBaseAcrescimo));
 		$preparaAcrescimo->__set("cpQtdAcrescimo", addslashes($qtdAcrescimo));
 		$preparaAcrescimo->__set("cpValorTotalAcrescimo", addslashes($valTotalAcrescimo));
+		$preparaAcrescimo->__set("cpObservacaoAcrescimo", addslashes($obsAcrescimo));
 		
 		if(empty($_REQUEST["cpAcrescimo"])):
 			

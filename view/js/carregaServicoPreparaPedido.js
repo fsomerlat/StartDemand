@@ -33,6 +33,7 @@ var Service_Prepara_Pedido = (function() {
 							
 							itens += "<tr>";
 							itens += "<td>"+i.cpCodPedido+"</td>";
+							itens += "<td>"+i.cpNomeProduto+"</td>"
 							itens += "<td>"+i.cpQtdProduto+"</td>";
 							itens += "<td>"+i.cpValorProduto+"</td>";
 							itens += "<td>"+i.cpValorTotalProduto+"</td>";
@@ -42,6 +43,7 @@ var Service_Prepara_Pedido = (function() {
 							itens += "</tr>";
 							
 							$("#cptuPedido_cpCodPedido").attr("value",i.cpCodPedido).focus();
+							$("#cpidPreparaPedido").val(i.idPedido);
 							
 						});
 						

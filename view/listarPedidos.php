@@ -34,9 +34,11 @@
 				<table class="table table-hover" id="tablePedidoAcrescimo">
 					<thead>
 						<tr>
+							<th class="success">Status</th>
 							<th class="danger">código pedido</th>
 							<th class="info">Acréscimo</th>
 							<th class="warning">Quantidade acréscimo</th>
+							<th class="success">Observação</th>
 						</tr>
 					</thead>
 					<tbody>

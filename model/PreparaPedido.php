@@ -38,7 +38,7 @@
 			$sql="SELECT
 					prep.idPreparaPedido,prep.tuProduto_idProduto,prep.cpCodPedido,prep.cpQtdProduto,prep.cpComplementoUm,
 					prep.cpComplementoDois,prep.cpValorTotalProduto,prep.cpStatusPedido,prep.cpObservacaoPedido,
-					prod.cpValorProduto
+					prod.cpValorProduto,prod.cpNomeProduto
 				  FROM 
 					$this->table as prep INNER JOIN tuProduto as prod 
 			      ON prod.idProduto = prep.tuProduto_idProduto		

@@ -7,11 +7,11 @@
 		</div>
 		<div id="panel-element_655955" class="panel-collapse collapse">
 			<div class="panel-body">
-				<form action="../controller/Prepara_Pedido_Acrescimo_Controller.php" name="formAcrescimo" id="formAcrescimo" method="">
+				<form action="../controller/Prepara_Pedido_Acrescimo_Controller.php" name="formAcrescimo" id="formAcrescimo" method="POST">
 					
 					<input type="hidden" name="valTotalPreparaProduto" id="valTotalPreparaProduto"/>
 					<input type="hidden" name="valTotalPreparaAcrescimo" id="valTotalPreparaAcrescimo"/>
-					
+	 		
 				<!-- INSERT TABLE PREPARE PEDIDO -->
 					<input type="hidden" name="cptuProduto_idProduto" />
 					<input type="hidden" name="cpCodPedido" />
@@ -22,7 +22,7 @@
 					<input type="hidden" name="cpValorProduto" />
 					<input type="hidden" name="cpObservacaoPedido" />
 				<!-- INSERT TABLE PREPARE PEDIDO -->
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<div class="form-group">
 							<label for="Codifo do pedido">Códido do pedido atual</label>
 							<input type="text" name="cptuPedido_cpCodPedido" id="cptuPedido_cpCodPedido" class="form-control" readonly />
@@ -67,6 +67,12 @@
 							<input type="text" name="cpValorTotalAcrescimo" id="cpValorTotalAcrescimo" value="" readonly class="form-control" />
 						</div>
 					</div>	
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="Observacao acrescimo">Observacao</label>
+							<textarea rows="" name="cpObservacaoAcrescimo" id="cpObservacaoAcrescimo" class="form-control" cols=""></textarea>
+						</div>
+					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<input type="button" name="acao" value="adicionar" id="btnAddAcrescimo" class="form-control btn btn-info" />
@@ -94,7 +100,8 @@
 				<thead>
 					<tr class="warning">
 						<th>CodPedido</th>
-						<th>QTDA</th>
+						<th>Nome produto</th>
+						<th>QTDE</th>
 						<th>Valor</th>
 						<th>Total</th>
 						<th>Observação</th>

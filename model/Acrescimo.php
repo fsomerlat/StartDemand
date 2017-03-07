@@ -4,12 +4,14 @@
 		
 		protected $table ="tuAcrescimo";
 		private $idAcrescimo,
+				$cpStatusAcrescimo,
 				$tuPedido_idPedido,
 				$tuPedido_cpCodPedido,
 				$cpValorBaseAcrescimo,
 				$cpAcrescimo,
 				$cpQtdAcrescimo,
-				$cpValorTotalAcrescimo;
+				$cpValorTotalAcrescimo,
+				$cpObservacaoAcrescimo;
 		
 		public function __set($attr,$valor){
 			
@@ -24,9 +26,9 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table 
-				  	(tuPedido_idPedido,tuPedido_cpCodPedido,cpValorBaseAcrescimo,cpAcrescimo,cpQtdAcrescimo,cpValorTotalAcrescimo)
+				  	(tuPedido_idPedido,tuPedido_cpCodPedido,cpValorBaseAcrescimo,cpAcrescimo,cpQtdAcrescimo,cpValorTotalAcrescimo,cpObservacaoAcrescimo)
 				  VALUES
-				  	(:tuPedido_idPedido,:tuPedido_cpCodPedido,:cpValorBaseAcrescimo,:cpAcrescimo,:cpQtdAcrescimo,:cpValorTotalAcrescimo)";
+				  	(:tuPedido_idPedido,:tuPedido_cpCodPedido,:cpValorBaseAcrescimo,:cpAcrescimo,:cpQtdAcrescimo,:cpValorTotalAcrescimo,:cpObservacaoAcrescimo)";
 			
 			$in=DB::prepare($sql);
 			$in->bindParam(":tuPedido_idPedido", $this->tuPedido_idPedido,PDO::PARAM_INT);
@@ -35,6 +37,7 @@
 			$in->bindParam(":cpAcrescimo", $this->cpAcrescimo,PDO::PARAM_STR);
 			$in->bindParam(":cpQtdAcrescimo",$this->cpQtdAcrescimo,PDO::PARAM_STR);
 			$in->bindParam(":cpValorTotalAcrescimo",$this->cpValorTotalAcrescimo , PDO::PARAM_STR);
+			$in->bindParam(":cpObservacaoAcrescimo",$this->cpObservacaoAcrescimo,PDO::PARAM_STR);
 			
 			try {
 				
@@ -49,9 +52,12 @@
 		public function getAcrescJSON() {
 			
 			$sql="SELECT 
-					idAcrescimo,cpValorBaseAcrescimo,cpAcrescimo,cpQtdAcrescimo, cpValorTotalAcrescimo
+					acr.idAcrescimo,acr.cpValorBaseAcrescimo,acr.tuPedido_idPedido,acr.cpAcrescimo,acr.cpQtdAcrescimo, 
+					acr.cpValorTotalAcrescimo,acr.cpStatusAcrescimo, acr.cpObservacaoAcrescimo,ped.cpCodPedido
 				  FROM 
-				  	$this->table ORDER BY cpAcrescimo";
+				  	$this->table as acr INNER JOIN tuPedido as ped 
+				  ON acr.tuPedido_idPedido = ped.idPedido
+			      ORDER BY cpCodPedido ASC";
 			
 			$s=DB::prepare($sql);
 			$s->execute();
@@ -81,6 +87,29 @@
 				
 				return $del->execute();
 			
+			}catch(PDOException $e) {
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}
+		
+		public  function UPDATESTATUS($id) {
+			
+			$sql="UPDATE 
+			  		 $this->table 
+				  SET 
+					 cpStatusAcrescimo=:cpStatusAcrescimo 
+			      WHERE  
+					tuPedido_idPedido=:tuPedido_idPedido";
+			
+			$up=DB::prepare($sql);
+			$up->bindParam(":tuPedido_idPedido",$id, PDO::PARAM_INT);
+			$up->bindParam(":cpStatusAcrescimo", $this->cpStatusAcrescimo,PDO::PARAM_STR);
+			
+			try {
+				
+				return $up->execute();
+				
 			}catch(PDOException $e) {
 				
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();

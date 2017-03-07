@@ -23,26 +23,32 @@ var Service_Acrescimo = (function() {
 					$("").html(retorno[0].erro);
 				
 				}else{
-				
-				setTimeout(function() {
+
 					
 				retorno.map(function(dados) {
-							
-	
-							itens += "<tr>";
-							itens += "<td>"+dados.idAcrescimo+"</td>";
-							itens += "<td>"+dados.cpAcrescimo+"</td>";
-							itens += "<td>"+dados.cpQtdAcrescimo+"</td>";
-							itens += "<td>"+dados.cpValorBaseAcrescimo+"</td>";
-							itens += "<td>"+dados.cpValorTotalAcrescimo+"</td>";
-							itens += "<td><a href='PreparaPedidoAcrescimo.php?panel=655955&acao=editar&id="+dados.idAcrescimo+"' title='editar'><span class='glyphicon glyphicon-pencil super'  aria-hidden='true'></span></a></td>";
-							itens += "<td><a href='../controller/Prepara_Pedido_Acrescimo_Controller.php?acao=deletarAcrescimo&id="+dados.idAcrescimo+"' title='excluir'><span class='glyphicon glyphicon-trash super excluirAcrescimo' aria-hidden='true'></span></a></td>";
-							itens += "</tr>";	
-							
-						});
-							$("").html(itens);
-							$("").html("");
-					},1500);
+					
+					var status = dados.cpStatusAcrescimo; 
+					
+					(status  == "A" ) ? status = "Em andamento" : "";
+					(status == "C") ? status = "Cancelado" : "";
+					(status == "F") ? status = "Finalizado" : "";
+					
+					itens += "<tr>";
+					switch(status) {
+						case "Em andamento" : itens += "<td class='statusAndamentoPedido'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+status+" ...</td>"; break;
+						case "Cancelado" : itens += "<td class='statusCancelPedido'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+status+"</td>"; break;
+						case "Finalizado" : itens += "<td class='statusFinalizadoPedido'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+status+"</td>"; break;
+					}
+					itens += "<td class='danger codPedidoBlue'>"+dados.cpCodPedido+"</td>";
+					itens += "<td class='info'>"+dados.cpAcrescimo+"</td>";
+					itens += "<td class='warning'>"+dados.cpQtdAcrescimo+"</td>";
+					itens += "<td class='success'>"+dados.cpObservacaoAcrescimo+"</td>";
+					itens += "</tr>";	
+					
+					});
+						
+					$("#tablePedidoAcrescimo tbody").html(itens);
+					$("").html("");
 				}
 			}
 		});

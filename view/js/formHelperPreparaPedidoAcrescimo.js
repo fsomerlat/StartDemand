@@ -79,11 +79,14 @@ var FormHelperAcrescimo = (function(){
 	
 	var postConfirmPedido =  function() {
 		
-		var confirm = "confirmaPedido";
-		$.post("http://localhost/startDemand/controller/Pedido_Controller.php",{confirm:confirm},function(retorno){
-			
-			$(".pedidoRealizado").html(msgSuccess(retorno)).collapse();
-		});
+		var valTotalPedido = $(".valTotalPedidoPagPreparaPedido").val(),
+		    confirm = "confirmaPedido",
+		    cpObservacaoAcrescimo = $("cpObservacaoAcrescimo").val();
+		$.post("http://localhost/startDemand/controller/Pedido_Controller.php",{confirm:confirm,valTotalPedido:valTotalPedido,cpObservacaoAcrescimo:cpObservacaoAcrescimo}
+			,function(retorno){
+				
+				$(".pedidoRealizado").html(msgSuccess(retorno)).collapse();
+			});
 	}
 		
 	var preencheAcrescimoPedido = function() {
@@ -114,14 +117,16 @@ var FormHelperAcrescimo = (function(){
 		var cpAcrescimo = $("#cpAcrescimo").val(),
 			cpValorBaseAcrescimo = $("#cpValorBaseAcrescimo").val(),
 			cpQtdAcrescimo = $("#cpQtdAcrescimo").val(),
-			cpValorTotalAcrescimo = $("#cpValorTotalAcrescimo").val();
+			cpValorTotalAcrescimo = $("#cpValorTotalAcrescimo").val(),
+			cpObservacaoAcrescimo = $("#cpObservacaoAcrescimo").val();
 		
 	    $.post("http://localhost/startDemand/controller/Prepara_Pedido_Acrescimo_Controller.php", {
 	    	
 	    	cpAcrescimo: cpAcrescimo,
 	    	cpValorBaseAcrescimo: cpValorBaseAcrescimo,
 	    	cpQtdAcrescimo: cpQtdAcrescimo,
-	    	cpValorTotalAcrescimo: cpValorTotalAcrescimo
+	    	cpValorTotalAcrescimo: cpValorTotalAcrescimo,
+	    	cpObservacaoAcrescimo: cpObservacaoAcrescimo
 	    },
 		function(retorno)	{
 
@@ -168,10 +173,10 @@ var FormHelperAcrescimo = (function(){
 			
 			postConfirmPedido();
 			
-//			setTimeout(function() {
-//				
-//				location.reload();
-//			},1000);
+			setTimeout(function() {
+				
+				location.reload();
+			},1000);
 		});
 		
 		$(document).on("click",".excluirProdPreparaPedido", function() {

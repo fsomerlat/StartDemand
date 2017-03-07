@@ -3,11 +3,11 @@
  */
 
 var Service_Pedido = (function() {
-	
+		
 	var carregaInfoPedidoAjaxDB =  function() {
 		
-		var itensProdutos= "",
-			itensAcrescimo = "";
+		var itensProdutos= "";
+			
 		$.ajax({
 			
 			url:"http://localhost/startDemand/service/Service_Pedido.php",
@@ -26,7 +26,7 @@ var Service_Pedido = (function() {
 				} else {
 					
 					retorno.map(function(dados) {
-						
+									
 						var status = dados.cpStatusPedido,
 							opcaoStatus = "";
 						
@@ -50,11 +50,11 @@ var Service_Pedido = (function() {
 							switch(opcaoStatus){
 								
 								case "Cancelado": itensProdutos += "<td class='statusCancelPedido'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
-								case "Em andamento" : itensProdutos += "<td class='statusAndamentoPedido'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
+								case "Em andamento" : itensProdutos += "<td class='statusAndamentoPedido'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+opcaoStatus+" ...</td>"; break;
 								case "Finalizado" : itensProdutos += "<td class='statusFinalizadoPedido'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+opcaoStatus+"</td>";break;
 							}			
 							itensProdutos += "<td class='idPedido'>"+dados.idPedido+"</td>";
-							itensProdutos += "<td class='danger'>"+dados.cpCodPedido+"</td>";
+							itensProdutos += "<td class='danger codPedidoBlue'>"+dados.cpCodPedido+"</td>";
 							itensProdutos += "<td class='info'>"+dados.cpNomeProduto+"</td>";
 							itensProdutos += "<td class='danger'>"+dados.cpQtdProduto+"</td>";
 							itensProdutos += "<td class='warning'>"+dados.cpComplementoUm+"</td>";
@@ -62,24 +62,19 @@ var Service_Pedido = (function() {
 							itensProdutos  += "<td class='warning'>"+dataPedido+"</td>";
 							itensProdutos += "<td class='success'>"+dados.cpObservacaoPedido+"</td>";
 							itensProdutos += "<td class='info'><button type='button' id='pedidoBaixado' class='btn btn-info'>baixar</button></td>";
-							itensProdutos += "<td class='success'><a href='../controller/Pedido_Controller.php?acao=finalizar&cod="+dados.cpCodPedido+"' title='Cancelar pedido'><button type='button' id='pedidoLiberado' class='btn btn-success'>Finalizado</button></a></td>";
-							itensProdutos += "<td class='danger'><a href='../controller/Pedido_Controller.php?acao=cancelar&cod="+dados.cpCodPedido+"' title='Finalizar pedido'><button type='button' id='pedidoCancelado' class='btn btn-danger'>Cancelar</button></a></td>";
+							itensProdutos += "<td class='success'><a href='../controller/Pedido_Controller.php?acao=finalizar&id="+dados.idPedido+"' title='Cancelar pedido'><button type='button' id='pedidoLiberado' class='btn btn-success'>Finalizado</button></a></td>";
+							itensProdutos += "<td class='danger'><a href='../controller/Pedido_Controller.php?acao=cancelar&id="+dados.idPedido+"' title='Finalizar pedido'><button type='button' id='pedidoCancelado' class='btn btn-danger'>Cancelar</button></a></td>";
 							itensProdutos += "</tr>";
 							
-							itensAcrescimo += "<tr>";
-							itensAcrescimo += "<td class='danger'>"+dados.cpCodPedido+"</td>";
-							itensAcrescimo += "<td class='info'>Nome acrescimo</td>";
-							itensAcrescimo += "<td class='warning'>Qtd acrescimo</td>";
-							itensAcrescimo += "</tr>";
-						
 					});
 					$("#tablePedidoProdutos tbody").html(itensProdutos);
-					//$("#tablePedidoAcrescimo tbody").html(itensAcrescimo);
 					$(".h3listaPedidoProduto").html("Lista de produtos");
 					$(".h3listaPedidoAcrescimo").html("Lista de acréscimo");
+				;
 				}
 			}
 		});	
+		
 	}
 	
 	var carregaInfoProdutosDisponiveisAjaxPedido = function() {
