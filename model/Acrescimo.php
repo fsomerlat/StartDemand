@@ -4,6 +4,8 @@
 		
 		protected $table ="tuAcrescimo";
 		private $idAcrescimo,
+				$tuPedido_idPedido,
+				$tuPedido_cpCodPedido,
 				$cpValorBaseAcrescimo,
 				$cpAcrescimo,
 				$cpQtdAcrescimo,
@@ -22,11 +24,13 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table 
-				  	(cpValorBaseAcrescimo,cpAcrescimo,cpQtdAcrescimo,cpValorTotalAcrescimo)
+				  	(tuPedido_idPedido,tuPedido_cpCodPedido,cpValorBaseAcrescimo,cpAcrescimo,cpQtdAcrescimo,cpValorTotalAcrescimo)
 				  VALUES
-				  	(:cpValorBaseAcrescimo,:cpAcrescimo,:cpQtdAcrescimo,:cpValorTotalAcrescimo)";
+				  	(:tuPedido_idPedido,:tuPedido_cpCodPedido,:cpValorBaseAcrescimo,:cpAcrescimo,:cpQtdAcrescimo,:cpValorTotalAcrescimo)";
 			
 			$in=DB::prepare($sql);
+			$in->bindParam(":tuPedido_idPedido", $this->tuPedido_idPedido,PDO::PARAM_INT);
+			$in->bindParam(":tuPedido_cpCodPedido", $this->tuPedido_cpCodPedido,PDO::PARAM_INT);
 			$in->bindParam(":cpValorBaseAcrescimo", $this->cpValorBaseAcrescimo,PDO::PARAM_STR);
 			$in->bindParam(":cpAcrescimo", $this->cpAcrescimo,PDO::PARAM_STR);
 			$in->bindParam(":cpQtdAcrescimo",$this->cpQtdAcrescimo,PDO::PARAM_STR);

@@ -177,7 +177,7 @@
 		public function getPedido() {
 			
 			$sql="SELECT 
-						idPreparaPedido,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpStatusPedido,cpObservacaoPedido
+						idPreparaPedido,tuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpStatusPedido,cpObservacaoPedido
 				  FROM 
 						$this->table";
 						

@@ -93,8 +93,12 @@
 	
 	if(isset($_REQUEST["confirm"])):
 		
+	    $somaAcrescimo = $preparaAcrescimo->getSomaTotalAcrescimo(); 
+		$somaProduto = $preparaPedido->getSomaProduto();
+		$somaTotalPedido = $somaAcrescimo + $somaProduto;
+		
+		
 		$getInfoPreparaPedido = $preparaPedido->getPedido();
-	
 	    $idPreparaPedido = $getInfoPreparaPedido->idPreparaPedido;
 	    
 	    $fkProduto = $getInfoPreparaPedido->tuProduto_idProduto;
@@ -105,13 +109,15 @@
 	    $valTotalProduto = $getInfoPreparaPedido->cpValorTotalProduto;
 	    $statusPedido = $getInfoPreparaPedido->cpStatusPedido;
 	    $obsPedido = $getInfoPreparaPedido->cpObservacaoPedido;
-	    
+	  
+	    //UM PEDIDO COM ACRÉSCIMO POR VEZ
 	    $ped->__set("tuProduto_idProduto", addslashes($fkProduto));
 	    $ped->__set("cpCodPedido", addslashes($codPreparaPedido));
 	    $ped->__set("cpQtdProduto", addslashes($qtdProd));
 	    $ped->__set("cpComplementoUm", addslashes($complementoUm));
 	    $ped->__set("cpComplementoDois", addslashes($complementoDois));
 	    $ped->__set("cpValorTotalProduto", addslashes($valTotalProduto));
+	    $ped->__set("cpValorTotalPedido", addslashes($somaTotalPedido));
 	    $ped->__set("cpStatusPedido", addslashes($statusPedido));
 	    $ped->__set("cpObservacaoPedido", addslashes($obsPedido));
 	    
@@ -135,10 +141,9 @@
 			$acrescimo->__set("cpQtdAcrescimo", addslashes($res->cpQtdAcrescimo));
 			$acrescimo->__set("cpValorBaseAcrescimo", addslashes($res->cpValorBaseAcrescimo));
 			$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
+			$acrescimo->INSERT();
 			
 		endforeach;
- 
-		$acrescimo->INSERT();
 			
 		echo "Pedido gerado com sucesso !";
 		
