@@ -3,6 +3,6 @@
 	$preparaPedido = new PreparaPedido();
 	header("Content-Type: application/json");
 	
-	$preparaPedido->getSomeProduto();
+	$preparaPedido->getSomaProduto();
 	
 	

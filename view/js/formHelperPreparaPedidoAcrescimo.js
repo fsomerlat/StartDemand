@@ -76,6 +76,15 @@ var FormHelperAcrescimo = (function(){
 			}
 		});
 	}
+	
+	var postConfirmPedido =  function() {
+		
+		var confirm = "confirmaPedido";
+		$.post("http://localhost/startDemand/controller/Pedido_Controller.php",{confirm:confirm},function(retorno){
+			
+			$(".pedidoRealizado").html(msgSuccess(retorno)).collapse();
+		});
+	}
 		
 	var preencheAcrescimoPedido = function() {
 
@@ -153,6 +162,16 @@ var FormHelperAcrescimo = (function(){
 		$(document).on('click','.excluirAcrescimo',function(){
 			
 			return confirm("Tem certeza que deseja excluir esse acréscimo ?");
+		});
+		
+		$("#confirmarPedido").click(function(){
+			
+			postConfirmPedido();
+			
+//			setTimeout(function() {
+//				
+//				location.reload();
+//			},1000);
 		});
 		
 		$(document).on("click",".excluirProdPreparaPedido", function() {

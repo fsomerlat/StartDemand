@@ -27,9 +27,9 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table
-					(tuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpStatusPedido,cpHoraPedido,cpObservacaoPedido)
+					(tuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpStatusPedido,cpHoraPedido,cpValorTotalPedido,cpObservacaoPedido)
 				  VALUES
-					(:tuProduto_idProduto,:cpCodPedido,:cpQtdProduto,:cpComplementoUm,:cpComplementoDois,:cpValorTotalProduto,:cpStatusPedido,now(),:cpObservacaoPedido)";
+					(:tuProduto_idProduto,:cpCodPedido,:cpQtdProduto,:cpComplementoUm,:cpComplementoDois,:cpValorTotalProduto,:cpStatusPedido,now(),:cpValorTotalPedido,:cpObservacaoPedido)";
 			
 			$in=DB::prepare($sql);
 			$in->bindParam(":tuProduto_idProduto",$this->tuProduto_idProduto,PDO::PARAM_INT);
@@ -38,7 +38,7 @@
 			$in->bindParam(":cpComplementoUm", $this->cpComplementoUm,PDO::PARAM_STR);
 			$in->bindParam(":cpComplementoDois", $this->cpComplementoDois,PDO::PARAM_STR);
 			$in->bindParam(":cpValorTotalProduto",$this->cpValorTotalProduto,PDO::PARAM_STR);
-			//$in->bindParam(":cpValorTotalPedido", $this->cpValorTotalPedido,PDO::PARAM_STR);
+			$in->bindParam(":cpValorTotalPedido", $this->cpValorTotalPedido,PDO::PARAM_STR);
 			$in->bindParam(":cpStatusPedido",$this->cpStatusPedido,PDO::PARAM_STR);
 			$in->bindParam(":cpObservacaoPedido", $this->cpObservacaoPedido,PDO::PARAM_STR);
 			
@@ -96,6 +96,26 @@
 			}catch(PDOException $e) {
 				
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}	
+		
+		public function getInfoPedido() {
+			
+			$sql="SELECT 
+						idPedido,cpCodPedido
+				  FROM 
+						$this->table";
+			
+			$s=DB::prepare($sql);
+			$s->execute();
+			
+			try {
+				
+				return $s->fetch();
+			
+			}catch(PDOException $e) {
+				
+				echo "Erro no aquivo ".$e->getFile()." referente a seguinte mensagem ".$e->getMessage()." na linha ".$e->getLine(); 
 			}
 		}
 	}

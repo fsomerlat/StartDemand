@@ -49,5 +49,8 @@
 	
 		$preparaAcrescimo->DELETE($id);
 		header("location:../view/PreparaPedidoAcrescimo.php?panel=655955");
+		
 	endif;
+	
+	
 	

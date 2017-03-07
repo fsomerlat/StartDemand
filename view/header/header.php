@@ -123,6 +123,8 @@
 						</div>
 					</div>
 				</div>
-				
-								
-		</div>			
+				<div class="col-md-12">
+					<div class="form-group pedidoRealizado"></div>
+				</div>
+		
+					

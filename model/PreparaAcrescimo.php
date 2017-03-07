@@ -91,4 +91,28 @@
 		 		echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 		 	}
 		 }
+		 
+		 public function getAll() {
+		 	
+		 	$sql="SELECT 
+		 				cpAcrescimo,cpQtdAcrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo
+		 		  FROM 
+		 			$this->table";
+		 	
+		 	$s=DB::prepare($sql);
+		 	$s->bindParam(":cpAcrescimo",$this->cpAcrescimo,PDO::PARAM_STR);
+		 	$s->bindParam(":cpQtdAcrescimo",$this->cpQtdAcrescimo,PDO::PARAM_STR);
+		 	$s->bindParam(":cpValorBaseAcrescimo",$this->cpValorBaseAcrescimo,PDO::PARAM_STR);
+		 	$s->bindParam(":cpValorTotalAcrescimo",$this->cpValorTotalAcrescimo,PDO::PARAM_STR);
+		 	$s->execute();
+		 	
+		 	try {
+		 		
+		 		return $s->fetchAll();
+		 	
+		 	}catch(PDOException $e) {
+		 		
+		 		echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+		 	}
+		 }
 	}

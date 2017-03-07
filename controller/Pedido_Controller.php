@@ -2,6 +2,8 @@
 	
 	$ped = new Pedido();
 	$preparaPedido =  new PreparaPedido();
+	$preparaAcrescimo = new PreparaAcrescimo();
+	$acrescimo =  new Acrescimo();
 	
 
 		
@@ -13,7 +15,7 @@
 		$ped->__set("cpComplementoUm", addslashes($_REQUEST["cpComplementoUm"]));
 		$ped->__set("cpComplementoDois", addslashes($_REQUEST["cpComplementoDois"]));
 		$ped->__set("cpValorTotalProduto", $_REQUEST["cpValorTotalProduto"]);
-// 		$ped->__set("cpValorTotalPedido", addslashes($_REQUEST["cpValorTotalPedido"]));
+ 		$ped->__set("cpValorTotalPedido", addslashes($_REQUEST["cpValorTotalPedido"]));
 		$ped->__set("cpStatusPedido", addslashes($_REQUEST["cpStatusPedido"]));
 		$ped->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
 		
@@ -86,6 +88,60 @@
 			
 			header("location:../view/PreparaPedidoAcrescimo.php?panel=655955");
 		endif;
+	endif;
+	
+	
+	if(isset($_REQUEST["confirm"])):
+		
+		$getInfoPreparaPedido = $preparaPedido->getPedido();
+	
+	    $idPreparaPedido = $getInfoPreparaPedido->idPreparaPedido;
+	    
+	    $fkProduto = $getInfoPreparaPedido->tuProduto_idProduto;
+	    $codPreparaPedido = $getInfoPreparaPedido->cpCodPedido;
+	    $qtdProd = $getInfoPreparaPedido->cpQtdProduto;
+	    $complementoUm = $getInfoPreparaPedido->cpComplementoUm;
+	    $complementoDois = $getInfoPreparaPedido->cpComplementoDois	;
+	    $valTotalProduto = $getInfoPreparaPedido->cpValorTotalProduto;
+	    $statusPedido = $getInfoPreparaPedido->cpStatusPedido;
+	    $obsPedido = $getInfoPreparaPedido->cpObservacaoPedido;
+	    
+	    $ped->__set("tuProduto_idProduto", addslashes($fkProduto));
+	    $ped->__set("cpCodPedido", addslashes($codPreparaPedido));
+	    $ped->__set("cpQtdProduto", addslashes($qtdProd));
+	    $ped->__set("cpComplementoUm", addslashes($complementoUm));
+	    $ped->__set("cpComplementoDois", addslashes($complementoDois));
+	    $ped->__set("cpValorTotalProduto", addslashes($valTotalProduto));
+	    $ped->__set("cpStatusPedido", addslashes($statusPedido));
+	    $ped->__set("cpObservacaoPedido", addslashes($obsPedido));
+	    
+		$ped->INSERT();	    
+	    
+		$getInfoPedido = $ped->getInfoPedido();
+		
+		$idPedido = $getInfoPedido->idPedido;
+		$codPedido = $getInfoPedido->cpCodPedido;
+		
+		
+	    //BUSCA INFO TABELA PREPARA ACRÉSCIMO
+		$arryAll = $preparaAcrescimo->getAll();
+
+		//SETA ACRÉSCIMO
+		foreach($arryAll as $key => $res):
+			
+			$acrescimo->__set("tuPedido_idPedido", addslashes($idPedido));
+			$acrescimo->__set("tuPedido_cpCodPedido", addslashes($codPedido));
+			$acrescimo->__set("cpAcrescimo", addslashes($res->cpAcrescimo));
+			$acrescimo->__set("cpQtdAcrescimo", addslashes($res->cpQtdAcrescimo));
+			$acrescimo->__set("cpValorBaseAcrescimo", addslashes($res->cpValorBaseAcrescimo));
+			$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
+			
+		endforeach;
+ 
+		$acrescimo->INSERT();
+			
+		echo "Pedido gerado com sucesso !";
+		
 	endif;
 	
 	if($_REQUEST["acao"] == "cancelar"):

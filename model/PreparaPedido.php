@@ -153,7 +153,7 @@
 			}
 		}
 		
-		public function getSomeProduto() {
+		public function getSomaProduto() {
 			
 			$sql="SELECT 
 						SUM(cpValorTotalProduto) as somaTotalProduto 
@@ -172,5 +172,24 @@
 				
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 			}
+		}
+		
+		public function getPedido() {
+			
+			$sql="SELECT 
+						idPreparaPedido,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpStatusPedido,cpObservacaoPedido
+				  FROM 
+						$this->table";
+						
+		     $s=DB::prepare($sql);
+		     $s->execute();
+		     try {
+		     	
+		     	return $s->fetch();
+		     
+		     }catch(PDOException $e) {
+		     	
+		     	echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+		     }
 		}
 	}
