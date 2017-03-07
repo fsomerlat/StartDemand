@@ -16,7 +16,7 @@
 							<th class="info">Id</th>
 							<th class="danger">Código pedido</th>
 							<th class="info">Produto</th>
-							<th class="danger">QTDA</th>
+							<th class="danger">QTDE</th>
 							<th class="warning">1º complemento</th>
 							<th class="success">2ª complemento</th>
 							<th class="warning">Hora criação</th>
