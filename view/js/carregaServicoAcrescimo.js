@@ -18,11 +18,11 @@ var Service_Acrescimo = (function() {
 			},
 			success: function(retorno) {
 				
-				if(retorno[0].erro) {
-					
-					$("").html(retorno[0].erro);
-				
-				}else{
+//				if(retorno[0].erro) {
+//					
+//					$("").html(retorno[0].erro);
+//				
+//				}else{
 
 					
 				retorno.map(function(dados) {
@@ -35,13 +35,14 @@ var Service_Acrescimo = (function() {
 					
 					itens += "<tr>";
 					switch(status) {
-						case "Em andamento" : itens += "<td class='statusAndamentoPedido'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+status+" ...</td>"; break;
-						case "Cancelado" : itens += "<td class='statusCancelPedido'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+status+"</td>"; break;
-						case "Finalizado" : itens += "<td class='statusFinalizadoPedido'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+status+"</td>"; break;
+						case "Em andamento" : itens += "<td class='statusAndamentoPedido default'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+status+" ...</td>"; break;
+						case "Cancelado" : itens += "<td class='statusCancelPedido default'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+status+"</td>"; break;
+						case "Finalizado" : itens += "<td class='statusFinalizadoPedido default'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+status+"</td>"; break;
 					}
+					itens += "<td class='info idPedido'>"+dados.tuPedido_idPedido+"</td>";
 					itens += "<td class='danger codPedidoBlue'>"+dados.cpCodPedido+"</td>";
 					itens += "<td class='info'>"+dados.cpAcrescimo+"</td>";
-					itens += "<td class='warning'>"+dados.cpQtdAcrescimo+"</td>";
+					itens += "<td class='danger'>"+dados.cpQtdAcrescimo+"</td>";
 					itens += "<td class='success'>"+dados.cpObservacaoAcrescimo+"</td>";
 					itens += "</tr>";	
 					
@@ -49,7 +50,7 @@ var Service_Acrescimo = (function() {
 						
 					$("#tablePedidoAcrescimo tbody").html(itens);
 					$("").html("");
-				}
+				//}
 			}
 		});
 	}

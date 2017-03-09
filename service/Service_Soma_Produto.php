@@ -1,8 +1,8 @@
 <?php require_once '../core/include.php';
 	
-	$preparaPedido = new PreparaPedido();
+	$preparaProduto = new PreparaProduto();
 	header("Content-Type: application/json");
 	
-	$preparaPedido->getSomaProduto();
+	$preparaProduto->getSomaProduto();
 	
 	

@@ -31,7 +31,9 @@
 				  	(:tuPedido_idPedido,:tuPedido_cpCodPedido,:cpValorBaseAcrescimo,:cpAcrescimo,:cpQtdAcrescimo,:cpValorTotalAcrescimo,:cpObservacaoAcrescimo)";
 			
 			$in=DB::prepare($sql);
-			$in->bindParam(":tuPedido_idPedido", $this->tuPedido_idPedido,PDO::PARAM_INT);
+			
+			$in->bindParam(":tuPedido_idPedido",$this->tuPedido_idPedido,PDO::PARAM_INT);
+			
 			$in->bindParam(":tuPedido_cpCodPedido", $this->tuPedido_cpCodPedido,PDO::PARAM_INT);
 			$in->bindParam(":cpValorBaseAcrescimo", $this->cpValorBaseAcrescimo,PDO::PARAM_STR);
 			$in->bindParam(":cpAcrescimo", $this->cpAcrescimo,PDO::PARAM_STR);

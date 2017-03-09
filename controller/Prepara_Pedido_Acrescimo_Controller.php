@@ -1,17 +1,19 @@
 <?php require_once '../core/include.php';
 
 	$preparaAcrescimo = new PreparaAcrescimo();
-	$preparaProdPed = new PreparaPedido();
+	$preparaProdPed = new PreparaProduto();
 
 	if(isset($_REQUEST["cpAcrescimo"])):
 		
 		$nmacrescimo = $_REQUEST["cpAcrescimo"];
 		$valBaseAcrescimo = $_REQUEST["cpValorBaseAcrescimo"];
+		$codPedido = $_REQUEST["tuPedido_cpCodPedido"];
 		$qtdAcrescimo = $_REQUEST["cpQtdAcrescimo"];
 		$valTotalAcrescimo = $_REQUEST["cpValorTotalAcrescimo"];
 		$obsAcrescimo = $_REQUEST["cpObservacaoAcrescimo"];
 		
 		$preparaAcrescimo->__set("cpAcrescimo", addslashes($nmacrescimo));
+		$preparaAcrescimo->__set("tuPedido_cpCodPedido", addslashes($codPedido));
 		$preparaAcrescimo->__set("cpValorBaseAcrescimo",addslashes($valBaseAcrescimo));
 		$preparaAcrescimo->__set("cpQtdAcrescimo", addslashes($qtdAcrescimo));
 		$preparaAcrescimo->__set("cpValorTotalAcrescimo", addslashes($valTotalAcrescimo));

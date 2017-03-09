@@ -1,4 +1,4 @@
-var FormHelperAcrescimo = (function(){
+var FormHelperAcrescimo = (function() {
 	
 	var msgSuccess =  function(mensagem) {
 		
@@ -6,6 +6,11 @@ var FormHelperAcrescimo = (function(){
 		return success;
 	}
 	
+	var msgDanger = function (mensagem) {
+		
+		var danger = '<div class="alert alert-danger" role="alert">' + mensagem + '</div>';
+		return danger;
+	}
 	
 	var getValorProduto = function() {
 		
@@ -80,12 +85,20 @@ var FormHelperAcrescimo = (function(){
 	var postConfirmPedido =  function() {
 		
 		var valTotalPedido = $(".valTotalPedidoPagPreparaPedido").val(),
-		    confirm = "confirmaPedido",
-		    cpObservacaoAcrescimo = $("cpObservacaoAcrescimo").val();
-		$.post("http://localhost/startDemand/controller/Pedido_Controller.php",{confirm:confirm,valTotalPedido:valTotalPedido,cpObservacaoAcrescimo:cpObservacaoAcrescimo}
-			,function(retorno){
-				
-				$(".pedidoRealizado").html(msgSuccess(retorno)).collapse();
+			tuPedido_cpCodPedido = $("#tuPedido_cpCodPedido").val(),
+			cpObservacaoAcrescimo = $("#cpObservacaoAcrescimo").val(),
+		    confirm = "confirmaPedido";
+		
+		$.post("http://localhost/startDemand/controller/Pedido_Controller.php",{confirm:confirm,valTotalPedido:valTotalPedido,
+			tuPedido_cpCodPedido:tuPedido_cpCodPedido,cpObservacaoAcrescimo:cpObservacaoAcrescimo} ,function(retorno){
+					
+				var msgRetorno = retorno.substring(0,7);
+				if(msgRetorno == "PRODUTO") {
+					
+					$(".pedidoRealizado").html(msgDanger(retorno)).collapse();
+				}else {
+					$(".pedidoRealizado").html(msgSuccess(retorno)).collapse();
+				}
 			});
 	}
 		
@@ -115,6 +128,7 @@ var FormHelperAcrescimo = (function(){
 	var postCamposAcrescimos = function() {
 		
 		var cpAcrescimo = $("#cpAcrescimo").val(),
+			tuPedido_cpCodPedido = $("#tuPedido_cpCodPedido").val(),
 			cpValorBaseAcrescimo = $("#cpValorBaseAcrescimo").val(),
 			cpQtdAcrescimo = $("#cpQtdAcrescimo").val(),
 			cpValorTotalAcrescimo = $("#cpValorTotalAcrescimo").val(),
@@ -126,7 +140,8 @@ var FormHelperAcrescimo = (function(){
 	    	cpValorBaseAcrescimo: cpValorBaseAcrescimo,
 	    	cpQtdAcrescimo: cpQtdAcrescimo,
 	    	cpValorTotalAcrescimo: cpValorTotalAcrescimo,
-	    	cpObservacaoAcrescimo: cpObservacaoAcrescimo
+	    	cpObservacaoAcrescimo: cpObservacaoAcrescimo,
+	    	tuPedido_cpCodPedido: tuPedido_cpCodPedido
 	    },
 		function(retorno)	{
 
@@ -137,9 +152,9 @@ var FormHelperAcrescimo = (function(){
 	var addOptions = function() {
 		
 		var options = "";
-		options += "<option value='0'>Selecione</option>";
+			options += "<option value='0'>Selecione</option>";
 		
-		for(var i=1;i < 101 ; i++) {
+		for(var i=1; i < 101 ;i++) {
 			
 			options += "<option value='"+i+"'>"+i+"</option>";
 		}	
@@ -151,6 +166,15 @@ var FormHelperAcrescimo = (function(){
 		
 		$("#cpCodPedido").html(addOptions());
 	}
+	
+	var painelAcrescimoHide = function(valor) {
+		
+		if(valor == '') {
+			$('.painelAddAcrescimos').fadeOut();
+		}else{
+			$('.painelAddAcrescimos').show();;
+		}
+	}	
 	
 	var bindEvents =  function() {
 		
@@ -176,7 +200,7 @@ var FormHelperAcrescimo = (function(){
 			setTimeout(function() {
 				
 				location.reload();
-			},1000);
+			},1500);
 		});
 		
 		$(document).on("click",".excluirProdPreparaPedido", function() {
@@ -192,6 +216,7 @@ var FormHelperAcrescimo = (function(){
 			 setInterval(function() {
 				 location.reload();
 			 },1500);
+			 
 		});
 	}
 	
@@ -199,7 +224,8 @@ var FormHelperAcrescimo = (function(){
 		
 		bindEvents: bindEvents,
 		setValorAcrescimo: setValorAcrescimo,
-		setValorProduto: setValorProduto
+		setValorProduto: setValorProduto,
+		painelAcrescimoHide: painelAcrescimoHide
 	}
 	
 })();

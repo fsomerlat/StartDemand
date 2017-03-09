@@ -13,13 +13,13 @@
 					<thead>
 						<tr class="success">
 							<th>Status</th>
-							<th class="info">Id</th>
+							<th class="info">Referênica</th>
 							<th class="danger">Código pedido</th>
 							<th class="info">Produto</th>
 							<th class="danger">QTDE</th>
 							<th class="warning">1º complemento</th>
 							<th class="success">2ª complemento</th>
-							<th class="warning">Hora criação</th>
+							<th class="danger">Hora criação</th>
 							<th class="success">Observação pedido</th>
 							<th></th>
 							<th></th>
@@ -35,9 +35,10 @@
 					<thead>
 						<tr>
 							<th class="success">Status</th>
-							<th class="danger">código pedido</th>
+							<th class="info">idPedido</th>
+							<th class="danger">Referência pedido</th>
 							<th class="info">Acréscimo</th>
-							<th class="warning">Quantidade acréscimo</th>
+							<th class="danger">Quantidade acréscimo</th>
 							<th class="success">Observação</th>
 						</tr>
 					</thead>

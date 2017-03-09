@@ -19,11 +19,11 @@ var Service_Pedido = (function() {
 			},
 			success: function(retorno) {
 				
-				if(retorno[0].erro) {
-					
-					$(".listaPedidoProdutos").html(retorno[0].erro);
-				
-				} else {
+//				if(retorno[0].erro) {
+//					
+//					$(".listaPedidoProdutos").html(retorno[0].erro);
+//				
+//				} else {
 					
 					retorno.map(function(dados) {
 									
@@ -49,9 +49,9 @@ var Service_Pedido = (function() {
 							
 							switch(opcaoStatus){
 								
-								case "Cancelado": itensProdutos += "<td class='statusCancelPedido'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
-								case "Em andamento" : itensProdutos += "<td class='statusAndamentoPedido'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+opcaoStatus+" ...</td>"; break;
-								case "Finalizado" : itensProdutos += "<td class='statusFinalizadoPedido'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+opcaoStatus+"</td>";break;
+								case "Cancelado": itensProdutos += "<td class='statusCancelPedido default'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
+								case "Em andamento" : itensProdutos += "<td class='statusAndamentoPedido default'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+opcaoStatus+" ...</td>"; break;
+								case "Finalizado" : itensProdutos += "<td class='statusFinalizadoPedido default'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+opcaoStatus+"</td>";break;
 							}			
 							itensProdutos += "<td class='idPedido'>"+dados.idPedido+"</td>";
 							itensProdutos += "<td class='danger codPedidoBlue'>"+dados.cpCodPedido+"</td>";
@@ -59,7 +59,7 @@ var Service_Pedido = (function() {
 							itensProdutos += "<td class='danger'>"+dados.cpQtdProduto+"</td>";
 							itensProdutos += "<td class='warning'>"+dados.cpComplementoUm+"</td>";
 							itensProdutos += "<td class='success'>"+dados.cpComplementoDois+"</td>";
-							itensProdutos  += "<td class='warning'>"+dataPedido+"</td>";
+							itensProdutos  += "<td class='danger'>"+dataPedido+"</td>";
 							itensProdutos += "<td class='success'>"+dados.cpObservacaoPedido+"</td>";
 							itensProdutos += "<td class='info'><button type='button' id='pedidoBaixado' class='btn btn-info'>baixar</button></td>";
 							itensProdutos += "<td class='success'><a href='../controller/Pedido_Controller.php?acao=finalizar&id="+dados.idPedido+"' title='Cancelar pedido'><button type='button' id='pedidoLiberado' class='btn btn-success'>Finalizado</button></a></td>";
@@ -70,8 +70,8 @@ var Service_Pedido = (function() {
 					$("#tablePedidoProdutos tbody").html(itensProdutos);
 					$(".h3listaPedidoProduto").html("Lista de produtos");
 					$(".h3listaPedidoAcrescimo").html("Lista de acréscimo");
-				;
-				}
+				
+				//}
 			}
 		});	
 		
@@ -95,11 +95,11 @@ var Service_Pedido = (function() {
 			},
 			success:function(retorno) {
 				
-				if(retorno[0].erro) {
-					
-					$(".ProdutosDisponiveisPedido").html(retorno[0].erro);
-				
-				} else {
+//				if(retorno[0].erro) {
+//					
+//					$(".ProdutosDisponiveisPedido").html(retorno[0].erro);
+//				
+//				} else {
 					
 					setTimeout(function() {
 						
@@ -117,7 +117,7 @@ var Service_Pedido = (function() {
 						}		
 						
 					},1200);
-				}
+				//}
 			}
 		});
 	}

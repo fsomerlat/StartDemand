@@ -1,6 +1,6 @@
 <?php require_once 'header/header.php'; require_once '../core/include.php';
 	
-	$prep = new PreparaPedido();
+	$prep = new PreparaProduto();
 	
  if ($_GET["acao"] == "editar"):
 		 $acao = "atualizar";

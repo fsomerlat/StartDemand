@@ -117,8 +117,11 @@
 									<a href="Pedido.php?panel=193158" >Criar pedido</a>
 								</li>
 								<li class="default">
-									<a href="PreparaPedidoAcrescimo.php?panel=655955">Adicionar acréscimo</a>
+									<a href="PreparaPedidoAcrescimo.php?panel=655955">Pedido com acréscimo</a>
 	 							</li>
+								<li class="acitve">
+									<a href="Acrescimo.php"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> acréscimo</a>
+	 							</li>	 							
 							</ul>
 						</div>
 					</div>

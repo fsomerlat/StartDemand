@@ -9,11 +9,12 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table
-					(cpAcrescimo,cpQtdAcrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo,cpObservacaoAcrescimo)
+					(cpAcrescimo,tuPedido_cpCodPedido,cpQtdAcrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo,cpObservacaoAcrescimo)
 				  VALUES 
-				  	(:cpAcrescimo,:cpQtdAcrescimo,:cpValorBaseAcrescimo,:cpValorTotalAcrescimo,:cpObservacaoAcrescimo)";
+				  	(:cpAcrescimo,:tuPedido_cpCodPedido,:cpQtdAcrescimo,:cpValorBaseAcrescimo,:cpValorTotalAcrescimo,:cpObservacaoAcrescimo)";
 			$in=DB::prepare($sql);
 			$in->bindParam(":cpAcrescimo",$this->cpAcrescimo,PDO::PARAM_STR);
+			$in->bindParam(":tuPedido_cpCodPedido",$this->tuPedido_cpCodPedido,PDO::PARAM_INT);
 			$in->bindParam(":cpQtdAcrescimo",$this->cpQtdAcrescimo,PDO::PARAM_STR);
 			$in->bindParam(":cpValorBaseAcrescimo",$this->cpValorBaseAcrescimo,PDO::PARAM_STR);
 			$in->bindParam(":cpValorTotalAcrescimo",$this->cpValorTotalAcrescimo,PDO::PARAM_STR);
@@ -54,7 +55,7 @@
 		public function getInfoAcrescimoJSON() {
 			
 			$sql="SELECT 
-					idPreparaAcrescimo,cpAcrescimo,cpQtdACrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo,cpObservacaoAcrescimo
+					idPreparaAcrescimo,tuPedido_cpCodPedido,cpAcrescimo,cpQtdACrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo,cpObservacaoAcrescimo
 				  FROM  
 				  	$this->table";
 						
@@ -96,12 +97,13 @@
 		 public function getAll() {
 		 	
 		 	$sql="SELECT 
-		 				cpAcrescimo,cpQtdAcrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo,cpObservacaoAcrescimo
+		 				cpAcrescimo,tuPedido_cpCodPedido,cpQtdAcrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo,cpObservacaoAcrescimo
 		 		  FROM 
 		 			$this->table";
 		 	
 		 	$s=DB::prepare($sql);
 		 	$s->bindParam(":cpAcrescimo",$this->cpAcrescimo,PDO::PARAM_STR);
+		 	$s->bindParam(":tuPedido_cpCodPedido",$this->tuPedido_cpCodPedido,PDO::PARAM_INT);
 		 	$s->bindParam(":cpQtdAcrescimo",$this->cpQtdAcrescimo,PDO::PARAM_STR);
 		 	$s->bindParam(":cpValorBaseAcrescimo",$this->cpValorBaseAcrescimo,PDO::PARAM_STR);
 		 	$s->bindParam(":cpValorTotalAcrescimo",$this->cpValorTotalAcrescimo,PDO::PARAM_STR);
@@ -115,6 +117,42 @@
 		 	}catch(PDOException $e) {
 		 		
 		 		echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+		 	}
+		 }
+		 
+		 public function getRow() {
+		 	
+		 	$sql="SELECT 
+		 			idPreparaAcrescimo 
+		 		  FROM
+		 		  	$this->table";
+		 	
+		 	$row=DB::prepare($sql);
+		 	$row->execute();
+		 	
+		 	try {
+		 		
+		 		return $row->rowCount();
+		 	
+		 	}catch(PDOExecption $e) {
+		 		
+		 		echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage." na linhda ".$e->getLine();
+		 	}
+		 }
+		 
+		 //APAGA TOD0S REGISTROS DA TABELA PREPARA ACRÉSCIMO
+		 public function DELETATUDO() {
+		 	
+		 	$sql="DELETE FROM $this->table";
+		 	$del=DB::prepare($sql);
+		 	
+		 	try{
+		 		
+		 		return $del->execute();
+		 	
+		 	}catch(PDOExeception $e) {
+		 		
+		 		echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMesssage()." na linha ".$e->getLine();
 		 	}
 		 }
 	}

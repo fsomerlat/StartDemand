@@ -2,8 +2,8 @@
 
 	header("Content-Type: application/json");
 	
-	$preparaPedido = new PreparaPedido();
+	$preparaProduto = new PreparaProduto();
 	
-	$preparaPedido->getInfoJSON();
+	$preparaProduto->getInfoJSON();
 	
  

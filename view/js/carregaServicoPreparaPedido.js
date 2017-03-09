@@ -2,7 +2,9 @@ var Service_Prepara_Pedido = (function() {
 	
 	var carregaInfoProdPedido = function(url) {
 		
-		var itens = "";
+		var itens = "",
+			umiTem = "";
+		
 		$("listaPreparaPedido").html("Não há produto para ser listado");
 		$.ajax({
 			
@@ -13,19 +15,21 @@ var Service_Prepara_Pedido = (function() {
 				
 				$(".listaPreparaPedido").html("Carregando pedido para preparação...");
 				
-			},
+			}
+			,
+			
 			error:function() {
 				
 				$(".listaPreparaPedido").html("Houve algum erro com a fonte de dados !");
 			},
     		success:function(retorno) {
 				
-				if(retorno[0].erro) {
-					
-					$(".listaPreparaPedido").html(retorno[0].erro);
-				
-				}
-				else{
+//				if(retorno[0].erro) {
+//					
+//					$(".listaPreparaPedido").html(retorno[0].erro);
+//				
+//				}
+//				else{
 				
 				setTimeout(function() {
 					
@@ -38,20 +42,22 @@ var Service_Prepara_Pedido = (function() {
 							itens += "<td>"+i.cpValorProduto+"</td>";
 							itens += "<td>"+i.cpValorTotalProduto+"</td>";
 							itens += "<td>"+i.cpObservacaoPedido+"</td>";
-							itens += "<td><a href='Pedido.php?panel=193158&acao=editar&id="+i.idPreparaPedido+"' title='editar'><span class='glyphicon glyphicon-pencil super'  aria-hidden='true'></span></a></td>";
-							itens += "<td><a href='../controller/Prepara_Pedido_Acrescimo_Controller.php?acao=deletarProdPedido&id="+i.idPreparaPedido+"' title='excluir'><span class='glyphicon glyphicon-trash super excluirProdPreparaPedido' aria-hidden='true'></span></a></td>";
+							itens += "<td><a href='Pedido.php?panel=193158&acao=editar&id="+i.idPreparaProduto+"' title='editar'><span class='glyphicon glyphicon-pencil super'  aria-hidden='true'></span></a></td>";
+							itens += "<td><a href='../controller/Prepara_Pedido_Acrescimo_Controller.php?acao=deletarProdPedido&id="+i.idPreparaProduto+"' title='excluir'><span class='glyphicon glyphicon-trash super excluirProdPreparaPedido' aria-hidden='true'></span></a></td>";
 							itens += "</tr>";
 							
-							$("#cptuPedido_cpCodPedido").attr("value",i.cpCodPedido).focus();
-							$("#cpidPreparaPedido").val(i.idPedido);
-							
+							$("#tuPedido_cpCodPedido").html("<option value='"+i.cpCodPedido+"'>"+i.cpCodPedido+"</option>");
+							umiTem += i.idPreparaProduto;
 						});
-						
 						$("#tablePreparaPedido tbody").html(itens);
-						$(".listaPreparaPedido").html("Pedido em andamento");
+						$(".listaPreparaPedido").html("");
 						
-					},1200);
-				}
+					},010); 
+					
+					setTimeout(function(){
+						FormHelperAcrescimo.painelAcrescimoHide(umiTem);
+					},020);
+				//}
 			}
 		});
 	}
@@ -75,11 +81,11 @@ var Service_Prepara_Pedido = (function() {
 			},
 		   success:function(retorno) {
 				
-				if(retorno[0].erro) {
-					
-					$(".").html(retorno[0].erro)
-				}else {
-				
+//				if(retorno[0].erro) {
+//					
+//					$(".").html(retorno[0].erro)
+//				}else {
+//				
 					setTimeout(function(){
 						retorno.map(function(dados) {
 							
@@ -97,7 +103,7 @@ var Service_Prepara_Pedido = (function() {
 						$("#tablePreparaAcrescimo tbody").html(itens);
 						$(".listaPreparaAcrescimo").html("");
 					},1000);	
-				}
+				//}
 			}
 		});
 	}
@@ -150,9 +156,8 @@ var Service_Prepara_Pedido = (function() {
 		
 		getSomaTotalProduto("http://localhost/startDemand/service/Service_Soma_Produto.php");
 		getSomaTotalAcrescimo("http://localhost/startDemand/service/Service_Soma_Acrescimo.php");
-		carregaInfoProdPedido("http://localhost/startDemand/service/Service_Prepara_Pedido.php");
+		carregaInfoProdPedido("http://localhost/startDemand/service/Service_Prepara_Produto.php");
 		carregaInfoAcrescimoPedido("http://localhost/startDemand/service/Service_Prepara_Acrescimo.php");
-		setSomaValores();
 	}
 		
 	return  {

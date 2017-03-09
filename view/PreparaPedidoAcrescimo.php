@@ -1,6 +1,6 @@
 <?php require_once 'header/header.php'; ?>
 <div class="col-md-8">
-<div class="panel-group" id="panel-402239">
+<div class="panel-group painelAddAcrescimos" id="panel-402239">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			 <div class="panel-title" data-toggle="collapse" data-parent="#panel-402239" href="#panel-element_655955">Adicionar acréscimos</div>
@@ -11,21 +11,13 @@
 					
 					<input type="hidden" name="valTotalPreparaProduto" id="valTotalPreparaProduto"/>
 					<input type="hidden" name="valTotalPreparaAcrescimo" id="valTotalPreparaAcrescimo"/>
-	 		
-				<!-- INSERT TABLE PREPARE PEDIDO -->
-					<input type="hidden" name="cptuProduto_idProduto" />
-					<input type="hidden" name="cpCodPedido" />
-					<input type="hidden" name="cpQtdProduto" />
-					<input type="hidden" name="cpValorBaseProduto" />
-					<input type="hidden" name="cpComplementoUm" />
-					<input type="hidden" name="cpComplementoDois" />
-					<input type="hidden" name="cpValorProduto" />
-					<input type="hidden" name="cpObservacaoPedido" />
-				<!-- INSERT TABLE PREPARE PEDIDO -->
+
 					<div class="col-md-2">
 						<div class="form-group">
 							<label for="Codifo do pedido">Códido do pedido atual</label>
-							<input type="text" name="cptuPedido_cpCodPedido" id="cptuPedido_cpCodPedido" class="form-control" readonly />
+							<select type="text" name="tuPedido_cpCodPedido" id="tuPedido_cpCodPedido" class="form-control" readonly >
+								<!-- CAREEGA FORMHELPERPREPARAPEDIDODACRESCIMO -->
+							</select>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -61,7 +53,7 @@
 							<input type="text" name="cpValorBaseAcrescimo" id="cpValorBaseAcrescimo" value="" readonly class="form-control"/>
 						</div>
 					</div>							
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<div class="form-group">
 							<label for="Valor acrescimo">Valor total</label>
 							<input type="text" name="cpValorTotalAcrescimo" id="cpValorTotalAcrescimo" value="" readonly class="form-control" />
@@ -129,15 +121,20 @@
 		<div id="panel-element_655960" class="panel-collapse collapse in">
 			<div class="panel-body">
 
-				<div class="col-md-6 btnConfirmGeracaoPedido">
+				<div class="col-md-4 btnConfirmGeracaoPedido">
 					<div class="form-group">
 						<button type="button"  id="confirmarPedido"  class="form-control btn btn-info">confirma pedido</button>
 					</div>
 				</div>
-				<div class="col-md-6 totalPedidoPegPrepara">
+				<div class="col-md-4 totalPedidoPegPrepara">
 					<div class="form-group">
 						<label for="valor totaPedido">Valor total do pedido</label>
 						<input type="text" name="cpValorTotalPedido" id="cpValorTotalPedido" readonly class="form-control valTotalPedidoPagPreparaPedido" />
+					</div>
+				</div>
+				<div class="col-md-4 btnFinalziarPedidoAcrescimo">
+					<div class="form-group">
+						<button type="button" id="btnFinalziarPedidoAcrescimo" class="form-control btn btn-danger">efetivar pedido</button>
 					</div>
 				</div>
 			</div>
