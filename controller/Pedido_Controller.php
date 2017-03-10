@@ -9,6 +9,7 @@
 	if($_REQUEST["acao"] == "gerar pedido"):
 	
 		$ped->__set("tuProduto_idProduto", addslashes($_REQUEST["tuProduto_idProduto"]));
+		$ped->__set("tsPreparaPedido_idPreparaPedido", "99999999999");
 		$ped->__set("cpCodPedido", $_REQUEST["cpCodPedido"]);
 		$ped->__set("cpStatusPedido", addslashes($_REQUEST["cpStatusPedido"]));
 		$ped->__set("cpQtdProduto", addslashes($_REQUEST["cpQtdProduto"]));
