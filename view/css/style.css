@@ -14,7 +14,7 @@ body {
 	margin-top:50px;
 }
 .btnConfirmGeracaoPedido,
-.btnFinalziarPedidoAcrescimo {
+#btnEfetivarPedidoAcrescimo {
 	
 	margin-top:74px;
 }

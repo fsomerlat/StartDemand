@@ -134,7 +134,7 @@
 				</div>
 				<div class="col-md-4 btnFinalziarPedidoAcrescimo">
 					<div class="form-group">
-						<button type="button" id="btnFinalziarPedidoAcrescimo" class="form-control btn btn-danger">efetivar pedido</button>
+						<button type="button" id="btnEfetivarPedidoAcrescimo" class="form-control btn btn-danger efetivarPedido">efetivar pedido</button>
 					</div>
 				</div>
 			</div>

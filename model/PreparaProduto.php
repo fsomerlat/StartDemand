@@ -193,4 +193,19 @@ class PreparaProduto extends Pedido{
 			echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 		}
 	}
+	
+	public function DELETATUDO() {
+		
+		$sql="DELETE FROM $this->table";
+		$del=DB::prepare($sql);
+		
+		try {
+			
+			return $del->execute();
+		
+		}catch(PDOException $e) {
+			
+			echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+		}
+	}
 }

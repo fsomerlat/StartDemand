@@ -12,6 +12,12 @@ var FormHelperAcrescimo = (function() {
 		return danger;
 	}
 	
+	
+	var msgInfo = function(mensagem) {
+		
+		var msgInfo = '<div class="alert alert-info" role="alert">' +mensagem + '</div>';
+		return msgInfo;
+	}
 	var getValorProduto = function() {
 		
 		return  $("#valTotalPreparaProduto").val();
@@ -82,6 +88,19 @@ var FormHelperAcrescimo = (function() {
 		});
 	}
 	
+	var efetivarPedido =  function() {
+		
+		var efetivaPedido = "efetivaPedido";
+		$.post("http://localhost/startDemand/controller/Pedido_Controller.php",{efetivaPedido: efetivaPedido },function(retorno){ 
+			
+			$('.msgPedido').html(msgInfo(retorno)).collapse();
+			
+			setTimeout(function() {
+				window.location.href='http://localhost/startDemand/view/Pedido.php?panel=193158';
+			},1500);
+		});
+	}
+	
 	var postConfirmPedido =  function() {
 		
 		var valTotalPedido = $(".valTotalPedidoPagPreparaPedido").val(),
@@ -93,11 +112,21 @@ var FormHelperAcrescimo = (function() {
 			tuPedido_cpCodPedido:tuPedido_cpCodPedido,cpObservacaoAcrescimo:cpObservacaoAcrescimo} ,function(retorno){
 					
 				var msgRetorno = retorno.substring(0,7);
-				if(msgRetorno == "PRODUTO") {
+				if(msgRetorno == "INFORME") {
 					
-					$(".pedidoRealizado").html(msgDanger(retorno)).collapse();
+					$(".msgPedido").html(msgDanger(retorno)).collapse();
+					
+					setTimeout(function(){
+						location.reload();
+					},2500);
+					
 				}else {
-					$(".pedidoRealizado").html(msgSuccess(retorno)).collapse();
+					
+					$(".msgPedido").html(msgSuccess(retorno)).collapse();
+					
+					setTimeout(function(){
+						location.reload();
+					},1500);
 				}
 			});
 	}
@@ -197,17 +226,22 @@ var FormHelperAcrescimo = (function() {
 			
 			postConfirmPedido();
 			
-			setTimeout(function() {
-				
-				location.reload();
-			},1500);
 		});
 		
 		$(document).on("click",".excluirProdPreparaPedido", function() {
 			
 			return confirm("Tem certeza que deseja excluir esse produto ?");
 		});
-	
+		
+		$(".efetivarPedido").click(function() {
+			
+			return confirm("Efetivar pedido ?");
+		});
+		
+		$(".efetivarPedido").click(function(){
+			
+			efetivarPedido();
+		});
 		
 		$("#btnAddAcrescimo").bind('click',function() {
 							

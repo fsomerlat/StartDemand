@@ -25,21 +25,8 @@
 							StartDemand - <small>Sistema para gestão de demandas !</small>
 						</h4>
 					</div>
-					 </div>
-					 <div class="form-group">
-						<ul class="nav nav-pills">
-							<li class="active">
-								 <a href="#"> <span class="badge pull-right"><i class="pedidosDeHoje"></i>16</span>Pedidos de hoje</a>
-							</li>
-							<li class="active">
-								 <a href="#"> <span class="badge pull-right"><i class="pedidosFinalizados"></i>16</span>Pedidos finalizados</a>
-							</li>
-							<li class="active">
-								 <a href="#"> <span class="badge pull-right"><i class="pedidosCancelados">3</i></span>Pedidos cancelados</a>
-							</li>
-						</ul>
-					</div>
-				</div>
+			 </div>
+			 </div>
 				<div class="col-md-6">
 					<nav class="navbar navbar-default navbar-inverse" role="navigation">
 						<div class="navbar-header">
@@ -109,7 +96,7 @@
 						
 					</nav>
 				</div>			
-				<div class="col-md-12">
+				<div class="col-md-8">
 					<div class="form-group">
 						<div>
 							<ul class="nav nav-tabs nav-hover subMenuPedido">
@@ -126,8 +113,24 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-md=4">
+					 <div class="form-group">
+						<ul class="nav nav-pills">
+							<li class="active">
+								 <a href="#"> <span class="badge pull-right"><i class="pedidosDeHoje"></i>16</span>Pedidos de hoje</a>
+							</li>
+							<li class="active">
+								 <a href="#"> <span class="badge pull-right"><i class="pedidosFinalizados"></i>16</span>Pedidos finalizados</a>
+							</li>
+							<li class="active">
+								 <a href="#"> <span class="badge pull-right"><i class="pedidosCancelados">3</i></span>Pedidos cancelados</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 				<div class="col-md-12">
-					<div class="form-group pedidoRealizado"></div>
+					<div class="form-group msgPedido"></div>
+			
 				</div>
 		
 					

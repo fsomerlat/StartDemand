@@ -123,7 +123,9 @@
 	    $ped->__set("cpValorTotalPedido", addslashes($somaTotalPedido));
 	    $ped->__set("cpObservacaoPedido", addslashes($obsPedido));
 	    
-	    
+	    $getInfoProduto = $preparaProduto->getProduto(); //RETORNA SEMPRE O ULTIMO REGISTRO DA TABELA tuPedido para ser inserido na tsPreparaProduto
+	  
+	    $codProduto = $getInfoProduto->cpCodPedido;
 	  
 	    $comparaIdsDuplicados = $ped->comparaRelacionamentoIds();
 	    
@@ -181,12 +183,12 @@
 				
 			endforeach;
 	    	
-			echo "Pedido [ ACŔESCIMO ] gerado com sucesso !";
+			echo " Pedido [ ACŔESCIMO ] gerado com sucesso !";
 	    } 
 	    
 	    else {
 	    	
-	    	echo "PRODUTO E ACRÉSCIMO DEVEM SER INFORMADOS !";
+	    	echo "Informe quais [ ACRÉSCIMOS ] deseja incluir no pedido [ ".$codProduto." ] !";
 	}
 	    
 	endif;
@@ -220,23 +222,33 @@
 	
 	if($_REQUEST["acao"] == "atualizar"):
 	 
-	$id = (int)$_GET["id"];
-	 
-	$preparaProduto->__set("tuProduto_idProduto", addslashes($_REQUEST["tuProduto_idProduto"]));
-	$preparaProduto->__set("cpQtdProduto", addslashes($_REQUEST["cpQtdProduto"]));
-	$preparaProduto->__set("cpComplementoUm", addslashes($_REQUEST["cpComplementoUm"]));
-	$preparaProduto->__set("cpComplementoDois", addslashes($_REQUEST["cpComplementoDois"]));
-	$preparaProduto->__set("cpValorTotalProduto", addslashes($_REQUEST["cpValorTotalProduto"]));
-	$preparaProduto->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
-		
-	$preparaProduto->UPDATE($id);
-	 
-	echo "<script language='javascript'>
-   					window.alert('Registro atualizado com sucesso !');
-   					window.location.href='../view/PreparaPedidoAcrescimo.php?panel=655955';
-   				</script>";
+		$id = (int)$_GET["id"];
+		 
+		$preparaProduto->__set("tuProduto_idProduto", addslashes($_REQUEST["tuProduto_idProduto"]));
+		$preparaProduto->__set("cpQtdProduto", addslashes($_REQUEST["cpQtdProduto"]));
+		$preparaProduto->__set("cpComplementoUm", addslashes($_REQUEST["cpComplementoUm"]));
+		$preparaProduto->__set("cpComplementoDois", addslashes($_REQUEST["cpComplementoDois"]));
+		$preparaProduto->__set("cpValorTotalProduto", addslashes($_REQUEST["cpValorTotalProduto"]));
+		$preparaProduto->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
+			
+		$preparaProduto->UPDATE($id);
+		 
+		echo "<script language='javascript'>
+	   					window.alert('Registro atualizado com sucesso !');
+	   					window.location.href='../view/PreparaPedidoAcrescimo.php?panel=655955';
+	   				</script>";
 	
 	endif;
+	
+	if(isset($_REQUEST["efetivaPedido"])):
+	
+		$preparaAcrescimo->DELETATUDO();
+		$preparaProduto->DELETATUDO();
+		
+		echo "PEDIDO EFETIVADO !";
+	
+	endif;
+	
 	
 	
 	
