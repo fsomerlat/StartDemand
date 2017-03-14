@@ -28,11 +28,15 @@ var FormHelperPedido = (function() {
 	
 	var getContadorPedido =  function() {
 	
+		
 		$.ajax({
 			
 			url: "http://localhost/startDemand/service/Service_Conta_Pedidos.php",
 			cache: false,
 			dataType:"json",
+			beforeSend:function(){
+				$(".pedidosFinalizados,.pedidosCancelados,.pedidoEmAndamento").html(0)
+			},
 			success: function(retorno){
 				
 				retorno.map(function(dados){
@@ -40,13 +44,13 @@ var FormHelperPedido = (function() {
 					var status = dados.cpStatusPedido;
 
 					if(status == "F") {
-						statusF += dados.contaPedido;
+					
 						$(".pedidosFinalizados").html(dados.contaPedido);
 					}else if(status == "C"){
-						statusC += dados.contaPedido;
+						
 						$(".pedidosCancelados").html(dados.contaPedido);
 					}else if(status == "A") {
-						statusA += dados.contaPedido;
+						
 						$(".pedidoEmAndamento").html(dados.contaPedido);
 					}
 				});
@@ -57,14 +61,19 @@ var FormHelperPedido = (function() {
 	
 	var getPedidoDiaCorrente = function() {
 		
+		var contador = [];
+		
 		$.ajax({
 			
 			url: "http://localhost/startDemand/service/Service_Pedido.php",
 			cache: false,
 			dataType:"json",
+			beforeSend:function(){
+				$(".pedidosDeHoje").html(0);
+			},
 			success:function(retorno) {
 				
-				retorno.map(function(dados){
+				retorno.forEach(function(dados){
 					
 					var objDtHoje =  dados.cpHoraPedido.substring(0,10);
 						dataAtual = objDtHoje.split("-");
@@ -76,10 +85,19 @@ var FormHelperPedido = (function() {
 					
 					data = dia+"/"+mes+"/"+ano;
 					
-					console.log(data);
+					if(data == Utils.carregaDataDeHoje(new Date())) {
 						
+						contador.push(dados.idPedido);
+						
+						for(var i=0;i < contador.length; i++) {
+							
+							$(".pedidosDeHoje").html(i + 1);
+						}
+					}else{
+						
+						$(".pedidosDeHoje").html(0);
+					}
 				});
-				
 			}
 		});
 
