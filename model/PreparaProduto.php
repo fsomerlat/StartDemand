@@ -208,4 +208,26 @@ class PreparaProduto extends Pedido{
 			echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 		}
 	}
+	
+	public function getRowCodPedido() {
+		
+		$sql="SELECT 
+					preProd.cpCodPedido , 
+					ped.cpCodPedido 
+			   FROM 
+			   		$this->table as preProd  INNER JOIN tuPedido as ped ON preProd.cpCodPedido = ped.cpCodPedido
+			   WHERE 
+			   		preProd.cpCodPedido = ped.cpCodPedido";
+		
+		$row=DB::prepare($sql);
+		$row->execute();
+		
+		try {
+			
+			return $row->rowCount();
+		}catch(PDOException $e) {
+			
+			echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+		}
+	}
 }

@@ -193,6 +193,30 @@
 		    	echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 		    }		
 		}
+		
+		public function getContaPedidos() {
+			
+			$sql="SELECT
+					COUNT(idPedido) as contaPedido,cpStatusPedido
+				  FROM 
+					$this->table
+				  GROUP BY
+					cpStatusPedido";
+			
+			$row=DB::prepare($sql);
+			$row->execute();		
+			try {
+				
+				$assoc = PDO::FETCH_ASSOC;
+				$all = $row->fetchAll($assoc);
+				
+				echo json_encode($all,JSON_PRETTY_PRINT);
+			
+			}catch(PDOException $e) {
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}
 	
 		
 	}

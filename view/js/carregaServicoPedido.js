@@ -6,7 +6,8 @@ var Service_Pedido = (function() {
 		
 	var carregaInfoPedidoAjaxDB =  function() {
 		
-		var itensProdutos= "";
+		var itensProdutos= "",
+			contador = "";
 			
 		$.ajax({
 			
@@ -26,7 +27,7 @@ var Service_Pedido = (function() {
 //				} else {
 					
 					retorno.map(function(dados) {
-									
+							
 						var status = dados.cpStatusPedido,
 							opcaoStatus = "";
 						
@@ -37,15 +38,17 @@ var Service_Pedido = (function() {
 						
 						var dataHrPedido = dados.cpHoraPedido,
 							hora = dataHrPedido.substring(11,20),	
-							objDate = 	dataHrPedido.substring(0,11).split("-");
+							objDate = 	dataHrPedido.substring(0,10).split("-");
 						
 						dia  = objDate[2];
 						mes  = objDate[1];
-						ano  = dataHrPedido.substring(0,5); 
-							
+						ano  = dataHrPedido.substring(0,4); 
+						
+						data = dia+"/"+mes+"/"+ano;
+						
 						dataPedido = dia+'/'+mes+'/'+ano+ hora;
-								
-							itensProdutos += "<tr>";
+
+						itensProdutos += "<tr>";
 							
 							switch(opcaoStatus){
 								
@@ -65,12 +68,15 @@ var Service_Pedido = (function() {
 							itensProdutos += "<td class='success'><a href='../controller/Pedido_Controller.php?acao=finalizar&id="+dados.idPedido+"' title='Cancelar pedido'><button type='button' id='pedidoLiberado' class='btn btn-success'>Finalizado</button></a></td>";
 							itensProdutos += "<td class='danger'><a href='../controller/Pedido_Controller.php?acao=cancelar&id="+dados.idPedido+"' title='Finalizar pedido'><button type='button' id='pedidoCancelado' class='btn btn-danger'>Cancelar</button></a></td>";
 							itensProdutos += "</tr>";
-							
+		
+				
+						
 					});
+					
 					$("#tablePedidoProdutos tbody").html(itensProdutos);
 					$(".h3listaPedidoProduto").html("Lista de produtos");
 					$(".h3listaPedidoAcrescimo").html("Lista de acréscimo");
-				
+					
 				//}
 			}
 		});	

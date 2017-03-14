@@ -139,6 +139,28 @@
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 			}
 		}
+		
+		public function getVerificaRelacionamento($id) {
+			
+			$sql="SELECT 
+					prod.idProduto,ped.tuProduto_idProduto
+				  FROM 
+				  	$this->table as prod INNER JOIN tuPedido as ped ON prod.idProduto = ped.tuProduto_idProduto
+				  WHERE 
+				  	prod.idProduto = $id AND  ped.tuProduto_idProduto = $id";
+			
+			$row=DB::prepare($sql);
+			$row->execute();
+			
+			try {
+				
+				return $row->rowCount();
+			
+			}catch(PDOException $e) {
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}
 
 	}
 

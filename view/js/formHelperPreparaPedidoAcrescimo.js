@@ -1,23 +1,5 @@
 var FormHelperAcrescimo = (function() {
 	
-	var msgSuccess =  function(mensagem) {
-		
-		var success = '<div class="alert alert-success" role="alert">' + mensagem + '</div>';
-		return success;
-	}
-	
-	var msgDanger = function (mensagem) {
-		
-		var danger = '<div class="alert alert-danger" role="alert">' + mensagem + '</div>';
-		return danger;
-	}
-	
-	
-	var msgInfo = function(mensagem) {
-		
-		var msgInfo = '<div class="alert alert-info" role="alert">' +mensagem + '</div>';
-		return msgInfo;
-	}
 	var getValorProduto = function() {
 		
 		return  $("#valTotalPreparaProduto").val();
@@ -93,11 +75,21 @@ var FormHelperAcrescimo = (function() {
 		var efetivaPedido = "efetivaPedido";
 		$.post("http://localhost/startDemand/controller/Pedido_Controller.php",{efetivaPedido: efetivaPedido },function(retorno){ 
 			
-			$('.msgPedido').html(msgInfo(retorno)).collapse();
+			var msgRetornoInforme = retorno.substring(0,7),
+				msgRetornoEnecessario = retorno.substring(0,1);
 			
-			setTimeout(function() {
-				window.location.href='http://localhost/startDemand/view/Pedido.php?panel=193158';
-			},1500);
+			if(msgRetornoInforme == "Informe") {
+				$(".msgPedido").html(Utils.msgDanger(retorno)).collapse();
+				Utils.setTimeoutLocation('http://localhost/startDemand/view/Pedido.php?panel=193158')
+			}else if(msgRetornoEnecessario == "È") {
+				
+				$(".msgPedido").html(Utils.msgDanger(retorno)).collapse();
+				Utils.setTimeoutReload();
+			} else {
+				
+				$(".msgPedido").html(Utils.msgSuccess(retorno)).collapse();
+				Utils.setTimeoutReload();
+			}
 		});
 	}
 	
@@ -111,23 +103,22 @@ var FormHelperAcrescimo = (function() {
 		$.post("http://localhost/startDemand/controller/Pedido_Controller.php",{confirm:confirm,valTotalPedido:valTotalPedido,
 			tuPedido_cpCodPedido:tuPedido_cpCodPedido,cpObservacaoAcrescimo:cpObservacaoAcrescimo} ,function(retorno){
 					
-				var msgRetorno = retorno.substring(0,7);
-				if(msgRetorno == "INFORME") {
+				var msgRetorno = retorno.substring(0,7),
+					msgRetornoAcrescimos = retorno.substring(0,9);
+				if(msgRetorno == "Informe") {
 					
-					$(".msgPedido").html(msgDanger(retorno)).collapse();
+					$(".msgPedido").html(Utils.msgDanger(retorno)).collapse();
+					Utils.setTimeoutLocation('http://localhost/startDemand/view/Pedido.php?panel=193158');
+				} else if(msgRetornoAcrescimos == "Acréscimo"){
 					
-					setTimeout(function(){
-						location.reload();
-					},2500);
-					
-				}else {
-					
-					$(".msgPedido").html(msgSuccess(retorno)).collapse();
-					
-					setTimeout(function(){
-						location.reload();
-					},1500);
+					$(".msgPedido").html(Utils.msgDanger(retorno)).collapse();
+					Utils.setTimeoutReload();
 				}
+				else {
+					
+					$(".msgPedido").html(Utils.msgSuccess(retorno)).collapse();
+					Utils.setTimeoutReload();
+				} 
 			});
 	}
 		
@@ -174,7 +165,8 @@ var FormHelperAcrescimo = (function() {
 	    },
 		function(retorno)	{
 
-			$(".successAddAcrescimo").html(msgSuccess(retorno)).collapse();
+			$(".successAddAcrescimo").html(Utils.msgSuccess(retorno)).collapse();
+			Utils.setTimeoutReload();
 		});
 	}
 	
@@ -233,11 +225,6 @@ var FormHelperAcrescimo = (function() {
 			return confirm("Tem certeza que deseja excluir esse produto ?");
 		});
 		
-		$(".efetivarPedido").click(function() {
-			
-			return confirm("Efetivar pedido ?");
-		});
-		
 		$(".efetivarPedido").click(function(){
 			
 			efetivarPedido();
@@ -246,11 +233,7 @@ var FormHelperAcrescimo = (function() {
 		$("#btnAddAcrescimo").bind('click',function() {
 							
 			 postCamposAcrescimos();
-			 
-			 setInterval(function() {
-				 location.reload();
-			 },1500);
-			 
+			 Utils.setTimoutReload();
 		});
 	}
 	

@@ -1,12 +1,42 @@
 <?php require_once 'header/header.php'; ?>
+
 <div class="col-md-8">
+	<div class="panel-group" id="panel-402239">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				 <div class="panel-title" data-toggle="collapse" data-parent="#panel-402239" href="#panel-element_655957">Pedido atual sendo preparado</div>
+			</div>
+			<div id="panel-element_655957" class="panel-collapse collapse in">
+				<div class="panel-body">
+				<h4 class="listaPreparaPedido"></h4>
+					<table class="table table-hover" id="tablePreparaPedido">
+					<thead>
+						<tr class="warning">
+							<th>CodPedido</th>
+							<th>Nome produto</th>
+							<th>QTDE</th>
+							<th>Valor</th>
+							<th>Total</th>
+							<th>Observação</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- LISTA PRODUTOS VIA AJAX -->
+					</tbody>
+					</table>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="panel-group painelAddAcrescimos" id="panel-402239">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			 <div class="panel-title" data-toggle="collapse" data-parent="#panel-402239" href="#panel-element_655955">Adicionar acréscimos</div>
 		</div>
 		<div id="panel-element_655955" class="panel-collapse collapse">
-			<div class="panel-body">
+			<div class="panel-body">	
 				<form action="../controller/Prepara_Pedido_Acrescimo_Controller.php" name="formAcrescimo" id="formAcrescimo" method="POST">
 					
 					<input type="hidden" name="valTotalPreparaProduto" id="valTotalPreparaProduto"/>
@@ -80,35 +110,7 @@
 		</div>
 	</div>
 </div>	
-<div class="panel-group" id="panel-402239">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			 <div class="panel-title" data-toggle="collapse" data-parent="#panel-402239" href="#panel-element_655957">Pedido atual</div>
-		</div>
-		<div id="panel-element_655957" class="panel-collapse collapse in">
-			<div class="panel-body">
-			<h4 class="listaPreparaPedido"></h4>
-				<table class="table table-hover" id="tablePreparaPedido">
-				<thead>
-					<tr class="warning">
-						<th>CodPedido</th>
-						<th>Nome produto</th>
-						<th>QTDE</th>
-						<th>Valor</th>
-						<th>Total</th>
-						<th>Observação</th>
-						<th></th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<!-- LISTA PRODUTOS VIA AJAX -->
-				</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-</div>
+
 </div>
 
 

@@ -19,39 +19,46 @@
  		$ped->__set("cpValorTotalPedido", addslashes($_REQUEST["cpValorTotalPedido"]));
 		$ped->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
 		
-		if($_REQUEST["tuProduto_idProduto"] == 0):
+		if($_REQUEST["tipoPedido"] == ""):
+			
+			echo "<script language='javascript'>
+						window.alert('Informe o [ TIPO DO PEDIDO ] !');
+						window.location.href='../view/Pedido.php?panel=193158';
+					</script>";
+		
+		elseif($_REQUEST["tuProduto_idProduto"] == 0):
 		
 			echo "<script language='javascript'>
 						window.alert('È necessário selecionar o campo [ NOME PRODUTO ] ! ');
-						window.history.go(-1);
+						window.location.href='../view/Pedido.php?panel=193158';
 					</script>";
 		
 		elseif ($_REQUEST["cpCodPedido"] == 0):
 		
 			echo "<script language='javascript'>
 							window.alert('È necessário selecionar o campo [ CÓDIGO PRODUTO ] !');
-							window.history.go(-1);
+							window.location.href='../view/Pedido.php?panel=193158';
 						</script>";
 		
 		elseif ($_REQUEST["cpQtdProduto"] == 0):
 		
 			echo "<script language='javascript'>
 								window.alert('È necessário selecionar o campo [ QUANTIDADE PRODUTO ] !');
-								window.history.go(-1);
+								window.location.href='../view/Pedido.php?panel=193158';
 							</script>";
 		
 		elseif ($_REQUEST["cpComplementoUm"] == ''):
 		
 			echo "<script language='javascript'>
 								window.alert('È necessário selecionar o campo [ 1ª COMPLEMENETO ] !');
-								window.history.go(-1);
+								window.location.href='../view/Pedido.php?panel=193158';
 							</script>";
 		
 		elseif ($_REQUEST["cpComplementoDois"] == ''):
 		
 			echo "<script language='javascript'>
 								window.alert('È necessário selecionar o campo [ 2ª COMPLEMENETO ] !');
-								window.history.go(-1);
+								window.location.href='../view/Pedido.php?panel=193158';
 							</script>";
 		else:
 		
@@ -77,13 +84,54 @@
 		$preparaProduto->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
 
 		
+		if($_REQUEST["tipoPedido"] == ""):
 		
-		if($preparaProduto->getRow() > 0):
+			echo "<script language='javascript'>
+						window.alert('Informe o [ TIPO DO PEDIDO ] !');
+						window.location.href='../view/Pedido.php?panel=193158';
+					</script>";
+		
+		elseif($preparaProduto->getRow() > 0):
 			
 			echo "<script language='javascript'>
 						window.alert('Um pedido com acréscimo já está sendo preparado. Finalize-o para continuar !');
 						window.location.href='../view/PreparaPedidoAcrescimo.php?panel=655955';
 					</script>";
+	
+		elseif($_REQUEST["tuProduto_idProduto"] == 0):
+		
+			echo "<script language='javascript'>
+						window.alert('È necessário selecionar o campo [ NOME PRODUTO ] ! ');
+						window.location.href='../view/Pedido.php?panel=193158';
+					</script>";
+		
+		elseif ($_REQUEST["cpCodPedido"] == 0):
+		
+			echo "<script language='javascript'>
+							window.alert('È necessário selecionar o campo [ CÓDIGO PRODUTO ] !');
+							window.location.href='../view/Pedido.php?panel=193158';
+						</script>";
+		
+		elseif ($_REQUEST["cpQtdProduto"] == 0):
+		
+			echo "<script language='javascript'>
+								window.alert('È necessário selecionar o campo [ QUANTIDADE PRODUTO ] !');
+								window.location.href='../view/Pedido.php?panel=193158';
+							</script>";
+		
+		elseif ($_REQUEST["cpComplementoUm"] == ''):
+		
+			echo "<script language='javascript'>
+								window.alert('È necessário selecionar o campo [ 1ª COMPLEMENETO ] !');
+								window.location.href='../view/Pedido.php?panel=193158';
+							</script>";
+		
+		elseif ($_REQUEST["cpComplementoDois"] == ''):
+		
+			echo "<script language='javascript'>
+								window.alert('È necessário selecionar o campo [ 2ª COMPLEMENETO ] !');
+								window.location.href='../view/Pedido.php?panel=193158';
+							</script>";
 		else:
 		
 			$preparaProduto->INSERT();
@@ -154,9 +202,13 @@
 	    
 	    	endforeach;
 	    	
-	    	$preparaAcrescimo->DELETATUDO();
+	    	//$preparaAcrescimo->DELETATUDO();
 	    	echo "Pedido [ PRODUTO COM ACRÉSCIMO ] gerado com sucesso !";
 	    
+	   } elseif ($preparaAcrescimo->getRow() == 0 && $preparaProduto->getRow() == 0){
+	   	
+	   		echo "Informe um [ PRODUTO ] e um [ ACRÉSCIMO ] para gerar um pedido !";
+	   
 	   } elseif($preparaProduto->getRow() == 1 && $preparaAcrescimo->getRow() > 0 && $comparaIdsDuplicados > 0) {
 
 	   		
@@ -183,12 +235,12 @@
 				
 			endforeach;
 	    	
-			echo " Pedido [ ACŔESCIMO ] gerado com sucesso !";
-	    } 
+			echo "Pedido [ ACŔESCIMO ] gerado com sucesso !";
+	    }
 	    
 	    else {
 	    	
-	    	echo "Informe quais [ ACRÉSCIMOS ] deseja incluir no pedido [ ".$codProduto." ] !";
+	    	echo "Acréscimo deve ser informado para incluir no pedido [ ".$codProduto." ] !";
 	}
 	    
 	endif;
@@ -242,11 +294,20 @@
 	
 	if(isset($_REQUEST["efetivaPedido"])):
 	
-		$preparaAcrescimo->DELETATUDO();
-		$preparaProduto->DELETATUDO();
+		if($preparaAcrescimo->getRow() == 0 && $preparaProduto->getRow() == 0 ):
+			
+			echo "Informe um [ PEDIDO ] e [ ACŔESCIMO ] para executar essa ação !";
 		
-		echo "PEDIDO EFETIVADO !";
-	
+		elseif($preparaProduto->getRowCodPedido() == 0):
+		
+			echo "È necessário que tenha pelo menos um pedido efetivado referente a esse código !";
+		else:
+		
+			$preparaAcrescimo->DELETATUDO();
+			$preparaProduto->DELETATUDO();
+			echo "PEDIDO EFETIVADO !";
+			
+		endif;
 	endif;
 	
 	

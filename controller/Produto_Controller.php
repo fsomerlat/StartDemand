@@ -116,11 +116,19 @@
 	
 		$id = (int)$_GET["id"];
 	
-		$prod->DELETE($id);
-		echo "<script language='javascript'>
-					window.alert('Registro [ $id ] foi excluído com sucesso !');
-					window.history.go(-1);
-				</script>";
+		if($prod->getVerificaRelacionamento($id) > 0):
+		
+			echo "<script language='javascript'>
+						window.alert('Não é possível excluir.Registro relacionado a um pedido !');
+						window.history.go(-1);
+					</script>";
+		else:
+			$prod->DELETE($id);
+			echo "<script language='javascript'>
+						window.alert('Registro [ $id ] foi excluído com sucesso !');
+						window.history.go(-1);
+					</script>";
+		endif;
 	endif;
 	
 	
