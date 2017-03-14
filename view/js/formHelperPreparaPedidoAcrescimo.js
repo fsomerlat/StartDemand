@@ -88,7 +88,7 @@ var FormHelperAcrescimo = (function() {
 			} else {
 				
 				$(".msgPedido").html(Utils.msgSuccess(retorno)).collapse();
-				Utils.setTimeoutReload();
+				Utils.setTimeoutLocation('http://localhost/startDemand/view/Pedido.php?panel=193158');
 			}
 		});
 	}
@@ -117,7 +117,7 @@ var FormHelperAcrescimo = (function() {
 				else {
 					
 					$(".msgPedido").html(Utils.msgSuccess(retorno)).collapse();
-					Utils.setTimeoutLocation('http://localhost/startDemand/view/Pedido.php?panel=193158');
+					Utils.setTimeoutReload();
 				} 
 			});
 	}

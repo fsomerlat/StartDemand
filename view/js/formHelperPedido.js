@@ -85,6 +85,7 @@ var FormHelperPedido = (function() {
 					
 					data = dia+"/"+mes+"/"+ano;
 					
+				
 					if(data == Utils.carregaDataDeHoje(new Date())) {
 						
 						contador.push(dados.idPedido);
@@ -93,6 +94,9 @@ var FormHelperPedido = (function() {
 							
 							$(".pedidosDeHoje").html(i + 1);
 						}
+						
+						getContadorPedido();
+						
 					}else{
 						
 						$(".pedidosDeHoje").html(0);
@@ -147,7 +151,6 @@ var FormHelperPedido = (function() {
 		
 		expandePainel(Utils.verificaUrl());
 		preencheValorProduto();
-		getContadorPedido();
 		getPedidoDiaCorrente();
 		
 		$(document).on("click","#pedidoCancelado", function() {
