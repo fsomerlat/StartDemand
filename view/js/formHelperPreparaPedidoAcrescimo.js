@@ -37,11 +37,6 @@ var FormHelperAcrescimo = (function() {
 				 $(".valTotalPedidoPagPreparaPedido").val(somaTotal);				
 			}
 		},100);
-	}	
-	
-	var expandePainel = function(idPanel) {
-		
-		$("#panel-element_" + idPanel).collapse();
 	}
 	
 	var getValorBaseAcrescimo =  function() {
@@ -199,7 +194,6 @@ var FormHelperAcrescimo = (function() {
 	
 	var bindEvents =  function() {
 		
-		expandePainel(Utils.verificaUrl());
 		preencheAcrescimoPedido();
 		preencheSelectCodigo();
 		setSomaValores();

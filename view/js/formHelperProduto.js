@@ -4,11 +4,6 @@
 
 var FormHelperProduto = (function() {
 	
-	var expandePainel = function(idPanel) {
-		
-		$("#panel-element_" + idPanel).collapse();
-	}
-	
 	var mascaraCampos = function(value) {
 		
 		if(value == 1) {
@@ -46,8 +41,6 @@ var FormHelperProduto = (function() {
 	}
 	
 	var bindEvents = function() {
-		
-		expandePainel(Utils.verificaUrl());
 		
 		$("#cpValorProduto").prop("disabled", true);
 		

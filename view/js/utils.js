@@ -65,16 +65,23 @@ var Utils =  (function(){
 			window.location.href= url;
 		},1500);  
 	}
+	
+	var expandePainel = function(idPanel) {
+		
+		$("#panel-element_" + idPanel).collapse();
+	}
+	
 	var bindEvents = function() {
 		
+		expandePainel(verificaUrl());
 		$('.dataHoje').html(carregaDataDeHoje(getDate()));
 	};
 	
 	return {
+		
 		setTimeoutLocation: setTimeoutLocation,
 		setTimeoutReload: setTimeoutReload,
 		bindEvents: bindEvents,
-		verificaUrl: verificaUrl,
 		msgSuccess: msgSuccess,
 		msgDanger: msgDanger,
 		msgInfo: msgInfo,

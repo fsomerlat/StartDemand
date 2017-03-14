@@ -15,12 +15,6 @@ var FormHelperPedido = (function() {
 		$(".valTotalPedidoPagPedido").val(valor);
 	}
 		
-	
-	var expandePainel = function(idPanel) {
-		
-		$("#panel-element_" + idPanel).collapse();
-	}
-	
 	var getValorBaseProduto =  function() {
 		
 		return $("#cpValorBaseProduto").val();
@@ -149,7 +143,6 @@ var FormHelperPedido = (function() {
 	
 	var bindEvents =  function() {
 		
-		expandePainel(Utils.verificaUrl());
 		preencheValorProduto();
 		getPedidoDiaCorrente();
 		

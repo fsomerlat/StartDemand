@@ -107,21 +107,17 @@
 <!-- 								<a href="PreparaPedidoAcrescimo.php?panel=655955">Pedido com acréscimo</a> -->
 <!--  							</li> -->
 							<li class="acitve">
-								<a href="Acrescimo.php"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> acréscimo</a>
+								<a href="Acrescimo.php?panel=387270"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> acréscimo</a>
  							</li>	 							
 						</ul>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-5">
+			<div class="col-md--5">
 				 <div class="form-group">
 					<ul class="nav nav-pills">
 						<li class="active">
-							 <a href="#"> <span class="badge pull-right"></span><span class=" glyphicon glyphicon-list-alt" aria-hidden="true"></span> Pedidos <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
-						</li>
-						<li class="active">
-							 <a href="#"> <span class="badge pull-right"><i class="pedidosDeHoje"></i></span><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> hoje</a>
-							
+							 <a href="#"> <span class="badge pull-right"></span><span class=" glyphicon glyphicon-list-alt" aria-hidden="true"></span> Pedidos do dia <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
 						</li>
 						<li class="active">
 							<a href="#"><span class="badge pull-right"><i class="pedidoEmAndamento"></i></span><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span> andamento</a>
@@ -131,6 +127,9 @@
 						</li>
 						<li class="active">
 							 <a href="#"> <span class="badge pull-right"><i class="pedidosCancelados"></i></span><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> cancelados</a>
+						</li>
+						<li class="active">
+							 <a href="#"> <span class="badge pull-right"><i class="pedidosDeHoje"></i></span><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Total</a>
 						</li>
 					</ul>
 				</div>
