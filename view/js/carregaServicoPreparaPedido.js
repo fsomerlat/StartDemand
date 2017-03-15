@@ -55,7 +55,7 @@ var Service_Prepara_Pedido = (function() {
 					},010); 
 					
 					setTimeout(function(){
-						FormHelperAcrescimo.painelAcrescimoHide(umiTem);
+						FormHelperPedidoAcrescimo.painelEmenuAcrescimoHide(umiTem);
 					},020);
 				//}
 			}
@@ -120,9 +120,9 @@ var Service_Prepara_Pedido = (function() {
 				retorno.map(function(dados){
 					
 					if(dados.somaTotalProduto) {
-						FormHelperAcrescimo.setValorProduto(dados.somaTotalProduto.substring(0,5));
+						FormHelperPedidoAcrescimo.setValorProduto(dados.somaTotalProduto.substring(0,5));
 					}else{
-						FormHelperAcrescimo.setValorProduto(0);
+						FormHelperPedidoAcrescimo.setValorProduto(0);
 					}
 				});
 			}
@@ -142,9 +142,9 @@ var Service_Prepara_Pedido = (function() {
 					
 					if(dados.somaTotalAcrescimo) {
 						
-						FormHelperAcrescimo.setValorAcrescimo(dados.somaTotalAcrescimo.substring(0,5));
+						FormHelperPedidoAcrescimo.setValorAcrescimo(dados.somaTotalAcrescimo.substring(0,5));
 					}else {
-						FormHelperAcrescimo.setValorAcrescimo(0);
+						FormHelperPedidoAcrescimo.setValorAcrescimo(0);
 					}	
 				});
 			}

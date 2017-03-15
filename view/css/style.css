@@ -32,7 +32,8 @@ body {
 .listaPedidoProduto,
 .listaPedidoAcrescimo,
 .listaPreparaAcrescimo,
-.tabelaProdutosDisponiveis{
+.tabelaProdutosDisponiveis,
+.listaAcrescimos{
 	
 	text-align: center;
 }

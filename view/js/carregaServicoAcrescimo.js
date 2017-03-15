@@ -1,21 +1,14 @@
 var Service_Acrescimo = (function() {
 	
-	var carregaInfoAcrescimo = function(url) {
+	var carregaInfoAcrescimoListaPedido = function(url) {
 		
-		var itens = "";
+		var itensAcrescimoTablePedido = "",
+			intesTableAcrescimo = "";
 		$.ajax({
 			
 			url:url,
 			cache:false,
 			dataType:"json",
-			beforeSend: function(){
-				
-				$("").html("Carregando lista de acréscimos...");
-			},
-			error: function() {
-			
-				$("").html("Houve algum erro com a fonte de dados !");
-			},
 			success: function(retorno) {
 				
 //				if(retorno[0].erro) {
@@ -33,22 +26,40 @@ var Service_Acrescimo = (function() {
 					(status == "C") ? status = "Cancelado" : "";
 					(status == "F") ? status = "Finalizado" : "";
 					
-					itens += "<tr>";
+					itensAcrescimoTablePedido += "<tr>";
 					switch(status) {
-						case "Em andamento" : itens += "<td class='statusAndamentoPedido default'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+status+" ...</td>"; break;
-						case "Cancelado" : itens += "<td class='statusCancelPedido default'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+status+"</td>"; break;
-						case "Finalizado" : itens += "<td class='statusFinalizadoPedido default'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+status+"</td>"; break;
+						case "Em andamento" : itensAcrescimoTablePedido += "<td class='statusAndamentoPedido default'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+status+" ...</td>"; break;
+						case "Cancelado" : itensAcrescimoTablePedido += "<td class='statusCancelPedido default'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+status+"</td>"; break;
+						case "Finalizado" : itensAcrescimoTablePedido += "<td class='statusFinalizadoPedido default'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+status+"</td>"; break;
 					}
-					itens += "<td class='info idPedido'>"+dados.tuPedido_idPedido+"</td>";
-					itens += "<td class='danger codPedidoBlue'>"+dados.cpCodPedido+"</td>";
-					itens += "<td class='info'>"+dados.cpAcrescimo+"</td>";
-					itens += "<td class='danger'>"+dados.cpQtdAcrescimo+"</td>";
-					itens += "<td class='success'>"+dados.cpObservacaoAcrescimo+"</td>";
-					itens += "</tr>";	
+					itensAcrescimoTablePedido += "<td class='info idPedido'>"+dados.tuPedido_idPedido+"</td>";
+					itensAcrescimoTablePedido += "<td class='danger codPedidoBlue'>"+dados.cpCodPedido+"</td>";
+					itensAcrescimoTablePedido += "<td class='info'>"+dados.cpAcrescimo+"</td>";
+					itensAcrescimoTablePedido += "<td class='danger'>"+dados.cpQtdAcrescimo+"</td>";
+					itensAcrescimoTablePedido += "<td class='success'>"+dados.cpObservacaoAcrescimo+"</td>";
+					itensAcrescimoTablePedido += "</tr>";	
 					
+					if(dados.tuPedido_cpCodPedido == null) {
+						
+						intesTableAcrescimo += "<tr>";
+						switch(status) {
+							case "Em andamento": intesTableAcrescimo += "<td class='statusAndamentoPedido'>"+status+"</td>"; break;
+							case "Cancelado" : intesTableAcrescimo += "<td class='statusCancelPedido'>"+status+"</td>"; break;
+							case "Finalizado": intesTableAcrescimo += "<td class='statusFinalizadoPedido'>"+status+"</td>"; break;
+						}			
+						intesTableAcrescimo += "<td>"+dados.cpCodPedido+"</td>";
+						intesTableAcrescimo += "<td>"+dados.cpAcrescimo+"</td>";
+						intesTableAcrescimo += "<td>"+dados.cpQtdAcrescimo+"</td>";
+						intesTableAcrescimo += "<td>"+dados.cpObservacaoAcrescimo+"</td>";
+						intesTableAcrescimo += "<td><a href=''><span class='glyphicon glyphicon-menu-down' aria-hidden='true' title='baixar'></span></a></td>";
+						intesTableAcrescimo += "<td>"+dados.cpObservacaoAcrescimo+"</td>";
+						intesTableAcrescimo += "</tr>";
+					
+						}
 					});
 						
-					$("#tablePedidoAcrescimo tbody").html(itens);
+					$("#tablePedidoAcrescimo tbody").html(itensAcrescimoTablePedido);
+					$("#tableAcrescimo tbody").html(intesTableAcrescimo);
 					$("").html("");
 				//}
 			}
@@ -57,7 +68,7 @@ var Service_Acrescimo = (function() {
 	
 	var carregaInfoAcrescimoAjaxDB = function() {
 		
-		carregaInfoAcrescimo("http://localhost/startDemand/service/Service_Acrescimo.php");
+		carregaInfoAcrescimoListaPedido("http://localhost/startDemand/service/Service_Acrescimo.php");
 	}
 	
 	return {

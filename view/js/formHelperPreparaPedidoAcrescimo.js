@@ -1,4 +1,4 @@
-var FormHelperAcrescimo = (function() {
+var FormHelperPedidoAcrescimo = (function() {
 	
 	var getValorProduto = function() {
 		
@@ -183,12 +183,12 @@ var FormHelperAcrescimo = (function() {
 		$("#cpCodPedido").html(addOptions());
 	}
 	
-	var painelAcrescimoHide = function(valor) {
+	var painelEmenuAcrescimoHide = function(valor) {
 		
 		if(valor == '') {
-			$('.painelAddAcrescimos').fadeOut();
+			$('.painelAddAcrescimos,.menuPedidoComAcrescimo').hide();
 		}else{
-			$('.painelAddAcrescimos').show();;
+			$('.painelAddAcrescimos,.menuPedidoComAcrescimo').show();;
 		}
 	}	
 	
@@ -236,7 +236,7 @@ var FormHelperAcrescimo = (function() {
 		bindEvents: bindEvents,
 		setValorAcrescimo: setValorAcrescimo,
 		setValorProduto: setValorProduto,
-		painelAcrescimoHide: painelAcrescimoHide
+		painelEmenuAcrescimoHide: painelEmenuAcrescimoHide
 	}
 	
 })();

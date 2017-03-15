@@ -103,9 +103,9 @@
 							<li class="active">
 								<a href="Pedido.php?panel=193158" >Criar pedido</a>
 							</li>
-<!-- 							<li class="default"> -->
-<!-- 								<a href="PreparaPedidoAcrescimo.php?panel=655955">Pedido com acréscimo</a> -->
-<!--  							</li> -->
+							<li class="default menuPedidoComAcrescimo">
+								<a href="PreparaPedidoAcrescimo.php?panel=655955" class="menuPedidoComAcrescimo">Pedido com acréscimo</a>
+ 							</li>
 							<li class="acitve">
 								<a href="Acrescimo.php?panel=387270"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> acréscimo</a>
  							</li>	 							

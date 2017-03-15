@@ -7,6 +7,7 @@ $(document).ready(function(){
 	Utils.bindEvents();
 	FormHelperPedido.bindEvents();
 	FormHelperProduto.bindEvents();
+	FormHelperPedidoAcrescimo.bindEvents();
 	FormHelperAcrescimo.bindEvents();
 
 })

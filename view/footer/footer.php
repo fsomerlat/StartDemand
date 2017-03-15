@@ -17,6 +17,7 @@
 	<script type="text/javascript" src="js/utils.js"></script>
 	<script type="text/javascript" src="js/formHelperPedido.js"></script>
 	<script type="text/javascript" src="js/formHelperProduto.js"></script>
+	<script type="text/javascript" src="js/formHelperAcrescimo.js"></script>
 	<script type="text/javascript" src="js/formHelperPreparaPedidoAcrescimo.js"></script>
 	<script type="text/javascript" src="js/carregaServicoProduto.js"></script>
 	<script type="text/javascript" src="js/carregaServicoPedido.js"></script>
