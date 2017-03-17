@@ -1,12 +1,9 @@
-/**
- * 
- */
-
-
 document.getELementById("btnCadastrarPedido").onclick = function() {
+
 	
-	var Errors = [];
-	
+	alert('ok');
+//	var Errors = [];
+//	
 //	var valida = function(campo,msg) {
 //		
 //		if(returnId(campo) == 0 || returnId(campo) == '') {
@@ -18,11 +15,10 @@ document.getELementById("btnCadastrarPedido").onclick = function() {
 //	var returnId = function(Nids) {
 //		
 //		var id =  document.getElementById(Nids);
+//		
 //		return id.value;
 //	}
-	
-	alert('ok');
-	
+//	
 //	valida("tipoPedido","È necessário selecionar o campo [ TIPO DO PEDIDO ] !");
 //	valida("tuProduto_idProduto","È necessário selecionar o campo [ NOME PRODUTO ] !");
 //	valida("cpCodPedido","È necessário selecionar o campo [ CÓDIGO PEDIDO ] !");
@@ -35,6 +31,7 @@ document.getELementById("btnCadastrarPedido").onclick = function() {
 //		var msg =  Errors.reduce(function(a,b) {
 //			
 //			return a + b + '\n';
+//			
 //		},'');
 //		
 //		window.alert(msg); return false;

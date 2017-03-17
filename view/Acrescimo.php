@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-7">
+		<div class="col-md-6">
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<h3 class="panel-title">
@@ -10,11 +10,11 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form action="" method="POST">
+					<form action="../controller/Acrescimo_Controller.php" method="POST">
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="tuPedido_cpCodPedido">Código pedido</label>
-								<select type="text" name="tuPedido_cpCopPedido" id="tuPedido_cpCopPedido" class="form-control codPedidoAcrescimo">
+								<select name="tuPedido_cpCodPedido" id="tuPedido_cpCodPedido" class="form-control codPedidoAcrescimo">
 									<!-- CARREGA JQUERY -->
 								</select>
 							</div>
@@ -79,7 +79,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-5">
+		<div class="col-md-6">
 			<div class="panel-group" id="panel-408410">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -87,20 +87,23 @@
 					</div>
 					<div id="panel-element_387270" class="panel-collapse collapse">
 						<div class="panel-body">
-							<table class="table table-hover" id="tableAcrescimo">
+
+							<table class="table table-hover" id="tableAcrescimosAvulso">
 								<thead>
 									<tr class="info">
-										<th>status</th>
+										<th>Status</th>
 										<th>Código pedido</th>
-										<th>Acrésimo</th>
+										<th>Acréscimo</th>
+										<th>Tipo</th>
 										<th>Quantidade</th>
+										<th>Total</th>
 										<th>Observação</th>
 										<th></th>
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
-									<!-- CARREGA ACRÉSCIMOS VIA AJAX -->
+									<!-- CARREGA VIA AJAX -->
 								</tbody>
 							</table>
 						</div>

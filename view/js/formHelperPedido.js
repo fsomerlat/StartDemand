@@ -89,11 +89,9 @@ var FormHelperPedido = (function() {
 							$(".pedidosDeHoje").html(i + 1);
 						}
 						
-						getContadorPedido();
-						
 					}else{
-						
-						$(".pedidosDeHoje").html(0);
+						$(".pedidosFinalizados,.pedidosCancelados,.pedidoEmAndamento,.pedidosDeHoje").html(0)
+
 					}
 				});
 			}
@@ -145,6 +143,7 @@ var FormHelperPedido = (function() {
 		
 		preencheValorProduto();
 		getPedidoDiaCorrente();
+		getContadorPedido();
 		
 		$(document).on("click","#pedidoCancelado", function() {
 			

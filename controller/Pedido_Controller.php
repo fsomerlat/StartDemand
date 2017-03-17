@@ -195,6 +195,7 @@
 		    	$acrescimo->__set("cpAcrescimo", addslashes($res->cpAcrescimo));
 		    	$acrescimo->__set("cpQtdAcrescimo", addslashes($res->cpQtdAcrescimo));
 		    	$acrescimo->__set("cpValorBaseAcrescimo", addslashes($res->cpValorBaseAcrescimo));
+		    	$acrescimo->__set("cpTipoAcrescimo","P"); // P = VINCULADO A UM PEDIDO
 		    	$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
 		    	$acrescimo->__set("cpObservacaoAcrescimo", addslashes($res->cpObservacaoAcrescimo));
 		    	 
@@ -228,6 +229,7 @@
 				$acrescimo->__set("cpAcrescimo", addslashes($res->cpAcrescimo));
 				$acrescimo->__set("cpQtdAcrescimo", addslashes($res->cpQtdAcrescimo));
 				$acrescimo->__set("cpValorBaseAcrescimo", addslashes($res->cpValorBaseAcrescimo));
+				$acrescimo->__set("cpTipoAcrescimo","P"); // P = VINCULADO A UM PEDIDO
 				$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
 				$acrescimo->__set("cpObservacaoAcrescimo", addslashes($res->cpObservacaoAcrescimo));
 				

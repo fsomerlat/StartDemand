@@ -12,8 +12,9 @@
 	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script type="text/javascript" src="js/validateFormProduto.js"></script>
-	<script type="text/javascript" src="js/validateFormPedido.js"></script>
 	<script type="text/javascript" src="js/validateFormPreparaPedidoAcrescimo.js"></script>
+	<script type="text/javascript" src="js/validateFormPedido.js"></script>
+	<script type="text/javascript" src="js/validateFormAcrescimo.js"></script>
 	<script type="text/javascript" src="js/utils.js"></script>
 	<script type="text/javascript" src="js/formHelperPedido.js"></script>
 	<script type="text/javascript" src="js/formHelperProduto.js"></script>

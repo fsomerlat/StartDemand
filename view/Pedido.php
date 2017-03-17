@@ -19,8 +19,8 @@
 			</div>
 			<div id="panel-element_193158" class="panel-collapse collapse">
 				<div class="panel-body">
-					<form name="formProduto" id="formProduto" action="../controller/Pedido_Controller.php" method="POST">
-					
+					<form name="formPedido" id="formPedido" action="../controller/Pedido_Controller.php" method="POST">
+				
 					<input type="hidden" name="id" value="<?php echo (!empty($_GET["id"])) ? $id : "";?>" />
 						<div class="col-md-2">
 							<div class="form-group">
@@ -95,7 +95,7 @@
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="ComplementoUm">1º Complemento</label>
-								<select name="cpComplementoUm" id="cpComplementoUm" class="form-control " >
+								<select name="cpComplementoUm" id="cpComplementoUm" class="form-control">
 									<option value="">Selecione <?php echo (!empty($_GET["id"]))? " | Anterior - ".$edit->cpComplementoUm :"";?></option>
 									<optgroup label="Frutas">
 										<option value="Banana">Banana</option>
@@ -172,13 +172,12 @@
 						</div>							
 						<div class="col-md-6">
 							<div class="form-group">
-						
-								<input type="submit" name="acao" id="btnCadastrarPedido"  value="<?php echo (!empty($_GET["id"])) ? $acao : "gerar pedido"; ?>"  class="btn btn-info form-control" />
+								<input type="submit" name="acao"  id="btnCadastrarPedido"  value="<?php echo (!empty($_GET["id"])) ? $acao : "gerar pedido"; ?>"  class="btn btn-info form-control" />
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<input type="reset" class="btn btn-warning form-control " value="limpar" />
+								<input type="reset" class="btn btn-warning form-control" value="limpar" />
 							</div>
 						</div>
 					</form>

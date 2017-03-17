@@ -108,6 +108,9 @@
  							</li>
 							<li class="acitve">
 								<a href="Acrescimo.php?panel=387270"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> acréscimo</a>
+ 							</li>
+ 							<li class="acitve">
+								<a href="painelDePedidos.php"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> painel de pedidos</a>
  							</li>	 							
 						</ul>
 					</div>
@@ -117,19 +120,19 @@
 				 <div class="form-group">
 					<ul class="nav nav-pills">
 						<li class="active">
-							 <a href="#"> <span class="badge pull-right"></span><span class=" glyphicon glyphicon-list-alt" aria-hidden="true"></span> Pedidos do dia <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+							 <a href="#"> <span class="badge pull-right"></span><span class=" glyphicon glyphicon-list-alt" aria-hidden="true"></span> Pedidos <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
 						</li>
 						<li class="active">
-							<a href="#"><span class="badge pull-right"><i class="pedidoEmAndamento"></i></span><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span> andamento</a>
+							 <a href="#"> <span class="badge pull-right"><i class="pedidosDeHoje"></i></span><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Dia atual</a>
+						</li>						
+						<li class="active">
+							<a href="#"><span class="badge pull-right"><i class="pedidoEmAndamento"></i></span><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span> Andamento</a>
 						</li>
 						<li class="active">
-							 <a href="#"> <span class="badge pull-right"><i class="pedidosFinalizados"></i></span><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> finalizados</a>
+							 <a href="#"> <span class="badge pull-right"><i class="pedidosFinalizados"></i></span><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Finalizados</a>
 						</li>
 						<li class="active">
-							 <a href="#"> <span class="badge pull-right"><i class="pedidosCancelados"></i></span><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> cancelados</a>
-						</li>
-						<li class="active">
-							 <a href="#"> <span class="badge pull-right"><i class="pedidosDeHoje"></i></span><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Total</a>
+							 <a href="#"> <span class="badge pull-right"><i class="pedidosCancelados"></i></span><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancelados</a>
 						</li>
 					</ul>
 				</div>

@@ -33,19 +33,22 @@ body {
 .listaPedidoAcrescimo,
 .listaPreparaAcrescimo,
 .tabelaProdutosDisponiveis,
-.listaAcrescimos{
+.listaAcrescimos,
+.listaAcrescimosAvulso{
 	
 	text-align: center;
 }
 
 
 .listaPedidoAcrescimo,
-.listaPedidoProduto {
+.listaPedidoProduto,
+.listaAcrescimosAvulso {
 	
 	background-color:black;
 }
 .h3listaPedidoProduto,
-.h3listaPedidoAcrescimo {
+.h3listaPedidoAcrescimo,
+.h3listaAcrescimoAvulso{
 	
 	color:white;
 }
@@ -101,7 +104,7 @@ body {
   line-height: 1.42857143;
   vertical-align: top;
   border-top: 1px solid #dddddd;
-  font-size: 20px;
+  font-size: 19px;
 }
 
 
@@ -116,7 +119,36 @@ body {
   line-height: 1.42857143;
   vertical-align: top;
   border-top: 1px solid #dddddd;
-  font-size: 20px;
+  font-size: 19px;
+}
+
+
+#tableAcrescimosAvulsoTelaPedido {
+	
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 5px;	
+}
+
+#tableAcrescimosAvulsoTelaPedido > thead > tr > th ,
+#tableAcrescimosAvulsoTelaPedido > tbody > tr > th,
+#tableAcrescimosAvulsoTelaPedido > tfoot > tr > th,
+#tableAcrescimosAvulsoTelaPedido > thead > tr > td,
+#tableAcrescimosAvulsoTelaPedido > tbody > tr > td,
+#tableAcrescimosAvulsoTelaPedido > tfoot > tr > td{
+
+  padding: 2px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
+  font-size: 19px;
+}
+
+#tableAcrescimosAvulsoTelaPedido,
+#tablePedidoAcrescimo,
+#tablePedidoProdutos {
+	
+	background-color:white;
 }
 
 .table > thead > tr > th {
