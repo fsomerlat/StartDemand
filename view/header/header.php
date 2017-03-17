@@ -110,7 +110,7 @@
 								<a href="Acrescimo.php?panel=387270"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> acréscimo</a>
  							</li>
  							<li class="acitve">
-								<a href="painelDePedidos.php"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> painel de pedidos</a>
+								<a href="PainelDePedidos.php"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> painel de pedidos</a>
  							</li>	 							
 						</ul>
 					</div>

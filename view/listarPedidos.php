@@ -22,8 +22,6 @@
 							<th class="danger">Hora criação</th>
 							<th class="success">Observação pedido</th>
 							<th></th>
-							<th></th>
-							<th></th>
 						</tr>
 					</thead>
 					<tbody>

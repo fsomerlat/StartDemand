@@ -46,7 +46,7 @@
 			$acrescimo->DELETE($id);
 			echo "<script language='javascript'>
 						window.alert('Registro excluído com sucesso !');
-						window.location.href='../view/painelDePedidos.php';
+						window.location.href='../view/PainelDePedidos.php';
 					</script>";
 		endif;
 			
@@ -58,17 +58,16 @@
 	
 		if($acrescimo->verifcaStatus($id)):
 			
-				$acrescimo->DELETE($id);
 				echo "<script language='javascript'>
 							window.alert('Baixa realizada com sucesso !');
-							window.location.href='../view/painelDePedidos.php';
+							window.location.href='../view/PainelDePedidos.php';
 						</script>";
 			else:
 				
 				
 				echo "<script language='javascript'>
 							window.alert('Registro não pode ser dado  baixa [ EM ANDAMENTO ] !');
-							window.location.href='../view/painelDePedidos.php';
+							window.location.href='../view/PainelDePedidos.php';
 						</script>";
 		endif;
 	endif;

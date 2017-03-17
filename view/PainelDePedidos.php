@@ -7,10 +7,12 @@
 			<tr class="warning">
 				<th>Status</th>
 				<th>Produto</th>
-				<th>Código pedido</th>
+				<th>Código</th>
+				<th>Hora criação</th>
 				<th>Quantidade</th>
-				<th>Valor total</th>
+				<th>Total</th>
 				<th>Observacao</th>
+				<th></th>
 				<th></th>
 			<tr>
 		</thead>
@@ -25,7 +27,7 @@
 		<thead>
 			<tr class="warning">
 				<th>Status</th>
-				<th>Código pedido</th>
+				<th>Código</th>
 				<th>Tipo</th>
 				<th>Acréscimo</th>
 				<th>Quantidade</th>

@@ -83,11 +83,10 @@
 			<div class="panel-group" id="panel-408410">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						 <div class="panel-title collapsed listaAcrescimos" data-toggle="collapse" data-parent="#panel-408410" href="#panel-element_387270">Lista todos acréscimos</div>
+						 <div class="panel-title collapsed listaAcrescimos" data-toggle="collapse" data-parent="#panel-408410" href="#panel-element_387270">Lista acréscimos avulso</div>
 					</div>
 					<div id="panel-element_387270" class="panel-collapse collapse">
 						<div class="panel-body">
-
 							<table class="table table-hover" id="tableAcrescimosAvulso">
 								<thead>
 									<tr class="info">

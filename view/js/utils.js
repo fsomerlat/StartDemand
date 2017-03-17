@@ -66,6 +66,13 @@ var Utils =  (function(){
 		},1500);  
 	}
 	
+	var setTimeoutReload500 = function() {
+		
+		return setTimeout(function() {
+			location.reload();
+		},500);
+	}
+	
 	var expandePainel = function(idPanel) {
 		
 		$("#panel-element_" + idPanel).collapse();
@@ -80,6 +87,7 @@ var Utils =  (function(){
 	return {
 		
 		setTimeoutLocation: setTimeoutLocation,
+		setTimeoutReload500:setTimeoutReload500,
 		setTimeoutReload: setTimeoutReload,
 		bindEvents: bindEvents,
 		msgSuccess: msgSuccess,

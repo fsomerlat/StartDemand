@@ -146,7 +146,10 @@ body {
 
 #tableAcrescimosAvulsoTelaPedido,
 #tablePedidoAcrescimo,
-#tablePedidoProdutos {
+#tablePedidoProdutos,
+#painelPedidosProdutos,
+#painelAcrescimosPedidos,
+#painelAcrescimosAvulso {
 	
 	background-color:white;
 }

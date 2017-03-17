@@ -256,7 +256,7 @@
 		$ped->UPDATESTATUS($id);
 		$acrescimo->UPDATESTATUS($id);
 		
-		header("location:../view/listarPedidos.php");
+		header("location:../view/PainelDePedidos.php");
 		
 	endif;
 	

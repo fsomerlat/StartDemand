@@ -66,23 +66,23 @@ var Service_Pedido = (function() {
 							itensProdutos += "<td class='success'>"+dados.cpComplementoDois+"</td>";
 							itensProdutos  += "<td class='danger'>"+dataPedido+"</td>";
 							itensProdutos += "<td class='success'>"+dados.cpObservacaoPedido+"</td>";
-							itensProdutos += "<td class='info'><button type='button' id='pedidoBaixado' class='btn btn-info'>baixar</button></td>";
-							itensProdutos += "<td class='success'><a href='../controller/Pedido_Controller.php?acao=finalizar&id="+dados.idPedido+"' title='Cancelar pedido'><button type='button' id='pedidoLiberado' class='btn btn-success'>Finalizado</button></a></td>";
-							itensProdutos += "<td class='danger'><a href='../controller/Pedido_Controller.php?acao=cancelar&id="+dados.idPedido+"' title='Finalizar pedido'><button type='button' id='pedidoCancelado' class='btn btn-danger'>Cancelar</button></a></td>";
+							itensProdutos += "<td class='success'><a href='../controller/Pedido_Controller.php?acao=finalizar&id="+dados.idPedido+"' title='Finalizar pedido'><button type='button' id='pedidoLiberado' class='btn btn-success'>Finalizado</button></a></td>";
 							itensProdutos += "</tr>";
 							
 							painelPedidosProdutos += "<tr>";
 							switch(opcaoStatus){
-								case "Canceleado" : painelPedidosProdutos += "<td class='statusCancelPedido'>"+opcaoStatus+"</td>"; break;
-								case "Em andamento" : painelPedidosProdutos += "<td class='statusAndamentoPedido'>"+opcaoStatus+"</td>"; break;
-								case "Finalizado": painelPedidosProdutos += "<td class='statusFinalizadoPedido'>"+opcaoStatus+"</td>"; break;
+								case "Cancelado" : painelPedidosProdutos += "<td class='statusCancelPedido'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
+								case "Em andamento" : painelPedidosProdutos += "<td class='statusAndamentoPedido'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
+								case "Finalizado": painelPedidosProdutos += "<td class='statusFinalizadoPedido'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
 							}
 							painelPedidosProdutos += "<td>"+dados.cpNomeProduto+"</td>";
 							painelPedidosProdutos += "<td>"+dados.cpCodPedido+"</td>";
+							painelPedidosProdutos += "<td>"+dataPedido+"</td>";
 							painelPedidosProdutos += "<td>"+dados.cpQtdProduto+"</td>";
 							painelPedidosProdutos += "<td>R$ "+dados.cpValorTotalPedido+"</td>";
 							painelPedidosProdutos += "<td>"+dados.cpObservacaoPedido+"</td>";
-							painelPedidosProdutos += "<td><a href='' title='baixar'><span class='glyphicon glyphicon-menu-down' aria-hidden='true'></span></a></td>";
+							painelPedidosProdutos += "<td><a href='../controller/Pedido_Controller.php?acao=baixar&id="+dados.idPedido+"' title='baixar'><span class='glyphicon glyphicon-save' aria-hidden='true'></span></a></td>";
+							painelPedidosProdutos += "<td><a href='../controller/Pedido_Controller.php?acao=cancelar&id="+dados.idPedido+"' title='cancelar'><span class='glyphicon glyphicon-remove-sign' id='pedidoCancelado' aria-hidden='true'></span></a></td>";
 							painelPedidosProdutos += "</tr>";
 					});
 					
