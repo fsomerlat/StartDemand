@@ -164,6 +164,43 @@
 								<input type="text" name="cpValorTotalPedido" id="cpValorTotalPedido" class="form-control valTotalPedidoPagPedido" readonly/>
 							</div>
 						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="Forma de pagamento">Forma de pagamento</label>
+								<select name="cpFormaPagamento" id="cpFormaPagamento" class="form-control">
+									<option value="">Selecione</option>
+									<option value="D">Dinheiro</option>
+									<option value="CD">Cartão / débito</option>
+									<option value="CC">Cartão / crédito</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-2 parcelas">
+							<div class="form-group">
+								<label for="Parcelas">QTDE Parcelas</label>
+								<select name="cpQtdParcela" id="cpQtdParcela" class="form-control">
+									<option value="0">Selecione</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+								</select>
+							</div>
+						</div>	
+						<div class="col-md-2 parcelas">
+							<div class="form-group">
+								<label for="Valor das parcelas">Valor / parcela</label>
+								<input type="text" name="cpValorParcela" id="cpValorParcela" class="form-control" readonly/>
+							</div>
+						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 							<label for="Observacao">Observação</label>

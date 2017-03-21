@@ -10,6 +10,7 @@
 				<th>Código</th>
 				<th>Hora criação</th>
 				<th>Quantidade</th>
+				<th>Valor base</th>
 				<th>Total</th>
 				<th>Observacao</th>
 				<th></th>
@@ -31,8 +32,9 @@
 				<th>Tipo</th>
 				<th>Acréscimo</th>
 				<th>Quantidade</th>
+				<th>Valor base</th>
+				<th>Total</th>
 				<th>Observaçao</th>
-				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -47,6 +49,7 @@
 				<th>Acréscimo</th>
 				<th>Tipo</th>
 				<th>Quantidade</th>
+				<th>Valor base</th>
 				<th>Total</th>
 				<th>Observaçao</th>
 				<th></th>

@@ -20,6 +20,83 @@ var FormHelperPedido = (function() {
 		return $("#cpValorBaseProduto").val();
 	}
 	
+	var createDatePicker = function() { // SERÁ UTILIZADO NO FINANCEIRO
+		  
+		var data = new Date();
+			
+			dia = data.getDate();
+			mes = data.getMonth() + 2;
+			ano = data.getFullYear();
+			
+		novaData = dia +'/'+mes+'/'+ano;
+		
+		$( "#cpDataVencimentoParcela" ).datepicker({
+			
+			dateFormat: 'dd/mm/yy', //formato da data
+		    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'], //nomes dos campos dos dias
+		    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],//nomes do titulo dos dias
+		    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'], //dias com nomes curtos
+		    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],//nomes dos messes
+		    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],//meses com nomes curtos
+		    minDate: novaData,
+		    nextText: 'Próximo',//titulo do próximo texto
+		    prevText: 'Anterior',//titulo do texto anterior
+
+		    });
+	}
+	
+	
+	var changeFormaPagamento = function(value) {
+		
+		if(value == "CC") {
+			
+			$(".parcelas").show();
+			
+		
+		} else if(value == "CD" ) {
+			
+			$(".parcelas").hide();
+			
+		}else if(value == "D") {
+			
+			$(".parcelas").hide();
+			$("#cpValorParcela").val("");
+			$("#cpQtdParcela").val(0);
+		
+		} else {
+			
+			$(".parcelas").hide();
+			$("#cpValorParcela").val("");
+			$("#cpQtdParcela").val(0);
+		}	
+	}
+	
+	
+	var changeQtdParcelas =  function(value) {
+
+		 	
+		 if(value == "Debito") {
+			
+			$(".parcelas").hide();
+			$("#cpQtdParcela").val(0);
+		
+		} else if(value == "Credito") {
+			
+			$(".parcelas").show();
+		
+		} else {
+			
+			$(".parcelas").hide();
+			$("#cpQtdParcela").val(0);
+		}
+	}
+	
+	var setSituacaoPagamento = function() {
+		
+		$(".creditoOuDebito").hide();
+		$(".parcelas").hide();
+	}
+	
 	var getContadorPedido =  function() {
 	
 		
@@ -127,6 +204,35 @@ var FormHelperPedido = (function() {
 		});
 	}
 	
+	var setDivideParcela = function() {
+		
+		$("input[name=cpValorParcela]").attr("placeholder","R$ 00.00");
+		
+		$("select[name=cpQtdParcela]").change(function(){
+			
+			var valorTotalPedido = $(".valTotalPedidoPagPedido").val();
+	
+			if(this.value > 0) {
+			
+				if(valorTotalPedido != "") {
+					
+					$("input[name=cpValorParcela]").val(parseFloat(valorTotalPedido) / parseInt(this.value));
+				
+				}else{
+					
+					this.value = 0;
+					window.alert("O valor total do pedido não pode ser zero para poder dividir as parcelas !");
+					$("#cpQtdProduto").focus(); return false;
+					
+				}
+			}else{
+				
+				$("input[name=cpValorParcela]").val(0);
+			}
+			
+		});
+	}
+	
 	var defineTipoPedido = function(value) { 
 		
 		if(value == "comAcrescimo") {
@@ -144,6 +250,19 @@ var FormHelperPedido = (function() {
 		preencheValorProduto();
 		getPedidoDiaCorrente();
 		getContadorPedido();
+		setSituacaoPagamento();
+		createDatePicker();
+		setDivideParcela();
+		
+		$("select[name=cpFormaPagamento]").change(function(){
+			
+			changeFormaPagamento(this.value);
+		});
+		
+		$("select[name=cpCreditoOuDebito]").change(function(){
+			
+			changeQtdParcelas(this.value);
+		});
 		
 		$(document).on("click","#pedidoCancelado", function() {
 			

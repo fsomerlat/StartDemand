@@ -13,6 +13,9 @@
 				  $cpComplementoUm,
 				  $cpComplementoDois,
 				  $cpValorTotalProduto,
+				  $cpFormaPagamento,
+				  $cpQtdParcela,
+				  $cpValorParcela,
 				  $cpObservacaoPedido;
 		
 		public function __set($attr,$valor) {
@@ -28,9 +31,11 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table
-					(tuProduto_idProduto,tsPreparaProduto_idPreparaProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpHoraPedido,cpValorTotalPedido,cpObservacaoPedido)
+					(tuProduto_idProduto,tsPreparaProduto_idPreparaProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,
+					cpValorTotalProduto,cpHoraPedido,cpValorTotalPedido,cpFormaPagamento,cpQtdParcela,cpValorParcela,cpObservacaoPedido)
 				  VALUES
-					(:tuProduto_idProduto,:tsPreparaProduto_idPreparaProduto,:cpCodPedido,:cpQtdProduto,:cpComplementoUm,:cpComplementoDois,:cpValorTotalProduto,now(),:cpValorTotalPedido,:cpObservacaoPedido)";
+					(:tuProduto_idProduto,:tsPreparaProduto_idPreparaProduto,:cpCodPedido,:cpQtdProduto,:cpComplementoUm,:cpComplementoDois,
+					:cpValorTotalProduto,now(),:cpValorTotalPedido,:cpFormaPagamento,:cpQtdParcela,:cpValorParcela,:cpObservacaoPedido)";
 			
 			$in=DB::prepare($sql);
 			$in->bindParam(":tuProduto_idProduto",$this->tuProduto_idProduto,PDO::PARAM_INT);
@@ -41,6 +46,9 @@
 			$in->bindParam(":cpComplementoDois", $this->cpComplementoDois,PDO::PARAM_STR);
 			$in->bindParam(":cpValorTotalProduto",$this->cpValorTotalProduto,PDO::PARAM_STR);
 			$in->bindParam(":cpValorTotalPedido", $this->cpValorTotalPedido,PDO::PARAM_STR);
+			$in->bindParam(":cpFormaPagamento",$this->cpFormaPagamento,PDO::PARAM_STR);
+			$in->bindParam(":cpQtdParcela",$this->cpQtdParcela,PDO::PARAM_INT);
+			$in->bindParam(":cpValorParcela",$this->cpValorParcela,PDO::PARAM_STR);
 			$in->bindParam(":cpObservacaoPedido", $this->cpObservacaoPedido,PDO::PARAM_STR);
 			
 			try {
@@ -78,7 +86,7 @@
 		public function getInfoPedidoJSON() {
 			
 			$sql="SELECT
-					ped.idPedido,p.cpNomeProduto,ped.cpCodPedido,ped.cpQtdProduto,ped.cpHoraPedido,ped.cpComplementoUm,
+					ped.idPedido,p.cpNomeProduto,ped.cpCodPedido,ped.cpQtdProduto,ped.cpHoraPedido,ped.cpComplementoUm,p.cpValorProduto,
 					ped.cpComplementoDois,ped.cpValorTotalProduto,ped.cpValorTotalPedido,ped.cpStatusPedido,ped.cpObservacaoPedido
 				  FROM 
 					$this->table as ped 
@@ -175,14 +183,14 @@
 		public function comparaRelacionamentoIds() {
 			
 			$sql="SELECT 
-					ped.tsPreparaProduto_idPreparaProduto,prepProd.idPreparaProduto 
+					ped.tsPreparaProduto_idPreparaProduto,prepProd.idPreparaProduto,ped.cpStatusPedido
 				  FROM 
 					$this->table as ped INNER JOIN tsPreparaProduto as prepProd ON ped.tsPreparaProduto_idPreparaProduto = prepProd.idPreparaProduto
 				  WHERE 
-				  	ped.tsPreparaProduto_idPreparaProduto = prepProd.idPreparaProduto";
+				  	ped.tsPreparaProduto_idPreparaProduto = prepProd.idPreparaProduto AND cpStatusPedido = 'A'";
 			
 		    $row=DB::prepare($sql);
-		    $row->execute(array($this->idPedido,$this->tsPreparaProduto_idPreparaProduto));
+		    $row->execute(array($this->idPedido,$this->tsPreparaProduto_idPreparaProduto,$this->cpStatusPedido));
 		    
 		    try {
 		    	
@@ -217,6 +225,50 @@
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 			}
 		}
-	
+		
+		public function relacionaPedidoAcrescimo($id) {
+			
+			$sql="SELECT 
+					ped.idPedido ,acr.tuPedido_idPedido
+				  FROM 
+				 	$this->table as ped INNER JOIN tuAcrescimo as acr ON ped.idPedido = acr.tuPedido_idPedido
+				  WHERE
+					ped.idPedido = $id AND acr.tuPedido_idPedido = $id AND ped.cpStatusPedido = 'A' AND acr.cpStatusAcrescimo = 'A'";
+			
+			$row=DB::prepare($sql);
+			$row->execute();
+			try {
+				
+				return $row->rowCount();;
+			
+			}catch(PDOException $e) {
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linda ".$e->getLine();
+			}
+		}
+		
+		public function pedidoAndamentoIndividual($id) {
+			
+			$sql="SELECT 
+					idPedido
+				  FROM 
+					$this->table
+				  WHERE 
+				  	idPedido = $id AND cpStatusPedido = 'A'";
+			
+			$row=DB::prepare($sql);
+			$row->execute();
+			
+			try {
+				
+				return $row->rowCount();
+			
+			}catch(PDOException $e){
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}
+		
+
 		
 	}

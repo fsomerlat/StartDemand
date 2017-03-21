@@ -49,8 +49,10 @@ var Service_Pedido = (function() {
 						data = dia+"/"+mes+"/"+ano;
 						
 						dataPedido = dia+'/'+mes+'/'+ano+" - "+ hora;
-
-						itensProdutos += "<tr>";
+						
+						if(opcaoStatus == "Em andamento") {
+							
+							itensProdutos += "<tr>";
 							
 							switch(opcaoStatus){
 								
@@ -68,17 +70,18 @@ var Service_Pedido = (function() {
 							itensProdutos += "<td class='success'>"+dados.cpObservacaoPedido+"</td>";
 							itensProdutos += "<td class='success'><a href='../controller/Pedido_Controller.php?acao=finalizar&id="+dados.idPedido+"' title='Finalizar pedido'><button type='button' id='pedidoLiberado' class='btn btn-success'>Finalizado</button></a></td>";
 							itensProdutos += "</tr>";
-							
+						}
 							painelPedidosProdutos += "<tr>";
 							switch(opcaoStatus){
 								case "Cancelado" : painelPedidosProdutos += "<td class='statusCancelPedido'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
-								case "Em andamento" : painelPedidosProdutos += "<td class='statusAndamentoPedido'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
+								case "Em andamento" : painelPedidosProdutos += "<td class='statusAndamentoPedido'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+opcaoStatus+" ...</td>"; break;
 								case "Finalizado": painelPedidosProdutos += "<td class='statusFinalizadoPedido'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
 							}
 							painelPedidosProdutos += "<td>"+dados.cpNomeProduto+"</td>";
 							painelPedidosProdutos += "<td>"+dados.cpCodPedido+"</td>";
 							painelPedidosProdutos += "<td>"+dataPedido+"</td>";
 							painelPedidosProdutos += "<td>"+dados.cpQtdProduto+"</td>";
+							painelPedidosProdutos += "<td>"+dados.cpValorProduto+"</td>";
 							painelPedidosProdutos += "<td>R$ "+dados.cpValorTotalPedido+"</td>";
 							painelPedidosProdutos += "<td>"+dados.cpObservacaoPedido+"</td>";
 							painelPedidosProdutos += "<td><a href='../controller/Pedido_Controller.php?acao=baixar&id="+dados.idPedido+"' title='baixar'><span class='glyphicon glyphicon-save' aria-hidden='true'></span></a></td>";

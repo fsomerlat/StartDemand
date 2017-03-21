@@ -9,11 +9,11 @@ class PreparaProduto extends Pedido{
 	public function INSERT() {
 			
 		$sql="INSERT INTO $this->table
-				(tuProduto_idProduto,cpQtdProduto,cpComplementoUm,cpCodPedido,
-				cpComplementoDois,cpValorTotalProduto,cpObservacaoPedido)
+				(tuProduto_idProduto,cpQtdProduto,cpComplementoUm,cpCodPedido,cpComplementoDois,
+				 cpFormaPagamento,cpQtdParcela,cpValorParcela,cpValorTotalProduto,cpObservacaoPedido)
 			  VALUES
-				(:tuProduto_idProduto,:cpQtdProduto,:cpComplementoUm,
-				:cpCodPedido,:cpComplementoDois,:cpValorTotalProduto,:cpObservacaoPedido)";
+				(:tuProduto_idProduto,:cpQtdProduto,:cpComplementoUm,:cpCodPedido,:cpComplementoDois,
+				 :cpFormaPagamento,:cpQtdParcela,:cpValorParcela,:cpValorTotalProduto,:cpObservacaoPedido)";
 			
 		$in=DB::prepare($sql);
 		$in->bindParam(":tuProduto_idProduto", $this->tuProduto_idProduto,PDO::PARAM_INT);
@@ -22,6 +22,9 @@ class PreparaProduto extends Pedido{
 		$in->bindParam(":cpCodPedido",$this->cpCodPedido,PDO::PARAM_INT);
 		$in->bindParam(":cpComplementoDois", $this->cpComplementoDois,PDO::PARAM_STR);
 		$in->bindParam(":cpValorTotalProduto", $this->cpValorTotalProduto,PDO::PARAM_STR);
+		$in->bindParam(":cpFormaPagamento", $this->cpFormaPagamento,PDO::PARAM_STR);
+		$in->bindParam(":cpQtdParcela", $this->cpQtdParcela,PDO::PARAM_INT);
+		$in->bindParam(":cpValorParcela", $this->cpValorParcela,PDO::PARAM_STR);
 		$in->bindParam(":cpObservacaoPedido", $this->cpObservacaoPedido,PDO::PARAM_STR);
 			
 		try {
@@ -178,7 +181,8 @@ class PreparaProduto extends Pedido{
 	public function getProduto() {
 			
 		$sql="SELECT
-				idPreparaProduto,tuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,cpValorTotalProduto,cpObservacaoPedido
+				idPreparaProduto,tuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,
+				cpFormaPagamento,cpQtdParcela,cpValorParcela,cpComplementoDois,cpValorTotalProduto,cpObservacaoPedido
 			 FROM
 				$this->table";
 

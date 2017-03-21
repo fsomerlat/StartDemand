@@ -17,7 +17,20 @@
 		$ped->__set("cpComplementoDois", addslashes($_REQUEST["cpComplementoDois"]));
 		$ped->__set("cpValorTotalProduto", $_REQUEST["cpValorTotalProduto"]);
  		$ped->__set("cpValorTotalPedido", addslashes($_REQUEST["cpValorTotalPedido"]));
-		$ped->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
+ 		$ped->__set("cpFormaPagamento",addslashes($_REQUEST["cpFormaPagamento"]));
+ 		$ped->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
+ 		
+ 		if($_REQUEST["cpFormaPagamento"] == "CC"):
+	 		
+ 			$ped->__set("cpQtdParcela", addslashes($_REQUEST["cpQtdParcela"]));
+	 		$ped->__set("cpValorParcela", addslashes($_REQUEST["cpValorParcela"]));
+
+			else:
+				
+			$ped->__set("cpQtdParcela", 0);
+			$ped->__set("cpValorParcela", 0);
+		
+		endif;
 		
 		if($_REQUEST["tipoPedido"] == ""):
 			
@@ -60,6 +73,13 @@
 								window.alert('È necessário selecionar o campo [ 2ª COMPLEMENETO ] !');
 								window.location.href='../view/Pedido.php?panel=193158';
 							</script>";
+		
+		elseif($_REQUEST["cpFormaPagamento"] == ""):
+			
+			echo "<script language='javascript'>
+									window.alert('È necessário selecionar o campo [ FORMA DE PAGAMENTO ] !');
+									window.location.href='../view/Pedido.php?panel=193158';
+								</script>";
 		else:
 		
 		$ped->INSERT();
@@ -81,8 +101,20 @@
 		$preparaProduto->__set("cpComplementoUm", addslashes($_REQUEST["cpComplementoUm"]));
 		$preparaProduto->__set("cpComplementoDois", addslashes($_REQUEST["cpComplementoDois"]));
 		$preparaProduto->__set("cpValorTotalProduto", addslashes($_REQUEST["cpValorTotalProduto"]));
+		$preparaProduto->__set("cpFormaPagamento",addslashes($_REQUEST["cpFormaPagamento"]));
 		$preparaProduto->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
-
+		
+		if($_REQUEST["cpFormaPagamento"] == "CC"):
+			
+			$preparaProduto->__set("cpQtdParcela", addslashes($_REQUEST["cpQtdParcela"]));
+			$preparaProduto->__set("cpValorParcela", addslashes($_REQUEST["cpValorParcela"]));
+			
+			else:
+			
+			$preparaProduto->__set("cpQtdParcela", 0);
+			$preparaProduto->__set("cpValorParcela", 0);
+			
+		endif;
 		
 		if($_REQUEST["tipoPedido"] == ""):
 		
@@ -154,6 +186,9 @@
 	    $complementoUm = $getInfoPreparaProduto->cpComplementoUm;
 	    $complementoDois = $getInfoPreparaProduto->cpComplementoDois;
 	    $valTotalProduto = $getInfoPreparaProduto->cpValorTotalProduto;
+	    $formaPagamento = $getInfoPreparaProduto->cpFormaPagamento;
+	    $qtdParcela = $getInfoPreparaProduto->cpQtdParcela;
+	    $valParcela = $getInfoPreparaProduto->cpValorParcela;
 	    $obsPedido = $getInfoPreparaProduto->cpObservacaoPedido;
 	    	
 	    //BUSCA INFO TABELA PREPARA ACRÉSCIMO
@@ -169,6 +204,11 @@
 	    $ped->__set("cpComplementoDois", addslashes($complementoDois));
 	    $ped->__set("cpValorTotalProduto", addslashes($valTotalProduto));
 	    $ped->__set("cpValorTotalPedido", addslashes($somaTotalPedido));
+	    
+	    $ped->__set("cpFormaPagamento", addslashes($formaPagamento));
+	    $ped->__set("cpQtdParcela", addslashes($qtdParcela));
+	    $ped->__set("cpValorParcela", addslashes($valParcela));
+	    
 	    $ped->__set("cpObservacaoPedido", addslashes($obsPedido));
 	    
 	    $getInfoProduto = $preparaProduto->getProduto(); //RETORNA SEMPRE O ULTIMO REGISTRO DA TABELA tuPedido para ser inserido na tsPreparaProduto
@@ -309,6 +349,26 @@
 			$preparaProduto->DELETATUDO();
 			echo "PEDIDO EFETIVADO !";
 			
+		endif;
+	endif;
+	
+	if($_REQUEST["acao"] == "baixar"):
+	
+		$id = (int)$_GET["id"];		
+		
+		if($ped->relacionaPedidoAcrescimo($id) || $ped->pedidoAndamentoIndividual($id)) :
+			
+			echo "<script language='javascript'>
+						window.alert('Registro  [ EM ANDAMENTO ] não pode ser baixado !');
+						window.history.go(-1);
+					</script>";
+			
+		else:
+		
+			echo "<script language='javascript'>
+						window.alert('Pedido baixado com sucesso !');
+						window.location.href='../view/PainelDePedidos.php';
+					</script>";
 		endif;
 	endif;
 	

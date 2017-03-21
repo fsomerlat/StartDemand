@@ -4,6 +4,9 @@
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link type="text/css" rel="stylesheet" href="css/jquery-ui.css" />
+		<link type="text/css" rel="stylesheet" href="css/datepicker.css"/>
+		<link type="text/css" rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />	
 	
 	</head>
 	
@@ -65,6 +68,30 @@
 									</li>
 									<li>
 										<a href="Produto.php?panel=571586">Listar</a>
+									</li>
+									<li class="divider">
+									</li>
+									<li>
+										<a href="#">relatórios</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav">
+							<li class="dropdown">
+								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Finaceiro<strong class="caret"></strong></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="Financeiro.php">Contas a pagar</a>
+									</li>
+									<li>
+										<a href="Financeiro.php">Contas a receber</a>
+									</li>
+									<li>
+										<a href="Financeiro.php">Lançamentos</a>
+									</li>
+									<li>
+										<a href="Financeiro.php">Listar</a>
 									</li>
 									<li class="divider">
 									</li>

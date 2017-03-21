@@ -46,7 +46,7 @@
 			$acrescimo->DELETE($id);
 			echo "<script language='javascript'>
 						window.alert('Registro excluído com sucesso !');
-						window.location.href='../view/PainelDePedidos.php';
+						window.location.href='../view/Acrescimo.php?panel=387270';
 					</script>";
 		endif;
 			

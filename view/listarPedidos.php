@@ -1,6 +1,7 @@
 <html>
 	<head>
-		<meta charset="UTF-8" />
+	    <meta charset="UTF-8" />
+		<meta http-equiv="refresh" content="10">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />	
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 	</head>
@@ -71,5 +72,4 @@
 		</div>
 	</div>
 	<br/><br/><br/><br/>
-
 <?php require_once 'footer/footer.php'; ?>

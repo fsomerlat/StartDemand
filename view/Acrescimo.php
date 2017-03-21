@@ -95,6 +95,7 @@
 										<th>Acréscimo</th>
 										<th>Tipo</th>
 										<th>Quantidade</th>
+										<th>Valor base</th>
 										<th>Total</th>
 										<th>Observação</th>
 										<th></th>
