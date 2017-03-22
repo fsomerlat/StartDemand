@@ -1,7 +1,7 @@
 <?php require_once 'header/header.php'; ?>
-
+<div class="col-md-12"><h3 class="painelDeControle">Painel de controle</h3></div>
 <div class="col-md-6">
-	<h3 class="painelPedidos">Pedidos produtos</h3>
+	<h4 class="painelPedidos">Pedidos</h4>
 	<table class='table table-hover' id="painelPedidosProdutos">
 		<thead>
 			<tr class="warning">
@@ -23,7 +23,7 @@
 	</table>
 </div>
 <div class="col-md-6">
-	<h3 class="painelAcrescimo">Pedidos de acréscimos</h3>
+	<h4 class="painelAcrescimoPedidos">Acréscimos / Pedidos</h4>
 	<table class="table table-hover" id="painelAcrescimosPedidos">
 		<thead>
 			<tr class="warning">
@@ -41,6 +41,7 @@
 			<!-- CARREGA VIA AJAX -->
 		</tbody>	
 	</table>
+	<h4 class="painelAcrescimoPedidos">Acréscimos / Avulso</h4>
 	<table class="table table-hover" id="painelAcrescimosAvulso">
 		<thead>
 			<tr class="info">

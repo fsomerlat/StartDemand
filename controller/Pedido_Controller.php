@@ -293,11 +293,18 @@
 		$ped->__set("cpStatusPedido","C");
 		$acrescimo->__set("cpStatusAcrescimo","C");
 		
-		$ped->UPDATESTATUS($id);
-		$acrescimo->UPDATESTATUS($id);
+		if($ped->verificaPedidoFinalizado($id)):
 		
-		header("location:../view/PainelDePedidos.php");
-		
+			echo "<script language='javascript'>
+						window.alert('Pedido [ FINALIZADO ] não pode ser cancelado !');
+						window.history.go(-1);
+					</script>";
+		else:
+
+			$ped->UPDATESTATUS($id);
+			$acrescimo->UPDATESTATUS($id);
+			header("location:../view/PainelDePedidos.php");
+		endif;
 	endif;
 	
 	if($_REQUEST["acao"] == "finalizar"):
@@ -355,6 +362,10 @@
 	if($_REQUEST["acao"] == "baixar"):
 	
 		$id = (int)$_GET["id"];		
+		$ped->__set("cpStatusPedido", "B");
+		$acrescimo->__set("cpStatusAcrescimo", "B");
+		
+		
 		
 		if($ped->relacionaPedidoAcrescimo($id) || $ped->pedidoAndamentoIndividual($id)) :
 			
@@ -364,7 +375,8 @@
 					</script>";
 			
 		else:
-		
+			$ped->UPDATESTATUS($id);
+			$acrescimo->UPDATESTATUS($id);
 			echo "<script language='javascript'>
 						window.alert('Pedido baixado com sucesso !');
 						window.location.href='../view/PainelDePedidos.php';

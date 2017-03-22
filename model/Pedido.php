@@ -269,6 +269,26 @@
 			}
 		}
 		
-
+		public function verificaPedidoFinalizado($id) {
+			
+			$sql="SELECT 
+					idPedido,cpStatusPedido
+				  FROM 
+					$this->table
+				  WHERE 
+				  	idPedido = $id AND cpStatusPedido = 'F'";
+			
+			$row=DB::prepare($sql);
+			$row->execute();
+			
+			try {
+				
+				return $row->rowCount();
+				
+			}catch(PDOException $e){
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}	
+		}
 		
 	}

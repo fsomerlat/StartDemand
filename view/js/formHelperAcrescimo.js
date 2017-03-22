@@ -19,6 +19,11 @@ var FormHelperAcrescimo = (function(){
 	var bindEvents = function(){
 		
 		preencheComboCodPedido();
+		
+		$(document).on("click","#excluirAcrescimoAvulso", function() {
+			
+			return confirm("Deseja excluir esse  registro ?");
+		});
 	}
 	
 	return {

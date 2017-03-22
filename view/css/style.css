@@ -34,7 +34,11 @@ body {
 .listaPreparaAcrescimo,
 .tabelaProdutosDisponiveis,
 .listaAcrescimos,
-.listaAcrescimosAvulso{
+.listaAcrescimosAvulso,
+.painelPedidos,
+.painelAcrescimoPedidos,
+.painelAcrescimoPedidos,
+.painelDeControle{
 	
 	text-align: center;
 }

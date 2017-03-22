@@ -55,9 +55,11 @@
 	if($_REQUEST["acao"]=="baixar"):
 		
 		$id = (int)$_GET["id"];
-	
+		$acrescimo->__set("cpStatusAcrescimo", "B");
+		
 		if($acrescimo->verifcaStatus($id)):
-			
+				
+				$acrescimo->UPDATE_STATUS_AVULSO($id);
 				echo "<script language='javascript'>
 							window.alert('Baixa realizada com sucesso !');
 							window.location.href='../view/PainelDePedidos.php';
