@@ -30,14 +30,14 @@ var Service_Pedido = (function() {
 							
 						var status = dados.cpStatusPedido,
 							tipo = dados.cpTipoProduto,
+							situacaoPedido = dados.cpSituacaoPedido,
 							opcaoStatus = "";
 						
 						(status == "C") ? opcaoStatus = "Cancelado" :"";
 						(status == "A") ? opcaoStatus = "Em andamento" : "";
 						(status == "F") ? opcaoStatus = "Finalizado" : "";
-						(status == "B") ? opcaoStatus = "Baixado" : "";
  						
-						
+						(situacaoPedido == "A") ? situacaoPedido = "Ativo" : "Baixado";
 						
 						var dataHrPedido = dados.cpHoraPedido,
 							hora = dataHrPedido.substring(11,20),	
@@ -60,7 +60,6 @@ var Service_Pedido = (function() {
 								case "Cancelado": itensProdutos += "<td class='statusCancelPedido default'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
 								case "Em andamento" : itensProdutos += "<td class='statusAndamentoPedido default'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+opcaoStatus+" ...</td>"; break;
 								case "Finalizado" : itensProdutos += "<td class='statusFinalizadoPedido default'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+opcaoStatus+"</td>";break;
-								case "Baixado" : itensProdutos += "<td>"+opcaoStatus+"</td>"; break;
 							}			
 							itensProdutos += "<td class='info idPedido'>"+dados.idPedido+"</td>";
 							itensProdutos += "<td class='danger codPedidoBlue'>"+dados.cpCodPedido+"</td>";
@@ -73,13 +72,12 @@ var Service_Pedido = (function() {
 							itensProdutos += "<td class='success'><a href='../controller/Pedido_Controller.php?acao=finalizar&id="+dados.idPedido+"' title='Finalizar pedido'><button type='button' id='pedidoLiberado' class='btn btn-success'>Finalizado</button></a></td>";
 							itensProdutos += "</tr>";
 						}
-						if(opcaoStatus != "Baixado") {
+						if(situacaoPedido == "Ativo") {
 							painelPedidosProdutos += "<tr>";
 							switch(opcaoStatus){
 								case "Cancelado" : painelPedidosProdutos += "<td class='statusCancelPedido'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
 								case "Em andamento" : painelPedidosProdutos += "<td class='statusAndamentoPedido'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+opcaoStatus+" ...</td>"; break;
 								case "Finalizado": painelPedidosProdutos += "<td class='statusFinalizadoPedido'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
-								case "Baixado" : painelPedidosProdutos += "<td> [ "+opcaoStatus+" ]</td>"; break;
 							}
 							painelPedidosProdutos += "<td>"+dados.cpNomeProduto+"</td>";
 							painelPedidosProdutos += "<td>"+dados.cpCodPedido+"</td>";

@@ -362,8 +362,8 @@
 	if($_REQUEST["acao"] == "baixar"):
 	
 		$id = (int)$_GET["id"];		
-		$ped->__set("cpStatusPedido", "B");
-		$acrescimo->__set("cpStatusAcrescimo", "B");
+		$ped->__set("cpSituacaoPedido", "B");
+		$acrescimo->__set("cpSituacaoAcrescimo", "B");
 		
 		
 		
@@ -375,8 +375,8 @@
 					</script>";
 			
 		else:
-			$ped->UPDATESTATUS($id);
-			$acrescimo->UPDATESTATUS($id);
+			$ped->UPDATE_SITUACAO_PEDIDO($id);
+			$acrescimo->UPDATE_SITUACAO_ACRESCIMO_PEDIDO($id);
 			echo "<script language='javascript'>
 						window.alert('Pedido baixado com sucesso !');
 						window.location.href='../view/PainelDePedidos.php';

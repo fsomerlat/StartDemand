@@ -21,13 +21,14 @@ var Service_Acrescimo = (function() {
 				retorno.map(function(dados) {
 					
 					var status = dados.cpStatusAcrescimo,
-						tipo = dados.cpTipoAcrescimo; 
+						tipo = dados.cpTipoAcrescimo,
+						situacaoAcrescimo = dados.cpSituacaoAcrescimo; 
 					
 					(status  == "A" ) ? status = "Em andamento" : "";
 					(status == "C") ? status = "Cancelado" : "";
 					(status == "F") ? status = "Finalizado" : "";
-					(status == "B") ? status = "Baixado" : "";
 					(tipo == "P") ? tipo = "Pedido" : false;
+					(situacaoAcrescimo == "A") ? situacaoAcrescimo = "Ativo" : "Baixado";
 					
 					
 					if(status == "Em andamento") {
@@ -36,7 +37,6 @@ var Service_Acrescimo = (function() {
 							case "Em andamento" : itensAcrescimoTablePedido += "<td class='statusAndamentoPedido default'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+status+" ...</td>"; break;
 							case "Cancelado" : itensAcrescimoTablePedido += "<td class='statusCancelPedido default'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+status+"</td>"; break;
 							case "Finalizado" : itensAcrescimoTablePedido += "<td class='statusFinalizadoPedido default'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+status+"</td>"; break;
-							case "Baixado" : itensAcrescimoTablePedido += "<td>"+status+"</td>"; break;
 						}
 						itensAcrescimoTablePedido += "<td class='info idPedido'>"+dados.tuPedido_idPedido+"</td>";
 						itensAcrescimoTablePedido += "<td>"+tipo+"</td>";
@@ -47,7 +47,7 @@ var Service_Acrescimo = (function() {
 						itensAcrescimoTablePedido += "</tr>";	
 					}
 					
-					if(status != "Baixado") {
+					if(situacaoAcrescimo == "Ativo") {
 
 						itensTableAcrescimo += "<tr>";
 						
@@ -55,7 +55,6 @@ var Service_Acrescimo = (function() {
 							case "Em andamento": itensTableAcrescimo += "<td class='statusAndamentoPedido'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+status+" ...</td>"; break;
 							case "Cancelado" : itensTableAcrescimo += "<td class='statusCancelPedido'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+status+"</td>"; break;
 							case "Finalizado": itensTableAcrescimo += "<td class='statusFinalizadoPedido'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+status+"</td>"; break;
-							case "Baixado" : itensTableAcrescimo += "<td>[ "+status+" ]</td>"; break;
 						}			
 						itensTableAcrescimo += "<td>"+dados.cpCodPedido+"</td>";
 						itensTableAcrescimo += "<td>"+tipo+"</td>";
@@ -97,22 +96,23 @@ var Service_Acrescimo = (function() {
 				retorno.map(function(dados){
 					
 					var status = dados.cpStatusAcrescimo,
-						tipo = dados.cpTipoAcrescimo;
+						tipo = dados.cpTipoAcrescimo,
+						situacaoAcrescimo = dados.cpSituacaoAcrescimo;
 					
 					(status == "A") ? status = "Em andamento" : false;
 					(status == "C") ? status = "Cancelado" : false;
 					(status == "F") ? status = "Finalizado" : false;
-					(status == "B") ? status = "Baixado" : false;
 					(tipo == "N") ? tipo = "Avulso": false;
+					(situacaoAcrescimo == "A") ? situacaoAcrescimo = "Ativo" : "Baixado";
 					
-					if(tipo == "Avulso" && status != "Baixado") {
+					
+					if(tipo == "Avulso" && situacaoAcrescimo == "Ativo") {
 						itensAcresimosAvulso += "<tr>";
 						switch(status){
 							
 							case "Cancelado": itensAcresimosAvulso += "<td class='statusCancelPedido'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+status+"</td>"; break;
 							case "Em andamento": itensAcresimosAvulso += "<td class='statusAndamentoPedido'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+status+" ...</td>"; break;
 							case "Finalizado": itensAcresimosAvulso += "<td class='statusFinalizadoPedido'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+status+"</td>"; break;
-							case "Baixado" : itensAcresimosAvulso += "<td>[ "+status+" ]</td>";
 						}
 						itensAcresimosAvulso += "<td>"+dados.tuPedido_cpCodPedido+"</td>";
 						itensAcresimosAvulso += "<td>"+dados.cpAcrescimo+"</td>";
@@ -132,7 +132,6 @@ var Service_Acrescimo = (function() {
 								case "Cancelado": itensAcrescimoAvulsoTelaPedido += "<td class='statusCancelPedido'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+status+"</td>"; break;
 								case "Em andamento": itensAcrescimoAvulsoTelaPedido += "<td class='statusAndamentoPedido'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+status+" ...</td>"; break;
 								case "Finalizado": itensAcrescimoAvulsoTelaPedido += "<td class='statusFinalizadoPedido'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+status+"</td>"; break;
-								case "Baixado" : itensAcrescimoAvulsoTelaPedido += "<td>"+status+"</td>";
 							}
 							itensAcrescimoAvulsoTelaPedido += "<td class='info'>"+dados.tuPedido_cpCodPedido+"</td>"; 
 							itensAcrescimoAvulsoTelaPedido += "<td class='danger'>"+dados.cpAcrescimo+"</td>"; 

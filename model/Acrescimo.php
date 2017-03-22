@@ -5,6 +5,7 @@
 		protected $table ="tuAcrescimo";
 		private $idAcrescimo,
 				$cpStatusAcrescimo,
+				$cpSituacaoAcrescimo,
 				$tuPedido_idPedido,
 				$tuPedido_cpCodPedido,
 				$cpValorBaseAcrescimo,
@@ -55,7 +56,7 @@
 		public function getAcrescJSON() {
 			
 			$sql="SELECT 
-					acr.idAcrescimo,acr.cpValorBaseAcrescimo,acr.tuPedido_idPedido,acr.cpAcrescimo,acr.cpQtdAcrescimo, 
+					acr.idAcrescimo,acr.cpValorBaseAcrescimo,acr.tuPedido_idPedido,acr.cpAcrescimo,acr.cpQtdAcrescimo,acr.cpSituacaoAcrescimo, 
 					acr.cpValorTotalAcrescimo,acr.cpStatusAcrescimo,acr.cpTipoAcrescimo, acr.cpObservacaoAcrescimo,ped.cpCodPedido
 				  FROM 
 				  	$this->table as acr INNER JOIN tuPedido as ped 
@@ -144,7 +145,7 @@
 		public function getAcrescimosAvulsosJSON() {
 			
 			$sql="SELECT 
-					idAcrescimo,cpStatusAcrescimo,cpAcrescimo,cpQtdAcrescimo,cpValorBaseAcrescimo,
+					idAcrescimo,cpStatusAcrescimo,cpAcrescimo,cpQtdAcrescimo,cpValorBaseAcrescimo,cpSituacaoAcrescimo,
 					cpValorTotalAcrescimo,cpObservacaoAcrescimo,cpTipoAcrescimo,tuPedido_cpCodPedido
 				  FROM 
 					$this->table";
@@ -182,6 +183,54 @@
 				return $s->rowCount();				
 			
 			}catch(PDOException $e){
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}
+		
+		
+		public function UPDATE_SITUACAO_ACRESCIMO_PEDIDO($id) {
+			
+			$sql="UPDATE 
+					$this->table
+				  SET
+				  	cpSituacaoAcrescimo=:cpSituacaoAcrescimo
+				  WHERE 
+				    tuPedido_idPedido=:tuPedido_idPedido";
+			
+			$up=DB::prepare($sql);
+			$up->bindParam(":tuPedido_idPedido",$id,PDO::PARAM_INT);
+			$up->bindParam(":cpSituacaoAcrescimo", $this->cpSituacaoAcrescimo,PDO::PARAM_STR);
+			
+			try{
+				
+				return $up->execute();
+			
+			}catch(PDOException $e) {
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getFile();
+			}
+		}
+		
+		public function UPDATE_SITUACAO_ACRESCIMO_AVULSO($id) {
+			
+			
+			$sql="UPDATE 
+					$this->table
+				  SET
+				  	cpSituacaoAcrescimo=:cpSituacaoAcrescimo
+				  WHERE
+				  	idAcrescimo=:idAcrescimo";
+			
+			$up=DB::prepare($sql);
+			$up->bindParam(":idAcrescimo", $id,PDO::PARAM_INT);
+			$up->bindParam(":cpSituacaoAcrescimo", $this->cpSituacaoAcrescimo,PDO::PARAM_STR);
+			
+			try{
+				
+				return $up->execute();
+			
+			}catch(PDOException $e) {
 				
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 			}
