@@ -20,11 +20,11 @@ var Service_Pedido = (function() {
 			},
 			success: function(retorno) {
 				
-//				if(retorno[0].erro) {
-//					
-//					$(".listaPedidoProdutos").html(retorno[0].erro);
-//				
-//				} else {
+				if(retorno[0].erro) {
+					
+					$(".listaPedidoProdutos").html(retorno[0].erro);
+				
+				} else {
 					
 					retorno.map(function(dados) {
 							
@@ -96,7 +96,7 @@ var Service_Pedido = (function() {
 					$("#painelPedidosProdutos tbody").html(painelPedidosProdutos);
 					$(".h3listaPedidoProduto").html("Lista de produtos");
 					
-				//}
+				}
 			}
 		});	
 		
@@ -120,11 +120,11 @@ var Service_Pedido = (function() {
 			},
 			success:function(retorno) {
 				
-//				if(retorno[0].erro) {
-//					
-//					$(".ProdutosDisponiveisPedido").html(retorno[0].erro);
-//				
-//				} else {
+				if(retorno[0].erro) {
+					
+					$(".ProdutosDisponiveisPedido").html(retorno[0].erro);
+				
+				} else {
 					
 					setTimeout(function() {
 						
@@ -142,7 +142,7 @@ var Service_Pedido = (function() {
 						}		
 						
 					},1200);
-				//}
+				}
 			}
 		});
 	}

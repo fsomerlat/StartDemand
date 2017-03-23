@@ -1,15 +1,15 @@
-<?php require_once '../core/include.php'; 
+<?php require_once '../core/include.php';  session_start();
 	
 	$ped = new Pedido();
 	$preparaProduto =  new PreparaProduto();
 	$preparaAcrescimo = new PreparaAcrescimo();
 	$acrescimo =  new Acrescimo();
+	$financeiro =  new Financeiro();
 	
 	
 	if($_REQUEST["acao"] == "gerar pedido"):
 	
 		$ped->__set("tuProduto_idProduto", addslashes($_REQUEST["tuProduto_idProduto"]));
-		$ped->__set("tsPreparaPedido_idPreparaPedido", "99999999999");
 		$ped->__set("cpCodPedido", $_REQUEST["cpCodPedido"]);
 		$ped->__set("cpStatusPedido", addslashes($_REQUEST["cpStatusPedido"]));
 		$ped->__set("cpQtdProduto", addslashes($_REQUEST["cpQtdProduto"]));
@@ -22,16 +22,15 @@
  		
  		if($_REQUEST["cpFormaPagamento"] == "CC"):
 	 		
- 			$ped->__set("cpQtdParcela", addslashes($_REQUEST["cpQtdParcela"]));
-	 		$ped->__set("cpValorParcela", addslashes($_REQUEST["cpValorParcela"]));
+	 			$ped->__set("cpQtdParcela", addslashes($_REQUEST["cpQtdParcela"]));
+	 			$ped->__set("cpValorParcela", addslashes($_REQUEST["cpValorParcela"]));
+ 			else:
+ 			
+	 			$ped->__set("cpQtdParcela", 0);
+	 			$ped->__set("cpValorParcela", 0);
+ 			
+ 		endif;		
 
-			else:
-				
-			$ped->__set("cpQtdParcela", 0);
-			$ped->__set("cpValorParcela", 0);
-		
-		endif;
-		
 		if($_REQUEST["tipoPedido"] == ""):
 			
 			echo "<script language='javascript'>
@@ -80,13 +79,15 @@
 									window.alert('È necessário selecionar o campo [ FORMA DE PAGAMENTO ] !');
 									window.location.href='../view/Pedido.php?panel=193158';
 								</script>";
-		else:
 		
-		$ped->INSERT();
-		echo "<script language='javascript'>
-					window.alert('Pedido gerado com sucesso !');
-					window.location.href='../view/Pedido.php?panel=193158';
-				</script>";
+			else:
+			
+			
+				$ped->INSERT();
+				echo "<script language='javascript'>
+							window.alert('Pedido gerado com sucesso !');
+							window.location.href='../view/Pedido.php?panel=193158';
+						</script>";
 		endif;
 	endif;
 	
@@ -362,9 +363,42 @@
 	if($_REQUEST["acao"] == "baixar"):
 	
 		$id = (int)$_GET["id"];		
+	
+		$getInfoPedido = $ped->getId($id); // RETORNA INFORMAÇÕES DO PEDIDO ATRAVEŚ DO IDPEDIDO
+		$getInfoAcrescimo = $acrescimo->getId($id); // RETORNA IDACRESCIMO ATRAVEŚ DA FK TUPEDIDO_IDPEDIDO
+		
 		$ped->__set("cpSituacaoPedido", "B");
+		$ped->__set("cpUsuarioBaixa",addslashes($_SESSION['cpNome']));
 		$acrescimo->__set("cpSituacaoAcrescimo", "B");
 		
+		if($acrescimo->getRow() > 0):
+			$idAcrescimo = $getInfoAcrescimo->idAcrescimo;
+			$financeiro->__set("tuAcrescimo_idAcrescimo", addslashes($idAcrescimo));
+			$financeiro->__set("tuPedido_idPedido", addslashes($id));
+			
+			else:
+				
+			$financeiro->__set("tuAcrescimo_idAcrescimo", 0);
+			$financeiro->__set("tuPedido_idPedido", addslashes($id));
+		endif;
+		
+		$formaPagamento = $getInfoPedido->cpFormaPagamento;
+		$qtdParcela = $getInfoPedido->cpQtdParcela;
+		$valParcela = $getInfoPedido->cpValorParcela;
+	
+
+		if($formaPagamento == "CC"):
+				
+				for($i=0; $i < $qtdParcela; $i++){
+						
+					$financeiro->INSERT();
+				}
+			
+			else:
+				
+				$financeiro->INSERT();
+			
+		endif;
 		
 		
 		if($ped->relacionaPedidoAcrescimo($id) || $ped->pedidoAndamentoIndividual($id)) :

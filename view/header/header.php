@@ -88,7 +88,7 @@
 										<a href="Financeiro.php">Contas a receber</a>
 									</li>
 									<li>
-										<a href="Financeiro.php">Lançamentos</a>
+										<a href="FinanceiroLancamento.php">Lançamentos</a>
 									</li>
 									<li>
 										<a href="Financeiro.php">Listar</a>
@@ -101,6 +101,21 @@
 								</ul>
 							</li>
 						</ul>
+						<ul class="nav navbar-nav">
+							<li class="dropdown">
+								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuário<strong class="caret"></strong></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="Usuario.php?panel=">Cadastrar</a>
+									</li>
+									<li>
+										<a href="Usuario.php?panel=">Listar</a>
+									</li>
+									<li class="divider">
+									</li>
+								</ul>
+							</li>
+						</ul>						
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown">
 								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sair<strong class="caret"></strong></a>

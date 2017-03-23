@@ -1,6 +1,7 @@
 <?php	require_once '../core/include.php';
 
 	$acrescimo =  new Acrescimo();
+	$financeiro = new Financeiro();
 	
 	if($_REQUEST["acao"] == "cadastrar"):
 
@@ -57,9 +58,14 @@
 		$id = (int)$_GET["id"];
 		$acrescimo->__set("cpSituacaoAcrescimo", "B");
 		
+		$financeiro->__set("tuPedido_idPedido", 0);-
+		$financeiro->__set("tuAcrescimo_idAcrescimo", addslashes($id));
+		
+		
 		if($acrescimo->verifcaStatus($id)):
 				
 				$acrescimo->UPDATE_SITUACAO_ACRESCIMO_AVULSO($id);
+				$financeiro->INSERT();
 				echo "<script language='javascript'>
 							window.alert('Baixa realizada com sucesso !');
 							window.location.href='../view/PainelDePedidos.php';

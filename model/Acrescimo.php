@@ -236,6 +236,49 @@
 			}
 		}
 		
+		public function getId($id) {
+			
+			
+			$sql="SELECT 
+						idAcrescimo,tuPedido_idPedido
+				  FROM 
+						$this->table
+				  WHERE  
+					tuPedido_idPedido=:tuPedido_idPedido";
+			
+			$s=DB::prepare($sql);
+			$s->bindParam(":tuPedido_idPedido", $id,PDO::PARAM_INT);
+			$s->execute();
+			try{
+				
+				return $s->fetch();
+			
+			}catch(PDOException $e) {
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}
+		
+		public function getRow(){
+			
+			$sql="SELECT 
+						idAcrescimo
+				  FROM 
+						$this->table";
+			
+		     $row=DB::prepare($sql);
+			 $row->execute();
+			 
+			 try {
+			 	
+			 	return $row->rowCount();
+			 
+			 }catch(PDOException $e) {
+			 	
+			 	echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			 }
+		}
+		
 		
 	}
 	
