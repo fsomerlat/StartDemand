@@ -90,11 +90,13 @@
 			
 			$sql="SELECT
 					ped.idPedido,p.cpNomeProduto,ped.cpCodPedido,ped.cpQtdProduto,ped.cpHoraPedido,ped.cpComplementoUm,p.cpValorProduto,ped.cpSituacaoPedido,
-					ped.cpComplementoDois,ped.cpValorTotalProduto,ped.cpValorTotalPedido,ped.cpStatusPedido,ped.cpObservacaoPedido
+					ped.cpComplementoDois,ped.cpValorTotalProduto,ped.cpValorTotalPedido,ped.cpStatusPedido,ped.cpObservacaoPedido,ped.cpQtdParcela,ped.cpValorParcela
+					
 				  FROM 
 					$this->table as ped 
 				  
 					INNER JOIN tuProduto as p ON p.idProduto = ped.tuProduto_idProduto
+					
 					
 				 ORDER BY ped.cpHoraPedido ASC ";
 			

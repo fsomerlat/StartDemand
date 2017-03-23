@@ -4,7 +4,7 @@
 	$preparaProduto =  new PreparaProduto();
 	$preparaAcrescimo = new PreparaAcrescimo();
 	$acrescimo =  new Acrescimo();
-	$financeiro =  new Financeiro();
+	$pedidoAcrescimo =  new PedidoAcrescimo();
 	
 	
 	if($_REQUEST["acao"] == "gerar pedido"):
@@ -373,13 +373,13 @@
 		
 		if($acrescimo->getRow() > 0):
 			$idAcrescimo = $getInfoAcrescimo->idAcrescimo;
-			$financeiro->__set("tuAcrescimo_idAcrescimo", addslashes($idAcrescimo));
-			$financeiro->__set("tuPedido_idPedido", addslashes($id));
+			$pedidoAcrescimo->__set("tuAcrescimo_idAcrescimo", addslashes($idAcrescimo));
+			$pedidoAcrescimo->__set("tuPedido_idPedido", addslashes($id));
 			
 			else:
 				
-			$financeiro->__set("tuAcrescimo_idAcrescimo", 0);
-			$financeiro->__set("tuPedido_idPedido", addslashes($id));
+			$pedidoAcrescimo->__set("tuAcrescimo_idAcrescimo", 0);
+			$pedidoAcrescimo->__set("tuPedido_idPedido", addslashes($id));
 		endif;
 		
 		$formaPagamento = $getInfoPedido->cpFormaPagamento;
@@ -391,19 +391,19 @@
 				
 				for($i=0; $i < $qtdParcela; $i++){
 						
-					$financeiro->INSERT();
+					$pedidoAcrescimo->INSERT();
 				}
 			
 			else:
 				
-				$financeiro->INSERT();
+				$pedidoAcrescimo->INSERT();
 			
 		endif;
 		
 		
 		if($ped->relacionaPedidoAcrescimo($id) || $ped->pedidoAndamentoIndividual($id)) :
 			
-			echo "<script language='javascript'>
+			echo "<script language='javascript'>f
 						window.alert('Registro  [ EM ANDAMENTO ] não pode ser baixado !');
 						window.history.go(-1);
 					</script>";
