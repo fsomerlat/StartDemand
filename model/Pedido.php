@@ -96,9 +96,8 @@
 					$this->table as ped 
 				  
 					INNER JOIN tuProduto as p ON p.idProduto = ped.tuProduto_idProduto
-					
-					
-				 ORDER BY ped.cpHoraPedido ASC ";
+				
+ 				  ORDER BY ped.cpHoraPedido ASC ";
 			
 			$s=DB::prepare($sql);
 								

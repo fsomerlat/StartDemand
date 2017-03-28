@@ -1,10 +1,15 @@
-<?php require_once 'Pedido.php';
+<?php require_once 'DB.php';
 
-	class ParcelasAcrescimo extends Pedido {
+	class ParcelaAcrescimo {
 		
 		protected $table = "tuParcelaAcrescimo";
 		private $tuAcrescimo_idAcrescimo,
 				$cpDataLancamento;
+		
+		public function __set($attr,$valor) {
+			
+			$this->$attr = $valor;
+		}
 		
 		public function INSERT() {
 			
@@ -17,7 +22,7 @@
 			
 			try{
 				
-				return $s->execute();
+				return $in->execute();
 			
 			}catch(PDOException $e) {
 				

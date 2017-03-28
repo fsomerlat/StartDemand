@@ -101,6 +101,7 @@
 		$preparaProduto->__set("cpQtdProduto", addslashes($_REQUEST["cpQtdProduto"]));
 		$preparaProduto->__set("cpComplementoUm", addslashes($_REQUEST["cpComplementoUm"]));
 		$preparaProduto->__set("cpComplementoDois", addslashes($_REQUEST["cpComplementoDois"]));
+		$preparaProduto->__set("cpValorBaseProduto", addslashes($_REQUEST["cpValorBaseProduto"]));
 		$preparaProduto->__set("cpValorTotalProduto", addslashes($_REQUEST["cpValorTotalProduto"]));
 		$preparaProduto->__set("cpFormaPagamento",addslashes($_REQUEST["cpFormaPagamento"]));
 		$preparaProduto->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
@@ -186,11 +187,12 @@
 	    $qtdProd = $getInfoPreparaProduto->cpQtdProduto;
 	    $complementoUm = $getInfoPreparaProduto->cpComplementoUm;
 	    $complementoDois = $getInfoPreparaProduto->cpComplementoDois;
+	    $valBaseProduto = $getInfoPreparaProduto->cpValorBaseProduto;
 	    $valTotalProduto = $getInfoPreparaProduto->cpValorTotalProduto;
 	    $formaPagamento = $getInfoPreparaProduto->cpFormaPagamento;
 	    $qtdParcela = $getInfoPreparaProduto->cpQtdParcela;
 	    
-	   // $valParcela = $getInfoPreparaProduto->cpValorParcela;
+	    $valorMultiplicadoProduto = $valBaseProduto * $qtdProd;
 	    
 	    $valorParcela = $somaTotalPedido / $qtdParcela;
 	    
@@ -207,7 +209,7 @@
 		$ped->__set("cpQtdProduto", addslashes($qtdProd));
 	    $ped->__set("cpComplementoUm", addslashes($complementoUm));
 	    $ped->__set("cpComplementoDois", addslashes($complementoDois));
-	    $ped->__set("cpValorTotalProduto", addslashes($valTotalProduto));
+	    $ped->__set("cpValorTotalProduto", addslashes($valorMultiplicadoProduto));
 	    $ped->__set("cpValorTotalPedido", addslashes($somaTotalPedido));
 	    
 	    $ped->__set("cpFormaPagamento", addslashes($formaPagamento));
@@ -252,6 +254,9 @@
 		    	$acrescimo->__set("cpQtdAcrescimo", addslashes($res->cpQtdAcrescimo));
 		    	$acrescimo->__set("cpValorBaseAcrescimo", addslashes($res->cpValorBaseAcrescimo));
 		    	$acrescimo->__set("cpTipoAcrescimo","P"); // P = VINCULADO A UM PEDIDO
+		    	$acrescimo->__set("cpFormaPagamentoAcrescimo","PD"); //FORMA DEPAGAMENTO ESTÁ DECLARADA NO PEDIDO
+		    	$acrescimo->__set("cpQtdParcelaAcrescimo", 0); // PARCELA DELCARADA NO PEDIDO
+		    	$acrescimo->__set("cpValorParcelaAcrescimo",0); //VALOR DA PARCELA ESTÁ DEFINIDO NO PEDIDO
 		    	$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
 		    	$acrescimo->__set("cpObservacaoAcrescimo", addslashes($res->cpObservacaoAcrescimo));
 		    	 
@@ -297,11 +302,13 @@
 				
 				$acrescimo->__set("tuPedido_idPedido", addslashes($idPedido)); 
 				$acrescimo->__set("tuPedido_cpCodPedido", addslashes($codPedido));
-				
 				$acrescimo->__set("cpAcrescimo", addslashes($res->cpAcrescimo));
 				$acrescimo->__set("cpQtdAcrescimo", addslashes($res->cpQtdAcrescimo));
 				$acrescimo->__set("cpValorBaseAcrescimo", addslashes($res->cpValorBaseAcrescimo));
 				$acrescimo->__set("cpTipoAcrescimo","P"); // P = VINCULADO A UM PEDIDO
+				$acrescimo->__set("cpFormaPagamentoAcrescimo","PD"); //FORMA DEPAGAMENTO ESTÁ DECLARADA NO PEDIDO
+				$acrescimo->__set("cpQtdParcelaAcrescimo", 0); // PARCELA DELCARADA NO PEDIDO
+				$acrescimo->__set("cpValorParcelaAcrescimo",0); //VALOR DA PARCELA ESTÁ DEFINIDO NO PEDIDO
 				$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
 				$acrescimo->__set("cpObservacaoAcrescimo", addslashes($res->cpObservacaoAcrescimo));
 						

@@ -15,10 +15,11 @@
 							<th>CodPedido</th>
 							<th>Nome produto</th>
 							<th>QTDE</th>
-							<th>Valor</th>
+							<th>Valor base</th>
+							<th>Valor total produto</th>
 							<th>QTDE parcela</th>
 							<th>Valor parcela</th>
-							<th>Total</th>
+							<th>Total com acréscimo</th>
 							<th>Observação</th>
 							<th></th>
 							<th></th>

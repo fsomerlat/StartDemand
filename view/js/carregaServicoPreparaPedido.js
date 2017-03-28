@@ -35,11 +35,15 @@ var Service_Prepara_Pedido = (function() {
 					
 						retorno.filter(function(i) {
 							
+							
+							var valorDoProduto = i.cpQtdProduto * i.cpValorBaseProduto;
+							
 							itens += "<tr>";
 							itens += "<td>"+i.cpCodPedido+"</td>";
 							itens += "<td>"+i.cpNomeProduto+"</td>"
 							itens += "<td>"+i.cpQtdProduto+"</td>";
 							itens += "<td>"+i.cpValorProduto+"</td>";
+							itens += "<td>"+valorDoProduto+"</td>";
 							itens += "<td>"+i.cpQtdParcela+"</td>";
 							itens += "<td>"+i.cpValorParcela+"</td>";
 							itens += "<td>"+i.cpValorTotalProduto+"</td>";

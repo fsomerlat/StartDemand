@@ -13,6 +13,9 @@
 				$cpQtdAcrescimo,
 				$cpTipoAcrescimo,
 				$cpValorTotalAcrescimo,
+				$cpFormaPagamentoAcrescimo,
+				$cpQtdParcelaAcrescimo,
+				$cpValorParcelaAcrescimo,
 				$cpObservacaoAcrescimo;
 		
 		public function __set($attr,$valor){
@@ -28,9 +31,11 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table 
-				  	(tuPedido_idPedido,tuPedido_cpCodPedido,cpTipoAcrescimo,cpValorBaseAcrescimo,cpAcrescimo,cpQtdAcrescimo,cpValorTotalAcrescimo,cpObservacaoAcrescimo)
+				  	(tuPedido_idPedido,tuPedido_cpCodPedido,cpTipoAcrescimo,cpValorBaseAcrescimo,cpAcrescimo,cpQtdAcrescimo,
+				  	cpValorTotalAcrescimo,cpFormaPagamentoAcrescimo,cpQtdParcelaAcrescimo,cpValorParcelaAcrescimo,cpObservacaoAcrescimo)
 				  VALUES
-				  	(:tuPedido_idPedido,:tuPedido_cpCodPedido,:cpTipoAcrescimo,:cpValorBaseAcrescimo,:cpAcrescimo,:cpQtdAcrescimo,:cpValorTotalAcrescimo,:cpObservacaoAcrescimo)";
+				  	(:tuPedido_idPedido,:tuPedido_cpCodPedido,:cpTipoAcrescimo,:cpValorBaseAcrescimo,:cpAcrescimo,:cpQtdAcrescimo,
+					:cpValorTotalAcrescimo,:cpFormaPagamentoAcrescimo,:cpQtdParcelaAcrescimo,:cpValorParcelaAcrescimo,:cpObservacaoAcrescimo)";
 			
 			$in=DB::prepare($sql);
 			
@@ -41,6 +46,9 @@
 			$in->bindParam(":cpAcrescimo", $this->cpAcrescimo,PDO::PARAM_STR);
 			$in->bindParam(":cpQtdAcrescimo",$this->cpQtdAcrescimo,PDO::PARAM_STR);
 			$in->bindParam(":cpValorTotalAcrescimo",$this->cpValorTotalAcrescimo , PDO::PARAM_STR);
+			$in->bindParam(":cpFormaPagamentoAcrescimo",$this->cpFormaPagamentoAcrescimo,PDO::PARAM_STR);
+			$in->bindParam(":cpQtdParcelaAcrescimo",$this->cpQtdParcelaAcrescimo,PDO::PARAM_INT);
+			$in->bindParam(":cpValorParcelaAcrescimo",$this->cpValorParcelaAcrescimo,PDO::PARAM_STR);
 			$in->bindParam(":cpObservacaoAcrescimo",$this->cpObservacaoAcrescimo,PDO::PARAM_STR);
 			
 			try {
@@ -277,6 +285,29 @@
 			 	
 			 	echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 			 }
+		}
+		
+		public function getInfoAcrescimo($id) {
+			
+			
+			$sql="SELECT
+					idAcrescimo,cpFormaPagamentoAcrescimo,cpQtdParcelaAcrescimo,cpValorParcelaAcrescimo,cpStatusAcrescimo
+				  FROM 
+					$this->table
+				  WHERE 
+				  	idAcrescimo=:idAcrescimo";
+			
+			$s=DB::prepare($sql);
+			$s->bindParam(":idAcrescimo",$id,PDO::PARAM_INT);
+			$s->execute();
+			try {
+				
+				return $s->fetch();
+			
+			}catch(PDOException $e) {
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getLine()." na linha ".$e->getLine();
+			}
 		}
 		
 		

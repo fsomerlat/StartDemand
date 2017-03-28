@@ -10,16 +10,17 @@ class PreparaProduto extends Pedido{
 			
 		$sql="INSERT INTO $this->table
 				(tuProduto_idProduto,cpQtdProduto,cpComplementoUm,cpCodPedido,cpComplementoDois,
-				 cpFormaPagamento,cpQtdParcela,cpValorParcela,cpValorTotalProduto,cpObservacaoPedido)
+				 cpFormaPagamento,cpQtdParcela,cpValorParcela,cpValorBaseProduto,cpValorTotalProduto,cpObservacaoPedido)
 			  VALUES
 				(:tuProduto_idProduto,:cpQtdProduto,:cpComplementoUm,:cpCodPedido,:cpComplementoDois,
-				 :cpFormaPagamento,:cpQtdParcela,:cpValorParcela,:cpValorTotalProduto,:cpObservacaoPedido)";
+				 :cpFormaPagamento,:cpQtdParcela,:cpValorParcela,:cpValorBaseProduto,:cpValorTotalProduto,:cpObservacaoPedido)";
 			
 		$in=DB::prepare($sql);
 		$in->bindParam(":tuProduto_idProduto", $this->tuProduto_idProduto,PDO::PARAM_INT);
 		$in->bindParam(":cpQtdProduto", $this->cpQtdProduto,PDO::PARAM_INT);
 		$in->bindParam(":cpComplementoUm", $this->cpComplementoUm,PDO::PARAM_STR);
 		$in->bindParam(":cpCodPedido",$this->cpCodPedido,PDO::PARAM_INT);
+		$in->bindParam(":cpValorBaseProduto", $this->cpValorBaseProduto,PDO::PARAM_STR);
 		$in->bindParam(":cpComplementoDois", $this->cpComplementoDois,PDO::PARAM_STR);
 		$in->bindParam(":cpValorTotalProduto", $this->cpValorTotalProduto,PDO::PARAM_STR);
 		$in->bindParam(":cpFormaPagamento", $this->cpFormaPagamento,PDO::PARAM_STR);
@@ -40,9 +41,9 @@ class PreparaProduto extends Pedido{
 	public function getInfoJSON(){
 			
 		$sql="SELECT
-			prep.idPreparaProduto,prep.tuProduto_idProduto,prod.cpQtdProduto,prep.cpComplementoUm,prep.cpCodPedido,
+			prep.idPreparaProduto,prep.tuProduto_idProduto,prep.cpQtdProduto,prep.cpComplementoUm,prep.cpCodPedido,
 			prep.cpComplementoDois,prep.cpValorTotalProduto,prod.cpValorProduto,prod.cpNomeProduto,prep.cpObservacaoPedido,
-			prep.cpQtdParcela,prep.cpValorParcela
+			prep.cpQtdParcela,prep.cpValorParcela,prep.cpValorBaseProduto
 		FROM
 			$this->table as prep INNER JOIN tuProduto as prod
 			
@@ -182,7 +183,7 @@ class PreparaProduto extends Pedido{
 	public function getProduto() {
 			
 		$sql="SELECT
-				idPreparaProduto,tuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,
+				idPreparaProduto,tuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,cpValorBaseProduto,
 				cpFormaPagamento,cpQtdParcela,cpValorParcela,cpComplementoDois,cpValorTotalProduto,cpObservacaoPedido
 			 FROM
 				$this->table";

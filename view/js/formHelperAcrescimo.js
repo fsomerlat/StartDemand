@@ -42,10 +42,23 @@ var FormHelperAcrescimo = (function(){
 					
 						$("#cpValorTotalAcrescimo").val(dados.cpValorProduto);
 						$("#cpValorBaseAcrescimo").val(dados.cpValorProduto);
+	
 					} 
 				});
 			}
 		});
+	}
+	
+	var getValorTotalAcrescimo =  function() {
+		
+		return $("#cpValorTotalAcrescimo").val();
+	}
+	
+	var setValorParcelas = function(value) {
+		
+		var parcelas = getValorTotalAcrescimo() / value;
+		
+		$("#cpValorParcelaAcrescimo").val(parcelas);
 	}
 	
 	var setHideBlocoParcelasAcrescimo = function() {
@@ -65,7 +78,7 @@ var FormHelperAcrescimo = (function(){
 				$(".isZero").val(0);
 				$(".isPlaceholder").val("").attr("placeholder","R$ 00.00");				
 			}else{
-				getAjaxValorAcrescimo(ev.target.value);				
+				getAjaxValorAcrescimo(ev.target.value);
 			}
 		});		
 		
@@ -83,6 +96,15 @@ var FormHelperAcrescimo = (function(){
 				
 				$("#cpQtdParcelaAcrescimo").val(0);
 				$("#cpValorParcelaAcrescimo").val("");
+			}
+		});
+		
+		$("#cpQtdParcelaAcrescimo").change(function(){
+			
+			if(this.value > 0) {
+				setValorParcelas(this.value);	
+			}else{
+				$("#cpValorParcelaAcrescimo").val("").attr("placeholder","R$ 00.00");
 			}
 		});
 	}

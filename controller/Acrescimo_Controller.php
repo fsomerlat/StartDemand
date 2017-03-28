@@ -1,7 +1,8 @@
 <?php	require_once '../core/include.php';
 
 	$acrescimo =  new Acrescimo();
-	$parcelasPedido = new ParcelasPedido();
+	$parcelasAcrescimo = new ParcelaAcrescimo();
+	
 	
 	if($_REQUEST["acao"] == "cadastrar"):
 
@@ -10,9 +11,23 @@
 		$acrescimo->__set("cpQtdAcrescimo", addslashes($_REQUEST["cpQtdAcrescimo"]));
 		$acrescimo->__set("cpValorBaseAcrescimo", addslashes($_REQUEST["cpValorBaseAcrescimo"]));
 		$acrescimo->__set("cpValorTotalAcrescimo", addslashes($_REQUEST["cpValorTotalAcrescimo"]));
+		$acrescimo->__set("cpFormaPagamentoAcrescimo", addslashes($_REQUEST["cpFormaPagamentoAcrescimo"]));
+		
+		if(!empty($_REQUEST["cpQtdParcelaAcrescimo"]) && !empty($_REQUEST["cpValorParcelaAcrescimo"])) {
+			
+			$acrescimo->__set("cpQtdParcelaAcrescimo", addslashes($_REQUEST["cpQtdParcelaAcrescimo"]));
+			$acrescimo->__set("cpValorParcelaAcrescimo", addslashes($_REQUEST["cpValorParcelaAcrescimo"]));	
+			
+		}else{
+			
+			$acrescimo->__set("cpQtdParcelaAcrescimo", 0);
+			$acrescimo->__set("cpValorParcelaAcrescimo", 0);
+				
+		}
+		
 		$acrescimo->__set("cpTipoAcrescimo","N"); // N = AVUSLO
 		$acrescimo->__set("cpObservacaoAcrescimo", addslashes($_REQUEST["cpObservacaoAcrescimo"]));
-		
+	
 		
 		$acrescimo->INSERT();
 		
@@ -56,12 +71,33 @@
 	if($_REQUEST["acao"]=="baixar"):
 		
 		$id = (int)$_GET["id"];
+		$getInfoAcresimo = $acrescimo->getInfoAcrescimo($id);
+		
+		$formaPagamento = $getInfoAcresimo->cpFormaPagamentoAcrescimo;
+		$qtdParcelas = $getInfoAcresimo->cpQtdParcelaAcrescimo;
+		$status = $getInfoAcresimo->cpStatusAcrescimo;
 		$acrescimo->__set("cpSituacaoAcrescimo", "B");
-			
+		
+		$parcelasAcrescimo->__set("tuAcrescimo_idAcrescimo", addslashes($id));
+
+		
 		if($acrescimo->verifcaStatus($id)):
 				
 				$acrescimo->UPDATE_SITUACAO_ACRESCIMO_AVULSO($id);
-
+				
+				if($formaPagamento == "CC" && $status !="C") {//VERIFICAR FORMA DE PAGEMENTO PARA GERAR PARCELAS
+						
+					for($i=0; $i < $qtdParcelas; $i++) {
+				
+						$parcelasAcrescimo->INSERT();
+					}
+				}else {
+					
+					echo "<script language='javascript'>
+								window.alert('Pedido gerado a vista !');
+							</script>";
+				}
+				
 				echo "<script language='javascript'>
 							window.alert('Baixa realizada com sucesso !');
 							window.location.href='../view/PainelDePedidos.php';
