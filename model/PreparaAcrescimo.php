@@ -155,4 +155,29 @@
 		 		echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMesssage()." na linha ".$e->getLine();
 		 	}
 		 }
+		 
+		 public function getId($id) {
+		 	
+		 	$sql="SELECT 	
+		 			cpValorTotalAcrescimo 
+		 		  FROM 
+		 			$this->table
+		 		  WHERE 
+		 		    idPreparaAcrescimo=:idPreparaAcrescimo";
+		 	
+		 	$s=DB::prepare($sql);
+		 	$s->bindParam(":idPreparaAcrescimo",$id,PDO::PARAM_INT);	
+		 	$s->execute();
+		 	
+		 	try {
+		 		
+		 		return $s->fetch();
+		 	
+		 	}catch(PDOExcepion $e) {
+		 		
+		 		echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+		 	}
+		 		
+		 }
+		 
 	}

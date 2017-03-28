@@ -15,6 +15,15 @@ var FormHelperPedidoAcrescimo = (function() {
 		$("#valTotalPreparaProduto").val(valor);
 	}
 	
+	var setValorTotalProdutoComAcrescimo = function(valor) {
+		
+		$("#valTotalProdutoComAcrescimo").val(valor);
+	}
+	
+	var getValorTotalProdutoComAcrescimo = function() {
+		
+		return $("#valTotalProdutoComAcrescimo").val();
+	}
 	var setValorAcrescimo = function(valor) {
 		
 		$("#valTotalPreparaAcrescimo").val(valor);				
@@ -32,9 +41,8 @@ var FormHelperPedidoAcrescimo = (function() {
 				$(".valTotalPedidoPagPreparaPedido").attr("placeholder","R$ 00.00");
 
 			}else {
-				
-			     somaTotal = parseFloat(somaProduto) + parseFloat(somaAcrescimo);
-				 $(".valTotalPedidoPagPreparaPedido").val(somaTotal);				
+			
+				 $(".valTotalPedidoPagPreparaPedido").val(getValorTotalProdutoComAcrescimo());				
 			}
 		},100);
 	}
@@ -42,27 +50,6 @@ var FormHelperPedidoAcrescimo = (function() {
 	var getValorBaseAcrescimo =  function() {
 		
 		return $("#cpValorBaseAcrescimo").val();
-	}
-	
-	var getAjaxValorAcrescimo = function(nomeProduto) {
-		
-		$.ajax({
-			
-			url: "http://localhost/startDemand/service/Service_Produto.php",
-			cache: false,
-			dataType:"json",
-			success:function(retorno) {
-					
-			retorno.map(function(dados) {
-					
-					if(dados.cpNomeProduto == nomeProduto) {
-					
-						$("#cpValorTotalAcrescimo").val(dados.cpValorProduto);
-						$("#cpValorBaseAcrescimo").val(dados.cpValorProduto);
-					} 
-				});
-			}
-		});
 	}
 	
 	var efetivarPedido =  function() {
@@ -197,11 +184,6 @@ var FormHelperPedidoAcrescimo = (function() {
 		preencheAcrescimoPedido();
 		preencheSelectCodigo();
 		setSomaValores();
-		
-		$(document).on('change','#cpAcrescimo',function(ev) {
-			
-			getAjaxValorAcrescimo(ev.target.value);
-		});
 				
 		$(document).on('click','.excluirAcrescimo',function(){
 			
@@ -236,6 +218,7 @@ var FormHelperPedidoAcrescimo = (function() {
 		bindEvents: bindEvents,
 		setValorAcrescimo: setValorAcrescimo,
 		setValorProduto: setValorProduto,
+		setValorTotalProdutoComAcrescimo: setValorTotalProdutoComAcrescimo,
 		painelEmenuAcrescimoHide: painelEmenuAcrescimoHide
 	}
 	

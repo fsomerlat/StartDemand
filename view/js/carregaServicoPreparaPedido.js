@@ -40,6 +40,8 @@ var Service_Prepara_Pedido = (function() {
 							itens += "<td>"+i.cpNomeProduto+"</td>"
 							itens += "<td>"+i.cpQtdProduto+"</td>";
 							itens += "<td>"+i.cpValorProduto+"</td>";
+							itens += "<td>"+i.cpQtdParcela+"</td>";
+							itens += "<td>"+i.cpValorParcela+"</td>";
 							itens += "<td>"+i.cpValorTotalProduto+"</td>";
 							itens += "<td>"+i.cpObservacaoPedido+"</td>";
 							itens += "<td><a href='Pedido.php?panel=193158&acao=editar&id="+i.idPreparaProduto+"' title='editar'><span class='glyphicon glyphicon-pencil super'  aria-hidden='true'></span></a></td>";
@@ -48,6 +50,8 @@ var Service_Prepara_Pedido = (function() {
 							
 							$("#tuPedido_cpCodPedido").html("<option value='"+i.cpCodPedido+"'>"+i.cpCodPedido+"</option>");
 							umiTem += i.idPreparaProduto;
+							
+							FormHelperPedidoAcrescimo.setValorTotalProdutoComAcrescimo(i.cpValorTotalProduto);
 						});
 						$("#tablePreparaPedido tbody").html(itens);
 						$(".listaPreparaPedido").html("");

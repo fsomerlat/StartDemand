@@ -41,7 +41,8 @@ class PreparaProduto extends Pedido{
 			
 		$sql="SELECT
 			prep.idPreparaProduto,prep.tuProduto_idProduto,prod.cpQtdProduto,prep.cpComplementoUm,prep.cpCodPedido,
-			prep.cpComplementoDois,prep.cpValorTotalProduto,prod.cpValorProduto,prod.cpNomeProduto,prep.cpObservacaoPedido
+			prep.cpComplementoDois,prep.cpValorTotalProduto,prod.cpValorProduto,prod.cpNomeProduto,prep.cpObservacaoPedido,
+			prep.cpQtdParcela,prep.cpValorParcela
 		FROM
 			$this->table as prep INNER JOIN tuProduto as prod
 			
@@ -233,5 +234,29 @@ class PreparaProduto extends Pedido{
 			
 			echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 		}
+	}
+	
+	public function UPDATE_VALORES($id) {
+		
+		$sql="UPDATE 
+				$this->table 
+			  SET
+			  	cpValorParcela=:cpValorParcela,cpValorTotalProduto=:cpValorTotalProduto
+			  WHERE
+			  	idPreparaProduto=:idPreparaProduto";
+		
+		$up=DB::prepare($sql);
+		$up->bindParam(":idPreparaProduto",$id,PDO::PARAM_INT);
+		$up->bindParam(":cpValorParcela", $this->cpValorParcela,PDO::PARAM_STR);
+		$up->bindParam(":cpValorTotalProduto", $this->cpValorTotalProduto,PDO::PARAM_STR);
+		
+		try{
+			
+			return $up->execute();
+		
+		}catch(PDOException $e) {
+			
+			echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+		}		
 	}
 }

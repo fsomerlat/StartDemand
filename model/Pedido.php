@@ -67,7 +67,7 @@
 		public function getId($id) {
 			
 			$sql="SELECT 
-					idPedido,cpCodPedido,cpFormaPagamento,cpQtdParcela,cpValorParcela
+					idPedido,cpCodPedido,cpFormaPagamento,cpQtdParcela,cpValorParcela,cpStatusPedido
 				  FROM 
 					$this->table
 				  WHERE 
@@ -143,7 +143,7 @@
 		public function getInfoPedido() {
 			
 			$sql="SELECT 
-						idPedido,cpCodPedido
+						idPedido,cpCodPedido,cpValorTotalPedido
 				  FROM 
 						$this->table
 				  WHERE
@@ -315,6 +315,30 @@
 				return $up->execute();
 			
 			}catch(PDOException $e){
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}
+		
+		public function UPDATE_VALORES($id) {
+			
+			$sql="UPDATE 
+					$this->table
+				  SET
+				  	cpValorParcela=:cpValorParcela,cpValorTotalPedido=:cpValorTotalPedido
+				  WHERE
+				  	idPedido=:idPedido";
+			
+			$up=DB::prepare($sql);
+			$up->bindParam(":idPedido", $id,PDO::PARAM_INT);
+			$up->bindParam(":cpValorParcela", $this->cpValorParcela,PDO::PARAM_STR);
+			$up->bindParam(":cpValorTotalPedido", $this->cpValorTotalPedido,PDO::PARAM_STR);
+			
+			try {
+				
+				return $up->execute();
+			
+			}catch(PDOException $e) {
 				
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 			}

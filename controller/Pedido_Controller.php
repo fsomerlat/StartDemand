@@ -4,8 +4,8 @@
 	$preparaProduto =  new PreparaProduto();
 	$preparaAcrescimo = new PreparaAcrescimo();
 	$acrescimo =  new Acrescimo();
-	$pedidoAcrescimo =  new PedidoAcrescimo();
-	
+	$parcelasPedido =  new ParcelasPedido();
+	$parcelas = new Parcelas();
 	
 	if($_REQUEST["acao"] == "gerar pedido"):
 	
@@ -189,7 +189,11 @@
 	    $valTotalProduto = $getInfoPreparaProduto->cpValorTotalProduto;
 	    $formaPagamento = $getInfoPreparaProduto->cpFormaPagamento;
 	    $qtdParcela = $getInfoPreparaProduto->cpQtdParcela;
-	    $valParcela = $getInfoPreparaProduto->cpValorParcela;
+	    
+	   // $valParcela = $getInfoPreparaProduto->cpValorParcela;
+	    
+	    $valorParcela = $somaTotalPedido / $qtdParcela;
+	    
 	    $obsPedido = $getInfoPreparaProduto->cpObservacaoPedido;
 	    	
 	    //BUSCA INFO TABELA PREPARA ACRÉSCIMO
@@ -207,8 +211,19 @@
 	    $ped->__set("cpValorTotalPedido", addslashes($somaTotalPedido));
 	    
 	    $ped->__set("cpFormaPagamento", addslashes($formaPagamento));
-	    $ped->__set("cpQtdParcela", addslashes($qtdParcela));
-	    $ped->__set("cpValorParcela", addslashes($valParcela));
+	    
+	    if($qtdParcela > 0) {
+	 
+	    	$ped->__set("cpQtdParcela", addslashes($qtdParcela));
+	    	$ped->__set("cpValorParcela", addslashes($valorParcela));
+	    	
+	    } else {
+	    	
+	    	$ped->__set("cpQtdParcela", 0);
+	    	$ped->__set("cpValorParcela", 0);
+	    }
+
+	   
 	    
 	    $ped->__set("cpObservacaoPedido", addslashes($obsPedido));
 	    
@@ -244,7 +259,7 @@
 	    
 	    	endforeach;
 	    	
-	    	//$preparaAcrescimo->DELETATUDO();
+	    	$preparaAcrescimo->DELETATUDO();
 	    	echo "Pedido [ PRODUTO COM ACRÉSCIMO ] gerado com sucesso !";
 	    
 	   } elseif ($preparaAcrescimo->getRow() == 0 && $preparaProduto->getRow() == 0){
@@ -252,15 +267,31 @@
 	   		echo "Informe um [ PRODUTO ] e um [ ACRÉSCIMO ] para gerar um pedido !";
 	   
 	   } elseif($preparaProduto->getRow() == 1 && $preparaAcrescimo->getRow() > 0 && $comparaIdsDuplicados > 0) {
-
-	   		
-	   		$getInfoPedido = $ped->getInfoPedido();
+	   	
+ 	   		$getInfoPedido = $ped->getInfoPedido();
 	   		$UltimoIdPedido = $getInfoPedido->idPedido;
 	   		
     		$getInfoPedido = $ped->getId($UltimoIdPedido); 
     		$idPedido = $getInfoPedido->idPedido;
      		$codPedido = $getInfoPedido->cpCodPedido;
-				
+     		$valTotalPedido = $getInfoPedido->cpValorTotalPedido;
+     
+     		
+     		if($qtdParcela > 0){
+     		
+     			$preparaProduto->__set("cpValorParcela", $valorParcela);
+     			$preparaProduto->__set("cpValorTotalProduto", $valTotalProduto);
+     			$ped->__set("cpValorParcela", $valorParcela);
+     			$ped->__set("cpValorTotalPedido", $valTotalProduto);
+     		
+     		} else {
+     		
+     			$preparaProduto->__set("cpValorParcela", 0);
+     			$preparaProduto->__set("cpValorTotalProduto", $valTotalProduto);
+     			$ped->__set("cpValorParcela", 0);
+     			$ped->__set("cpValorTotalPedido", $valTotalProduto);
+     		}
+     		
 			//SETA ACRÉSCIMO
 			foreach($arryAll as $key => $res):
 				
@@ -273,11 +304,15 @@
 				$acrescimo->__set("cpTipoAcrescimo","P"); // P = VINCULADO A UM PEDIDO
 				$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
 				$acrescimo->__set("cpObservacaoAcrescimo", addslashes($res->cpObservacaoAcrescimo));
-				
+						
 				$acrescimo->INSERT();
 				
 			endforeach;
-	    	
+	
+			$preparaProduto->UPDATE_VALORES($idPreparaProduto);
+			$ped->UPDATE_VALORES($idPedido);
+			$preparaAcrescimo->DELETATUDO();
+			
 			echo "Pedido [ ACŔESCIMO ] gerado com sucesso !";
 	    }
 	    
@@ -365,59 +400,59 @@
 		$id = (int)$_GET["id"];		
 	
 		$getInfoPedido = $ped->getId($id); // RETORNA INFORMAÇÕES DO PEDIDO ATRAVEŚ DO IDPEDIDO
-		$getInfoAcrescimo = $acrescimo->getId($id); // RETORNA IDACRESCIMO ATRAVEŚ DA FK TUPEDIDO_IDPEDIDO
 		
 		$ped->__set("cpSituacaoPedido", "B");
 		$ped->__set("cpUsuarioBaixa",addslashes($_SESSION['cpNome']));
 		$acrescimo->__set("cpSituacaoAcrescimo", "B");
 		
 		if($acrescimo->getRow() > 0):
-			$idAcrescimo = $getInfoAcrescimo->idAcrescimo;
-			$pedidoAcrescimo->__set("tuAcrescimo_idAcrescimo", addslashes($idAcrescimo));
-			$pedidoAcrescimo->__set("tuPedido_idPedido", addslashes($id));
 			
-			else:
-				
-			$pedidoAcrescimo->__set("tuAcrescimo_idAcrescimo", 0);
-			$pedidoAcrescimo->__set("tuPedido_idPedido", addslashes($id));
+			$parcelas->__set("tuPedido_idPedido", addslashes($id));	
+
 		endif;
 		
 		$formaPagamento = $getInfoPedido->cpFormaPagamento;
 		$qtdParcela = $getInfoPedido->cpQtdParcela;
 		$valParcela = $getInfoPedido->cpValorParcela;
+		$statusPedido = $getInfoPedido->cpStatusPedido;
 	
-
-		if($formaPagamento == "CC"):
-				
-				for($i=0; $i < $qtdParcela; $i++){
-						
-					$pedidoAcrescimo->INSERT();
-				}
-			
-			else:
-				
-				$pedidoAcrescimo->INSERT();
-			
-		endif;
-		
 		
 		if($ped->relacionaPedidoAcrescimo($id) || $ped->pedidoAndamentoIndividual($id)) :
 			
-			echo "<script language='javascript'>f
+			echo "<script language='javascript'>
 						window.alert('Registro  [ EM ANDAMENTO ] não pode ser baixado !');
 						window.history.go(-1);
 					</script>";
 			
 		else:
+			
 			$ped->UPDATE_SITUACAO_PEDIDO($id);
 			$acrescimo->UPDATE_SITUACAO_ACRESCIMO_PEDIDO($id);
-			echo "<script language='javascript'>
-						window.alert('Pedido baixado com sucesso !');
-						window.location.href='../view/PainelDePedidos.php';
-					</script>";
+
+				
+				if($formaPagamento == "CC" && $statusPedido != "C"):
+				
+					for($i=0; $i < $qtdParcela; $i++){
+					
+						$parcelas->INSERT();
+					}
+					
+					else:
+		
+							echo "<script language='javascript'>
+										window.alert('Pedido criado a vista !');
+										window.history.go(-1);
+									</script>";
+					
+				endif;
+			
+					echo "<script language='javascript'>
+								window.alert('Pedido baixado com sucesso !');
+								window.location.href='../view/PainelDePedidos.php';
+							</script>";
+			
 		endif;
 	endif;
-	
 	
 	
 	

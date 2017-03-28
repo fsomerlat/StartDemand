@@ -16,6 +16,8 @@
 							<th>Nome produto</th>
 							<th>QTDE</th>
 							<th>Valor</th>
+							<th>QTDE parcela</th>
+							<th>Valor parcela</th>
 							<th>Total</th>
 							<th>Observação</th>
 							<th></th>
@@ -41,6 +43,8 @@
 					
 					<input type="hidden" name="valTotalPreparaProduto" id="valTotalPreparaProduto"/>
 					<input type="hidden" name="valTotalPreparaAcrescimo" id="valTotalPreparaAcrescimo"/>
+					
+					<input type="hidden" name="valTotalProdutoComAcrescimo" id="valTotalProdutoComAcrescimo" />
 
 					<div class="col-md-2">
 						<div class="form-group">

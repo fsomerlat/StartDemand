@@ -19,7 +19,7 @@
 								</select>
 							</div>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<div class="form-group">
 								<label for="Acrescimo">Acréscimo</label>
 								<select name="cpAcrescimo" id="cpAcrescimo" class="form-control">
@@ -27,10 +27,10 @@
 								</select>
 							</div>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-3">
 							<div class="form-group">
 								<label for="Quantidade acrescimo">Quantidade</label>
-								<select name="cpQtdAcrescimo" id="cpQtdAcrescimo" class="form-control">
+								<select name="cpQtdAcrescimo" id="cpQtdAcrescimo" class="form-control isZero">
 									<option value="0">Selecione</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -48,15 +48,54 @@
 						<div class="col-md-2">
 							<div class="form-group">
 								<label for="Valor base acrescimo">Valor base</label>
-								<input name="cpValorBaseAcrescimo" id="cpValorBaseAcrescimo" readonly class="form-control" />
+								<input name="cpValorBaseAcrescimo" id="cpValorBaseAcrescimo" readonly class="form-control isPlaceholder" />
 							</div>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="Forma de pagamento">Forma de pagamento</label>
+								<select name="cpFormaPagamentoAcrescimo" id="cpFormaPagamentoAcrescimo" class="form-control">
+									<option value="">Selecione</option>
+									<option value="D">Dinheiro</option>
+									<option value="CD">Cartão / Débito</option>
+									<option value="CC">Cartão / Crédito</option>
+								</select>
+							</div>
+						</div>
+						<div class="blocoParcelasAcrescimo">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="Quantidade parcelas">QTDE Parcelas</label>
+								<select name="cpQtdParcelaAcrescimo" id="cpQtdParcelaAcrescimo" class="form-control isZero">
+									<option value="0">Selecione</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="Valor da parcela">Valor / parcela</label>
+								<input name="cpValorParcelaAcrescimo" id="cpValorParcelaAcrescimo" readonly class="form-control isPlaceholder" />
+							</div>
+						</div>
+						</div>						
+						<div class="col-md-3">
 							<div class="form-group">
 								<label for="Valor total acréscmo">Valor total</label>
-								<input name="cpValorTotalAcrescimo" id="cpValorTotalAcrescimo" readonly class="form-control" />
+								<input name="cpValorTotalAcrescimo" id="cpValorTotalAcrescimo" readonly class="form-control isPlaceholder" />
 							</div>
-						</div>
+						</div>						
 						<div class="col-md-12">
 							<div class="form-group">
 								<textarea name="cpObservacaoAcrescimo" placeholder="Observação acréscimo..." id="cpObservacaoAcrescimo" class="form-control"></textarea>

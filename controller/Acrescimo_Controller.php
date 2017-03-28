@@ -1,7 +1,7 @@
 <?php	require_once '../core/include.php';
 
 	$acrescimo =  new Acrescimo();
-	$pedidoAcrescimo = new PedidoAcrescimo();
+	$parcelasPedido = new ParcelasPedido();
 	
 	if($_REQUEST["acao"] == "cadastrar"):
 
@@ -57,15 +57,11 @@
 		
 		$id = (int)$_GET["id"];
 		$acrescimo->__set("cpSituacaoAcrescimo", "B");
-		
-		$pedidoAcrescimo->__set("tuPedido_idPedido", 0);-
-		$pedidoAcrescimo->__set("tuAcrescimo_idAcrescimo", addslashes($id));
-		
-		
+			
 		if($acrescimo->verifcaStatus($id)):
 				
 				$acrescimo->UPDATE_SITUACAO_ACRESCIMO_AVULSO($id);
-				$pedidoAcrescimo->INSERT();
+
 				echo "<script language='javascript'>
 							window.alert('Baixa realizada com sucesso !');
 							window.location.href='../view/PainelDePedidos.php';
