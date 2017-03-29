@@ -63,7 +63,7 @@
 							</div>
 						</div>
 						<div class="blocoParcelasAcrescimo">
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<div class="form-group">
 								<label for="Quantidade parcelas">QTDE Parcelas</label>
 								<select name="cpQtdParcelaAcrescimo" id="cpQtdParcelaAcrescimo" class="form-control isZero">
@@ -83,14 +83,20 @@
 								</select>
 							</div>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<div class="form-group">
 								<label for="Valor da parcela">Valor / parcela</label>
 								<input name="cpValorParcelaAcrescimo" id="cpValorParcelaAcrescimo" readonly class="form-control isPlaceholder" />
 							</div>
 						</div>
+						<!-- div class="col-md-3">
+							<div class="form-group">
+								<label for="Data vencimento parcela">Data da compra</label>
+								<input type="text" name="cpDataCompraAcrescimo" id="cpDataCompraAcrescimo" readonly class="form-control" />
+							</div> 
+						</div-->
 						</div>						
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<div class="form-group">
 								<label for="Valor total acréscmo">Valor total</label>
 								<input name="cpValorTotalAcrescimo" id="cpValorTotalAcrescimo" readonly class="form-control isPlaceholder" />

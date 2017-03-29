@@ -17,10 +17,21 @@ document.getElementById("btnCadastarAcrescimo").onclick = function(){
 		return id.value;
 	}
 	
+	var validaPaiFilho = function(campo,valor) {
+		
+		if(returnId(campo) == valor ) {
+			
+			valida("cpQtdParcelaAcrescimo","È necessário selecionar o campo [ QTDE PARCELAS ] !");
+			valida("cpValorParcelaAcrescimo","È necessário preencher o campo [ VALOR PARCELA ] !");
+		}
+	}
+	
 	valida("tuPedido_cpCodPedido","È necessário selecionar o campo [ CÓDIGO DO PEDIDO ] !");
 	valida("cpAcrescimo","È necessário selecionar o campo [ ACRESCIMO ] !");
 	valida("cpQtdAcrescimo","È necessário selecionar o campo [ QUANTIDADE ] !");
 	valida("cpValorBaseAcrescimo","È necessário preencher o campo [ VALOR BASE ] !");
+	valida("cpFormaPagamentoAcrescimo","È necessário selecionar o campo [ FORMA DE PAGAMENTO ] !");
+	validaPaiFilho("cpFormaPagamentoAcrescimo","CC");
 	valida("cpValorTotalAcrescimo","È necessário preencher o campo [ VALOR TOTAL ] !");
 	
 	

@@ -4,7 +4,8 @@
 		
 		protected $table = "tuParcelaAcrescimo";
 		private $tuAcrescimo_idAcrescimo,
-				$cpDataLancamento;
+				$cpDataLancamento,
+				$cpDataVencimentoParcelaAcrescimo;
 		
 		public function __set($attr,$valor) {
 			
@@ -14,11 +15,13 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table
-					(tuAcrescimo_idAcrescimo,cpDataLancamento)
+					(tuAcrescimo_idAcrescimo,cpDataVencimentoParcelaAcrescimo,cpDataLancamento)
 				  VALUES
-				    (:tuAcrescimo_idAcrescimo,now())";
+				    (:tuAcrescimo_idAcrescimo,:cpDataVencimentoParcelaAcrescimo,now())";
+			
 			$in=DB::prepare($sql);
 			$in->bindParam(":tuAcrescimo_idAcrescimo", $this->tuAcrescimo_idAcrescimo,PDO::PARAM_INT);
+			$in->bindParam(":cpDataVencimentoParcelaAcrescimo", $this->cpDataVencimentoParcelaAcrescimo,PDO::PARAM_STR);
 			
 			try{
 				

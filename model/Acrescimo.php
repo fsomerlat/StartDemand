@@ -16,6 +16,7 @@
 				$cpFormaPagamentoAcrescimo,
 				$cpQtdParcelaAcrescimo,
 				$cpValorParcelaAcrescimo,
+				$cpDataCompraAcrescimo,
 				$cpObservacaoAcrescimo;
 		
 		public function __set($attr,$valor){
@@ -32,10 +33,10 @@
 			
 			$sql="INSERT INTO $this->table 
 				  	(tuPedido_idPedido,tuPedido_cpCodPedido,cpTipoAcrescimo,cpValorBaseAcrescimo,cpAcrescimo,cpQtdAcrescimo,
-				  	cpValorTotalAcrescimo,cpFormaPagamentoAcrescimo,cpQtdParcelaAcrescimo,cpValorParcelaAcrescimo,cpObservacaoAcrescimo)
+				  	cpValorTotalAcrescimo,cpFormaPagamentoAcrescimo,cpQtdParcelaAcrescimo,cpValorParcelaAcrescimo,cpObservacaoAcrescimo,cpDataCompraAcrescimo)
 				  VALUES
 				  	(:tuPedido_idPedido,:tuPedido_cpCodPedido,:cpTipoAcrescimo,:cpValorBaseAcrescimo,:cpAcrescimo,:cpQtdAcrescimo,
-					:cpValorTotalAcrescimo,:cpFormaPagamentoAcrescimo,:cpQtdParcelaAcrescimo,:cpValorParcelaAcrescimo,:cpObservacaoAcrescimo)";
+					:cpValorTotalAcrescimo,:cpFormaPagamentoAcrescimo,:cpQtdParcelaAcrescimo,:cpValorParcelaAcrescimo,:cpObservacaoAcrescimo,now())";
 			
 			$in=DB::prepare($sql);
 			
@@ -291,7 +292,7 @@
 			
 			
 			$sql="SELECT
-					idAcrescimo,cpFormaPagamentoAcrescimo,cpQtdParcelaAcrescimo,cpValorParcelaAcrescimo,cpStatusAcrescimo
+					idAcrescimo,cpFormaPagamentoAcrescimo,cpQtdParcelaAcrescimo,cpValorParcelaAcrescimo,cpStatusAcrescimo,cpDataCompraAcrescimo
 				  FROM 
 					$this->table
 				  WHERE 
