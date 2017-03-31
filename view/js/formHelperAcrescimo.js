@@ -18,14 +18,32 @@ var FormHelperAcrescimo = (function(){
 	
 	var changeFormaPagamento = function(value) {
 		
-		if(value == "CC"){
+		if(value == "D") {
 			
-			$(".blocoParcelasAcrescimo").show();
-		}else{
-			$(".blocoParcelasAcrescimo").hide();
+			$(".isParcela,.isPlanoPagSeguro,.isBandeiraCartao,.isTaxaJuros,.isTotalLiquido,.isPorcentagemTaxa").hide();
+		}
+		
+		else if(value == "CC"){
+			
+			$(".isParcela,.isBandeiraCartao,.isTaxaJuros,.isPorcentagemTaxa,.isTotalLiquido").show();
+			$(".isPlanoPagSeguro").hide();
+			
+		}else if(value == "CD"){
+			
+			$(".cpQtdParcelaAcrescimo").val(0);
+			$(".isBandeiraCartao,.isTaxaJuros,.isPorcentagemTaxa,.isTotalLiquido").show();
+			$(".isParcela,.isPlanoPagSeguro").hide();
+			
+		}else if(value == "PS"){
+			
+			$(".isParcela,.isBandeiraCartao").hide();
+			$(".isPlanoPagSeguro,.isTaxaJuros,.isPorcentagemTaxa,.isTotalLiquido").show();
+			$(".cpQtdParcelaAcrescimo").val(0);
+		}else {
+			
+			$(".isParcela,.isPlanoPagSeguro,.isBandeiraCartao,.isTaxaJuros,.isTotalLiquido,.isPorcentagemTaxa").hide();
 		}
 	}
-	
 	
 	var createDatePicker = function() {
 		
@@ -66,6 +84,73 @@ var FormHelperAcrescimo = (function(){
 		});
 	}
 	
+	
+	var setJurosPagSeguro = function(value) {
+			
+		$("#valorBaseTaxaJuros").val(value);
+		
+		if(value == "D" || value == "CD" || value == "") {
+			
+			$("#cpPorcentagemTaxa").val(0);
+		}
+	}
+	
+	var setValorBaseTaxaJuros = function(value) {
+		
+		var arryValue  = value.split("-"),
+			setValue = arryValue[1];		//PEGA A TAXA DO CARTAO QUE ESTÁ JUNTO AO NOME DA BANDEIRA DO CARTAO
+		
+		$("#cpPorcentagemTaxa").val(setValue);
+	}
+	
+	var getTaxaBaseJuros = function() {
+		
+		return $("#cpPorcentagemTaxa").val();   	
+	}
+	
+	var setTaxaJuros = function() {
+		
+		var valorTotal = getValorTotalAcrescimo(),
+			taxaBaseJuros = getTaxaBaseJuros(),
+			resultTaxa =  parseFloat(taxaBaseJuros) * parseFloat(valorTotal) / 100;
+		
+		valorTotalRecalculado = valorTotal - resultTaxa;
+		
+		$("#cpValorTaxaJuros").val(resultTaxa);
+		$("#cpValorTotalLiquido").val(valorTotalRecalculado);
+		$("#cpValorTotalAcrescimo").val(valorTotal);
+	} 	
+	
+	var setBandeiraCartoes = function(value) {
+	    
+		var options = "",
+			optionPlanoPagSeguro = "";
+		$.ajax({
+			
+			url:"http://localhost/startDemand/service/Service_Taxa_Juros.php",
+			cache: false,
+			dataType:"json",
+			success: function(retorno) {
+				
+			    options += "<option value='0'>Selecione</option>";
+			    optionPlanoPagSeguro += "<option value='0'>Selecione</option>";
+			    
+				for(var i=0; i < retorno.length; i++) {                                                                                              
+					
+					if(value == retorno[i].cpFormaPagamentoTaxa){
+						
+						options += "<option value='"+retorno[i].cpBandeiraCartao+"-"+retorno[i].cpPorcentagemTaxa+"'>"+retorno[i].cpBandeiraCartao+ "</option>";
+						optionPlanoPagSeguro += "<option value='"+retorno[i].cpBandeiraCartao+"-"+retorno[i].cpPorcentagemTaxa+"'>"+retorno[i].cpPlanoPagSeguro+" dias</option>";
+					}
+				}
+				
+				$("#cpBandeiraCartao").html(options);
+				$("#cpPlanoPagSeguro").html(optionPlanoPagSeguro);			
+			}
+		});
+		
+	}
+	
 	var getValorTotalAcrescimo =  function() {
 		
 		return $("#cpValorTotalAcrescimo").val();
@@ -78,16 +163,22 @@ var FormHelperAcrescimo = (function(){
 		$("#cpValorParcelaAcrescimo").val(parcelas);
 	}
 	
-	var setHideBlocoParcelasAcrescimo = function() {
+	var setHideBlocoFormaPagamento= function() {
 		
-		$(".blocoParcelasAcrescimo").hide();
+		$(".isParcela,.isPlanoPagSeguro,.isBandeiraCartao,.isTaxaJuros,.isTotalLiquido,.isPorcentagemTaxa").hide();
+	}
+	
+	var mascaraCampos = function() {
+		
+		$("#cpPorcentagemTaxa").mask("99.99");
 	}
 	
 	var bindEvents = function(){
 		
 		preencheComboCodPedido();
-		setHideBlocoParcelasAcrescimo();
+		setHideBlocoFormaPagamento();
 		createDatePicker();
+		mascaraCampos();
 		
 		$(document).on('change','#cpAcrescimo',function(ev) {
 			
@@ -104,9 +195,10 @@ var FormHelperAcrescimo = (function(){
 			return confirm("Deseja excluir esse  registro ?");
 		});
 		
-		
 		$("select[name=cpFormaPagamentoAcrescimo]").change(function(){
 			
+			setJurosPagSeguro(this.value);
+			setBandeiraCartoes(this.value);
 			changeFormaPagamento(this.value);
 			
 			if(this.value != "CC") {
@@ -118,12 +210,57 @@ var FormHelperAcrescimo = (function(){
 		
 		$("#cpQtdParcelaAcrescimo").change(function(){
 			
+			var valTotal = $("#cpValorTotalAcrescimo").val();
+		
+			if(valTotal == "") {
+				this.value = 0 ;
+				window.alert("È necessário ter um valor para gerar parcelas !");
+				$("#cpAcrescimo").focus();
+			}
+			setTimeout(function() {
+				setTaxaJuros();
+			},010)			
+		});
+	
+		$("#cpQtdParcelaAcrescimo").change(function(){
+			
 			if(this.value > 0) {
 				setValorParcelas(this.value);	
 			}else{
 				$("#cpValorParcelaAcrescimo").val("").attr("placeholder","R$ 00.00");
 			}
+			setTimeout(function() {
+				setTaxaJuros();
+			},010)			
 		});
+		
+		$(document).on("change","#cpPlanoPagSeguro", function(){
+				
+			setValorBaseTaxaJuros(this.value);
+			
+			setTimeout(function() {
+				setTaxaJuros();
+			},050)
+		});
+		
+		$(document).on("change","#cpBandeiraCartao",function(){
+
+			var acresimo = $("#cpAcrescimo").val();
+			
+			if(acresimo == "") {
+				
+				this.value = 0;
+				$("#cpAcrescimo").focus();
+				window.alert("Informe primeiramente um acréscimo !"); return false;
+				
+			}
+			
+			setValorBaseTaxaJuros(this.value);
+			setTimeout(function() {
+				setTaxaJuros();
+			},050)			
+		});		
+		
 	}
 	
 	return {

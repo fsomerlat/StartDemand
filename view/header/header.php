@@ -96,11 +96,14 @@
 									<li class="divider">
 									</li>
 									<li>
+										<a href="Taxas.php">Taxas</a>
+									</li>									
+									<li>
 										<a href="#">relatórios</a>
 									</li>
 								</ul>
 							</li>
-						</ul>
+						</ul>						
 						<ul class="nav navbar-nav">
 							<li class="dropdown">
 								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuário<strong class="caret"></strong></a>

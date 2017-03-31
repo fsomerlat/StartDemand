@@ -14,9 +14,13 @@
 				$cpTipoAcrescimo,
 				$cpValorTotalAcrescimo,
 				$cpFormaPagamentoAcrescimo,
+				$cpBandeiraCartao,
 				$cpQtdParcelaAcrescimo,
 				$cpValorParcelaAcrescimo,
 				$cpDataCompraAcrescimo,
+				$cpPorcentagemTaxa,
+				$cpValorTaxaJuros,
+				$cpValorTotalLiquido,
 				$cpObservacaoAcrescimo;
 		
 		public function __set($attr,$valor){
@@ -32,11 +36,11 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table 
-				  	(tuPedido_idPedido,tuPedido_cpCodPedido,cpTipoAcrescimo,cpValorBaseAcrescimo,cpAcrescimo,cpQtdAcrescimo,
-				  	cpValorTotalAcrescimo,cpFormaPagamentoAcrescimo,cpQtdParcelaAcrescimo,cpValorParcelaAcrescimo,cpObservacaoAcrescimo,cpDataCompraAcrescimo)
+				  	(tuPedido_idPedido,tuPedido_cpCodPedido,cpTipoAcrescimo,cpValorBaseAcrescimo,cpAcrescimo,cpQtdAcrescimo,cpValorTaxaJuros,cpBandeiraCartao,
+				  	cpValorTotalLiquido,cpPorcentagemTaxa,cpValorTotalAcrescimo,cpFormaPagamentoAcrescimo,cpQtdParcelaAcrescimo,cpValorParcelaAcrescimo,cpObservacaoAcrescimo,cpDataCompraAcrescimo)
 				  VALUES
-				  	(:tuPedido_idPedido,:tuPedido_cpCodPedido,:cpTipoAcrescimo,:cpValorBaseAcrescimo,:cpAcrescimo,:cpQtdAcrescimo,
-					:cpValorTotalAcrescimo,:cpFormaPagamentoAcrescimo,:cpQtdParcelaAcrescimo,:cpValorParcelaAcrescimo,:cpObservacaoAcrescimo,now())";
+				  	(:tuPedido_idPedido,:tuPedido_cpCodPedido,:cpTipoAcrescimo,:cpValorBaseAcrescimo,:cpAcrescimo,:cpQtdAcrescimo,:cpValorTaxaJuros,:cpBandeiraCartao,
+					:cpValorTotalLiquido,:cpPorcentagemTaxa,:cpValorTotalAcrescimo,:cpFormaPagamentoAcrescimo,:cpQtdParcelaAcrescimo,:cpValorParcelaAcrescimo,:cpObservacaoAcrescimo,now())";
 			
 			$in=DB::prepare($sql);
 			
@@ -48,8 +52,12 @@
 			$in->bindParam(":cpQtdAcrescimo",$this->cpQtdAcrescimo,PDO::PARAM_STR);
 			$in->bindParam(":cpValorTotalAcrescimo",$this->cpValorTotalAcrescimo , PDO::PARAM_STR);
 			$in->bindParam(":cpFormaPagamentoAcrescimo",$this->cpFormaPagamentoAcrescimo,PDO::PARAM_STR);
+			$in->bindParam(":cpBandeiraCartao",$this->cpBandeiraCartao,PDO::PARAM_STR);
 			$in->bindParam(":cpQtdParcelaAcrescimo",$this->cpQtdParcelaAcrescimo,PDO::PARAM_INT);
 			$in->bindParam(":cpValorParcelaAcrescimo",$this->cpValorParcelaAcrescimo,PDO::PARAM_STR);
+			$in->bindParam(":cpPorcentagemTaxa",$this->cpPorcentagemTaxa,PDO::PARAM_STR);
+			$in->bindParam(":cpValorTaxaJuros",$this->cpValorTaxaJuros,PDO::PARAM_STR);
+			$in->bindParam(":cpValorTotalLiquido",$this->cpValorTotalLiquido,PDO::PARAM_STR);
 			$in->bindParam(":cpObservacaoAcrescimo",$this->cpObservacaoAcrescimo,PDO::PARAM_STR);
 			
 			try {

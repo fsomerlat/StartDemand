@@ -4,7 +4,7 @@
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				Pedidos faturados / dinheiro / débito
+				Pedidos faturados do mês/ dinheiro / débito
 			</h3>
 		</div>
 		<div class="panel-body">
@@ -19,7 +19,7 @@
 	<div class="panel panel-danger">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				Pedidos a faturar / parcelados
+				Pedidos faturados / parcelados
 			</h3>
 		</div>
 		<div class="panel-body">

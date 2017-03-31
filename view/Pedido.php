@@ -33,7 +33,7 @@
 						<div class="col-md-2">
 							<div class="form-group">
 							<label for="Tipo do pedido">Tipo do pedido</label>
-								<select name="tipoPedido" class="form-control">
+								<select name="tipoPedido" id="tipoPedido" class="form-control">
 									<option value="">Selecione</option>
 									<option value="semAcrescimo">Sem acréscimo</option>
 									<option value="comAcrescimo">Com acréscimo</option>

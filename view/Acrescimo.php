@@ -11,15 +11,16 @@
 				</div>
 				<div class="panel-body">
 					<form action="../controller/Acrescimo_Controller.php" method="POST">
+				
 						<div class="col-md-3">
 							<div class="form-group">
 								<label for="tuPedido_cpCodPedido">Código pedido</label>
-								<select name="tuPedido_cpCodPedido" id="tuPedido_cpCodPedido" class="form-control codPedidoAcrescimo">
+								<select name="tuPedido_cpCodPedido" id="tuPedido_cpCodPedido" class="form-control btn btn-warning codPedidoAcrescimo">
 									<!-- CARREGA JQUERY -->
 								</select>
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<div class="form-group">
 								<label for="Acrescimo">Acréscimo</label>
 								<select name="cpAcrescimo" id="cpAcrescimo" class="form-control">
@@ -45,7 +46,7 @@
 								</select>
 							</div>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-3">
 							<div class="form-group">
 								<label for="Valor base acrescimo">Valor base</label>
 								<input name="cpValorBaseAcrescimo" id="cpValorBaseAcrescimo" readonly class="form-control isPlaceholder" />
@@ -57,13 +58,29 @@
 								<select name="cpFormaPagamentoAcrescimo" id="cpFormaPagamentoAcrescimo" class="form-control">
 									<option value="">Selecione</option>
 									<option value="D">Dinheiro</option>
+									<option value="PS">PagSeguro</option>
 									<option value="CD">Cartão / Débito</option>
 									<option value="CC">Cartão / Crédito</option>
 								</select>
 							</div>
 						</div>
-						<div class="blocoParcelasAcrescimo">
-						<div class="col-md-2">
+						<div class="col-md-3 isPlanoPagSeguro">
+							<div class="form-group">
+								<label for="Dias para receber do pagseguro">Plano PagSeguro</label>
+								<select name="cpPlanoPagSeguro" id="cpPlanoPagSeguro" class="form-control">
+									<!-- CARREGA VIA AJAX -->
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3 isBandeiraCartao">
+							<div class="form-group">
+								<label for="Bandeira do cartão">Bandeira</label>
+								<select name="cpBandeiraCartao" id=cpBandeiraCartao class="form-control">
+									<!-- CARREGA VIA AJAX -->
+								</select>
+							</div> 
+						</div>
+						<div class="col-md-3 isParcela">
 							<div class="form-group">
 								<label for="Quantidade parcelas">QTDE Parcelas</label>
 								<select name="cpQtdParcelaAcrescimo" id="cpQtdParcelaAcrescimo" class="form-control isZero">
@@ -83,20 +100,31 @@
 								</select>
 							</div>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-3 isParcela">
 							<div class="form-group">
 								<label for="Valor da parcela">Valor / parcela</label>
 								<input name="cpValorParcelaAcrescimo" id="cpValorParcelaAcrescimo" readonly class="form-control isPlaceholder" />
 							</div>
-						</div>
-						<!-- div class="col-md-3">
+						</div>	
+						<div class="col-md-2 isPorcentagemTaxa">
 							<div class="form-group">
-								<label for="Data vencimento parcela">Data da compra</label>
-								<input type="text" name="cpDataCompraAcrescimo" id="cpDataCompraAcrescimo" readonly class="form-control" />
-							</div> 
-						</div-->
-						</div>						
-						<div class="col-md-2">
+								<label for="Porcentagem juros"> % juros</label>
+								<input type="text" name="cpPorcentagemTaxa" id="cpPorcentagemTaxa" readonly class="form-control" />
+							</div>
+						</div>
+						<div class="col-md-4 isTaxaJuros">
+							<div class="form-group">
+								<label for="Taxa de juros">Valor taxa de juros</label>
+								<input type="text" name="cpValorTaxaJuros" id="cpValorTaxaJuros" readonly class="form-control" /> 
+							</div>
+						</div>
+						<div class="col-md-3 isTotalLiquido">
+							<div class="form-group">
+								<label for="Valor total reajustado">Valor líquido</label>
+								<input name="cpValorTotalLiquido" id="cpValorTotalLiquido" readonly class="form-control isPlaceholder" />
+							</div>
+						</div>										
+						<div class="col-md-3">
 							<div class="form-group">
 								<label for="Valor total acréscmo">Valor total</label>
 								<input name="cpValorTotalAcrescimo" id="cpValorTotalAcrescimo" readonly class="form-control isPlaceholder" />

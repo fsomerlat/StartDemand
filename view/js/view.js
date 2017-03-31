@@ -9,6 +9,7 @@ $(document).ready(function(){
 	FormHelperProduto.bindEvents();
 	FormHelperPedidoAcrescimo.bindEvents();
 	FormHelperAcrescimo.bindEvents();
+	FormHelperTaxa.bindEvents();
 
 })
 
@@ -59,6 +60,14 @@ $(document).ready(function(){
 		Service_Prepara_Pedido.carregaInfoPedidoAjaxDB()
 		
 	}catch(e) {
+		
+		console.log(e);
+	}
+	try {
+		
+		Service_Taxa.carregaInfoAjaxTaxaDB();
+	
+	}catch(e){
 		
 		console.log(e);
 	}

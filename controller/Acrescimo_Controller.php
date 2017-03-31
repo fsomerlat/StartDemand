@@ -13,12 +13,47 @@
 		$acrescimo->__set("cpValorTotalAcrescimo", addslashes($_REQUEST["cpValorTotalAcrescimo"]));
 		$acrescimo->__set("cpFormaPagamentoAcrescimo", addslashes($_REQUEST["cpFormaPagamentoAcrescimo"]));
 		
+		$formaPagamentoSemPagS = $_REQUEST["cpFormaPagamentoAcrescimo"] != "PS" && $_REQUEST["cpFormaPagamentoAcrescimo"] == "CD" || $_REQUEST["cpFormaPagamentoAcrescimo"] == "CC";
+		
+		$porcetagem = substr($_REQUEST["cpPorcentagemTaxa"],0,4);
+		$valorTaxaJuros = substr($_REQUEST["cpValorTaxaJuros"],0,4);
+		$valorLiquido = substr($_REQUEST["cpValorTotalLiquido"],0,4);
+		
+		$bandeiraCartao = explode("-", $_REQUEST["cpBandeiraCartao"]);
+		$planoPagSeguro = explode("-",$_REQUEST["cpPlanoPagSeguro"]);
+		
+		$setPlanoPagSegura = $planoPagSeguro[0];
+		$setBandeiraCartao = $bandeiraCartao[0];
+		
+		if($_REQUEST["cpFormaPagamentoAcrescimo"] == "PS") {
+		
+			$acrescimo->__set("cpPorcentagemTaxa", addslashes($_REQUEST["cpPorcentagemTaxa"]));
+			$acrescimo->__set("cpValorTaxaJuros", addslashes($valorTaxaJuros));
+			$acrescimo->__set("cpValorTotalLiquido", addslashes($valorLiquido));
+			$acrescimo->__set("cpBandeiraCartao", addslashes($setPlanoPagSegura));
+			
+		} elseif($formaPagamentoSemPagS) {
+			
+			$acrescimo->__set("cpPorcentagemTaxa", addslashes($_REQUEST["cpPorcentagemTaxa"]));
+			$acrescimo->__set("cpValorTaxaJuros", addslashes($valorTaxaJuros));
+			$acrescimo->__set("cpValorTotalLiquido", addslashes($valorLiquido));
+			$acrescimo->__set("cpBandeiraCartao", addslashes($setBandeiraCartao));
+			
+		} else {
+		
+			
+			$acrescimo->__set("cpPorcentagemTaxa", 0);
+			$acrescimo->__set("cpValorTaxaJuros", 0);
+			$acrescimo->__set("cpValorTotalLiquido", 0);
+			$acrescimo->__set("cpBandeiraCartao", "Dinheiro");
+		}
+		
 		if(!empty($_REQUEST["cpQtdParcelaAcrescimo"]) && !empty($_REQUEST["cpValorParcelaAcrescimo"])) {
 			
 			$acrescimo->__set("cpQtdParcelaAcrescimo", addslashes($_REQUEST["cpQtdParcelaAcrescimo"]));
 			$acrescimo->__set("cpValorParcelaAcrescimo", addslashes($_REQUEST["cpValorParcelaAcrescimo"]));
 			
-		}else{
+		} else {
 			
 			$acrescimo->__set("cpQtdParcelaAcrescimo", 0);
 			$acrescimo->__set("cpValorParcelaAcrescimo", 0);
