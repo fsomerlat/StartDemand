@@ -30,9 +30,9 @@ var FormHelperProduto = (function() {
 	
 	var tipoObservacao =  function(value) {
 		
-		if(value == "Produto") {
+		if(value == "Principal") {
 			
-			$("tipoObs").html("produto");
+			$("tipoObs").html("principal");
 			
 		} else if(value == "Acrescimo"){
 			

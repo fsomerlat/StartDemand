@@ -164,14 +164,23 @@
 								<input type="text" name="cpValorTotalPedido" id="cpValorTotalPedido" class="form-control valTotalPedidoPagPedido" readonly/>
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-2">
 							<div class="form-group">
 								<label for="Forma de pagamento">Forma de pagamento</label>
 								<select name="cpFormaPagamento" id="cpFormaPagamento" class="form-control">
 									<option value="">Selecione</option>
 									<option value="D">Dinheiro</option>
+									<option value="PS">PagSeguro</option>
 									<option value="CD">Cartão / débito</option>
 									<option value="CC">Cartão / crédito</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3 isPagSeguroProduto">
+							<div class="form-group">
+								<label for="Plano pagseguro">Plano / Pagseguro</label>
+								<select name="cpPlanoPagSeguroPedido" id="cpPlanoPagSeguroPedido" class="form-control">
+									<!-- CARREGA VIA AJAX -->
 								</select>
 							</div>
 						</div>
@@ -195,10 +204,36 @@
 								</select>
 							</div>
 						</div>	
+						<div class="col-md-2 isBandeiraCartaoPedido">
+							<div class="form-group">
+								<label for="Bandeira cartao">Bandeira / cartão</label>
+								<select name="cpBandeiraCartaoPedido" id="cpBandeiraCartaoPedido" class="form-control">
+									 <!-- CARREGA VIA AJAX -->
+								</select>
+							</div>
+						</div>
 						<div class="col-md-2 parcelas">
 							<div class="form-group">
 								<label for="Valor das parcelas">Valor / parcela</label>
 								<input type="text" name="cpValorParcela" id="cpValorParcela" class="form-control" readonly/>
+							</div>
+						</div>						
+						<div class="col-md-2 isPorcentagemJuros">
+							<div class="form-group">
+								<label for="Valor da taxa"> % juros</label>
+								<input type="text" name="cpPorcentagemJurosPedido" id="cpPorcentagemJurosPedido" class="form-control" readonly />
+							</div>
+						</div>						
+						<div class="col-md-2 isValorJuros">
+							<div class="form-group">
+								<label for="Valor da taxa">Valor taxa de juros</label>
+								<input type="text" name="cpValorTaxaJurosPedido" id="cpValorTaxaJurosPedido" class="form-control" readonly />
+							</div>
+						</div>
+						<div class="col-md-2 isValorLiquido">
+							<div class="form-group">
+								<label for="Valor total liquido">Valor total líquido</label>
+								<input type="text" name="cpValorTotalLiquidoPedido" id="cpValorTotalLiquidoPedido" class="form-control" readonly />
 							</div>
 						</div>
 						<div class="col-md-12">

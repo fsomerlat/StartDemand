@@ -40,10 +40,10 @@
 				</div>
 				<div class="col-md-6 isPagaSeguro">
 					<div class="form-group">
-						<label for="Plano pagseguro">Plano PagSeguro / total dia para receber</label>
-				        <input type="text" name="cpPlanoPagSeguro" value="<?php echo (!empty($_GET["id"])) ? $getInfoTaxa->cpPlanoPagSeguro : ""; ?>" id="cpPlanoPagSeguro" class="form-control" />
+						<label for="Plano pagseguro">Plano / PagSeguro</label>
+				        <input type="text" name="cpPlanoPagSeguro" maxlentgh="2" placeholder="Receber em quantos dias do PagSeguro ?" value="<?php echo (!empty($_GET["id"])) ? $getInfoTaxa->cpPlanoPagSeguro : ""; ?>" id="cpPlanoPagSeguro" class="form-control" />
 					</div>
-				</div>
+				</div> 
 				<div class="col-md-2">
 					<div class="form-group">
 						<label for="Porcentagem taxa">% taxa</label>

@@ -44,7 +44,7 @@
 			
 			$acrescimo->__set("cpPorcentagemTaxa", 0);
 			$acrescimo->__set("cpValorTaxaJuros", 0);
-			$acrescimo->__set("cpValorTotalLiquido", 0);
+			$acrescimo->__set("cpValorTotalLiquido", addslashes($_REQUEST["cpValorTotalAcrescimo"]));
 			$acrescimo->__set("cpBandeiraCartao", "Dinheiro");
 		}
 		

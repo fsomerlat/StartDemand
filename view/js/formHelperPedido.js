@@ -45,60 +45,81 @@ var FormHelperPedido = (function() {
 		    });
 	}
 	
+	var setPorcentagemJuros = function(value) {
+		
+		var arryValue =  value.split("-"),
+			setValue = arryValue[1];
+			
+		$("#cpPorcentagemJurosPedido").val(setValue);
+	}
+	
+	var getTaxaJuros = function(value) {
+		
+		var optionPagSeguro = "",
+			optionBandeiraCartao = "";
+		
+		$.ajax({
+			
+			url:"http://localhost/startDemand/service/Service_Taxa_Juros.php",
+			cache:false,
+			dataType:"json",
+			success: function(retorno) {
+				
+				optionPagSeguro += "<option value='0'>Selecione</option>";
+				optionBandeiraCartao += "<option value='0'>Selecione</option>";
+				retorno.map(function(dados) {
+					
+					if(value ==  dados.cpFormaPagamentoTaxa) {
+						
+						optionPagSeguro += "<option value='"+dados.cpBandeiraCartao+"-"+dados.cpPorcentagemTaxa+"'>Receber em "+dados.cpPlanoPagSeguro+" dias</option>";
+						optionBandeiraCartao += "<option value='"+dados.cpBandeiraCartao+"-"+dados.cpPorcentagemTaxa+"'>"+dados.cpBandeiraCartao+"</option>";
+					}
+				});
+				
+				$("#cpPlanoPagSeguroPedido").html(optionPagSeguro);
+				$("#cpBandeiraCartaoPedido").html(optionBandeiraCartao);
+			}
+		});
+	}
+	
 	
 	var changeFormaPagamento = function(value) {
 		
-		if(value == "CC") {
+		if(value == "PS") {
 			
-			$(".parcelas").show();
+			$(".isPagSeguroProduto,.isValorJuros,.isValorLiquido,.isPorcentagemJuros").show();
+			$(".isBandeiraCartaoPedido,.parcelas").hide();
 			
+		} else if(value == "CC") {
+			
+			$(".isValorJuros,.isValorLiquido,.isPorcentagemJuros,.isBandeiraCartaoPedido,.parcelas").show();
+			$(".isPagSeguroProduto").hide();
 		
 		} else if(value == "CD" ) {
 			
-			$(".parcelas").hide();
-			
+			$(".isValorJuros,.isValorLiquido,.isPorcentagemJuros,.isBandeiraCartaoPedido").show();
+			$(".parcelas,.isPagSeguroProduto").hide();
+
 		}else if(value == "D") {
 			
-			$(".parcelas").hide();
+			$(".parcelas,.isPagSeguroProduto,.isValorJuros,.isValorLiquido,.isPorcentagemJuros,.isBandeiraCartaoPedido").hide();
 			$("#cpValorParcela").val("");
 			$("#cpQtdParcela").val(0);
 		
 		} else {
 			
-			$(".parcelas").hide();
+			$(".parcelas,.parcelas,.isPagSeguroProduto,.isValorJuros,.isValorLiquido,.isPorcentagemJuros,.isBandeiraCartaoPedido").hide();
 			$("#cpValorParcela").val("");
 			$("#cpQtdParcela").val(0);
 		}	
 	}
 	
-	
-	var changeQtdParcelas =  function(value) {
-
-		 	
-		 if(value == "Debito") {
-			
-			$(".parcelas").hide();
-			$("#cpQtdParcela").val(0);
+	var setFormaPagamento = function() {
 		
-		} else if(value == "Credito") {
-			
-			$(".parcelas").show();
-		
-		} else {
-			
-			$(".parcelas").hide();
-			$("#cpQtdParcela").val(0);
-		}
-	}
-	
-	var setSituacaoPagamento = function() {
-		
-		$(".creditoOuDebito").hide();
-		$(".parcelas").hide();
+		$(".creditoOuDebito,.parcelas,.isPagSeguroProduto,.isPorcentagemJuros,.isValorJuros,.isValorLiquido,.isBandeiraCartaoPedido").hide();
 	}
 	
 	var getContadorPedido =  function() {
-	
 		
 		$.ajax({
 			
@@ -196,12 +217,22 @@ var FormHelperPedido = (function() {
 			} else {
 				
 				var result = this.value * getValorBaseProduto();
-				$("#cpValorTotalProduto").attr("value",result);
 				
 				setValorTotalPedido(result);
-				
+				$("#cpValorTotalProduto").attr("value",result);
 			}
 		});
+	}
+	
+	var recalcularValores = function(value) {
+		
+		var result = getValorTotalPedido();
+		porcentagemTaxaJuros = $("#cpPorcentagemJurosPedido").val(),
+		valorTaxaJuros = parseFloat(porcentagemTaxaJuros) * result / 100,
+		valorTotalLiquido = parseFloat(result) - parseFloat(valorTaxaJuros);
+	
+		$("#cpValorTaxaJurosPedido").val(valorTaxaJuros);
+		$("#cpValorTotalLiquidoPedido").val(valorTotalLiquido);
 	}
 	
 	var setDivideParcela = function() {
@@ -250,20 +281,34 @@ var FormHelperPedido = (function() {
 		preencheValorProduto();
 		getPedidoDiaCorrente();
 		getContadorPedido();
-		setSituacaoPagamento();
+		setFormaPagamento();
 		createDatePicker();
 		setDivideParcela();
 		
 		$("select[name=cpFormaPagamento]").change(function(){
 			
+			getTaxaJuros(this.value);
 			changeFormaPagamento(this.value);
 		});
 		
-		$("select[name=cpCreditoOuDebito]").change(function(){
+		$(document).on("change","#cpPlanoPagSeguroPedido",function(){
 			
-			changeQtdParcelas(this.value);
+			var arryValue = this.value.split("-"),
+				setValue = arryValue[1];
+			
+			setPorcentagemJuros(this.value);
+			recalcularValores(setValue);
 		});
 		
+		$(document).on("change","#cpBandeiraCartaoPedido", function(){
+			
+			var arryValue = this.value.split("-"),
+				setValue = arryValue[1];
+			
+			setPorcentagemJuros(this.value);
+			recalcularValores(setValue);
+		});
+
 		$(document).on("click","#pedidoCancelado", function() {
 			
 			return confirm("Deseja cancelar esse pedido ?");
@@ -271,6 +316,7 @@ var FormHelperPedido = (function() {
 		$(document).on('change','#tuProduto_idProduto', function(ev) {
 			
 			Service_Pedido.getAjaxValorProduto(ev.target.value);
+			recalcularValores(ev.target.value);
 		});
 		
 		$(document).on("click","#pedidoLiberado",function(){

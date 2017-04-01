@@ -67,8 +67,8 @@
 								<label for="Tipo de Observacao">Tipo de observação</label>
 								<select name="cpTipoObservacao" id="cpTipoObservacao" class="form-control">
 									<option value="">Selecione</option>
-									<option value="Produto">Produto</option>
-									<option value="Acrescimo">Acrescimo</option> 
+									<option value="Principal">Produto principal</option>
+									<option value="Acrescimo">Produto acréscimo</option> 
 								</select>
 							</div>
 						</div>

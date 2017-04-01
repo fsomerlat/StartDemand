@@ -45,7 +45,7 @@ var Service_Generico = (function() {
 							
 							option += "<option value='"+retorno[i].cpNomeProduto+"'>" +retorno[i].cpNomeProduto+"</option>";							
 						
-						} else if(retorno[i].cpTipoObservacao == "Produto") {
+						} else if(retorno[i].cpTipoObservacao == "Principal") {
 							
 							options += "<option value='"+retorno[i].idProduto+"'>"+retorno[i].cpNomeProduto+"</option>";
 						}
