@@ -220,11 +220,22 @@ var FormHelperPedido = (function() {
 				
 				setValorTotalPedido(result);
 				$("#cpValorTotalProduto").attr("value",result);
+				
+				recalcularValores();
 			}
 		});
 	}
 	
-	var recalcularValores = function(value) {
+	var recalcularValores = function() {
+		
+		setTimeout(function() {
+			
+			var qtdProduto = $("#cpQtdProduto").val(),
+			valorBaseProduto = $("#cpValorBaseProduto").val(),
+			multiplica = parseInt(qtdProduto) * parseFloat(valorBaseProduto);
+			setValorTotalPedido(multiplica);				
+		
+		},100)		
 		
 		var result = getValorTotalPedido();
 		porcentagemTaxaJuros = $("#cpPorcentagemJurosPedido").val(),
@@ -297,7 +308,7 @@ var FormHelperPedido = (function() {
 				setValue = arryValue[1];
 			
 			setPorcentagemJuros(this.value);
-			recalcularValores(setValue);
+			recalcularValores();
 		});
 		
 		$(document).on("change","#cpBandeiraCartaoPedido", function(){
@@ -306,17 +317,24 @@ var FormHelperPedido = (function() {
 				setValue = arryValue[1];
 			
 			setPorcentagemJuros(this.value);
-			recalcularValores(setValue);
+			recalcularValores();
 		});
 
 		$(document).on("click","#pedidoCancelado", function() {
 			
 			return confirm("Deseja cancelar esse pedido ?");
 		});
+		
+		
 		$(document).on('change','#tuProduto_idProduto', function(ev) {
 			
 			Service_Pedido.getAjaxValorProduto(ev.target.value);
-			recalcularValores(ev.target.value);
+			
+			setTimeout(function(){
+				
+				recalcularValores();
+			},100);
+			
 		});
 		
 		$(document).on("click","#pedidoLiberado",function(){
