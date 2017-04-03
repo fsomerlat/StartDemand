@@ -6,7 +6,7 @@
 		private $idTaxaJuros,
 				$cpFormaPagamentoTaxa,
 				$cpPlanoPagSeguro,
-				$cpBandeiraCartao,
+				$cpBandeiraCartaoTaxa,
 				$cpPorcentagemTaxa;
 		
 	  public function __set($attr,$valor) {
@@ -18,13 +18,13 @@
 	  	
 	  	$sql="INSERT INTO 
 	  				$this->table
-	  			(cpFormaPagamentoTaxa,cpPlanoPagSeguro,cpBandeiraCartao,cpPorcentagemTaxa)
+	  			(cpFormaPagamentoTaxa,cpPlanoPagSeguro,cpBandeiraCartaoTaxa,cpPorcentagemTaxa)
 	  		   VALUES
-	  		   	(:cpFormaPagamentoTaxa,:cpPlanoPagSeguro,:cpBandeiraCartao,:cpPorcentagemTaxa)";
+	  		   	(:cpFormaPagamentoTaxa,:cpPlanoPagSeguro,:cpBandeiraCartaoTaxa,:cpPorcentagemTaxa)";
 	  	$in=DB::prepare($sql);
 	  	$in->bindParam(":cpFormaPagamentoTaxa",$this->cpFormaPagamentoTaxa,PDO::PARAM_STR);
 	  	$in->bindParam(":cpPlanoPagSeguro",$this->cpPlanoPagSeguro,PDO::PARAM_INT);
-	  	$in->bindParam(":cpBandeiraCartao",$this->cpBandeiraCartao,PDO::PARAM_STR);
+	  	$in->bindParam(":cpBandeiraCartaoTaxa",$this->cpBandeiraCartaoTaxa,PDO::PARAM_STR);
 	  	$in->bindParam(":cpPorcentagemTaxa",$this->cpPorcentagemTaxa,PDO::PARAM_STR);
 	  	
 	  	try{
@@ -41,9 +41,10 @@
 	  public function getJSON_TAXA_JUROS() {
 	  	
 	  	$sql="SELECT 
-	  			idTaxaJuros,cpFormaPagamentoTaxa,cpPlanoPagSeguro,cpBandeiraCartao,cpPlanoPagSeguro,cpPorcentagemTaxa
+	  			idTaxaJuros,cpFormaPagamentoTaxa,cpPlanoPagSeguro,cpBandeiraCartaoTaxa,cpPlanoPagSeguro,cpPorcentagemTaxa
 	  		  FROM 
 	  			$this->table
+	  		  ORDER BY cpFormaPagamentoTaxa != 'PS' DESC
 	  		  ";
 	  	$s=DB::prepare($sql);
 	  	$s->execute();
@@ -63,7 +64,7 @@
 	 public function getId($id) {
 	 	
 	 	$sql="SELECT
-	 			 idTaxaJuros,cpFormaPagamentoTaxa,cpPlanoPagSeguro,cpBandeiraCartao,cpPorcentagemTaxa
+	 			 idTaxaJuros,cpFormaPagamentoTaxa,cpPlanoPagSeguro,cpBandeiraCartaoTaxa,cpPorcentagemTaxa
 	 	      FROM 
 	 			$this->table
 	 		  WHERE
@@ -108,7 +109,7 @@
 	 				$this->table
 	 			 SET
 	 				cpFormaPagamentoTaxa=:cpFormaPagamentoTaxa,cpPlanoPagSeguro=:cpPlanoPagSeguro,
-	 				cpBandeiraCartao=:cpBandeiraCartao,cpPorcentagemTaxa=:cpPorcentagemTaxa
+	 				cpBandeiraCartaoTaxa=:cpBandeiraCartaoTaxa,cpPorcentagemTaxa=:cpPorcentagemTaxa
 	 	         WHERE 
 	 				idTaxaJuros=:idTaxaJuros";
 	 	
@@ -116,12 +117,36 @@
 	 	$up->bindParam(":idTaxaJuros", $id,PDO::PARAM_INT);
 	 	$up->bindParam(":cpFormaPagamentoTaxa",$this->cpFormaPagamentoTaxa,PDO::PARAM_STR);
 	 	$up->bindParam(":cpPlanoPagSeguro",$this->cpPlanoPagSeguro,PDO::PARAM_INT);
-	 	$up->bindParam(":cpBandeiraCartao",$this->cpBandeiraCartao,PDO::PARAM_STR);
+	 	$up->bindParam(":cpBandeiraCartaoTaxa",$this->cpBandeiraCartaoTaxa,PDO::PARAM_STR);
 	 	$up->bindParam(":cpPorcentagemTaxa",$this->cpPorcentagemTaxa,PDO::PARAM_STR);
 	 	
 	 	try{
 	 		
 	 		return $up->execute();
+	 	
+	 	}catch(PDOException $e) {
+	 		
+	 		echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+	 	}
+	 }
+	 
+	 public function getVerificaDuplicidade() {
+	 	
+	 	$sql="SELECT 
+	 			 cpFormaPagamentoTaxa,cpBandeiraCartaoTaxa
+	 		  FROM
+	 			$this->table
+	 		  WHERE
+	 		  	cpFormaPagamentoTaxa = ? AND cpBandeiraCartaoTaxa = ?";
+	 	
+	 	$row=DB::prepare($sql);
+	 	$row->bindParam(":cpFormaPagamentoTaxa",$this->cpFormaPagamentoTaxa,PDO::PARAM_STR);
+	 	$row->bindParam(":cpBandeiraCartaoTaxa",$this->cpBandeiraCartaoTaxa,PDO::PARAM_STR);
+	 	$row->execute(array($this->cpFormaPagamentoTaxa,$this->cpBandeiraCartaoTaxa));
+	 	
+	 	try {
+	 		
+	 		return $row->rowCount();
 	 	
 	 	}catch(PDOException $e) {
 	 		

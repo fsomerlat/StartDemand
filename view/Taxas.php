@@ -41,7 +41,7 @@
 				<div class="col-md-6 isPagaSeguro">
 					<div class="form-group">
 						<label for="Plano pagseguro">Plano / PagSeguro</label>
-				        <input type="text" name="cpPlanoPagSeguro" maxlentgh="2" placeholder="Receber em quantos dias do PagSeguro ?" value="<?php echo (!empty($_GET["id"])) ? $getInfoTaxa->cpPlanoPagSeguro : ""; ?>" id="cpPlanoPagSeguro" class="form-control" />
+				        <input type="text" name="cpPlanoPagSeguro" maxlength="2" placeholder="Receber em quantos dias do PagSeguro ?" value="<?php echo (!empty($_GET["id"])) ? $getInfoTaxa->cpPlanoPagSeguro : ""; ?>" id="cpPlanoPagSeguro" class="form-control" />
 					</div>
 				</div> 
 				<div class="col-md-2">
@@ -53,8 +53,8 @@
 				<div class="col-md-6 isBandeiraCartaoPagTaxa">
 					<div class="form-group">
 						<label for="Bandeira cartão">Bandeira / cartão</label>
-						<select name="cpBandeiraCartao" id="cpBandeiraCartao"class="form-control">
-							<option value="">Selecione<?php echo (!empty($_GET["id"]) && $formaPagamento != "PagSeguro") ? " - ".$getInfoTaxa->cpBandeiraCartao : ""; ?></option>
+						<select name="cpBandeiraCartaoTaxa" id="cpBandeiraCartaoTaxa"class="form-control">
+							<option value="">Selecione<?php echo (!empty($_GET["id"]) && $formaPagamento != "PagSeguro") ? " - ".$getInfoTaxa->cpBandeiraCartaoTaxa : ""; ?></option>
 							<option value="Visa">Visa</option>
 							<option value="Master">Master</option>
 							<option value="Cielo">Cielo</option>
@@ -92,7 +92,7 @@
 					<tr class="danger">
 						<th>Id</th>
 						<th>Forma / Pagamento</th>
-						<th>Plano / PagSeguro</th>
+						<th>Plano / PagSeguro - Receber em X dias</th>
 						<th>Bandeira / Cartao</th>
 						<th>% taxa</th>
 						<th></th>

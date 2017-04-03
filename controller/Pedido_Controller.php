@@ -18,19 +18,59 @@
 		$ped->__set("cpValorTotalProduto", $_REQUEST["cpValorTotalProduto"]);
  		$ped->__set("cpValorTotalPedido", addslashes($_REQUEST["cpValorTotalPedido"]));
  		$ped->__set("cpFormaPagamento",addslashes($_REQUEST["cpFormaPagamento"]));
+ 		
+ 		
+ 		//VERIFICAR A FORMA DE PAGAMENTO
+ 		$ped->__set("cpPlanoPagSeguroPedido",addslashes($_REQUEST["cpPlanoPagSeguroPedido"]));
+ 		$ped->__set("cpBandeiraCartaoPedido",addslashes($_REQUEST["cpBandeiraCartaoPedido"]));
+ 		$ped->__set("cpPorcentagemJurosPedido",addslashes($_REQUEST["cpPorcentagemJurosPedido"]));
+ 		$ped->__set("cpValorTaxaJurosPedido",addslashes($_REQUEST["cpValorTaxaJurosPedido"]));
+ 		$ped->__set("cpValorTotalLiquidoPedido",addslashes($_REQUEST["cpValorTotalLiquidoPedido"]));
+ 		
+ 		
+ 		$porcentagemJuros = substr($_REQUEST["cpPorcentagemJurosPedido"],0,4);
+ 		$valorTaxaJuros = substr($_REQUEST["cpValorTaxaJurosPedido"],0,4);
+ 		$valorTotalLiquido = substr($_REQUEST["cpValorTotalLiquidoPedido"],0,4);
+ 		
  		$ped->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
  		
- 		if($_REQUEST["cpFormaPagamento"] == "CC"):
+ 		$formaPagamento = $_REQUEST["cpFormaPagamento"] == "CD" || $_REQUEST["cpFormaPagamento"] == "CC";
+ 		
+ 		if($_REQUEST["cpFormaPagamento"] == "PS"):
+ 	
+	 		$ped->__set("cpPlanoPagSeguroPedido",addslashes($_REQUEST["cpPlanoPagSeguroPedido"]));
+	 		$ped->__set("cpBandeiraCartaoPedido", addslashes("PagSeguro"));
+	 		$ped->__set("cpPorcentagemJurosPedido",addslashes($porcentagemJuros));
+	 		$ped->__set("cpValorTaxaJurosPedido",addslashes($valorTaxaJuros));
+	 		$ped->__set("cpValorTotalLiquidoPedido",addslashes($valorTotalLiquido));
+	 		$ped->__set("cpQtdParcela", 0);
+	 		$ped->__set("cpValorParcela", 0);
 	 		
-	 			$ped->__set("cpQtdParcela", addslashes($_REQUEST["cpQtdParcela"]));
-	 			$ped->__set("cpValorParcela", addslashes($_REQUEST["cpValorParcela"]));
- 			else:
- 			
-	 			$ped->__set("cpQtdParcela", 0);
-	 			$ped->__set("cpValorParcela", 0);
- 			
+	 		elseif($_REQUEST["cpFormaPagamento"] == "CC"):
+		 		
+		 			$ped->__set("cpQtdParcela", addslashes($_REQUEST["cpQtdParcela"]));
+		 			$ped->__set("cpValorParcela", addslashes($_REQUEST["cpValorParcela"]));
+		 			$ped->__set("cpPlanoPagSeguroPedido",addslashes($_REQUEST["cpPlanoPagSeguroPedido"]));
+		 			$ped->__set("cpBandeiraCartaoPedido", addslashes("PagSeguro"));
+		 			$ped->__set("cpPorcentagemJurosPedido",addslashes($porcentagemJuros));
+		 			$ped->__set("cpValorTaxaJurosPedido",addslashes($valorTaxaJuros));
+		 			$ped->__set("cpValorTotalLiquidoPedido",addslashes($valorTotalLiquido));
+	 			
+	 		elseif($_REQUEST["cpFormaPagamento"] == "CD"):
+	 			
+		 		$ped->__set("cpPlanoPagSeguroPedido",addslashes($_REQUEST["cpPlanoPagSeguroPedido"]));
+		 		$ped->__set("cpBandeiraCartaoPedido", addslashes("PagSeguro"));
+		 		$ped->__set("cpPorcentagemJurosPedido",addslashes($porcentagemJuros));
+		 		$ped->__set("cpValorTaxaJurosPedido",addslashes($valorTaxaJuros));
+		 		$ped->__set("cpValorTotalLiquidoPedido",addslashes($valorTotalLiquido));
+		 		$ped->__set("cpQtdParcela", 0);
+		 		$ped->__set("cpValorParcela", 0);
+ 		
  		endif;		
 
+ 		
+ 		//CONTINUAR VERIFICANDO A FORMA DE PAGAMENTO
+ 		
 		if($_REQUEST["tipoPedido"] == ""):
 			
 			echo "<script language='javascript'>

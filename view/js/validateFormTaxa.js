@@ -26,7 +26,7 @@ document.getElementById("btnCadastrarTaxa").onclick = function(){
 		
 		}else if(returnId(campo) == "CD" || returnId(campo) == "CC") {
 			
-			valida("cpBandeiraCartao","Selecione o campo [ BANDEIRA / CARTTÃO ] !");
+			valida("cpBandeiraCartaoTaxa","Selecione o campo [ BANDEIRA / CARTTÃO ] !");
 		}
 	}
 	

@@ -119,6 +119,10 @@
 											<option value="Leite em pó">Leite em pó</option>
 											<option value="Achocolatado">Achocolatado</option>												
 									</optgroup>
+									
+									<optgroup label="Outro">
+										<option value="Nenhum">Nenhum</option>
+									</optgroup>
 								</select>
 							</div>
 						</div>
@@ -148,6 +152,10 @@
 											<option value="Ovo maltine">Ovo maltine</option>
 											<option value="Leite em pó">Leite em pó</option>
 											<option value="Achocolatado">Achocolatado</option>												
+									</optgroup>
+									
+									<optgroup label="Outro">
+										<option value="Nenhum">Nenhum</option>
 									</optgroup>
 								</select>
 							</div>

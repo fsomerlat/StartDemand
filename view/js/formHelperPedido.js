@@ -71,8 +71,8 @@ var FormHelperPedido = (function() {
 					
 					if(value ==  dados.cpFormaPagamentoTaxa) {
 						
-						optionPagSeguro += "<option value='"+dados.cpBandeiraCartao+"-"+dados.cpPorcentagemTaxa+"'>Receber em "+dados.cpPlanoPagSeguro+" dias</option>";
-						optionBandeiraCartao += "<option value='"+dados.cpBandeiraCartao+"-"+dados.cpPorcentagemTaxa+"'>"+dados.cpBandeiraCartao+"</option>";
+						optionPagSeguro += "<option value='"+dados.cpBandeiraCartaoTaxa+"-"+dados.cpPorcentagemTaxa+"'>Receber em "+dados.cpPlanoPagSeguro+" dias</option>";
+						optionBandeiraCartao += "<option value='"+dados.cpBandeiraCartaoTaxa+"-"+dados.cpPorcentagemTaxa+"'>"+dados.cpBandeiraCartaoTaxa+"</option>";
 					}
 				});
 				
@@ -226,7 +226,7 @@ var FormHelperPedido = (function() {
 		});
 	}
 	
-	var recalcularValores = function() {
+	var atualizaValores = function(){
 		
 		setTimeout(function() {
 			
@@ -235,7 +235,10 @@ var FormHelperPedido = (function() {
 			multiplica = parseInt(qtdProduto) * parseFloat(valorBaseProduto);
 			setValorTotalPedido(multiplica);				
 		
-		},100)		
+		},100)			
+	}
+	
+	var recalcularValores = function() {	
 		
 		var result = getValorTotalPedido();
 		porcentagemTaxaJuros = $("#cpPorcentagemJurosPedido").val(),
@@ -265,7 +268,6 @@ var FormHelperPedido = (function() {
 					this.value = 0;
 					window.alert("O valor total do pedido não pode ser zero para poder dividir as parcelas !");
 					$("#cpQtdProduto").focus(); return false;
-					
 				}
 			}else{
 				
@@ -308,6 +310,7 @@ var FormHelperPedido = (function() {
 				setValue = arryValue[1];
 			
 			setPorcentagemJuros(this.value);
+			atualizaValores();
 			recalcularValores();
 		});
 		
@@ -317,6 +320,7 @@ var FormHelperPedido = (function() {
 				setValue = arryValue[1];
 			
 			setPorcentagemJuros(this.value);
+			atualizaValores();
 			recalcularValores();
 		});
 
@@ -329,11 +333,12 @@ var FormHelperPedido = (function() {
 		$(document).on('change','#tuProduto_idProduto', function(ev) {
 			
 			Service_Pedido.getAjaxValorProduto(ev.target.value);
+			atualizaValores();
 			
 			setTimeout(function(){
 				
 				recalcularValores();
-			},100);
+			},150);
 			
 		});
 		

@@ -111,14 +111,19 @@ var FormHelperAcrescimo = (function(){
 	var setTaxaJuros = function() {
 		
 		var valorTotal = getValorTotalAcrescimo(),
-			taxaBaseJuros = getTaxaBaseJuros(),
-			resultTaxa =  parseFloat(taxaBaseJuros) * parseFloat(valorTotal) / 100;
-		
+		taxaBaseJuros = getTaxaBaseJuros(),
+		resultTaxa =  parseFloat(taxaBaseJuros) * parseFloat(valorTotal) / 100,
 		valorTotalRecalculado = valorTotal - resultTaxa;
 		
 		$("#cpValorTaxaJuros").val(resultTaxa);
-		$("#cpValorTotalLiquido").val(valorTotalRecalculado);
 		$("#cpValorTotalAcrescimo").val(valorTotal);
+		
+		setTimeout(function(){
+		
+			$("#cpValorTotalLiquido").val(valorTotalRecalculado);	
+			
+		},100)
+
 	} 	
 	
 	var setBandeiraCartoes = function(value) {
@@ -153,7 +158,7 @@ var FormHelperAcrescimo = (function(){
 	
 	var getValorTotalAcrescimo =  function() {
 		
-		return $("#cpValorTotalAcrescimo").val();
+		return $("#cpQtdAcrescimo").val() * $("#cpValorBaseAcrescimo").val();
 	}
 	
 	var setValorParcelas = function(value) {
@@ -186,8 +191,12 @@ var FormHelperAcrescimo = (function(){
 				$(".isZero").val(0);
 				$(".isPlaceholder").val("").attr("placeholder","R$ 00.00");				
 			}else{
-				getAjaxValorAcrescimo(ev.target.value);
+				getAjaxValorAcrescimo(ev.target.value);;	
 			}
+			
+			setTimeout(function() {
+				setTaxaJuros();
+			},100);
 		});		
 		
 		$(document).on("click","#excluirAcrescimoAvulso", function() {
@@ -217,30 +226,27 @@ var FormHelperAcrescimo = (function(){
 				window.alert("È necessário ter um valor para gerar parcelas !");
 				$("#cpAcrescimo").focus();
 			}
-			setTimeout(function() {
-				setTaxaJuros();
-			},010)			
+					
 		});
 	
-		$("#cpQtdParcelaAcrescimo").change(function(){
+		$("#cpQtdAcrescimo").change(function(){
+			
+			setTaxaJuros();
 			
 			if(this.value > 0) {
-				setValorParcelas(this.value);	
+				setValorParcelas(this.value);
 			}else{
 				$("#cpValorParcelaAcrescimo").val("").attr("placeholder","R$ 00.00");
 			}
-			setTimeout(function() {
-				setTaxaJuros();
-			},010)			
+				
+		
 		});
 		
 		$(document).on("change","#cpPlanoPagSeguro", function(){
 				
 			setValorBaseTaxaJuros(this.value);
-			
-			setTimeout(function() {
-				setTaxaJuros();
-			},050)
+			setTaxaJuros();
+
 		});
 		
 		$(document).on("change","#cpBandeiraCartao",function(){
@@ -252,13 +258,11 @@ var FormHelperAcrescimo = (function(){
 				this.value = 0;
 				$("#cpAcrescimo").focus();
 				window.alert("Informe primeiramente um acréscimo !"); return false;
-				
 			}
 			
 			setValorBaseTaxaJuros(this.value);
-			setTimeout(function() {
-				setTaxaJuros();
-			},050)			
+			setTaxaJuros();
+				
 		});		
 		
 	}

@@ -19,6 +19,13 @@
 				  $cpValorParcela,
 				  $cpDataBaixa,
 				  $cpUsuarioBaixa,
+				  
+				  $cpPlanoPagSeguroPedido,
+				  $cpBandeiraCartaoPedido,
+				  $cpPorcentagemJurosPedido,
+				  $cpValorTaxaJurosPedido,
+				  $cpValorTotalLiquidoPedido,
+				  
 				  $cpObservacaoPedido;
 		
 		public function __set($attr,$valor) {
@@ -35,10 +42,12 @@
 			
 			$sql="INSERT INTO $this->table
 					(tuProduto_idProduto,tsPreparaProduto_idPreparaProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,cpComplementoDois,
-					cpValorTotalProduto,cpHoraPedido,cpValorTotalPedido,cpFormaPagamento,cpQtdParcela,cpValorParcela,cpObservacaoPedido)
+					cpValorTotalProduto,cpHoraPedido,cpValorTotalPedido,cpFormaPagamento,cpQtdParcela,cpValorParcela,cpPlanoPagSeguroPedido,
+					cpBandeiraCartaoPedido,cpPorcentagemJurosPedido,cpValorTaxaJurosPedido,cpValorTotalLiquidoPedido,cpObservacaoPedido)
 				  VALUES
 					(:tuProduto_idProduto,:tsPreparaProduto_idPreparaProduto,:cpCodPedido,:cpQtdProduto,:cpComplementoUm,:cpComplementoDois,
-					:cpValorTotalProduto,now(),:cpValorTotalPedido,:cpFormaPagamento,:cpQtdParcela,:cpValorParcela,:cpObservacaoPedido)";
+					:cpValorTotalProduto,now(),:cpValorTotalPedido,:cpFormaPagamento,:cpQtdParcela,:cpValorParcela,:cpPlanoPagSeguroPedido,
+					:cpBandeiraCartaoPedido,:cpPorcentagemJurosPedido,:cpValorTaxaJurosPedido,:cpValorTotalLiquidoPedido,:cpObservacaoPedido)";
 			
 			$in=DB::prepare($sql);
 			$in->bindParam(":tuProduto_idProduto",$this->tuProduto_idProduto,PDO::PARAM_INT);
@@ -52,6 +61,12 @@
 			$in->bindParam(":cpFormaPagamento",$this->cpFormaPagamento,PDO::PARAM_STR);
 			$in->bindParam(":cpQtdParcela",$this->cpQtdParcela,PDO::PARAM_INT);
 			$in->bindParam(":cpValorParcela",$this->cpValorParcela,PDO::PARAM_STR);
+			$in->bindParam(":cpPlanoPagSeguroPedido",$this->cpPlanoPagSeguroPedido,PDO::PARAM_INT);
+			$in->bindParam(":cpBandeiraCartaoPedido",$this->cpBandeiraCartaoPedido,PDO::PARAM_STR);
+			$in->bindParam(":cpPorcentagemJurosPedido",$this->cpPorcentagemJurosPedido,PDO::PARAM_STR);
+			$in->bindParam(":cpValorTaxaJurosPedido",$this->cpValorTaxaJurosPedido,PDO::PARAM_STR);
+			$in->bindParam(":cpValorTotalLiquidoPedido",$this->cpValorTotalLiquidoPedido,PDO::PARAM_STR);
+			
 			$in->bindParam(":cpObservacaoPedido", $this->cpObservacaoPedido,PDO::PARAM_STR);
 			
 			try {

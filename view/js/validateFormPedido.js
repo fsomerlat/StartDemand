@@ -20,6 +20,24 @@ document.getELementById("btnCadastrarPedido").onclick = function() {
 		return id.value;
 	}
 	
+	var validaPaiFilho = function(campo) {
+		
+		if(returnId(campo) == "PS") {
+			
+			valida("cpPlanoPagSeguroPedido","Selecione o campo [ PLANO / PAGSEGURO ] !");
+			valida("cpPorcentagemJurosPedido","Preencha o campo [ % JUROS ] !");
+			valida("cpValorTaxaJurosPedido","Preencha o campo [  VALOR TAXA JUROS ] !");
+			
+		}else if(returnId(campo) == "CD" || returnId(campo) == "CC") {
+			
+			valida("cpQtdParcela","Selecione o campo [ QTDE PARCELA ] !");
+			valida("cpPorcentagemJurosPedido","Preencha o campo [ % JUROS ] !");
+			valida("cpValorTaxaJurosPedido","Preencha o campo [  VALOR TAXA JUROS ] !");
+			valida("cpBandeiraCartaoPedido","Selecione o campo [ BANDEIRA / CARTÃO ] !");		
+		}
+		
+	}
+	
 	valida("tipoPedido","Selecione o campo [ TIPO DO PEDIDO ] !");
 	valida("tuProduto_idProduto","Selecione o campo [ NOME PRODUTO ] !");
 	valida("cpCodPedido","Selecione o campo [ CÓDIGO PEDIDO ] !");
@@ -27,6 +45,7 @@ document.getELementById("btnCadastrarPedido").onclick = function() {
 	valida("cpComplementoUm","Selecione o campo [ COMPLEMENTO UM ] !");
 	valida("cpComplementoDois","Selecione o campo [ COMPLEMENTO DOIS ] !");
 	valida("cpFormaPagamento","Selecione o campo [ FORMA DE PAGAMENTO  ] !");
+	validaPaiFilho("cpFormaPagamento");
 	
 	if(Errors.length > 0) {
 		
