@@ -21,24 +21,22 @@
  		
  		
  		//VERIFICAR A FORMA DE PAGAMENTO
- 		$ped->__set("cpPlanoPagSeguroPedido",addslashes($_REQUEST["cpPlanoPagSeguroPedido"]));
- 		$ped->__set("cpBandeiraCartaoPedido",addslashes($_REQUEST["cpBandeiraCartaoPedido"]));
- 		$ped->__set("cpPorcentagemJurosPedido",addslashes($_REQUEST["cpPorcentagemJurosPedido"]));
- 		$ped->__set("cpValorTaxaJurosPedido",addslashes($_REQUEST["cpValorTaxaJurosPedido"]));
- 		$ped->__set("cpValorTotalLiquidoPedido",addslashes($_REQUEST["cpValorTotalLiquidoPedido"]));
- 		
  		
  		$porcentagemJuros = substr($_REQUEST["cpPorcentagemJurosPedido"],0,4);
  		$valorTaxaJuros = substr($_REQUEST["cpValorTaxaJurosPedido"],0,4);
  		$valorTotalLiquido = substr($_REQUEST["cpValorTotalLiquidoPedido"],0,4);
  		
+ 		$arryBandeira = explode("-", $_REQUEST["cpBandeiraCartaoPedido"]);
+ 		$bandeiraCartao = $arryBandeira[0];
+ 		
+ 		$arryPlanoPagSeguro = explode("-", $_REQUEST["cpPlanoPagSeguroPedido"]);
+ 		$planoPagSeguro = $arryPlanoPagSeguro[0];		
+ 		
  		$ped->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
- 		
- 		$formaPagamento = $_REQUEST["cpFormaPagamento"] == "CD" || $_REQUEST["cpFormaPagamento"] == "CC";
- 		
+ 			
  		if($_REQUEST["cpFormaPagamento"] == "PS"):
  	
-	 		$ped->__set("cpPlanoPagSeguroPedido",addslashes($_REQUEST["cpPlanoPagSeguroPedido"]));
+	 		$ped->__set("cpPlanoPagSeguroPedido",addslashes($planoPagSeguro));
 	 		$ped->__set("cpBandeiraCartaoPedido", addslashes("PagSeguro"));
 	 		$ped->__set("cpPorcentagemJurosPedido",addslashes($porcentagemJuros));
 	 		$ped->__set("cpValorTaxaJurosPedido",addslashes($valorTaxaJuros));
@@ -48,24 +46,34 @@
 	 		
 	 		elseif($_REQUEST["cpFormaPagamento"] == "CC"):
 		 		
-		 			$ped->__set("cpQtdParcela", addslashes($_REQUEST["cpQtdParcela"]));
-		 			$ped->__set("cpValorParcela", addslashes($_REQUEST["cpValorParcela"]));
-		 			$ped->__set("cpPlanoPagSeguroPedido",addslashes($_REQUEST["cpPlanoPagSeguroPedido"]));
-		 			$ped->__set("cpBandeiraCartaoPedido", addslashes("PagSeguro"));
-		 			$ped->__set("cpPorcentagemJurosPedido",addslashes($porcentagemJuros));
-		 			$ped->__set("cpValorTaxaJurosPedido",addslashes($valorTaxaJuros));
-		 			$ped->__set("cpValorTotalLiquidoPedido",addslashes($valorTotalLiquido));
+	 			$ped->__set("cpQtdParcela", addslashes($_REQUEST["cpQtdParcela"]));
+	 			$ped->__set("cpValorParcela", addslashes($_REQUEST["cpValorParcela"]));
+	 			$ped->__set("cpPlanoPagSeguroPedido", 0);
+	 			$ped->__set("cpBandeiraCartaoPedido", addslashes($bandeiraCartao));
+	 			$ped->__set("cpPorcentagemJurosPedido",addslashes($porcentagemJuros));
+	 			$ped->__set("cpValorTaxaJurosPedido",addslashes($valorTaxaJuros));
+	 			$ped->__set("cpValorTotalLiquidoPedido",addslashes($valorTotalLiquido));
 	 			
 	 		elseif($_REQUEST["cpFormaPagamento"] == "CD"):
 	 			
-		 		$ped->__set("cpPlanoPagSeguroPedido",addslashes($_REQUEST["cpPlanoPagSeguroPedido"]));
-		 		$ped->__set("cpBandeiraCartaoPedido", addslashes("PagSeguro"));
+		 		$ped->__set("cpPlanoPagSeguroPedido", 0);
+		 		$ped->__set("cpBandeiraCartaoPedido",addslashes($bandeiraCartao));
 		 		$ped->__set("cpPorcentagemJurosPedido",addslashes($porcentagemJuros));
 		 		$ped->__set("cpValorTaxaJurosPedido",addslashes($valorTaxaJuros));
 		 		$ped->__set("cpValorTotalLiquidoPedido",addslashes($valorTotalLiquido));
 		 		$ped->__set("cpQtdParcela", 0);
 		 		$ped->__set("cpValorParcela", 0);
- 		
+		 		
+ 			else:
+ 			
+	 			$ped->__set("cpPlanoPagSeguroPedido", 0);
+	 			$ped->__set("cpBandeiraCartaoPedido", 0);
+	 			$ped->__set("cpPorcentagemJurosPedido", 0);
+	 			$ped->__set("cpValorTaxaJurosPedido", 0);
+	 			$ped->__set("cpValorTotalLiquidoPedido",addslashes($_REQUEST["cpValorTotalPedido"]));
+	 			$ped->__set("cpQtdParcela", 0);
+	 			$ped->__set("cpValorParcela", 0);
+ 				
  		endif;		
 
  		
@@ -145,14 +153,51 @@
 		$preparaProduto->__set("cpValorTotalProduto", addslashes($_REQUEST["cpValorTotalProduto"]));
 		$preparaProduto->__set("cpFormaPagamento",addslashes($_REQUEST["cpFormaPagamento"]));
 		$preparaProduto->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
+	    
+		$porcentagemJuros = substr($_REQUEST["cpPorcentagemJurosPedido"],0,4);
+		$valorTaxaJuros = substr($_REQUEST["cpValorTaxaJurosPedido"],0,4);
+		$valorTotalLiquido = substr($_REQUEST["cpValorTotalLiquidoPedido"],0,4);
 		
-		if($_REQUEST["cpFormaPagamento"] == "CC"):
+		$arryPlanoPagSeguro = explode("-", $_REQUEST["cpPlanoPagSeguroPedido"]);
+		$planoPagSeguro = $arryPlanoPagSeguro[0];
 			
+		if($_REQUEST["cpFormaPagamento"] == "PS"):
+		
+			$preparaProduto->__set("cpPlanoPagSeguroPedido",addslashes($planoPagSeguro));
+			$preparaProduto->__set("cpBandeiraCartaoPedido", addslashes("PagSeguro"));
+			$preparaProduto->__set("cpPorcentagemJurosPedido",addslashes($porcentagemJuros));
+			$preparaProduto->__set("cpValorTaxaJurosPedido",addslashes($valorTaxaJuros));
+			$preparaProduto->__set("cpValorTotalLiquidoPedido",addslashes($valorTotalLiquido));
+			$preparaProduto->__set("cpQtdParcela", 0);
+			$preparaProduto->__set("cpValorParcela", 0);
+			
+		elseif($_REQUEST["cpFormaPagamento"] == "CC"):
+		 
 			$preparaProduto->__set("cpQtdParcela", addslashes($_REQUEST["cpQtdParcela"]));
 			$preparaProduto->__set("cpValorParcela", addslashes($_REQUEST["cpValorParcela"]));
+			$preparaProduto->__set("cpPlanoPagSeguroPedido", 0);
+			$preparaProduto->__set("cpBandeiraCartaoPedido", addslashes($bandeiraCartao));
+			$preparaProduto->__set("cpPorcentagemJurosPedido",addslashes($porcentagemJuros));
+			$preparaProduto->__set("cpValorTaxaJurosPedido",addslashes($valorTaxaJuros));
+			$preparaProduto->__set("cpValorTotalLiquidoPedido",addslashes($valorTotalLiquido));
 			
-			else:
+		elseif($_REQUEST["cpFormaPagamento"] == "CD"):
 			
+			$preparaProduto->__set("cpPlanoPagSeguroPedido", 0);
+			$preparaProduto->__set("cpBandeiraCartaoPedido",addslashes($bandeiraCartao));
+			$preparaProduto->__set("cpPorcentagemJurosPedido",addslashes($porcentagemJuros));
+			$preparaProduto->__set("cpValorTaxaJurosPedido",addslashes($valorTaxaJuros));
+			$preparaProduto->__set("cpValorTotalLiquidoPedido",addslashes($valorTotalLiquido));
+			$preparaProduto->__set("cpQtdParcela", 0);
+			$preparaProduto->__set("cpValorParcela", 0);
+		 
+		else:
+		
+			$preparaProduto->__set("cpPlanoPagSeguroPedido", 0);
+			$preparaProduto->__set("cpBandeiraCartaoPedido", 0);
+			$preparaProduto->__set("cpPorcentagemJurosPedido", 0);
+			$preparaProduto->__set("cpValorTaxaJurosPedido", 0);
+			$preparaProduto->__set("cpValorTotalLiquidoPedido",addslashes($_REQUEST["cpValorTotalPedido"]));
 			$preparaProduto->__set("cpQtdParcela", 0);
 			$preparaProduto->__set("cpValorParcela", 0);
 			
@@ -231,6 +276,15 @@
 	    $valTotalProduto = $getInfoPreparaProduto->cpValorTotalProduto;
 	    $formaPagamento = $getInfoPreparaProduto->cpFormaPagamento;
 	    $qtdParcela = $getInfoPreparaProduto->cpQtdParcela;
+	    
+	    
+	    //**************************VERIFICAR REGRAS DE JUROS AO INCLUIR ACRÉSCIMO NOVAMENTE
+	    
+	    $planoPagSeguro = $getInfoPreparaProduto->cpPlanoPagSeguroPedido;
+	    $porcentagemJuros = $getInfoPreparaProduto->cpPorcentagemJurosPedido;
+	    $bandeiraCartao = $getInfoPreparaProduto->cpBandeiraCartaoPedido;
+	    $valorTaxaJuros = $getInfoPreparaProduto->cpValorTaxaJurosPedido;
+	    $valorTotalLiquido = $getInfoPreparaProduto->cpValorTotalLiquidoPedido;
 	    
 	    $valorMultiplicadoProduto = $valBaseProduto * $qtdProd;
 	    

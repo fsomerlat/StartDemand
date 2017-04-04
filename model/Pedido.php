@@ -19,7 +19,6 @@
 				  $cpValorParcela,
 				  $cpDataBaixa,
 				  $cpUsuarioBaixa,
-				  
 				  $cpPlanoPagSeguroPedido,
 				  $cpBandeiraCartaoPedido,
 				  $cpPorcentagemJurosPedido,
@@ -66,7 +65,6 @@
 			$in->bindParam(":cpPorcentagemJurosPedido",$this->cpPorcentagemJurosPedido,PDO::PARAM_STR);
 			$in->bindParam(":cpValorTaxaJurosPedido",$this->cpValorTaxaJurosPedido,PDO::PARAM_STR);
 			$in->bindParam(":cpValorTotalLiquidoPedido",$this->cpValorTotalLiquidoPedido,PDO::PARAM_STR);
-			
 			$in->bindParam(":cpObservacaoPedido", $this->cpObservacaoPedido,PDO::PARAM_STR);
 			
 			try {

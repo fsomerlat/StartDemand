@@ -71,7 +71,7 @@ var FormHelperPedido = (function() {
 					
 					if(value ==  dados.cpFormaPagamentoTaxa) {
 						
-						optionPagSeguro += "<option value='"+dados.cpBandeiraCartaoTaxa+"-"+dados.cpPorcentagemTaxa+"'>Receber em "+dados.cpPlanoPagSeguro+" dias</option>";
+						optionPagSeguro += "<option value='"+dados.cpPlanoPagSeguro+"-"+dados.cpPorcentagemTaxa+"'>Receber em "+dados.cpPlanoPagSeguro+" dias</option>";
 						optionBandeiraCartao += "<option value='"+dados.cpBandeiraCartaoTaxa+"-"+dados.cpPorcentagemTaxa+"'>"+dados.cpBandeiraCartaoTaxa+"</option>";
 					}
 				});
@@ -305,9 +305,6 @@ var FormHelperPedido = (function() {
 		});
 		
 		$(document).on("change","#cpPlanoPagSeguroPedido",function(){
-			
-			var arryValue = this.value.split("-"),
-				setValue = arryValue[1];
 			
 			setPorcentagemJuros(this.value);
 			atualizaValores();

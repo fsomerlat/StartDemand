@@ -10,10 +10,14 @@ class PreparaProduto extends Pedido{
 			
 		$sql="INSERT INTO $this->table
 				(tuProduto_idProduto,cpQtdProduto,cpComplementoUm,cpCodPedido,cpComplementoDois,
-				 cpFormaPagamento,cpQtdParcela,cpValorParcela,cpValorBaseProduto,cpValorTotalProduto,cpObservacaoPedido)
+				 cpFormaPagamento,cpQtdParcela,cpValorParcela,cpValorBaseProduto,cpValorTotalProduto,cpPlanoPagSeguroPedido,
+				 cpBandeiraCartaoPedido,cpPorcentagemJurosPedido,cpValorTaxaJurosPedido,cpValorTotalLiquidoPedido,
+				 cpObservacaoPedido)
 			  VALUES
 				(:tuProduto_idProduto,:cpQtdProduto,:cpComplementoUm,:cpCodPedido,:cpComplementoDois,
-				 :cpFormaPagamento,:cpQtdParcela,:cpValorParcela,:cpValorBaseProduto,:cpValorTotalProduto,:cpObservacaoPedido)";
+				 :cpFormaPagamento,:cpQtdParcela,:cpValorParcela,:cpValorBaseProduto,:cpValorTotalProduto,:cpPlanoPagSeguroPedido,
+				 :cpBandeiraCartaoPedido,:cpPorcentagemJurosPedido,:cpValorTaxaJurosPedido,:cpValorTotalLiquidoPedido,
+				 :cpObservacaoPedido)";
 			
 		$in=DB::prepare($sql);
 		$in->bindParam(":tuProduto_idProduto", $this->tuProduto_idProduto,PDO::PARAM_INT);
@@ -26,6 +30,11 @@ class PreparaProduto extends Pedido{
 		$in->bindParam(":cpFormaPagamento", $this->cpFormaPagamento,PDO::PARAM_STR);
 		$in->bindParam(":cpQtdParcela", $this->cpQtdParcela,PDO::PARAM_INT);
 		$in->bindParam(":cpValorParcela", $this->cpValorParcela,PDO::PARAM_STR);
+		$in->bindParam(":cpPlanoPagSeguroPedido",$this->cpPlanoPagSeguroPedido,PDO::PARAM_INT);
+		$in->bindParam(":cpBandeiraCartaoPedido",$this->cpBandeiraCartaoPedido,PDO::PARAM_STR);
+		$in->bindParam(":cpPorcentagemJurosPedido",$this->cpPorcentagemJurosPedido,PDO::PARAM_STR);
+		$in->bindParam(":cpValorTaxaJurosPedido",$this->cpValorTaxaJurosPedido,PDO::PARAM_STR);
+		$in->bindParam(":cpValorTotalLiquidoPedido",$this->cpValorTotalLiquidoPedido,PDO::PARAM_STR);		
 		$in->bindParam(":cpObservacaoPedido", $this->cpObservacaoPedido,PDO::PARAM_STR);
 			
 		try {
@@ -184,7 +193,10 @@ class PreparaProduto extends Pedido{
 			
 		$sql="SELECT
 				idPreparaProduto,tuProduto_idProduto,cpCodPedido,cpQtdProduto,cpComplementoUm,cpValorBaseProduto,
-				cpFormaPagamento,cpQtdParcela,cpValorParcela,cpComplementoDois,cpValorTotalProduto,cpObservacaoPedido
+				cpFormaPagamento,cpQtdParcela,cpValorParcela,cpComplementoDois,cpValorTotalProduto,cpObservacaoPedido,
+				cpPlanoPagSeguroPedido,cpBandeiraCartaoPedido,cpPorcentagemJurosPedido,cpValorTaxaJurosPedido,
+				cpValorTotalLiquidoPedido
+				
 			 FROM
 				$this->table";
 
