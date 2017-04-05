@@ -42,11 +42,14 @@ var Service_Prepara_Pedido = (function() {
 							itens += "<td>"+i.cpCodPedido+"</td>";
 							itens += "<td>"+i.cpNomeProduto+"</td>"
 							itens += "<td>"+i.cpQtdProduto+"</td>";
-							itens += "<td>"+i.cpValorProduto+"</td>";
-							itens += "<td>"+valorDoProduto+"</td>";
+							itens += "<td>R$ "+i.cpValorProduto+"</td>";
+							itens += "<td>R$ "+valorDoProduto+"</td>";
 							itens += "<td>"+i.cpQtdParcela+"</td>";
-							itens += "<td>"+i.cpValorParcela+"</td>";
-							itens += "<td>"+i.cpValorTotalProduto+"</td>";
+							itens += "<td>R$ "+i.cpValorParcela+"</td>";
+							itens += "<td>R$ "+i.cpValorTotalProduto+"</td>";
+							itens += "<td>"+i.cpPorcentagemJurosPedido+"</td>";
+							itens += "<td>R$ "+i.cpValorTaxaJurosPedido+"</td>";
+							itens += "<td>R$ "+i.cpValorTotalLiquidoPedido+"</td>";
 							itens += "<td>"+i.cpObservacaoPedido+"</td>";
 							itens += "<td><a href='Pedido.php?panel=193158&acao=editar&id="+i.idPreparaProduto+"' title='editar'><span class='glyphicon glyphicon-pencil super'  aria-hidden='true'></span></a></td>";
 							itens += "<td><a href='../controller/Prepara_Pedido_Acrescimo_Controller.php?acao=deletarProdPedido&id="+i.idPreparaProduto+"' title='excluir'><span class='glyphicon glyphicon-trash super excluirProdPreparaPedido' aria-hidden='true'></span></a></td>";

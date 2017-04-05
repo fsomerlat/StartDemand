@@ -160,7 +160,10 @@
 		
 		$arryPlanoPagSeguro = explode("-", $_REQUEST["cpPlanoPagSeguroPedido"]);
 		$planoPagSeguro = $arryPlanoPagSeguro[0];
-			
+	    
+		$arryBandeira = explode("-",$_REQUEST["cpBandeiraCartaoPedido"]);
+		$bandeiraCartao = $arryBandeira[0];
+		
 		if($_REQUEST["cpFormaPagamento"] == "PS"):
 		
 			$preparaProduto->__set("cpPlanoPagSeguroPedido",addslashes($planoPagSeguro));
@@ -303,6 +306,12 @@
 		$ped->__set("cpQtdProduto", addslashes($qtdProd));
 	    $ped->__set("cpComplementoUm", addslashes($complementoUm));
 	    $ped->__set("cpComplementoDois", addslashes($complementoDois));
+	    $ped->__set("cpPlanoPagSeguroPedido", addslashes($planoPagSeguro));
+	    $ped->__set("cpPorcentagemJurosPedido", addslashes($porcentagemJuros));
+	    $ped->__set("cpBandeiraCartaoPedido", addslashes($bandeiraCartao));
+	    $ped->__set("cpValorTaxaJurosPedido", addslashes($valorTaxaJuros));
+	    $ped->__set("cpValorTotalLiquidoPedido", addslashes($valorTotalLiquido));
+	    
 	    $ped->__set("cpValorTotalProduto", addslashes($valorMultiplicadoProduto));
 	    $ped->__set("cpValorTotalPedido", addslashes($somaTotalPedido));
 	    
@@ -323,9 +332,9 @@
 	    
 	    $ped->__set("cpObservacaoPedido", addslashes($obsPedido));
 	    
-	    $getInfoProduto = $preparaProduto->getProduto(); //RETORNA SEMPRE O ULTIMO REGISTRO DA TABELA tuPedido para ser inserido na tsPreparaProduto
+	    $getInfoPreparaProduto = $preparaProduto->getProduto(); 
 	  
-	    $codProduto = $getInfoProduto->cpCodPedido;
+	    $codProduto = $getInfoPreparaProduto->cpCodPedido;
 	  
 	    $comparaIdsDuplicados = $ped->comparaRelacionamentoIds();
 	    
@@ -351,6 +360,11 @@
 		    	$acrescimo->__set("cpFormaPagamentoAcrescimo","PD"); //FORMA DEPAGAMENTO ESTÁ DECLARADA NO PEDIDO
 		    	$acrescimo->__set("cpQtdParcelaAcrescimo", 0); // PARCELA DELCARADA NO PEDIDO
 		    	$acrescimo->__set("cpValorParcelaAcrescimo",0); //VALOR DA PARCELA ESTÁ DEFINIDO NO PEDIDO
+		    	//CAMPOS VINCULADOS AO PEDIDO
+		    	$acrescimo->__set("cpBandeiraCartao", "PD");
+		    	$acrescimo->__set("cpPorcentagemTaxa", 0);
+		    	$acrescimo->__set("cpValorTaxaJuros", 0);
+		    	$acrescimo->__set("cpValorTotalLiquido", 0);
 		    	$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
 		    	$acrescimo->__set("cpObservacaoAcrescimo", addslashes($res->cpObservacaoAcrescimo));
 		    	 
@@ -374,7 +388,14 @@
     		$idPedido = $getInfoPedido->idPedido;
      		$codPedido = $getInfoPedido->cpCodPedido;
      		$valTotalPedido = $getInfoPedido->cpValorTotalPedido;
-     
+     		
+     		
+     		//RETORNA O JUROS E OVALOR DO PEDIDO RECALCULADO PARA SER ATUAZALIDO     //******************   ATUALIZANDO JUROS DE DO PEDIDO EM TEMPO DE EXECUÇÃO
+     		$valorTaxaJuros = $preparaProduto->cpValorTaxaJurosPedido;
+     		$valorLiquidoPedido = $preparaProduto->cpValorLiquidoPedido;
+     		
+     		$ped->__set("cpValorTaxaJurosPedido", substr($valorTaxaJuros,0,4));
+     		$ped->__set("cpValorTotalLiquidoPedido", substr($valorLiquidoPedido,0,4));
      		
      		if($qtdParcela > 0){
      		
@@ -403,6 +424,11 @@
 				$acrescimo->__set("cpFormaPagamentoAcrescimo","PD"); //FORMA DEPAGAMENTO ESTÁ DECLARADA NO PEDIDO
 				$acrescimo->__set("cpQtdParcelaAcrescimo", 0); // PARCELA DELCARADA NO PEDIDO
 				$acrescimo->__set("cpValorParcelaAcrescimo",0); //VALOR DA PARCELA ESTÁ DEFINIDO NO PEDIDO
+				//CAMPOS VINCULADOS AO PEDIDO
+				$acrescimo->__set("cpBandeiraCartao", "PD");
+				$acrescimo->__set("cpPorcentagemTaxa", 0);
+				$acrescimo->__set("cpValorTaxaJuros", 0);
+				$acrescimo->__set("cpValorTotalLiquido", 0);
 				$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
 				$acrescimo->__set("cpObservacaoAcrescimo", addslashes($res->cpObservacaoAcrescimo));
 						

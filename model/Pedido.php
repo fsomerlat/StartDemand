@@ -337,7 +337,8 @@
 			$sql="UPDATE 
 					$this->table
 				  SET
-				  	cpValorParcela=:cpValorParcela,cpValorTotalPedido=:cpValorTotalPedido
+				  	cpValorParcela=:cpValorParcela,cpValorTotalPedido=:cpValorTotalPedido,
+				  	cpValorTaxaJurosPedido=:cpValorTaxaJurosPedido,cpValorTotalLiquidoPedido=:cpValorTotalLiquidoPedido
 				  WHERE
 				  	idPedido=:idPedido";
 			
@@ -345,6 +346,8 @@
 			$up->bindParam(":idPedido", $id,PDO::PARAM_INT);
 			$up->bindParam(":cpValorParcela", $this->cpValorParcela,PDO::PARAM_STR);
 			$up->bindParam(":cpValorTotalPedido", $this->cpValorTotalPedido,PDO::PARAM_STR);
+			$up->bindParam(":cpValorTaxaJurosPedido",$this->cpValorTaxaJurosPedido,PDO::PARAM_STR);
+			$up->bindParam(":cpValorTotalLiquidoPedido", $this->cpValorTotalLiquidoPedido,PDO::PARAM_STR);
 			
 			try {
 				

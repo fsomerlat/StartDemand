@@ -52,7 +52,8 @@ class PreparaProduto extends Pedido{
 		$sql="SELECT
 			prep.idPreparaProduto,prep.tuProduto_idProduto,prep.cpQtdProduto,prep.cpComplementoUm,prep.cpCodPedido,
 			prep.cpComplementoDois,prep.cpValorTotalProduto,prod.cpValorProduto,prod.cpNomeProduto,prep.cpObservacaoPedido,
-			prep.cpQtdParcela,prep.cpValorParcela,prep.cpValorBaseProduto
+			prep.cpQtdParcela,prep.cpValorParcela,prep.cpValorBaseProduto,prep.cpPlanoPagSeguroPedido,prep.cpBandeiraCartaoPedido,
+			prep.cpPorcentagemJurosPedido,prep.cpValorTaxaJurosPedido,prep.cpValorTotalLiquidoPedido
 		FROM
 			$this->table as prep INNER JOIN tuProduto as prod
 			
@@ -254,7 +255,8 @@ class PreparaProduto extends Pedido{
 		$sql="UPDATE 
 				$this->table 
 			  SET
-			  	cpValorParcela=:cpValorParcela,cpValorTotalProduto=:cpValorTotalProduto
+			  	cpValorParcela=:cpValorParcela,cpValorTotalProduto=:cpValorTotalProduto,cpValorTaxaJurosPedido=:cpValorTaxaJurosPedido,
+			  	cpValorTotalLiquidoPedido=:cpValorTotalLiquidoPedido
 			  WHERE
 			  	idPreparaProduto=:idPreparaProduto";
 		
@@ -262,6 +264,8 @@ class PreparaProduto extends Pedido{
 		$up->bindParam(":idPreparaProduto",$id,PDO::PARAM_INT);
 		$up->bindParam(":cpValorParcela", $this->cpValorParcela,PDO::PARAM_STR);
 		$up->bindParam(":cpValorTotalProduto", $this->cpValorTotalProduto,PDO::PARAM_STR);
+		$up->bindParam(":cpValorTaxaJurosPedido", $this->cpValorTaxaJurosPedido,PDO::PARAM_STR);
+		$up->bindParam(":cpValorTotalLiquidoPedido", $this->cpValorTotalLiquidoPedido,PDO::PARAM_STR);
 		
 		try{
 			

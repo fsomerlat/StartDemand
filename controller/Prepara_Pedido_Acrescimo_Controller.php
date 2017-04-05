@@ -27,18 +27,41 @@
 		$valTotalProduto = $getInfoPreparaProduto->cpValorTotalProduto;
 		$qtdParcela = $getInfoPreparaProduto->cpQtdParcela;
 		
+		//	RECALCULAR PEDIDO COM TAXA DE JUROS
+		
+		$formaPagamento = $getInfoPreparaProduto->cpFormaPagamentoPedido;
+		$porcentagemTaxaJuros = $getInfoPreparaProduto->cpPorcentagemJurosPedido;
+		$valorTaxaJuros = $getInfoPreparaProduto->cpValorTaxaJurosPedido;
+		$valorLiquido = $getInfoPreparaProduto->cpValorTotalLiquidoPedido;
+		
+		$valorTotalAtual = $valTotalProduto + $valTotalAcrescimo;
+		$parcelaAtualizada = $valorTotalAtual / $qtdParcela;
+		$valorTotalLiquido = $valorTotalAtual - substr($valorTaxaJuros,0,5);
+	   
 		$valorTotalAtualizado = $valTotalProduto + $valTotalAcrescimo;
-		$parcelaAtualizada = $valorTotalAtualizado / $qtdParcela;
+		$valorTaxaJurosCalculado = ($porcentagemTaxaJuros * $valTotalAcrescimo) / 100;
+		$valorJurosAtualizado =  $valorTaxaJurosCalculado + $valorTaxaJuros;
+		
+		if($porcentagemTaxaJuros != "D") {
+			
+			$preparaProdPed->__set("cpValorTaxaJurosPedido", addslashes(substr($valorJurosAtualizado,0,5)));
+			$preparaProdPed->__set("cpValorTotalLiquidoPedido", addslashes($valorTotalLiquido));
+			
+		} else {
+			
+			$preparaProdPed->__set("cpValorTaxaJurosPedido", addslashes(substr($valorTaxaJuros,0,5)));
+			$preparaProdPed->__set("cpValorTotalLiquidoPedido", addslashes($valorTotalAtual));
+		}
 		
 		if($getInfoPreparaProduto->cpQtdParcela > 0) {
 			
 			$preparaProdPed->__set("cpValorParcela", addslashes($parcelaAtualizada));
-			$preparaProdPed->__set("cpValorTotalProduto", addslashes($valorTotalAtualizado));
+			$preparaProdPed->__set("cpValorTotalProduto", addslashes($valorTotalAtual));
 			
 		}else{
 			
 			$preparaProdPed->__set("cpValorParcela", 0);
-			$preparaProdPed->__set("cpValorTotalProduto", $valorTotalAtualizado);
+			$preparaProdPed->__set("cpValorTotalProduto", $valorTotalAtual);
 		}
 		
 		if(empty($_REQUEST["cpAcrescimo"])):
@@ -88,9 +111,27 @@
 		$valTotalProduto = $getInfoPreparaProduto->cpValorTotalProduto;
 		$qtdParcela = $getInfoPreparaProduto->cpQtdParcela;
 		
+		$formaPagamento = $getInfoPreparaProduto->cpFormaPagamento;
+		$porcentagemTaxaJuros = $getInfoPreparaProduto->cpPorcentagemJurosPedido;
+		$valorTaxaJuros = $getInfoPreparaProduto->cpValorTaxaJurosPedido;
+		
 		$valorTotalAtualizado = $valTotalProduto - $valTotaAcrescimoPorID;
 		$valorParcelaAtualizado = $valorTotalAtualizado / $qtdParcela;
+		
+		$taxaJurosAtualizada = ($valTotaAcrescimoPorID * $porcentagemTaxaJuros) / 100;
+		$valorTotalLiquidoAtualizado =   $valorTotalAtualizado - substr($taxaJurosAtualizada,0,5); // EX. 9.9 =  SEMPRE ARREDONDARÁ PRA 10.1 -> 10.10
+		
+		if($formaPagamento != "D") {
 			
+			$preparaProdPed->__set("cpValorTaxaJurosPedido", addslashes(substr($taxaJurosAtualizada,0,5)));
+			$preparaProdPed->__set("cpValorTotalLiquidoPedido", addslashes($valorTotalLiquidoAtualizado));
+			
+		}else{
+			
+			$preparaProdPed->__set("cpValorTaxaJurosPedido", addslashes($valorTaxaJuros,0,5));
+			$preparaProdPed->__set("cpValorTotalLiquidoPedido", $valorTotalAtualizado);
+		}
+		
 		if($qtdParcela > 0) {
 
 			$preparaProdPed->__set("cpValorParcela", $valorParcelaAtualizado);

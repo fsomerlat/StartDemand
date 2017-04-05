@@ -9,17 +9,20 @@
 			<div id="panel-element_655957" class="panel-collapse collapse in">
 				<div class="panel-body">
 				<h4 class="listaPreparaPedido"></h4>
-					<table class="table table-hover" id="tablePreparaPedido">
+					<table class="table table-hover table-bordered" id="tablePreparaPedido">
 					<thead>
 						<tr class="warning">
 							<th>CodPedido</th>
-							<th>Nome produto</th>
+							<th>Produto</th>
 							<th>QTDE</th>
 							<th>Valor base</th>
 							<th>Valor total produto</th>
 							<th>QTDE parcela</th>
 							<th>Valor parcela</th>
 							<th>Total com acréscimo</th>
+							<th>%</th>
+							<th>Taxa</th>
+							<th>Total líquido</th>
 							<th>Observação</th>
 							<th></th>
 							<th></th>
