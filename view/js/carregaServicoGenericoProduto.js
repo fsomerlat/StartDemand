@@ -41,11 +41,11 @@ var Service_Generico = (function() {
 					
 					for(var i=0; i < retorno.length; i++) {
 						
-						if(retorno[i].cpTipoObservacao == "Acrescimo") {
+						if(retorno[i].cpClassificacaoProduto == "Acrescimo") {
 							
 							option += "<option value='"+retorno[i].cpNomeProduto+"'>" +retorno[i].cpNomeProduto+"</option>";							
 						
-						} else if(retorno[i].cpTipoObservacao == "Principal") {
+						} else if(retorno[i].cpClassificacaoProduto == "Principal") {
 							
 							options += "<option value='"+retorno[i].idProduto+"'>"+retorno[i].cpNomeProduto+"</option>";
 						}

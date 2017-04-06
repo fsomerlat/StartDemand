@@ -24,6 +24,24 @@
 
 	if($_REQUEST["acao"] == "atualizar"):
 	
+		$id = (int) $_REQUEST["id"];
+		
+		$contas->__set("cpTipoConta", addslashes($_REQUEST["cpTipoConta"]));
+		$contas->__set("cpClassificacaoConta", addslashes($_REQUEST["cpClassificacaoConta"]));
+		$contas->__set("cpValorConta", addslashes($_REQUEST["cpValorConta"]));
+		$contas->__set("cpDataVencimentoConta", addslashes($_REQUEST["cpDataVencimentoConta"]));
+		$contas->__set("cpObservacaoConta", addslashes($_REQUEST["cpObservacaoConta"]));
+		$contas->__set("cpAlteracaoUltimoUsuario", addslashes($_SESSION["cpNome"]));
+		
+		
+		$contas->UPDATE($id);
+		$contas->UPDATE_POR_USUARIO($id);
+		
+		echo "<script language='javascript'>
+					window.alert('Registro atualizado com sucesso !');
+					window.location.href='../view/Contas.php';
+				</script>";
+		
 	endif;
 	
 	

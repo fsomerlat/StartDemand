@@ -8,7 +8,7 @@
 		$prod->__set("cpQtdProduto", addslashes($_REQUEST["cpQtdProduto"]));
 		$prod->__set("cpTipoProduto", addslashes($_REQUEST["cpTipoProduto"]));
 		$prod->__set("cpValorProduto",  addslashes($_REQUEST["cpValorProduto"]));
-		$prod->__set("cpTipoObservacao", addslashes($_REQUEST["cpTipoObservacao"]));
+		$prod->__set("cpClassificacaoProduto", addslashes($_REQUEST["cpClassificacaoProduto"]));
 		$prod->__set("cpObservacaoProduto", addslashes($_REQUEST["cpObservacaoProduto"]));
 		
 		$validaNome = empty($prod->__get("cpNomeProduto"));
@@ -69,7 +69,7 @@
 		$prod->__set("cpQtdProduto", addslashes($_REQUEST["cpQtdProduto"]));
 		$prod->__set("cpTipoProduto", addslashes($_REQUEST["cpTipoProduto"]));
 		$prod->__set("cpValorProduto", addslashes($_REQUEST["cpValorProduto"]));
-		$prod->__set("cpTipoObservacao", addslashes($_REQUEST["cpTipoObservacao"]));
+		$prod->__set("cpClassificacaoProduto", addslashes($_REQUEST["cpClassificacaoProduto"]));
 		$prod->__set("cpObservacaoProduto", addslashes(trim($_REQUEST["cpObservacaoProduto"])));
 	
 	

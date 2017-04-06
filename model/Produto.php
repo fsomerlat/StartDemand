@@ -9,7 +9,7 @@
 				$cpQtdProduto,
 				$cpTipoProduto,
 				$cpValorProduto,
-				$cpTipoObservacao,
+				$cpClassificacaoProduto,
 				$cpObservacaoProduto;
 		
 		
@@ -26,16 +26,16 @@
 		public function INSERT() {
 			
 			$sql="INSERT INTO $this->table
-				 	(cpNomeProduto,cpQtdProduto,cpTipoProduto,cpValorProduto,cpTipoObservacao,cpObservacaoProduto)
+				 	(cpNomeProduto,cpQtdProduto,cpTipoProduto,cpValorProduto,cpClassificacaoProduto,cpObservacaoProduto)
 				 VALUES 
-				 (:cpNomeProduto,:cpQtdProduto,:cpTipoProduto,:cpValorProduto,:cpTipoObservacao,:cpObservacaoProduto)";
+				 (:cpNomeProduto,:cpQtdProduto,:cpTipoProduto,:cpValorProduto,:cpClassificacaoProduto,:cpObservacaoProduto)";
 			
 			$in=DB::prepare($sql);
 			$in->bindParam(":cpNomeProduto",$this->cpNomeProduto,PDO::PARAM_STR);
 			$in->bindParam(":cpQtdProduto",$this->cpQtdProduto,PDO::PARAM_STR);
 			$in->bindParam(":cpTipoProduto",$this->cpTipoProduto,PDO::PARAM_STR);
 			$in->bindParam(":cpValorProduto",$this->cpValorProduto,PDO::PARAM_STR);
-			$in->bindParam(":cpTipoObservacao",$this->cpTipoObservacao, PDO::PARAM_STR);
+			$in->bindParam(":cpClassificacaoProduto",$this->cpClassificacaoProduto, PDO::PARAM_STR);
 			$in->bindParam(":cpObservacaoProduto",$this->cpObservacaoProduto,PDO::PARAM_STR);
 			
 			try {
@@ -52,9 +52,9 @@
 			
 			$sql="SELECT 
 					
-					idProduto,cpNomeProduto,cpQtdProduto,cpTipoProduto,cpValorProduto,cpTipoObservacao,cpObservacaoProduto
+					idProduto,cpNomeProduto,cpQtdProduto,cpTipoProduto,cpValorProduto,cpClassificacaoProduto,cpObservacaoProduto
 						
-				  FROM $this->table ORDER BY cpTipoObservacao";
+				  FROM $this->table ORDER BY cpClassificacaoProduto";
 			
 			$s=DB::prepare($sql);
 			$s->execute();
@@ -74,7 +74,7 @@
 		public function listId($id) {
 			
 			$sql="SELECT 
-					cpNomeProduto, cpQtdProduto,cpTipoProduto,cpValorProduto,cpTipoObservacao,cpObservacaoProduto
+					cpNomeProduto, cpQtdProduto,cpTipoProduto,cpValorProduto,cpClassificacaoProduto,cpObservacaoProduto
 				  FROM 
 				  	$this->table
 				  WHERE 
@@ -99,7 +99,7 @@
 			$sql="UPDATE $this->table 
 			      
 			      SET cpNomeProduto=:cpNomeProduto,cpQtdProduto=:cpQtdProduto,cpTipoProduto=:cpTipoProduto,
-			      cpValorProduto=:cpValorProduto,cpTipoObservacao=:cpTipoObservacao,cpObservacaoProduto=:cpObservacaoProduto
+			      cpValorProduto=:cpValorProduto,cpClassificacaoProduto=:cpClassificacaoProduto,cpObservacaoProduto=:cpObservacaoProduto
 				 
 				 WHERE  idProduto=:idProduto";
 			
@@ -109,7 +109,7 @@
 			$up->bindParam(":cpQtdProduto", $this->cpQtdProduto,PDO::PARAM_INT);
 			$up->bindParam(":cpTipoProduto", $this->cpTipoProduto,PDO::PARAM_STR);
 			$up->bindParam(":cpValorProduto", $this->cpValorProduto,PDO::PARAM_INT);
-			$up->bindParam(":cpTipoObservacao",$this->cpTipoObservacao,PDO::PARAM_STR);
+			$up->bindParam(":cpClassificacaoProduto",$this->cpClassificacaoProduto,PDO::PARAM_STR);
 			$up->bindParam(":cpObservacaoProduto", $this->cpObservacaoProduto,PDO::PARAM_STR);
 			
 			try {

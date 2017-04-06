@@ -1,4 +1,32 @@
-<?php require_once 'header/header.php'; ?>
+<?php require_once 'header/header.php'; require_once '../core/include.php'; 
+
+	$contas =  new Contas();
+	
+	if($_GET["acao"] == "editar"):
+		
+		$acao = "atualizar";
+		$id = (int) addslashes($_GET["id"]);
+		
+		$getInfoContas = $contas->listId($id);
+		
+		$tipoConta = "";
+		$valorCompleto= "";
+		if(strlen($getInfoContas->cpValorConta) == 3){
+			$valorCompleto .= $getInfoContas->cpValorConta."00";
+		}elseif(strlen($getInfoContas->cpValorConta) == 2){
+			
+			$valorCompleto = "0".$getInfoContas->cpValorConta."00";	
+		}elseif(strlen($getInfoContas->cpValorConta > 3 && strlen($getInfoContas->cpValorConta) < 6)){
+		
+			$valorCompleto .= $getInfoContas->cpValorConta."0";
+		}else{
+			$valorCompleto .= $getInfoContas->cpValorConta;
+		}
+		($getInfoContas->cpTipoConta == "P") ? $tipoConta = "Pagar" : $tipoConta = "Receber";
+		
+
+	endif;
+?>
 
 <div class="col-md-6">
 	<div class="panel panel-primary">
@@ -9,11 +37,14 @@
 		</div>
 		<div class="panel-body">
 			<form action="../controller/Contas_Controller.php" method="POST">
+			
+			<input type="hidden" name="id" value="<?php echo (!empty($_GET["id"])) ? $id : ""; ?>" />
+			
 				<div class="col-md-3">
 					<div class="form-group">
 						<label for="Tipo de conta">Tipo de conta</label>
 							<select name="cpTipoConta" id="cpTipoConta" class="form-control">
-							<option value="">Selecione</option>
+							<option value="">Selecione <?php echo (!empty($_GET["id"])) ? " - ".$tipoConta : ""; ?></option>
 							<option value="P">A pagar</option>
 							<option value="R">A receber</option>
 						</select>
@@ -23,7 +54,7 @@
 					<div class="form-group">
 						<label for="Tipo de conta">Classificação</label>
 						<select name="cpClassificacaoConta" id="cpClassificacaoConta" class="form-control">
-							<option value="">Selecione</option>
+							<option value="">Selecione <?php echo (!empty($_GET["id"])) ? " - ".$getInfoContas->cpClassificacaoConta : ""; ?></option>
 							<option value="Luz">Luz</option>
 							<option value="Agua">Àgua</option>
 							<option value="Internet">Internet</option>
@@ -34,24 +65,25 @@
 				<div class="col-md-3">
 					<div class="form-group">
 						<label for="Valor">Valor</label>
-						<input type="text" name="cpValorConta" id="cpValorConta" class="form-control" />
+						<input type="text" name="cpValorConta" value="<?php echo (!empty($_GET["id"])) ? $valorCompleto : ""; ?>" id="cpValorConta" class="form-control" />
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class="form-group">
 						<label for="Data de vencimento">Data de vencimento</label>
-						<input type="text" name="cpDataVencimentoConta" id="cpDataVencimentoConta" readonly class="form-control" />
+						<input type="text" name="cpDataVencimentoConta" value="<?php echo(!empty($_GET["id"])) ? $getInfoContas->cpDataVencimentoConta : ""; ?>" id="cpDataVencimentoConta" readonly class="form-control" />
 					</div>
 				</div>
 				<div class="col-md-12">
 				<label for="Observacao conta">Observação conta</label>
 					<div class="form-group">
-						<textarea name="cpObservacaoConta" id="cpObservacaoConta" class="form-control"></textarea>
+						<textarea name="cpObservacaoConta" id="cpObservacaoConta" class="form-control"><?php echo (!empty($_GET["id"])) ? $getInfoContas->cpObservacaoConta : ""; ?></textarea>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">
-						<input type="submit" name="acao" value="cadastrar" id="btnCadastrarConta" class="form-control btn btn-info" />
+					
+						<input type="submit" name="acao" value="<?php echo (!empty($_GET["id"])) ? $acao : "cadastrar"; ?>" id="btnCadastrarConta" class="form-control btn btn-info" />
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -132,5 +164,7 @@
 		</div>
 	</div>
 </div>
+
+<br/><br/><br/><br/>
 
 <?php require_once 'footer/footer.php'; ?>

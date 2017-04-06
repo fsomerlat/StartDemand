@@ -150,7 +150,7 @@
 				}else {
 					
 					echo "<script language='javascript'>
-								window.alert('Pedido gerado a vista !');
+								window.alert('Pedido não parcelado !');
 							</script>";
 				}
 				

@@ -226,7 +226,8 @@
 				  FROM 
 					$this->table
 				  GROUP BY
-					cpStatusPedido";
+					cpStatusPedido 
+				  ";
 			
 			$row=DB::prepare($sql);
 			$row->execute();		

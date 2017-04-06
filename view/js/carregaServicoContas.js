@@ -5,7 +5,8 @@ var Service_Contas = (function(){
 		var contasPagar = '',
 			contasReceber = '',
 			msgPagar = '',
-			msgReceber = '';
+			msgReceber = '',
+			msgAlteracao = '';
 		
 		$.ajax({
 			
@@ -40,21 +41,44 @@ var Service_Contas = (function(){
 						
 						if(tipoConta == "Pagar") {
 														
-							var objData  = dados.cpDataCadastroConta,
-								data = objData.substring(0,10).split("-");
-							
-								dia = data[2];
-								mes = data[1];
-								ano = data[0];
+							var objDataCadastroConta  = dados.cpDataCadastroConta;
 								
-							hora = objData.substring(10,19);
-							var dataCadastroConta = dia +"/"+mes+"/"+ano;
+								dataCadastroConta = objDataCadastroConta.substring(0,10).split("-");
 							
+								diaCad = dataCadastroConta[2];
+								mesCad = dataCadastroConta[1];
+								anoCad = dataCadastroConta[0];
+								
+							horaCad = objDataCadastroConta.substring(10,19);
+							var dataCadastroConta = diaCad +"/"+mesCad+"/"+anoCad+" às "+horaCad;
+							
+							if(dados.cpDataUltimaAlteracao != null) {
+								
+								var objDataUltimaAlteracao = dados.cpDataUltimaAlteracao;
+								
+								dataUltimaAlteracao = objDataUltimaAlteracao.substring(0,10).split("-");
+									
+									diaAlt = dataUltimaAlteracao[2],
+									mesAlt = dataUltimaAlteracao[1];
+									anoAlt = dataUltimaAlteracao[0];
+								
+								horaAlt = objDataUltimaAlteracao.substring(10,19);
+								var dataAlteracao = diaAlt+"/"+mesAlt+"/"+ano;
+								
+								usuario = dados.cpAlteracaoUltimoUsuario;
+								
+								msgAlteracao = usuario +" no dia "+ dataAlteracao+" às "+horaAlt;
+							
+							} else {
+								
+								msgAlteracao = "Não há alteração no momento !";
+							}
+						
 							contasPagar += "<tr>";
 							contasPagar +="<td>"+tipoConta+"</td>";
 							contasPagar +="<td>"+dados.cpClassificacaoConta+"</td>";
 							contasPagar +="<td>R$ "+dados.cpValorConta+"</td>";
-							contasPagar  +="<td><a href='#' title='Cadastrado por: "+dados.cpUsuario+" no dia "+dataCadastroConta+" às "+hora+"' ><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span></a></td>"; 
+							contasPagar +="<td><a href='#' title='Cadastrado por: "+dados.cpUsuario+" no dia "+dataCadastroConta+ " Ùltima Alteração: "+msgAlteracao+"'><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span></a></td>"; 
 							contasPagar +="<td>"+dados.cpDataVencimentoConta+"</td>";
 							contasPagar +="<td>"+dados.cpObservacaoConta+"</td>";
 							contasPagar += "<td><a href='Contas.php?acao=editar&id="+dados.idContas+"'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a></td>";
@@ -65,20 +89,44 @@ var Service_Contas = (function(){
 							
 						}else if(tipoConta == "Receber") {
 							
-							var objData = dados.cpDataCadastroConta,
-								data = objData.substring(0,10).split("-");
-								dia = data[2];
-								mes = data[1];
-								ano = data[0];
+							var objDataCadastroConta  = dados.cpDataCadastroConta,
+								dataAlteracao = '';
 							
-							hora = objData.substring(10,19);
-							var dataCadastroConta = dia +"/"+mes+"/"+ano;
+								dataCadastroConta = objDataCadastroConta.substring(0,10).split("-");
+								
+								diaCad = dataCadastroConta[2];
+								mesCad = dataCadastroConta[1];
+								anoCad = dataCadastroConta[0];
 							
+								horaCad = objDataCadastroConta.substring(10,19);
+								var dataCadastroConta = diaCad +"/"+mesCad+"/"+anoCad;
+								
+							if(dados.cpDataUltimaAlteracao != null) {
+								
+								var	objDataUltimaAlteracao = dados.cpDataUltimaAlteracao;
+								
+								dataUltimaAlteracao = objDataUltimaAlteracao.substring(0,10).split("-");
+			
+								diaAlt = dataUltimaAlteracao[2],
+								mesAlt = dataUltimaAlteracao[1];
+								anoAlt = dataUltimaAlteracao[0];
+								
+								horaAlt = objDataUltimaAlteracao.substring(10,19);
+								var dataAlteracao = diaAlt+"/"+mesAlt+"/"+ano;
+								
+								usuario = dados.cpUsuario;
+								
+								msgAlteracao = usuario +" no dia "+dataAlteracao+" às "+horaAlt;
+								
+							}else{
+								
+								msgAlteracao = "Não há alteração no momento !";								
+							}
 							contasReceber += "<tr>";
 							contasReceber +="<td>"+tipoConta+"</td>";
 							contasReceber +="<td>"+dados.cpClassificacaoConta+"</td>";
 							contasReceber +="<td>R$ "+dados.cpValorConta+"</td>";
-							contasReceber +="<td><a href='#' title='Cadastrado por: "+dados.cpUsuario+" no dia "+dataCadastroConta+" às "+hora+"'><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span></a></td>";
+							contasReceber +="<td><a href='#' title='Cadastrado por: "+dados.cpUsuario+" no dia "+dataCadastroConta+" às "+horaCad+" Ùltima alteração "+msgAlteracao+"'><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span></a></td>";
 							contasReceber +="<td>"+dados.cpDataVencimentoConta+"</td>";
 							contasReceber +="<td>"+dados.cpObservacaoConta+"</td>";
 							contasReceber += "<td><a href='Contas.php?acao=editar&id="+dados.idContas+"'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a></td>";

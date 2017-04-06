@@ -1,4 +1,10 @@
 <?php require_once 'header/header.php'; ?>
+
+<html>
+	<head>
+		<meta http-equiv="refresh" content="30">
+	</head>
+</html>
 <div class="col-md-12"><h3 class="painelDeControle">Painel de controle</h3></div>
 <div class="col-md-6">
 	<h4 class="painelPedidos">Pedidos</h4>
@@ -63,4 +69,6 @@
 	</table>
 </div>
 
+<br/><br/><br/><br/>
+	
 <?php require_once 'footer/footer.php'; ?>

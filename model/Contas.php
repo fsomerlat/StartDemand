@@ -10,7 +10,7 @@
 			    $cpValorConta,
 			    $cpDataVencimentoConta,
 			    $cpUsuario,
-			    $cpDataCadastroConta,
+			    $cpAlteracaoUltimoUsuario,
 			    $cpObservacaoConta;
 		
 	    public function __get($attr) {
@@ -54,17 +54,17 @@
 	    	
 	    	$sql="UPDATE $this->table SET 
 	    		  	cpTipoConta=:cpTipoConta,cpClassificacaoConta=:cpClassificacaoConta,cpValorConta=:cpValorConta,
-	    		  	cpDataVencimentoConta=:cpDataVencimentoConta,cpObservacaoConta=:cpObservacaoConta,cpUsuario=:cpUsuario
+	    		  	cpDataVencimentoConta=:cpDataVencimentoConta,cpObservacaoConta=:cpObservacaoConta
 	    		  WHERE
 	    		    idContas=:idContas";
 	    	
 	    	$up=DB::prepare($sql);
-	    	$up->bindParam(":cpTipoConta",$this->cpTipoConta,PDO::PARAM_STR);
-	    	$up->bindParam(":cpClassificacaoConta", $this->cpClassificacaoConta,PDO::PARAM_STR);
-	    	$up->bindParam(":cpValorConta", $this->cpValorConta,PDO::PARA,_STR);
-	    	$up->bindParam(":cpDataVencimentoConta", $this->cpDataVencimentoConta,PDO::PARAM_STR);
-	    	$up->bindParam(":cpObservacaoConta",$this->cpObservacaoConta,PDO::PARA,M_STR);
-	    	$up->bindParam(":cpUsuario", $this->cpUsuario, PDO::PARAM_STR);
+	    	$up->bindParam(":idContas", $id,PDO::PARAM_INT);
+	    	$up->bindParam(":cpTipoConta", $this->cpTipoConta, PDO::PARAM_STR);
+	    	$up->bindParam(":cpClassificacaoConta", $this->cpClassificacaoConta, PDO::PARAM_STR);
+	    	$up->bindParam(":cpValorConta", $this->cpValorConta, PDO::PARAM_STR);
+	    	$up->bindParam(":cpDataVencimentoConta", $this->cpDataVencimentoConta, PDO::PARAM_STR);
+	    	$up->bindParam(":cpObservacaoConta", $this->cpObservacaoConta, PDO::PARAM_STR);
 	    	
 	    	try{
 	    		
@@ -101,7 +101,7 @@
 	   		
 	   		$sql="SELECT
 	   					idContas,cpTipoConta,cpClassificacaoConta,cpValorConta,cpDataVencimentoConta,cpObservacaoConta,
-	   					cpUsuario,cpDataCadastroConta
+	   					cpUsuario,cpDataCadastroConta,cpAlteracaoUltimoUsuario,cpDataUltimaAlteracao
 	   			  FROM
 	   				$this->table";
 	   		
@@ -143,5 +143,27 @@
 	    		echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 	    	}
 	    }
+	    
+	    public function UPDATE_POR_USUARIO($id) {
+	    	
+	    	$sql="UPDATE $this->table SET
+	    			 cpAlteracaoUltimoUsuario=:cpAlteracaoUltimoUsuario,cpDataUltimaAlteracao=now()
+	    		  WHERE
+	    		  	idContas=:idContas";
+	    	
+	    	$up=DB::prepare($sql);
+	    	$up->bindParam(":idContas", $id,PDO::PARAM_INT);
+	    	$up->bindParam(":cpAlteracaoUltimoUsuario", $this->cpAlteracaoUltimoUsuario,PDO::PARAM_STR);
+
+	    	try{
+	    		
+	    		return $up->execute();
+	    	
+	    	}catch(PDOException $e){
+	    		
+	    		echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+	    	}
+	    }
+	    
 	    
 	}

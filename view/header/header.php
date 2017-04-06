@@ -155,7 +155,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md--5">
+			<div class="col-md-5">
 				 <div class="form-group">
 					<ul class="nav nav-pills">
 						<li class="active">

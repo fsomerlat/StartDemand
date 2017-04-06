@@ -64,8 +64,8 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label for="Tipo de Observacao">Tipo de observação</label>
-								<select name="cpTipoObservacao" id="cpTipoObservacao" class="form-control">
+								<label for="Tipo de Observacao">Classificação / produto</label>
+								<select name="cpClassificacaoProduto" id="cpClassificacaoProduto" class="form-control">
 									<option value="">Selecione</option>
 									<option value="Principal">Produto principal</option>
 									<option value="Acrescimo">Produto acréscimo</option> 
@@ -114,7 +114,7 @@
 								<th>Quantidade</th>
 								<th>Tipo</th>
 								<th>Valor</th>
-								<th>Tipo Observacao</th>
+								<th>Tipo</th>
 								<th>Observação</th>
 								<th></th>
 								<th></th>
@@ -130,5 +130,7 @@
 		</div>
 	</div>
 </div>
+
+<br/><br/><br/><br/>
 
 <?php require_once 'footer/footer.php'; ?>

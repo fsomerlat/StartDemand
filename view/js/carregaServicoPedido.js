@@ -132,7 +132,7 @@ var Service_Pedido = (function() {
 							
 							itensProdutos += "<tr>";
 							itensProdutos += "<td>" +retorno[i].cpNomeProduto+ "</td>"; 
-							itensProdutos += "<td>" +retorno[i].cpTipoObservacao+ "</td>";
+							itensProdutos += "<td>" +retorno[i].cpClassificacaoProduto+ "</td>";
 							itensProdutos += "<td> R$ " +retorno[i].cpValorProduto+"</td>";
 							itensProdutos += "<td>" +retorno[i].cpObservacaoProduto+"</td>";
 							itensProdutos += "</tr>";
