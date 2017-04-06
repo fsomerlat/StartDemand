@@ -56,7 +56,7 @@ var Utils =  (function(){
 		
 		return setTimeout(function() {
 			location.reload();
-		},2200);
+		},2000);
 	}	
 	
 	var setTimeoutLocation = function(url) {

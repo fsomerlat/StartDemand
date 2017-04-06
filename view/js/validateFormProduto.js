@@ -17,11 +17,11 @@ document.getElementById("btnCadastrarProduto").onclick = function() {
 		return id.value;
 	}
 	
-	valida('cpNomeProduto','È necessário preencher o campo [ NOME ] !');
-	valida('cpQtdProduto','È necessário preencher o campo [ QUANTIDADE ] !');
-	valida('cpTipoProduto','È necessário preencher o campo [ TIPO ] !');
-	valida('cpValorEstimado','È necessário selecione o campo [ VALOR ESTIMADO ] !');
-	valida('cpValorProduto','È necessário preencher o campo [ VALOR ] !');
+	valida('cpNomeProduto','Preencha o campo [ NOME ] !');
+	valida('cpQtdProduto','Preencha o campo [ QUANTIDADE ] !');
+	valida('cpTipoProduto','Preencha o campo [ TIPO ] !');
+	valida('cpValorEstimado','Selecione o campo [ VALOR ESTIMADO ] !');
+	valida('cpValorProduto','Preencha o campo [ VALOR ] !');
 
 	
 	if(Errors.length > 0) {
@@ -30,7 +30,7 @@ document.getElementById("btnCadastrarProduto").onclick = function() {
 			
 			return a + b + '\n';
 			
-		},'');
+		},'Por favor,\n\n');
 		
 		window.alert(msg); return false;
 	}

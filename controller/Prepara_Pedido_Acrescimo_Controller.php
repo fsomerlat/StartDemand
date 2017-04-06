@@ -128,8 +128,8 @@
 			
 		}else{
 			
-			$preparaProdPed->__set("cpValorTaxaJurosPedido", addslashes($valorTaxaJuros,0,5));
-			$preparaProdPed->__set("cpValorTotalLiquidoPedido", $valorTotalAtualizado);
+			$preparaProdPed->__set("cpValorTaxaJurosPedido", addslashes($valorTaxaJuros));
+			$preparaProdPed->__set("cpValorTotalLiquidoPedido", addslashes($valorTotalAtualizado));
 		}
 		
 		if($qtdParcela > 0) {

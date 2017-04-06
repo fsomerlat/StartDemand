@@ -46,7 +46,7 @@ document.getElementById("btnCadastrarTaxa").onclick = function(){
 			
 			return a + b + '\n';
 			
-		},'');
+		},'Por favor,\n\n');
 		
 		window.alert(msg); return false;
 	}

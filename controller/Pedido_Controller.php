@@ -391,12 +391,12 @@
      		
      		
      		//RETORNA O JUROS E OVALOR DO PEDIDO RECALCULADO PARA SER ATUAZALIDO     //******************   ATUALIZANDO JUROS DE DO PEDIDO EM TEMPO DE EXECUÇÃO
-     		$valorTaxaJuros = $preparaProduto->cpValorTaxaJurosPedido;
-     		$valorLiquidoPedido = $preparaProduto->cpValorLiquidoPedido;
-     		
+     	
+     		$preparaProduto->__set("cpValorTaxaJurosPedido", substr($valorTaxaJuros,0,4));
+     		$preparaProduto->__set("cpValorTotalLiquidoPedido", substr($valorTotalLiquido,0,4));
      		$ped->__set("cpValorTaxaJurosPedido", substr($valorTaxaJuros,0,4));
-     		$ped->__set("cpValorTotalLiquidoPedido", substr($valorLiquidoPedido,0,4));
-     		
+     		$ped->__set("cpValorTotalLiquidoPedido", substr($valorTotalLiquido,0,4));
+     	
      		if($qtdParcela > 0){
      		
      			$preparaProduto->__set("cpValorParcela", $valorParcela);

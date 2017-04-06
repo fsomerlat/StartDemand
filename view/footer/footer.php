@@ -18,17 +18,20 @@
 	<script type="text/javascript" src="js/validateFormPedido.js"></script>
 	<script type="text/javascript" src="js/validateFormAcrescimo.js"></script>
 	<script type="text/javascript" src="js/validateFormTaxa.js"></script>
+	<script type="text/javascript" src="js/validateFormContas.js"></script>
 	<script type="text/javascript" src="js/utils.js"></script>
 	<script type="text/javascript" src="js/formHelperPedido.js"></script>
 	<script type="text/javascript" src="js/formHelperProduto.js"></script>
 	<script type="text/javascript" src="js/formHelperAcrescimo.js"></script>
 	<script type="text/javascript" src="js/formHelperPreparaPedidoAcrescimo.js"></script>
 	<script type="text/javascript" src="js/formHelperTaxa.js"></script>
+	<script type="text/javascript" src="js/formHelperContas.js"></script>
 	<script type="text/javascript" src="js/carregaServicoProduto.js"></script>
 	<script type="text/javascript" src="js/carregaServicoPedido.js"></script>
 	<script type="text/javascript" src="js/carregaServicoAcrescimo.js"></script>
 	<script type="text/javascript" src="js/carregaServicoGenericoProduto.js"></script>
 	<script type="text/javascript" src="js/carregaServicoPreparaPedido.js"></script>
+	<script type="text/javascript" src="js/carregaServicoContas.js"></script>
 	<script type="text/javascript" src="js/maskinput.js"></script>
 	<script type="text/javascript" src="js/view.js"></script>
 

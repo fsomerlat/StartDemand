@@ -82,13 +82,7 @@
 								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Finaceiro<strong class="caret"></strong></a>
 								<ul class="dropdown-menu">
 									<li>
-										<a href="Financeiro.php">Contas a pagar</a>
-									</li>
-									<li>
-										<a href="Financeiro.php">Contas a receber</a>
-									</li>
-									<li>
-										<a href="FinanceiroLancamento.php">Lançamentos</a>
+										<a href="Contas.php">Lançar contas</a>
 									</li>
 									<li>
 										<a href="Financeiro.php">Listar</a>

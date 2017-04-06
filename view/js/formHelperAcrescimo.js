@@ -144,8 +144,8 @@ var FormHelperAcrescimo = (function(){
 					
 					if(value == retorno[i].cpFormaPagamentoTaxa){
 						
-						options += "<option value='"+retorno[i].cpBandeiraCartao+"-"+retorno[i].cpPorcentagemTaxa+"'>"+retorno[i].cpBandeiraCartao+ "</option>";
-						optionPlanoPagSeguro += "<option value='"+retorno[i].cpBandeiraCartao+"-"+retorno[i].cpPorcentagemTaxa+"'>"+retorno[i].cpPlanoPagSeguro+" dias</option>";
+						options += "<option value='"+retorno[i].cpBandeiraCartaoTaxa+"-"+retorno[i].cpPorcentagemTaxa+"'>"+retorno[i].cpBandeiraCartao+ "</option>";
+						optionPlanoPagSeguro += "<option value='PagSeguro-"+retorno[i].cpPorcentagemTaxa+"'>"+retorno[i].cpPlanoPagSeguro+" dias</option>";
 					}
 				}
 				

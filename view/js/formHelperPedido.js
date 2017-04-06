@@ -20,30 +20,30 @@ var FormHelperPedido = (function() {
 		return $("#cpValorBaseProduto").val();
 	}
 	
-	var createDatePicker = function() { // SERÁ UTILIZADO NO FINANCEIRO
-		  
-		var data = new Date();
-			
-			dia = data.getDate();
-			mes = data.getMonth() + 2;
-			ano = data.getFullYear();
-			
-		novaData = dia +'/'+mes+'/'+ano;
-		
-		$( "#cpDataVencimentoParcela" ).datepicker({
-			
-			dateFormat: 'dd/mm/yy', //formato da data
-		    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'], //nomes dos campos dos dias
-		    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],//nomes do titulo dos dias
-		    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'], //dias com nomes curtos
-		    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],//nomes dos messes
-		    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],//meses com nomes curtos
-		    minDate: novaData,
-		    nextText: 'Próximo',//titulo do próximo texto
-		    prevText: 'Anterior',//titulo do texto anterior
-
-		    });
-	}
+//	var createDatePicker = function() { // SERÁ UTILIZADO NO FINANCEIRO
+//		  
+//		var data = new Date();
+//			
+//			dia = data.getDate();
+//			mes = data.getMonth() + 2;
+//			ano = data.getFullYear();
+//			
+//		novaData = dia +'/'+mes+'/'+ano;
+//		
+//		$( "#cpDataVencimentoParcela" ).datepicker({
+//			
+//			dateFormat: 'dd/mm/yy', //formato da data
+//		    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'], //nomes dos campos dos dias
+//		    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],//nomes do titulo dos dias
+//		    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'], //dias com nomes curtos
+//		    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],//nomes dos messes
+//		    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],//meses com nomes curtos
+//		    minDate: novaData,
+//		    nextText: 'Próximo',//titulo do próximo texto
+//		    prevText: 'Anterior',//titulo do texto anterior
+//
+//		    });
+//	}
 	
 	var setPorcentagemJuros = function(value) {
 		
@@ -295,7 +295,7 @@ var FormHelperPedido = (function() {
 		getPedidoDiaCorrente();
 		getContadorPedido();
 		setFormaPagamento();
-		createDatePicker();
+		//createDatePicker();
 		setDivideParcela();
 		
 		$("select[name=cpFormaPagamento]").change(function(){

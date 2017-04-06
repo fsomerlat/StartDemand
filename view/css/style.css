@@ -38,7 +38,10 @@ body {
 .painelPedidos,
 .painelAcrescimoPedidos,
 .painelAcrescimoPedidos,
-.painelDeControle{
+.painelDeControle,
+.listaContasPagarVazia,
+.listaContasReceberVazia,
+.contas{
 	
 	text-align: center;
 }

@@ -1,6 +1,3 @@
-/**
- ** 
- **/
 
 document.getELementById("btnCadastrarPedido").onclick = function() {
 
@@ -35,7 +32,6 @@ document.getELementById("btnCadastrarPedido").onclick = function() {
 			valida("cpValorTaxaJurosPedido","Preencha o campo [  VALOR TAXA JUROS ] !");
 			valida("cpBandeiraCartaoPedido","Selecione o campo [ BANDEIRA / CARTÃO ] !");		
 		}
-		
 	}
 	
 	valida("tipoPedido","Selecione o campo [ TIPO DO PEDIDO ] !");
@@ -53,7 +49,7 @@ document.getELementById("btnCadastrarPedido").onclick = function() {
 			
 			return a + b + '\n';
 			
-		},'');
+		},'Por favor, \n\n');
 		
 		window.alert(msg); return false;
 	}
