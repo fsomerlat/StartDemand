@@ -104,6 +104,7 @@
 				 <div class="panel-title" data-toggle="collapse" data-parent="#panel-754764" href="#panel-element_571586">Listar produtos</div>
 			</div>
 			<div id="panel-element_571586" class="panel-collapse collapse">
+			<div class="rolagem_2">
 				<div class="panel-body">
 				<h4 class="listaProdutos"></h4>
 					<table class="table table-hover" id="tableProduto">
@@ -125,6 +126,7 @@
 						 	<!-- CARREGA LISTA DE PRODUTOS VIA AJAX -->
 						</tbody>
 					</table>
+				</div>
 				</div>
 			</div>
 		</div>

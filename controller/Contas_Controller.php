@@ -54,3 +54,25 @@
 		header("location:../view/Contas.php");
 		
 	endif;
+	
+	
+	if($_REQUEST["acao"] == "fechar"):
+	
+		$id = (int)addslashes($_GET["id"]);
+	     
+		$contas->__set("cpStatusConta", "F");
+		$contas->__set("cpUsuarioFechamentoConta", addslashes($_SESSION["cpNome"]));
+
+		$contas->UPDATE_USUARIO_FECHAMENTO($id);
+		$contas->UPDATE_STATUS($id);
+		
+		
+		echo "<script language='javascript'>
+					window.alert('Registro [ FECHADO ] com sucesso !');
+					window.location.href='../view/Contas.php';
+				</script>";
+	
+	endif;
+	
+	
+	

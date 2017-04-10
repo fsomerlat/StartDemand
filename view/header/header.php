@@ -134,7 +134,12 @@
 					</div>
 					
 				</nav>
-			</div>			
+			</div>	
+			<div class="col-md-6">
+				<div class="form-group">
+					<msgVencimentoContas class="msgVencimentoContas"></msgVencimentoContas>
+				</div>
+			</div>		
 			<div class="col-md-7">
 				<div class="form-group">
 					<div>

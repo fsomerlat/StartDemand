@@ -273,6 +273,7 @@
 				 <div class="panel-title tabelaProdutosDisponiveis" data-toggle="collapse" data-parent="#panel-615652" href="#panel-element_193159">Tabela de produtos disponíveis</div>
 			</div>
 			<div id="panel-element_193159" class="panel-collapse collapse in">
+			<div class="rolagem_2">
 				<div class="panel-body">
 					<h4 class="ProdutosDisponiveisPedido"></h4>
 					<table class="table table-hover" id="tableProdutosDisponiveisPedido">
@@ -289,6 +290,7 @@
 						</tbody>
 					</table>
 				</div><!-- FIM PANEL-BODY -->
+			</div>
 			</div><!-- FIM PANEL-COLLAPSE -->
 		</div><!-- FIM PANEL DEFAULT -->
 	</div><!-- FIM PANEL-GROUP -->

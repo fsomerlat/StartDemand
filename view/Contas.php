@@ -97,35 +97,75 @@
 			
 		</div>
 	</div>
+	
+	<div class="panel panel-danger">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				Informativo simplificado - Valores referente as contas
+			</h3>
+		</div>
+		<div class="panel-body">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="">Total valor / pagar</label>
+					<input type="text" name="cpTotalValorPagar" id="cpTotalValorPagar" readonly class="form-control" />
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="">Total valor / pago</label>
+					<input type="text" name="cpTotalValorPagado" id="cpTotalValorPagado" readonly class="form-control" />
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="">Total valor / receber</label>
+					<input type="text" name="cpTotalValorReceber" id="cpTotalValorReceber" readonly class="form-control" />
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="">Total valor / recebido</label>
+					<input type="text" name="cpTotalValorRecebido" id="cpTotalValorRecebido" readonly class="form-control" />
+				</div>
+			</div>	
+		</div>
+		<div class="panel-footer">
+			
+		</div>
+	</div>	
 </div>
 <div class="col-md-6">
 	<div class="panel panel-danger">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				Listar contas a ṕagar
+				Listar contas a pagar
 			</h3>
 		</div>
-		<div class="panel-body">
-			<h4 class="contas"></h4>
-			<table class="table table-hover" id="tableContasPagar">
-				<thead>
-					<tr class="danger">
-						<th>Tipo / conta</th>
-						<th>Classificação</th>
-						<th>Valor</th>
-						<th>ver detalhes</th>
-						<th>Data / Vencimento</th>
-						<th>Observação</th>
-						<th></th>
-						<th></th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<!-- CARREGA VIA AJAX -->
-					<h4 class="listaContasPagarVazia"></h4>
-				</tbody>
-			</table>
+		<div class="rolagem">
+			<div class="panel-body">
+				<h4 class="contas"></h4>
+				<table class="table table-hover" id="tableContasPagar">
+					<thead>
+						<tr class="danger">
+							<th>Status</th>
+							<th>Tipo / conta</th>
+							<th>Classificação</th>
+							<th>Valor</th>
+							<th>ver detalhes</th>
+							<th>Data / Vencimento</th>
+							<th>Observação</th>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- CARREGA VIA AJAX -->
+						<h4 class="listaContasPagarVazia"></h4>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<div class="panel-footer">
 			
@@ -137,27 +177,31 @@
 				Listar contas a receber
 			</h3>
 		</div>
-		<div class="panel-body">
-			<h4 class="contas"></h4>
-			<table class="table table-hover" id="tableContasReceber">
-				<thead>
-					<tr class="success">
-						<th>Tipo / conta</th>
-						<th>Classificação</th>
-						<th>Valor</th>
-						<th>ver detalhes</th>
-						<th>Data / Vencimento</th>
-						<th>Observação</th>
-						<th></th>
-						<th></th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<!-- CARREGA VIA AJAX -->
-					<h4 class="listaContasReceberVazia"></h4>
-				</tbody>
-			</table>
+		<div class="rolagem">
+			<div class="panel-body">
+				<h4 class="contas"></h4>
+				<table class="table table-hover" id="tableContasReceber">
+					<thead>
+						<tr class="success">
+							<th>Status</th>
+							<th>Id</th>
+							<th>Tipo / conta</th>
+							<th>Classificação</th>
+							<th>Valor</th>
+							<th>ver detalhes</th>
+							<th>Data / Vencimento</th>
+							<th>Observação</th>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- CARREGA VIA AJAX -->
+						<h4 class="listaContasReceberVazia"></h4>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<div class="panel-footer">
 			

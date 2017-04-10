@@ -8,6 +8,7 @@
 <div class="col-md-12"><h3 class="painelDeControle">Painel de controle</h3></div>
 <div class="col-md-6">
 	<h4 class="painelPedidos">Pedidos</h4>
+	<div class="rolagem">
 	<table class='table table-hover' id="painelPedidosProdutos">
 		<thead>
 			<tr class="warning">
@@ -27,9 +28,11 @@
 			<!-- CARREGA VIA AJAX -->
 		</tbody>
 	</table>
+	</div>
 </div>
 <div class="col-md-6">
 	<h4 class="painelAcrescimoPedidos">Acréscimos / Pedidos</h4>
+	<div class="rolagem">
 	<table class="table table-hover" id="painelAcrescimosPedidos">
 		<thead>
 			<tr class="warning">
@@ -47,7 +50,9 @@
 			<!-- CARREGA VIA AJAX -->
 		</tbody>	
 	</table>
+	</div>
 	<h4 class="painelAcrescimoPedidos">Acréscimos / Avulso</h4>
+	<div class="rolagem">
 	<table class="table table-hover" id="painelAcrescimosAvulso">
 		<thead>
 			<tr class="info">
@@ -67,6 +72,7 @@
 			<!-- CARREGA VIA AJAX -->
 		</tbody>
 	</table>
+	</div>
 </div>
 
 <br/><br/><br/><br/>

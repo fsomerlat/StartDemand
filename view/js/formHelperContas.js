@@ -17,19 +17,79 @@ var FormHelperContas = (function(){
 		    });
 	}
 	
+	
 	var mascaraCampos = function() {
 		
 		$("#cpValorConta").mask("999.99");
 	}
 	
+	//SOMA CONTAS EM ABERTO
+	var getSomaContasAbertas = function(url) {
+		
+		$.ajax({
+			
+			url: url,
+			cache: false,
+			dataType:"json",
+			success: function(retorno){
+				
+				retorno.map(function(dados) {
+					
+					var valorTotal = dados.somaConta.substring(0,6);
+					if(dados.cpTipoConta == 'P') {
+						
+						$("#cpTotalValorPagar").val("R$ " + valorTotal);
+						
+					}else if(dados.cpTipoConta == 'R'){
+						
+						$("#cpTotalValorReceber").val("R$ " + valorTotal);
+					}
+				});
+			}
+		});
+	}
+	
+	var getSomaContasFechadas = function(url) {
+		
+		$.ajax({
+			
+			url:url,
+			cache: false,
+			dataType: "json",
+			success: function(retorno){
+				
+				retorno.map(function(dados){
+					
+					var valorTotal =  dados.somaConta.substring(0,6);
+					if(dados.cpTipoConta == 'P'){
+						
+						$("#cpTotalValorPagado").val("R$ " + valorTotal);
+					
+					}else if(dados.cpTipoConta == 'R') {
+						
+						$("#cpTotalValorRecebido").val("R$ " + valorTotal);
+					}
+				});
+			}
+			
+		});
+	}
+	
 	var bindEvents = function() {
 		
+		getSomaContasAbertas('http://localhost/startDemand/service/Service_Soma_Contas_Abertas.php');
+		getSomaContasFechadas('http://localhost/startDemand/service/Service_Soma_Contas_Fechadas.php');
 		mascaraCampos();
 		createDatePicker();
 		
 		$(document).on("click","#exluirConta", function() {
 			
 			return confirm("Deseja excluir esse registro ?");
+		});
+		
+		$(document).on("click","#cpConfirmaContaReceber",function(){
+			
+			return confirm ("Fechar essa conta ?");
 		});
 	}
 
