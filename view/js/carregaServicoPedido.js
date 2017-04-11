@@ -94,7 +94,7 @@ var Service_Pedido = (function() {
 					
 					$("#tablePedidoProdutos tbody").html(itensProdutos);
 					$("#painelPedidosProdutos tbody").html(painelPedidosProdutos);
-					$(".h3listaPedidoProduto").html("Lista de produtos");
+					$(".h3listaPedidoProduto").html("LISTA DE PRODUTOS");
 					
 				//}
 			}

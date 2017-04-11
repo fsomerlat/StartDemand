@@ -55,7 +55,7 @@ var FormHelperProduto = (function() {
 			return confirm("Tem certeza que deseja excluit esse registro ?");
 		});
 	
-		$("#cpTipoObservacao").change(function() {
+		$("#cpClassificacaoProduto").change(function() {
 			
 			tipoObservacao(this.value);
 		});

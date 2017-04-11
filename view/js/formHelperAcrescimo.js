@@ -158,7 +158,7 @@ var FormHelperAcrescimo = (function(){
 	
 	var getValorTotalAcrescimo =  function() {
 		
-		return $("#cpQtdAcrescimo").val() * $("#cpValorBaseAcrescimo").val();
+		return  $("#cpValorTotalAcrescimo").val();
 	}
 	
 	var setValorParcelas = function(value) {
@@ -225,6 +225,9 @@ var FormHelperAcrescimo = (function(){
 				this.value = 0 ;
 				window.alert("È necessário ter um valor para gerar parcelas !");
 				$("#cpAcrescimo").focus();
+				return false;
+			}else{
+				setValorParcelas(this.value);
 			}
 					
 		});
@@ -233,8 +236,14 @@ var FormHelperAcrescimo = (function(){
 			
 			setTaxaJuros();
 			
+			var  parcelas = $("#cpQtdParcelaAcrescimo").val();
+				
 			if(this.value > 0) {
-				setValorParcelas(this.value);
+				
+				setTimeout(function(){
+					setValorParcelas(parcelas);
+				},100);
+				
 			}else{
 				$("#cpValorParcelaAcrescimo").val("").attr("placeholder","R$ 00.00");
 			}

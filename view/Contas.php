@@ -98,10 +98,10 @@
 		</div>
 	</div>
 	
-	<div class="panel panel-danger">
+	<div class="panel panel-info">
 		<div class="panel-heading">
-			<h3 class="panel-title">
-				Informativo simplificado - Valores referente as contas
+			<h3 class="panel-title titleInformativoContas">
+				Informativo simplificado - Valores referentes as contas
 			</h3>
 		</div>
 		<div class="panel-body">
@@ -114,7 +114,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label for="">Total valor / pago</label>
-					<input type="text" name="cpTotalValorPagado" id="cpTotalValorPagado" readonly class="form-control" />
+					<input type="text" name="cpTotalValorPago" id="cpTotalValorPago" readonly class="form-control" />
 				</div>
 			</div>
 			<div class="col-md-3">

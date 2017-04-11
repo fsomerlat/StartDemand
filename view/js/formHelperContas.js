@@ -17,6 +17,13 @@ var FormHelperContas = (function(){
 		    });
 	}
 	
+	var setPlaceholdersValoresContas = function() {
+		
+		$("#cpTotalValorPagar").attr("placeholder"," R$ 00,00");
+		$("#cpTotalValorPago").attr("placeholder","R$ 00,00");
+		$("#cpTotalValorReceber").attr("placeholder","R$ 00,00");
+		$("#cpTotalValorRecebido").attr("placeholder","R$ 00,00");
+	} 
 	
 	var mascaraCampos = function() {
 		
@@ -37,8 +44,9 @@ var FormHelperContas = (function(){
 					
 					var valorTotal = dados.somaConta.substring(0,6);
 					if(dados.cpTipoConta == 'P') {
-						
+							
 						$("#cpTotalValorPagar").val("R$ " + valorTotal);
+						
 						
 					}else if(dados.cpTipoConta == 'R'){
 						
@@ -62,8 +70,14 @@ var FormHelperContas = (function(){
 					
 					var valorTotal =  dados.somaConta.substring(0,6);
 					if(dados.cpTipoConta == 'P'){
-						
-						$("#cpTotalValorPagado").val("R$ " + valorTotal);
+						if(valorTotal != '') {
+							
+							$("#cpTotalValorPago").val("R$ " + valorTotal);
+							
+						}else{
+							
+							$("#cpTotalValorPago").attr("placeholder","R$ 00,00");
+						}
 					
 					}else if(dados.cpTipoConta == 'R') {
 						
@@ -79,6 +93,7 @@ var FormHelperContas = (function(){
 		
 		getSomaContasAbertas('http://localhost/startDemand/service/Service_Soma_Contas_Abertas.php');
 		getSomaContasFechadas('http://localhost/startDemand/service/Service_Soma_Contas_Fechadas.php');
+		setPlaceholdersValoresContas();
 		mascaraCampos();
 		createDatePicker();
 		

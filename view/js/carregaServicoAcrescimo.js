@@ -69,13 +69,11 @@ var Service_Acrescimo = (function() {
 							
 					});
 						
-					
 					$("#tablePedidoAcrescimo tbody").html(itensAcrescimoTablePedido);
 					$("#tableAcrescimo tbody").html(itensTableAcrescimo);
 					$("#painelAcrescimosPedidos tbody").html(itensTableAcrescimo);
-					$(".h3listaPedidoAcrescimo").html("Lista de acréscimos relacionados a produtos");
+					$(".h3listaPedidoAcrescimo").html("LISTA DE ACRÉSCIMOS RELACIONADOS A PEDIDOS");
 					$("").html("");
-				
 			}
 		});
 	}
@@ -140,15 +138,14 @@ var Service_Acrescimo = (function() {
 							itensAcrescimoAvulsoTelaPedido += "<td class='success'>"+dados.cpObservacaoAcrescimo+"</td>";
 							itensAcrescimoAvulsoTelaPedido += "<td class='success'><a href='../controller/Acrescimo_Controller.php?acao=atualizar&id="+dados.idAcrescimo+"'><button type='button' id='pedidoLiberado' class='btn btn-success'>Finalizado</button></a></td>";
 							itensAcrescimoAvulsoTelaPedido += "</tr>";
-							
 						}
 					}
 				});
 	
-				$("#tableAcrescimosAvulso tbody").html(itensAcresimosAvulso);
+				$("#tableAcrescimosAvulso tbody").html(itensAcresimosAvulso); if(itensAcresimosAvulso == "") { $(".msgAcrescimoVazio").html("Nenhum acréscimo para listar !"); }
 				$("#tableAcrescimosAvulsoTelaPedido tbody").html(itensAcrescimoAvulsoTelaPedido);
 				$("#painelAcrescimosAvulso tbody").html(itensAcresimosAvulso);
-				$(".h3listaAcrescimoAvulso").html("Lista de acréscimos avulso");
+				$(".h3listaAcrescimoAvulso").html("LISTA DE ACRÉSCIMOS AVULSO");
 			}
 			
 		});

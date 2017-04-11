@@ -176,6 +176,7 @@
 									</tr>
 								</thead>
 								<tbody>
+								<msgAcrescimoVazio><h4 class="msgAcrescimoVazio"></h4></msgAcrescimoVazio>
 									<!-- CARREGA VIA AJAX -->
 								</tbody>
 							</table>

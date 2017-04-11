@@ -17,7 +17,7 @@
 		<div class="form-group">
 				<ul class="breadcrumb">
 					<li>
-						<b>Bem vindo <?php echo  $nome." !";?></b> 
+					<b>Bem vindo <?php echo  $nome." !";?></b> 
 					</li>
 					<li>
 						Hoje é dia - <b class="dataHoje"></b>
@@ -103,10 +103,10 @@
 								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuário<strong class="caret"></strong></a>
 								<ul class="dropdown-menu">
 									<li>
-										<a href="Usuario.php?panel=">Cadastrar</a>
+										<a href="Usuario.php?panel=767438">Cadastrar</a>
 									</li>
 									<li>
-										<a href="Usuario.php?panel=">Listar</a>
+										<a href="Usuario.php?panel=11508">Listar</a>
 									</li>
 									<li class="divider">
 									</li>

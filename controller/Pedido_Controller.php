@@ -362,9 +362,9 @@
 		    	$acrescimo->__set("cpValorParcelaAcrescimo",0); //VALOR DA PARCELA ESTÁ DEFINIDO NO PEDIDO
 		    	//CAMPOS VINCULADOS AO PEDIDO
 		    	$acrescimo->__set("cpBandeiraCartao", "PD");
-		    	$acrescimo->__set("cpPorcentagemTaxa", 0);
-		    	$acrescimo->__set("cpValorTaxaJuros", 0);
-		    	$acrescimo->__set("cpValorTotalLiquido", 0);
+// 		    	$acrescimo->__set("cpPorcentagemTaxa", 0);
+// 		    	$acrescimo->__set("cpValorTaxaJuros", 0);
+// 		    	$acrescimo->__set("cpValorTotalLiquido", 0);
 		    	$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
 		    	$acrescimo->__set("cpObservacaoAcrescimo", addslashes($res->cpObservacaoAcrescimo));
 		    	 
@@ -389,7 +389,6 @@
      		$codPedido = $getInfoPedido->cpCodPedido;
      		$valTotalPedido = $getInfoPedido->cpValorTotalPedido;
      		
-     		
      		//RETORNA O JUROS E OVALOR DO PEDIDO RECALCULADO PARA SER ATUAZALIDO     //******************   ATUALIZANDO JUROS DE DO PEDIDO EM TEMPO DE EXECUÇÃO
      	
      		$preparaProduto->__set("cpValorTaxaJurosPedido", substr($valorTaxaJuros,0,4));
@@ -406,9 +405,9 @@
      		
      		} else {
      		
-     			$preparaProduto->__set("cpValorParcela", 0);
+     			//$preparaProduto->__set("cpValorParcela", 0);
      			$preparaProduto->__set("cpValorTotalProduto", $valTotalProduto);
-     			$ped->__set("cpValorParcela", 0);
+     			//$ped->__set("cpValorParcela", 0);
      			$ped->__set("cpValorTotalPedido", $valTotalProduto);
      		}
      		
@@ -422,13 +421,13 @@
 				$acrescimo->__set("cpValorBaseAcrescimo", addslashes($res->cpValorBaseAcrescimo));
 				$acrescimo->__set("cpTipoAcrescimo","P"); // P = VINCULADO A UM PEDIDO
 				$acrescimo->__set("cpFormaPagamentoAcrescimo","PD"); //FORMA DEPAGAMENTO ESTÁ DECLARADA NO PEDIDO
-				$acrescimo->__set("cpQtdParcelaAcrescimo", 0); // PARCELA DELCARADA NO PEDIDO
-				$acrescimo->__set("cpValorParcelaAcrescimo",0); //VALOR DA PARCELA ESTÁ DEFINIDO NO PEDIDO
+// 				$acrescimo->__set("cpQtdParcelaAcrescimo", 0); // PARCELA DELCARADA NO PEDIDO
+// 				$acrescimo->__set("cpValorParcelaAcrescimo",0); //VALOR DA PARCELA ESTÁ DEFINIDO NO PEDIDO
 				//CAMPOS VINCULADOS AO PEDIDO
 				$acrescimo->__set("cpBandeiraCartao", "PD");
-				$acrescimo->__set("cpPorcentagemTaxa", 0);
-				$acrescimo->__set("cpValorTaxaJuros", 0);
-				$acrescimo->__set("cpValorTotalLiquido", 0);
+// 				$acrescimo->__set("cpPorcentagemTaxa", 0);
+// 				$acrescimo->__set("cpValorTaxaJuros", 0);
+// 				$acrescimo->__set("cpValorTotalLiquido", 0);
 				$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
 				$acrescimo->__set("cpObservacaoAcrescimo", addslashes($res->cpObservacaoAcrescimo));
 						
@@ -557,21 +556,21 @@
 			$acrescimo->UPDATE_SITUACAO_ACRESCIMO_PEDIDO($id);
 
 				
-				if($formaPagamento == "CC" && $statusPedido != "C"):
+// 				if($formaPagamento == "CC" && $statusPedido != "C"):
 				
-					for($i=0; $i < $qtdParcela; $i++){
+// 					for($i=0; $i < $qtdParcela; $i++){
 					
-						$parcelas->INSERT();
-					}
+// 						$parcelas->INSERT();
+// 					}
 					
-					else:
+// 					else:
 		
-							echo "<script language='javascript'>
-										window.alert('Pedido criado a vista !');
-										window.history.go(-1);
-									</script>";
+// 							echo "<script language='javascript'>
+// 										window.alert('Pedido criado a vista !');
+// 										window.history.go(-1);
+// 									</script>";
 					
-				endif;
+// 				endif;
 			
 					echo "<script language='javascript'>
 								window.alert('Pedido baixado com sucesso !');

@@ -129,30 +129,30 @@
 				
 				$acrescimo->UPDATE_SITUACAO_ACRESCIMO_AVULSO($id);
 				
-				if($formaPagamento == "CC" && $status !="C") {//VERIFICA FORMA DE PAGAMENTO PARA GERAR PARCELAS
+// 				if($formaPagamento == "CC" && $status !="C") {//VERIFICA FORMA DE PAGAMENTO PARA GERAR PARCELAS
 						
-					for($i=1; $i <= $qtdParcelas; $i++) {
+// 					for($i=1; $i <= $qtdParcelas; $i++) {
 						
-						$verificaLengthMes = str_replace($mes,"",$mes + $i);
-						$verificaLenghtAno = str_replace($ano,"",$ano + 1);
+// 						$verificaLengthMes = str_replace($mes,"",$mes + $i);
+// 						$verificaLenghtAno = str_replace($ano,"",$ano + 1);
 						
-						if($verificaLengthMes  > 12) {
+// 						if($verificaLengthMes  > 12) {
 							
-							$verificaLengthMes = $i + 1; 
-							$parcelasAcrescimo->__set("cpDataVencimentoParcelaAcrescimo", $arryData[0]."/".substr($verificaLengthMes,1)."/".$verificaLenghtAno);
+// 							$verificaLengthMes = $i + 1; 
+// 							$parcelasAcrescimo->__set("cpDataVencimentoParcelaAcrescimo", $arryData[0]."/".substr($verificaLengthMes,1)."/".$verificaLenghtAno);
 							
-						}else{
+// 						}else{
 							
-							$parcelasAcrescimo->__set("cpDataVencimentoParcelaAcrescimo", $arryData[0]."/".str_replace($mes,"",$mes + $i)."/".$arryData[2]);
-						}
-						$parcelasAcrescimo->INSERT();
-					}
-				}else {
+// 							$parcelasAcrescimo->__set("cpDataVencimentoParcelaAcrescimo", $arryData[0]."/".str_replace($mes,"",$mes + $i)."/".$arryData[2]);
+// 						}
+// 						$parcelasAcrescimo->INSERT();
+// 					}
+// 				}else {
 					
-					echo "<script language='javascript'>
-								window.alert('Pedido não parcelado !');
-							</script>";
-				}
+// 					echo "<script language='javascript'>
+// 								window.alert('Pedido não parcelado !');
+// 							</script>";
+// 				}
 				
 				echo "<script language='javascript'>
 							window.alert('Baixa realizada com sucesso !');

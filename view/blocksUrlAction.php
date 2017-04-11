@@ -2,6 +2,6 @@
 
 if($verificaAcessoUrl) {
 	  	
-	  	header("location:index.php");
+	  	header("location:permissaoNegada.php");
 }
 	

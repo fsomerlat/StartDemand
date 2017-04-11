@@ -37,7 +37,6 @@ var Service_Contas = (function(){
 						(dados.cpTipoConta == "P") ? tipoConta = "Pagar" : tipoConta = "Receber";
 						(dados.cpStatusConta == "A") ? status = "Aberto" : status = "Fechado";
 						
-						
 						//LOG DE CADASTRO POR USUÁRIO
 						var objDataCadastroConta  = dados.cpDataCadastroConta;
 						
@@ -77,7 +76,7 @@ var Service_Contas = (function(){
 							msgAlteracao = "Não há alterações no momento !";
 						}						
 						
-						//LOG DE FECHAMENTO POR USUÁRIOs
+						//LOG DE FECHAMENTO POR USUÁRIO
 						if(dados.cpDataFechamentoConta != null) {
 							
 							var objDataFechamento =  dados.cpDataFechamentoConta;
@@ -197,5 +196,4 @@ var Service_Contas = (function(){
 		
 		carregaInfoContasAjaxDB: carregaInfoContasAjaxDB
 	}
-	
 })();
