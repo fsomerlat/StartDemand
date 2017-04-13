@@ -4,8 +4,7 @@
 	$preparaProduto =  new PreparaProduto();
 	$preparaAcrescimo = new PreparaAcrescimo();
 	$acrescimo =  new Acrescimo();
-	$parcelasPedido =  new ParcelasPedido();
-	$parcelas = new Parcelas();
+	$financeiro = new Financeiro();
 	
 	if($_REQUEST["acao"] == "gerar pedido"):
 	
@@ -362,9 +361,9 @@
 		    	$acrescimo->__set("cpValorParcelaAcrescimo",0); //VALOR DA PARCELA ESTÁ DEFINIDO NO PEDIDO
 		    	//CAMPOS VINCULADOS AO PEDIDO
 		    	$acrescimo->__set("cpBandeiraCartao", "PD");
-// 		    	$acrescimo->__set("cpPorcentagemTaxa", 0);
-// 		    	$acrescimo->__set("cpValorTaxaJuros", 0);
-// 		    	$acrescimo->__set("cpValorTotalLiquido", 0);
+		    	$acrescimo->__set("cpPorcentagemTaxa", 0);
+		    	$acrescimo->__set("cpValorTaxaJuros", 0);
+		    	$acrescimo->__set("cpValorTotalLiquido", 0);
 		    	$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
 		    	$acrescimo->__set("cpObservacaoAcrescimo", addslashes($res->cpObservacaoAcrescimo));
 		    	 
@@ -405,9 +404,9 @@
      		
      		} else {
      		
-     			//$preparaProduto->__set("cpValorParcela", 0);
+     			$preparaProduto->__set("cpValorParcela", 0);
      			$preparaProduto->__set("cpValorTotalProduto", $valTotalProduto);
-     			//$ped->__set("cpValorParcela", 0);
+     			$ped->__set("cpValorParcela", 0);
      			$ped->__set("cpValorTotalPedido", $valTotalProduto);
      		}
      		
@@ -421,13 +420,13 @@
 				$acrescimo->__set("cpValorBaseAcrescimo", addslashes($res->cpValorBaseAcrescimo));
 				$acrescimo->__set("cpTipoAcrescimo","P"); // P = VINCULADO A UM PEDIDO
 				$acrescimo->__set("cpFormaPagamentoAcrescimo","PD"); //FORMA DEPAGAMENTO ESTÁ DECLARADA NO PEDIDO
-// 				$acrescimo->__set("cpQtdParcelaAcrescimo", 0); // PARCELA DELCARADA NO PEDIDO
-// 				$acrescimo->__set("cpValorParcelaAcrescimo",0); //VALOR DA PARCELA ESTÁ DEFINIDO NO PEDIDO
+				$acrescimo->__set("cpQtdParcelaAcrescimo", 0); // PARCELA DELCARADA NO PEDIDO
+				$acrescimo->__set("cpValorParcelaAcrescimo",0); //VALOR DA PARCELA ESTÁ DEFINIDO NO PEDIDO
 				//CAMPOS VINCULADOS AO PEDIDO
 				$acrescimo->__set("cpBandeiraCartao", "PD");
-// 				$acrescimo->__set("cpPorcentagemTaxa", 0);
-// 				$acrescimo->__set("cpValorTaxaJuros", 0);
-// 				$acrescimo->__set("cpValorTotalLiquido", 0);
+				$acrescimo->__set("cpPorcentagemTaxa", 0);
+				$acrescimo->__set("cpValorTaxaJuros", 0);
+				$acrescimo->__set("cpValorTotalLiquido", 0);
 				$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
 				$acrescimo->__set("cpObservacaoAcrescimo", addslashes($res->cpObservacaoAcrescimo));
 						
@@ -531,47 +530,58 @@
 		$ped->__set("cpUsuarioBaixa",addslashes($_SESSION['cpNome']));
 		$acrescimo->__set("cpSituacaoAcrescimo", "B");
 		
-		if($acrescimo->getRow() > 0):
+// 		if($acrescimo->getRow() > 0):
 			
-			$parcelas->__set("tuPedido_idPedido", addslashes($id));	
+// 			$parcelas->__set("tuPedido_idPedido", addslashes($id));	
 
-		endif;
+// 		endif;
 		
 		$formaPagamento = $getInfoPedido->cpFormaPagamento;
 		$qtdParcela = $getInfoPedido->cpQtdParcela;
 		$valParcela = $getInfoPedido->cpValorParcela;
 		$statusPedido = $getInfoPedido->cpStatusPedido;
-	
+		$valorTotalPed = $getInfoPedido->cpValorTotalPedido;
+		$valorTotalLiquidoPed = $getInfoPedido->cpValorTotalLiquidoPedido;	
+		
 		
 		if($ped->relacionaPedidoAcrescimo($id) || $ped->pedidoAndamentoIndividual($id)) :
 			
 			echo "<script language='javascript'>
 						window.alert('Registro  [ EM ANDAMENTO ] não pode ser baixado !');
 						window.history.go(-1);
-					</script>";
-			
+				  </script>";
 		else:
 			
+		
 			$ped->UPDATE_SITUACAO_PEDIDO($id);
 			$acrescimo->UPDATE_SITUACAO_ACRESCIMO_PEDIDO($id);
 
-				
-// 				if($formaPagamento == "CC" && $statusPedido != "C"):
-				
-// 					for($i=0; $i < $qtdParcela; $i++){
-					
-// 						$parcelas->INSERT();
-// 					}
-					
-// 					else:
+			$dataCriacaoPedido = substr($getInfoPedido->cpHoraPedido,0,10);
 		
-// 							echo "<script language='javascript'>
-// 										window.alert('Pedido criado a vista !');
-// 										window.history.go(-1);
-// 									</script>";
-					
-// 				endif;
+			$getInfFinanceiro = $financeiro->getInfoFinanceiro($dataCriacaoPedido);
 			
+			$valorTotal = $getInfFinanceiro->cpValorTotal;
+			$valorTotalLiquido = $getInfFinanceiro->cpValorLiquidoTotal;
+			
+			$somaValorTotal = $valorTotalPed + $valorTotal;
+			$somaValorLiquido = $valorTotalLiquidoPed + $valorTotalLiquido;
+
+			$financeiro->__set("cpDataBaixa", addslashes($dataCriacaoPedido));
+			$financeiro->__set("cpStatusFinanceiro", addslashes($statusPedido));
+			$financeiro->__set("cpValorTotal", addslashes($somaValorTotal));
+			$financeiro->__set("cpValorLiquidoTotal", addslashes($somaValorLiquido));
+			
+			if($financeiro->verificaData($dataCriacaoPedido) == ""):	
+			
+	 			
+				$financeiro->INSERT();
+				
+			else:
+							
+				$financeiro->UPDATE($dataCriacaoPedido);			
+			
+			endif;
+				
 					echo "<script language='javascript'>
 								window.alert('Pedido baixado com sucesso !');
 								window.location.href='../view/PainelDePedidos.php';

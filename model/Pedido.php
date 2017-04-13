@@ -80,7 +80,8 @@
 		public function getId($id) {
 			
 			$sql="SELECT 
-					idPedido,cpCodPedido,cpFormaPagamento,cpQtdParcela,cpValorParcela,cpStatusPedido
+					idPedido,cpCodPedido,cpFormaPagamento,cpQtdParcela,cpValorParcela,cpStatusPedido,
+					cpValorTotalPedido,cpValorTotalLiquidoPedido,cpDataBaixa,cpHoraPedido
 				  FROM 
 					$this->table
 				  WHERE 

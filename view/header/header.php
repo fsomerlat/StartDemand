@@ -93,7 +93,7 @@
 										<a href="Taxas.php">Taxas</a>
 									</li>									
 									<li>
-										<a href="#">relatórios</a>
+										<a href="Financeiro.php">relatórios</a>
 									</li>
 								</ul>
 							</li>

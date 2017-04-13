@@ -47,6 +47,11 @@ body {
 	margin-top:74px;
 }
 
+.btnFltFinanceiro{
+	
+	margin-top:20px;
+}
+
 .msgVencimentoContas {
 	
 	text-align:center;
@@ -85,7 +90,8 @@ body {
 .titleInformativoContas,
 .carregaUsuario,
 .msgUsuarioVazio,
-.msgAcrescimoVazio{
+.msgAcrescimoVazio
+{
 	
 	text-align: center;
 }
