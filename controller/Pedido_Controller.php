@@ -530,12 +530,6 @@
 		$ped->__set("cpUsuarioBaixa",addslashes($_SESSION['cpNome']));
 		$acrescimo->__set("cpSituacaoAcrescimo", "B");
 		
-// 		if($acrescimo->getRow() > 0):
-			
-// 			$parcelas->__set("tuPedido_idPedido", addslashes($id));	
-
-// 		endif;
-		
 		$formaPagamento = $getInfoPedido->cpFormaPagamento;
 		$qtdParcela = $getInfoPedido->cpQtdParcela;
 		$valParcela = $getInfoPedido->cpValorParcela;
@@ -566,7 +560,7 @@
 			$somaValorTotal = $valorTotalPed + $valorTotal;
 			$somaValorLiquido = $valorTotalLiquidoPed + $valorTotalLiquido;
 
-			$financeiro->__set("cpDataBaixa", addslashes($dataCriacaoPedido));
+			$financeiro->__set("cpDataCompra", addslashes($dataCriacaoPedido));
 			$financeiro->__set("cpStatusFinanceiro", addslashes($statusPedido));
 			$financeiro->__set("cpValorTotal", addslashes($somaValorTotal));
 			$financeiro->__set("cpValorLiquidoTotal", addslashes($somaValorLiquido));

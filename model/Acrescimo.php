@@ -235,7 +235,7 @@
 			$sql="UPDATE 
 					$this->table
 				  SET
-				  	cpSituacaoAcrescimo=:cpSituacaoAcrescimo
+				  	cpSituacaoAcrescimo=:cpSituacaoAcrescimo,cpDataBaixa=now()
 				  WHERE
 				  	idAcrescimo=:idAcrescimo";
 			
@@ -295,12 +295,13 @@
 			 	echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 			 }
 		}
-		
+				
 		public function getInfoAcrescimo($id) {
 			
 			
 			$sql="SELECT
-					idAcrescimo,cpFormaPagamentoAcrescimo,cpQtdParcelaAcrescimo,cpValorParcelaAcrescimo,cpStatusAcrescimo,cpDataCompraAcrescimo
+					idAcrescimo,cpFormaPagamentoAcrescimo,cpQtdParcelaAcrescimo,cpValorParcelaAcrescimo,
+					cpStatusAcrescimo,cpDataCompraAcrescimo,cpDataBaixa,cpValorTotalAcrescimo,cpValorTotalLiquido
 				  FROM 
 					$this->table
 				  WHERE 

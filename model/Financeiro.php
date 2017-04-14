@@ -7,7 +7,7 @@
 				$cpStatusFinanceiro,
 				$cpValorTotal,
 				$cpValorLiquidoTotal,
-				$cpDataBaixa,
+				$cpDataCompra,
 				$cpDataLancamento;
 	
 		public function __set($attr, $valor) {
@@ -19,15 +19,15 @@
 			
 			$sql="INSERT INTO 
 						$this->table
-				 	(cpStatusFinanceiro,cpValorTotal,cpValorLiquidoTotal,cpDataBaixa,cpDataLancamento)
+				 	(cpStatusFinanceiro,cpValorTotal,cpValorLiquidoTotal,cpDataCompra,cpDataLancamento)
 				 VALUES
-				 	(:cpStatusFinanceiro,:cpValorTotal,:cpValorLiquidoTotal,:cpDataBaixa,now())";
+				 	(:cpStatusFinanceiro,:cpValorTotal,:cpValorLiquidoTotal,:cpDataCompra,now())";
 			
 			$in=DB::prepare($sql);
 			$in->bindParam(":cpStatusFinanceiro", $this->cpStatusFinanceiro,PDO::PARAM_STR);
 			$in->bindParam(":cpValorTotal", $this->cpValorTotal,PDO::PARAM_STR);
 			$in->bindParam(":cpValorLiquidoTotal", $this->cpValorLiquidoTotal,PDO::PARAM_STR);
-			$in->bindParam(":cpDataBaixa", $this->cpDataBaixa,PDO::PARAM_STR);
+			$in->bindParam(":cpDataCompra", $this->cpDataCompra,PDO::PARAM_STR);
 			
 			try {
 				
@@ -39,16 +39,16 @@
 			}
 		}
 		
-		public function UPDATE($dataFechamento) {
+		public function UPDATE($data) {
 			
 			$sql="UPDATE $this->table SET
 				  	cpValorTotal=:cpValorTotal,cpValorLiquidoTotal=:cpValorLiquidoTotal
 				  WHERE
-				  	cpDataBaixa=:cpDataBaixa";
+				  	cpDataCompra=:cpDataCompra";
 			$up=DB::prepare($sql);
 			$up->bindParam(":cpValorTotal", $this->cpValorTotal,PDO::PARAM_STR);
 			$up->bindParam(":cpValorLiquidoTotal", $this->cpValorLiquidoTotal,PDO::PARAM_STR);
-			$up->bindParam(":cpDataBaixa", $dataFechamento, PDO::PARAM_STR);
+			$up->bindParam(":cpDataCompra", $data, PDO::PARAM_STR);
 			
 			try{
 				
@@ -63,14 +63,14 @@
 		public function getInfoFinanceiro($dt) {
 			
 			$sql="SELECT 
-					cpValorTotal,cpValorLiquidoTotal,cpDataBaixa
+					cpValorTotal,cpValorLiquidoTotal,cpDataCompra
 				  FROM
 					$this->table
 				  WHERE
-				  	cpDataBaixa=:cpDataBaixa";
+				  	cpDataCompra=:cpDataCompra";
 			
 			$s=DB::prepare($sql);
-			$s->bindParam(":cpDataBaixa", $dt,PDO::PARAM_STR);
+			$s->bindParam(":cpDataCompra", $dt,PDO::PARAM_STR);
 			$s->execute();
 			
 			try {
@@ -106,15 +106,15 @@
 		public function verificaData($data) {
 			
 			$sql="SELECT 
-					cpDataBaixa
+					cpDataCompra
 				  FROM
 					$this->table
 				  WHERE 
-				  	cpDataBaixa = ?";
+				  	cpDataCompra = ?";
 			
 			$s=DB::prepare($sql);	
-			$s->bindParam(":cpDataBaixa", $data,PDO::PARAM_STR);
-			$s->execute(array($this->cpDataBaixa));
+			$s->bindParam(":cpDataCompra", $data,PDO::PARAM_STR);
+			$s->execute(array($this->cpDataCompra));
 			
 			try{
 				

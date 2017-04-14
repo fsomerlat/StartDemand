@@ -1,7 +1,7 @@
 <?php	require_once '../core/include.php';
 
 	$acrescimo =  new Acrescimo();
-	$parcelasAcrescimo = new ParcelaAcrescimo();
+	$financeiro = new Financeiro();
 	
 	
 	if($_REQUEST["acao"] == "cadastrar"):
@@ -106,53 +106,43 @@
 	if($_REQUEST["acao"]=="baixar"):
 		
 		$id = (int)$_GET["id"];
-		$getInfoAcresimo = $acrescimo->getInfoAcrescimo($id);
-		
-		$formaPagamento = $getInfoAcresimo->cpFormaPagamentoAcrescimo;
-		$qtdParcelas = $getInfoAcresimo->cpQtdParcelaAcrescimo;
-		$status = $getInfoAcresimo->cpStatusAcrescimo;
-		$dataCompraAcrescimo = $getInfoAcresimo->cpDataCompraAcrescimo;
-	  
-		$data = date_create($dataCompraAcrescimo);
-		$nova_data = date_format($data,"d/m/Y");
-		
-		$arryData = explode("/",$nova_data);
-		$mes = substr($arryData[1],0);
-		$ano = substr($arryData[2],0);
-
 		
 		$acrescimo->__set("cpSituacaoAcrescimo", "B"); 
-		$parcelasAcrescimo->__set("tuAcrescimo_idAcrescimo", addslashes($id));
-		
-			
+				
 		if($acrescimo->verifcaStatus($id)):
 				
-				$acrescimo->UPDATE_SITUACAO_ACRESCIMO_AVULSO($id);
-				
-// 				if($formaPagamento == "CC" && $status !="C") {//VERIFICA FORMA DE PAGAMENTO PARA GERAR PARCELAS
-						
-// 					for($i=1; $i <= $qtdParcelas; $i++) {
-						
-// 						$verificaLengthMes = str_replace($mes,"",$mes + $i);
-// 						$verificaLenghtAno = str_replace($ano,"",$ano + 1);
-						
-// 						if($verificaLengthMes  > 12) {
-							
-// 							$verificaLengthMes = $i + 1; 
-// 							$parcelasAcrescimo->__set("cpDataVencimentoParcelaAcrescimo", $arryData[0]."/".substr($verificaLengthMes,1)."/".$verificaLenghtAno);
-							
-// 						}else{
-							
-// 							$parcelasAcrescimo->__set("cpDataVencimentoParcelaAcrescimo", $arryData[0]."/".str_replace($mes,"",$mes + $i)."/".$arryData[2]);
-// 						}
-// 						$parcelasAcrescimo->INSERT();
-// 					}
-// 				}else {
+			$getInfoAcresimo = $acrescimo->getInfoAcrescimo($id);
+			
+			$valorTotalAcres = $getInfoAcresimo->cpValorTotalAcrescimo;
+			$valorLiquidoAcres = $getInfoAcresimo->cpValorTotalLiquido;
+			$statusAcrescimo = $getInfoAcresimo->cpStatusAcrescimo;
+			
+			$dataCompraAcrescimo = substr($getInfoAcresimo->cpDataCompraAcrescimo,0,10);
+			$getInfoFinanceiro = $financeiro->getInfoFinanceiro($dataCompraAcrescimo);
+			
+			$valorTotalFinanc = $getInfoFinanceiro->cpValorTotal;
+			$valorLiquidoFinanc = $getInfoFinanceiro->cpValorLiquidoTotal;
+			
+			$valorTotal = $valorTotalAcres + $valorTotalFinanc;
+			$valorLiquido = $valorLiquidoAcres + $valorLiquidoFinanc;
+			
+			$financeiro->__set("cpStatusFinanceiro", addslashes($statusAcrescimo));
+			$financeiro->__set("cpValorTotal", addslashes($valorTotal));
+			$financeiro->__set("cpDataCompra", addslashes($dataCompraAcrescimo));
+			$financeiro->__set("cpValorLiquidoTotal", addslashes($valorLiquido));
+		
+				if($financeiro->verificaData($dataCompraAcrescimo) == ""):
 					
-// 					echo "<script language='javascript'>
-// 								window.alert('Pedido não parcelado !');
-// 							</script>";
-// 				}
+					$financeiro->INSERT();
+				
+				else:
+					
+					$financeiro->UPDATE($dataCompraAcrescimo);
+				
+				endif;
+				
+					$acrescimo->UPDATE_SITUACAO_ACRESCIMO_AVULSO($id);
+				
 				
 				echo "<script language='javascript'>
 							window.alert('Baixa realizada com sucesso !');
