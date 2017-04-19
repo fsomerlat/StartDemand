@@ -115,7 +115,7 @@
 	
 	$mpdf->showWatermarkImage = True;
 	
-	$mpdf->SetHeader($logo."<h3 class='isTituloPDF'>Relatório</h3>");
+	$mpdf->SetHeader($logo."<h3 class='isTituloPDF'>GECSistemas para Internet</h3>");
 	
 	$mpdf->SetFooter('Impresso em '.date('d/m/Y / H:i:s').'|{PAGENO}/{nb}|GECSistemas para Internet'); // CRIAR RODAPÉ NAS PÁGINAS
 	
