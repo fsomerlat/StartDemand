@@ -39,16 +39,17 @@
 			}
 		}
 		
-		public function UPDATE($data) {
+		public function UPDATE($data,$status) {
 			
 			$sql="UPDATE $this->table SET
 				  	cpValorTotal=:cpValorTotal,cpValorLiquidoTotal=:cpValorLiquidoTotal
 				  WHERE
-				  	cpDataCompra=:cpDataCompra";
+				  	cpDataCompra=:cpDataCompra AND cpStatusFinanceiro=:cpStatusFinanceiro";
 			$up=DB::prepare($sql);
 			$up->bindParam(":cpValorTotal", $this->cpValorTotal,PDO::PARAM_STR);
 			$up->bindParam(":cpValorLiquidoTotal", $this->cpValorLiquidoTotal,PDO::PARAM_STR);
 			$up->bindParam(":cpDataCompra", $data, PDO::PARAM_STR);
+			$up->bindParam(":cpStatusFinanceiro", $status,PDO::PARAM_STR);
 			
 			try{
 				
@@ -103,18 +104,65 @@
 			}
 		}
 		
-		public function verificaData($data) {
+		
+		public function getFiltroSelecionado($status,$dataInicio,$dataFinal) {
 			
 			$sql="SELECT 
-					cpDataCompra
+						cpValorTotal,cpValorLiquidoTotal,cpStatusFinanceiro,cpDataCompra,cpDataLancamento
+				  FROM
+						$this->table
+				  WHERE
+					cpStatusFinanceiro = '$status' AND cpDataCompra BETWEEN '$dataInicio' AND '$dataFinal'";
+			
+			$s=DB::prepare($sql);
+			$s->execute();
+			
+			try{
+				
+				return $s->fetchAll();
+			
+			}catch(PDOException $e){
+				
+				echo "Erro arquivo ".$e->getFile()." referetne a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}
+		
+		public function getAll() {
+			
+			$sql="SELECT
+					cpStatusFinanceiro,SUM(cpValorTotal) as valorTotal,SUM(cpValorLiquidoTotal) as valorLiquido
+				  FROM	
+					$this->table
+				  GROUP BY
+				  	cpStatusFinanceiro";
+			
+			$s=DB::prepare($sql);
+			$s->execute();
+			
+			try{
+				
+				return $s->fetchAll();
+			
+			}catch(PDOException $e) {
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}
+		
+		
+		public function verificaSituacao($data, $status) {
+			
+			$sql="SELECT 
+					cpDataCompra,cpStatusFinanceiro
 				  FROM
 					$this->table
 				  WHERE 
-				  	cpDataCompra = ?";
+				  	cpDataCompra = ? AND cpStatusFinanceiro = ?";
 			
 			$s=DB::prepare($sql);	
 			$s->bindParam(":cpDataCompra", $data,PDO::PARAM_STR);
-			$s->execute(array($this->cpDataCompra));
+			$s->bindParam(":cpStatusFinanceiro", $status,PDO::PARAM_STR);
+			$s->execute(array($this->cpDataCompra,$this->cpStatusFinanceiro));
 			
 			try{
 				

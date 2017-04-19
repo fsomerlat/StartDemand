@@ -565,14 +565,14 @@
 			$financeiro->__set("cpValorTotal", addslashes($somaValorTotal));
 			$financeiro->__set("cpValorLiquidoTotal", addslashes($somaValorLiquido));
 			
-			if($financeiro->verificaData($dataCriacaoPedido) == ""):	
+			if($financeiro->verificaSituacao($dataCriacaoPedido, $statusPedido) == ""):	
 			
 	 			
 				$financeiro->INSERT();
 				
 			else:
 							
-				$financeiro->UPDATE($dataCriacaoPedido);			
+				$financeiro->UPDATE($dataCriacaoPedido,$statusPedido);			
 			
 			endif;
 				

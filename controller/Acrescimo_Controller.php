@@ -131,13 +131,13 @@
 			$financeiro->__set("cpDataCompra", addslashes($dataCompraAcrescimo));
 			$financeiro->__set("cpValorLiquidoTotal", addslashes($valorLiquido));
 		
-				if($financeiro->verificaData($dataCompraAcrescimo) == ""):
+				if($financeiro->verificaSituacao($dataCompraAcrescimo,$statusAcrescimo) == ""):
 					
 					$financeiro->INSERT();
 				
 				else:
 					
-					$financeiro->UPDATE($dataCompraAcrescimo);
+					$financeiro->UPDATE($dataCompraAcrescimo,$statusAcrescimo);
 				
 				endif;
 				
