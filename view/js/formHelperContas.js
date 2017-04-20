@@ -106,6 +106,11 @@ var FormHelperContas = (function(){
 			
 			return confirm ("Fechar essa conta ?");
 		});
+		
+		$("#btnPrintTelaConta").click(function(){
+			
+			 window.print();
+		});
 	}
 
 	return {

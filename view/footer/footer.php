@@ -16,7 +16,8 @@
 	<script type="text/javascript" src="js/validateFormProduto.js"></script>
 	<script type="text/javascript" src="js/validateFormPreparaPedidoAcrescimo.js"></script>
 	<script type="text/javascript" src="js/validateFormPedido.js"></script>
-	<script type="text/javascript" src="js/validateFormFinanceiro.js"></script>
+	<script type="text/javascript" src="js/validateFormRelatorioFinanceiro.js"></script>
+	<script type="text/javascript" src="js/validateFormRelatorioPedido.js"></script>
 	<script type="text/javascript" src="js/validateFormAcrescimo.js"></script>
 	<script type="text/javascript" src="js/validateFormTaxa.js"></script>
 	<script type="text/javascript" src="js/validateFormContas.js"></script>
@@ -29,7 +30,8 @@
 	<script type="text/javascript" src="js/formHelperTaxa.js"></script>
 	<script type="text/javascript" src="js/formHelperContas.js"></script>
 	<script type="text/javascript" src="js/formHelperUsuario.js"></script>
-	<script type="text/javascript" src="js/formHelperFinanceiro.js"></script>
+	<script type="text/javascript" src="js/formHelperRelatorioFinanceiro.js"></script>
+	<script type="text/javascript" src="js/formHelperRelatorioPedido.js"></script>
 	<script type="text/javascript" src="js/carregaServicoProduto.js"></script>
 	<script type="text/javascript" src="js/carregaServicoPedido.js"></script>
 	<script type="text/javascript" src="js/carregaServicoAcrescimo.js"></script>

@@ -20,7 +20,7 @@
 							<th class="danger">QTDE</th>
 							<th class="warning">1º complemento</th>
 							<th class="success">2ª complemento</th>
-							<th class="danger">Hora criação</th>
+							<th class="danger">Data criação</th>
 							<th class="success">Observação pedido</th>
 							<th></th>
 						</tr>

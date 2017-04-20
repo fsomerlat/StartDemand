@@ -16,6 +16,18 @@ body {
 	 box-shadow:0px 1px 1px 1px black;/*#fff*/
 }
 
+.rolagem_colMD_12
+{
+	 overflow: auto; auto;
+	 height: 270px;   /* QUANTO CHEGAR AO TAMANHO 200PX,APARECE A BARRA DE ROLAGEM VERTICAL*/
+	 text-align:center;
+	 font-family:arial; 
+	 font-size:20px;  
+	 line-height:100%;
+	 width:100%;
+	 box-shadow:0px 1px 1px 1px black;/*#fff*/
+}
+
 .rolagem_2
 {
 	 overflow: auto; auto;
@@ -47,7 +59,8 @@ body {
 	margin-top:74px;
 }
 
-.btnFltFinanceiro{
+.btnFltFinanceiro,
+.isBtnFltPedido{
 	
 	margin-top:20px;
 }
@@ -92,13 +105,19 @@ body {
 .msgUsuarioVazio,
 .msgAcrescimoVazio,
 .msgRelatorioFinanceiro,
-.isResultadoPesquisaFinanceiro
+.isResultadoPesquisaFinanceiro,
+.msgPesquisaPedido,
+.msgPreparaPDF
 {
 	
 	text-align: center;
 }
 
-
+.isDetalhesPesquisaPedido{
+	
+	margin-left:auto;
+	margin-right:auto;
+}
 
 .listaPedidoAcrescimo,
 .listaPedidoProduto,

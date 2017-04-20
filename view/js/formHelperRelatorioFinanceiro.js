@@ -1,5 +1,5 @@
 
-var FormHelperFinanceiro = (function(){
+var FormHelperRelatorioFinanceiro = (function(){
 	
 	var setHideCamposData =  function() {
 		
@@ -105,12 +105,12 @@ var FormHelperFinanceiro = (function(){
 		
 	var gerarPDFTotal = function(tipoPesquisa) {
 		
-		window.open('http://localhost/startDemand/gera-pdf/gerarPDF_Financeiro.php?tipoPesquisa='+tipoPesquisa, "_blank");	
+		window.open('http://localhost/startDemand/gera-pdf/PDF_Financeiro.php?tipoPesquisa='+tipoPesquisa, "_blank");	
 	}
 	
 	var geraPDFPorData = function(tipoPesquisa,status,dataInicio,dataFinal) {
 		
-		window.open("http://localhost/startDemand/gera-pdf/gerarPDF_Financeiro.php?tipoPesquisa="+tipoPesquisa+"&status="+status+"&dataI="+dataInicio+"&dataF="+dataFinal,"_blank");
+		window.open("http://localhost/startDemand/gera-pdf/PDF_Financeiro.php?tipoPesquisa="+tipoPesquisa+"&status="+status+"&dataI="+dataInicio+"&dataF="+dataFinal,"_blank");
 	}
 	
 	var bindEvents = function() {

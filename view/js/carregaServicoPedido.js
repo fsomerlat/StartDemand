@@ -49,7 +49,7 @@ var Service_Pedido = (function() {
 						
 						data = dia+"/"+mes+"/"+ano;
 						
-						dataPedido = dia+'/'+mes+'/'+ano+" - "+ hora;
+						dataPedido = dia+'/'+mes+'/'+ano+" "+ hora;
 						
 						if(opcaoStatus == "Em andamento") {
 							

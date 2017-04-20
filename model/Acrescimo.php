@@ -253,18 +253,18 @@
 			}
 		}
 		
-		public function getId($id) {
+		public function getId($fk) {
 			
 			
 			$sql="SELECT 
-						idAcrescimo,tuPedido_idPedido
+						idAcrescimo,tuPedido_idPedido,cpAcrescimo,cpQtdAcrescimo,cpValorBaseAcrescimo,cpValorTotalAcrescimo
 				  FROM 
 						$this->table
 				  WHERE  
 					tuPedido_idPedido=:tuPedido_idPedido";
 			
 			$s=DB::prepare($sql);
-			$s->bindParam(":tuPedido_idPedido", $id,PDO::PARAM_INT);
+			$s->bindParam(":tuPedido_idPedido", $fk,PDO::PARAM_INT);
 			$s->execute();
 			try{
 				

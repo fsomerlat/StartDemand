@@ -42,7 +42,7 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label for="Produto">Nome do produto</label>
+								<label for="Produto">Nome do produto principal</label>
 								<select name="tuProduto_idProduto" id="tuProduto_idProduto" class="form-control toClearProduto">
 									<!-- LISTA PRODUTOS VIA AJAX -->
 								</select>

@@ -99,6 +99,63 @@
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine(); 
 			}
 		}
+			
+		//NÃO BUSCA PEDIDOS EM ANDAMENTO
+		public function getPedidoInProduto() {
+			
+			$sql="SELECT 
+					ped.idPedido,prod.cpQtdProduto,prod.cpNomeProduto,ped.cpStatusPedido,ped.cpFormaPagamento,ped.cpQtdParcela,ped.cpValorParcela,
+					ped.cpValorTotalPedido,ped.cpValorTotalLiquidoPedido,ped.cpPlanoPagSeguroPedido,ped.cpBandeiraCartaoPedido,ped.cpPorcentagemJurosPedido,
+					ped.cpValorTaxaJurosPedido,ped.cpComplementoUm,ped.cpComplementoDois,ped.cpObservacaoPedido,ped.cpHoraPedido,
+					ped.cpDataBaixa,ped.cpUsuarioBaixa
+				 FROM
+					$this->table as ped INNER JOIN tuProduto as prod 
+				 ON 
+				 	ped.tuProduto_idProduto = prod.idProduto
+				 WHERE 
+					ped.cpStatusPedido = 'F' OR ped.cpStatusPedido = 'C' ORDER BY ped.cpStatusPedido DESC"; 
+			
+			$s=DB::prepare($sql);
+			$s->execute();
+			
+			try{
+				
+				return $s->fetchAll();
+			
+			}catch(PDOException $e){
+				
+				echo "Errono arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}	
+		}
+		
+		
+		public function getBuscaPorData($status,$dataInicio,$dataFinal) {
+			
+			
+			$sql="SELECT
+					ped.idPedido,prod.cpQtdProduto,prod.cpNomeProduto,ped.cpStatusPedido,ped.cpFormaPagamento,ped.cpQtdParcela,ped.cpValorParcela,
+					ped.cpValorTotalPedido,ped.cpValorTotalLiquidoPedido,ped.cpPlanoPagSeguroPedido,ped.cpBandeiraCartaoPedido,ped.cpPorcentagemJurosPedido,
+					ped.cpValorTaxaJurosPedido,ped.cpComplementoUm,ped.cpComplementoDois,ped.cpObservacaoPedido,ped.cpHoraPedido,
+					ped.cpDataBaixa,ped.cpUsuarioBaixa
+				FROM
+					$this->table as ped INNER JOIN tuProduto as prod
+				ON
+					ped.tuProduto_idProduto = prod.idProduto
+				WHERE
+					ped.cpStatusPedido = '$status'  AND ped.cpHoraPedido BETWEEN '$dataInicio' AND '$dataFinal' ORDER BY ped.cpStatusPedido DESC";
+			
+			$s=DB::prepare($sql);
+			$s->execute();
+			
+			try {
+				
+				return $s->fetchAll();
+				
+			}catch(PDOException $e) {
+				
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}
 		
 		public function getInfoPedidoJSON() {
 			

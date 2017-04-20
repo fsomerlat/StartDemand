@@ -12,7 +12,9 @@ $(document).ready(function(){
 	FormHelperTaxa.bindEvents();
 	FormHelperContas.bindEvents();
 	FormHelperUsuario.bindEvents();
-	FormHelperFinanceiro.bindEvents();
+	
+	FormHelperRelatorioFinanceiro.bindEvents();
+	FormHelperRelatorioPedido.bindEvents();
 
 })
 

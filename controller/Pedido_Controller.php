@@ -326,8 +326,6 @@
 	    	$ped->__set("cpQtdParcela", 0);
 	    	$ped->__set("cpValorParcela", 0);
 	    }
-
-	   
 	    
 	    $ped->__set("cpObservacaoPedido", addslashes($obsPedido));
 	    
@@ -583,6 +581,160 @@
 			
 		endif;
 	endif;
+	
+	if($_REQUEST["filtroPedido"] == "filtroPedido"):
+	
+		$td = "";
+		
+		if($_REQUEST["tipoPesquisa"] == "T"):
+			
+			
+			$getAll = $ped->getPedidoInProduto();
+	
+			foreach($getAll as $key => $res):
+				
+				$dataPedido = explode("-",substr($res->cpHoraPedido,0,10));
+				
+					$diaC = $dataPedido[2]; 
+					$mesC = $dataPedido[1];
+					$anoC = $dataPedido[0];
+				
+				$msgHoraPedido = $diaC."/".$mesC."/".$anoC; //." - ".substr($res->cpHoraPedido,10,19);
+				
+				$dataBaixa = explode("-",substr($res->cpDataBaixa,0,10));
+				
+					$diaB = $dataBaixa[2];
+					$mesB = $dataBaixa[1];
+					$anoB = $dataBaixa[0];
+				
+				$msgBaixaPedido = $diaB."/".$mesB."/".$anoB;//." - ".substr($res->cpDataBaixa,10,19);
+				
+				$usuarioBaixa = $res->cpUsuarioBaixa;
+				
+				($res->cpStatusPedido == "F") ? $status="Finalizado" : $status="Cancelado";
+				
+				$getInfoAcrescimo = $acrescimo->getId($res->idPedido);
+				
+				$td .= "<tr>";
+				$td .= "<td>".$res->idPedido."</td>";
+				$td .= "<td>".$status."</td>";
+				$td .= "<td>".$res->cpNomeProduto."</td>";
+				$td .= "<td>".$res->cpQtdProduto."</td>";
+				$td .= "<td>".$res->cpComplementoUm."</td>";
+				$td .= "<td>".$res->cpComplementoDois."</td>";		
+				$td .= "<td class='danger'>".$getInfoAcrescimo->cpAcrescimo."</td>";
+				$td .= "<td class='danger'>".$getInfoAcrescimo->cpQtdAcrescimo."</td>";
+				$td .= "<td class='danger'>R$ ".$getInfoAcrescimo->cpValorBaseAcrescimo."</td>";
+				$td .= "<td class='danger'>R$ ".$getInfoAcrescimo->cpValorTotalAcrescimo."</td>";
+				$td .= "<td>".$msgHoraPedido."</td>";
+				$td .= "<td class='isDetalhesPesquisaPedido'>
+						<a href='#' title='Data do Pedido: "
+								.$msgHoraPedido." Data baixa: "
+								.$msgBaixaPedido." Usuário / baixa: "
+								.$usuarioBaixa."'><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>
+						</a>
+				</td>";
+				$td .= "<td>".$res->cpBandeiraCartaoPedido."</td>";
+				$td .= "<td>".$res->cpValorTotalPedido."</td>";
+				$td .= "<td>".$res->cpValorTotalLiquidoPedido."</td>";
+			    $td .= "</tr>";
+				
+			endforeach;
+			
+			if(!empty($td)){
+				
+				echo $td;
+			
+			} else {
+				
+				$td = "";
+				echo $td;
+			}
+			
+		elseif($_REQUEST["tipoPesquisa"] == "D"):
+		
+		$td = "";
+		
+		$status = $_REQUEST["status"];
+		$dataIn = explode("/", $_REQUEST["dataInicio"]);
+		
+			$diaIn = $dataIn[0];
+			$mesIn = $dataIn[1];
+			$anoIn = $dataIn[2];
+		
+		$dataInicio = $anoIn."-".$mesIn."-".$diaIn;
+		
+		$dataFin = explode("/", $_REQUEST["dataFinal"]);
+			
+			$diaFin = $dataFin[0];
+			$mesFin = $dataFin[1];
+			$anoFin = $dataFin[2];
+		
+		$dataFinal = $anoFin."-".$mesFin."-".$diaFin;
+			
+		$getAll = $ped->getBuscaPorData($status, $dataInicio, $dataFinal);
+		
+		foreach($getAll as $key => $res):
+		
+			$dataPedido = explode("-",substr($res->cpHoraPedido,0,10));
+			
+				$diaC = $dataPedido[2];
+				$mesC = $dataPedido[1];
+				$anoC = $dataPedido[0];
+			
+			$msgHoraPedido = $diaC."/".$mesC."/".$anoC ;//." - ".substr($res->cpHoraPedido,10,19);
+			
+			$dataBaixa = explode("-",substr($res->cpDataBaixa,0,10));
+				
+				$diaB = $dataBaixa[2];
+				$mesB = $dataBaixa[1];
+				$anoB = $dataBaixa[0];
+			
+			$msgBaixaPedido = $diaB."/".$mesB."/".$anoB." - ".substr($res->cpDataBaixa,10,19);
+			
+			$usuarioBaixa = $res->cpUsuarioBaixa;
+			
+			($res->cpStatusPedido == "F") ? $status="Finalizado" : $status="Cancelado";
+			
+			$getInfoAcrescimo = $acrescimo->getId($res->idPedido);
+			
+			$td .= "<tr>";
+			$td .= "<td>".$res->idPedido."</td>";
+			$td .= "<td>".$status."</td>";
+			$td .= "<td>".$res->cpNomeProduto."</td>";
+			$td .= "<td>".$res->cpQtdProduto."</td>";
+			$td .= "<td>".$res->cpComplementoUm."</td>";
+			$td .= "<td>".$res->cpComplementoDois."</td>";
+			$td .= "<td class='danger'>".$getInfoAcrescimo->cpAcrescimo."</td>";
+			$td .= "<td class='danger'>".$getInfoAcrescimo->cpQtdAcrescimo."</td>";
+			$td .= "<td class='danger'>R$ ".$getInfoAcrescimo->cpValorBaseAcrescimo."</td>";
+			$td .= "<td class='danger'>R$ ".$getInfoAcrescimo->cpValorTotalAcrescimo."</td>";
+			$td .= "<td>".$msgHoraPedido."</td>";
+			$td .= "<td class='isDetalhesPesquisaPedido'>
+							<a href='#' title='Data do Pedido: "
+							.$msgHoraPedido." Data baixa: "
+							.$msgBaixaPedido." Usuário / baixa: "
+							.$usuarioBaixa."'><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>
+							</a>
+					</td>";
+			$td .= "<td>".$res->cpBandeiraCartaoPedido."</td>";
+			$td .= "<td>".$res->cpValorTotalPedido."</td>";
+			$td .= "<td>".$res->cpValorTotalLiquidoPedido."</td>";
+			$td .= "</tr>";
+
+		endforeach;
+			
+		if(!empty($td)){
+
+			echo $td;
+				
+		} else {
+
+			$td = "";
+			echo $td;
+		}
+	endif;
+endif;
 	
 	
 	

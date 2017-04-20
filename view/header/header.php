@@ -53,7 +53,7 @@
 									<li class="divider">
 									</li>
 									<li>
-										<a href="#">relatórios</a>
+										<a href="Relatorio_Pedido.php?panel=492322">relatórios</a>
 									</li>
 								</ul>
 							</li>
@@ -93,7 +93,7 @@
 										<a href="Taxas.php">Taxas</a>
 									</li>									
 									<li>
-										<a href="Financeiro.php">relatórios</a>
+										<a href="Relatorio_Financeiro.php">relatórios</a>
 									</li>
 								</ul>
 							</li>
@@ -170,13 +170,13 @@
 							 <a href="#"> <span class="badge pull-right"><i class="pedidosDeHoje"></i></span><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Dia atual</a>
 						</li>						
 						<li class="active">
-							<a href="#"><span class="badge pull-right"><i class="pedidoEmAndamento"></i></span><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span> Andamento</a>
+							<a href="#"><span class="badge pull-right"><i class="pedidoEmAndamento"></i></span><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span> Anda</a>
 						</li>
 						<li class="active">
-							 <a href="#"> <span class="badge pull-right"><i class="pedidosFinalizados"></i></span><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Finalizados</a>
+							 <a href="#"> <span class="badge pull-right"><i class="pedidosFinalizados"></i></span><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Final</a>
 						</li>
 						<li class="active">
-							 <a href="#"> <span class="badge pull-right"><i class="pedidosCancelados"></i></span><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancelados</a>
+							 <a href="#"> <span class="badge pull-right"><i class="pedidosCancelados"></i></span><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</a>
 						</li>
 					</ul>
 				</div>

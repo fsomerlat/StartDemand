@@ -9,7 +9,8 @@
 	if($_REQUEST["tipoPesquisa"] == "T"): //<img src='http://localhost/startDemand/view/img/logoPDF.png'>
 	
 	$html .= "<h3 class='isH3TituloPDF'>Pedidos finalizados e cancelados</h3>";
-	
+	$html .= "<p>Os valores aqui apresentados podem conter algum desconto referente a vendas incluindo possíveis taxas de cartões de crédito / débito
+			ou algum outro plano contrato pela empresa.</p>";
 	$html .= "<table class='table table-bordered'>";
 	$html .= "<head>"; 
 	$html .= "<tr>";
@@ -44,7 +45,8 @@
 	if($_REQUEST["tipoPesquisa"] == "D"):
     	
 	$html .= "<h3 class='isH3TituloPDF'>Relatório personalizado</h3>";
-	
+	$html .= "<p>Os valores aqui apresentados podem conter algum desconto referente a vendas incluindo possíveis taxas de cartões de crédito / débito
+			ou algum outro plano contrato pela empresa.</p>";
 	$html .= "<table class='table table-bordered'>";
 	$html .= "<head>";
 	$html .= "<tr>";
@@ -87,8 +89,8 @@
 			$html .= "<tr>";
 			$html .= "<td>".$status."</td>";
 			$html .= "<td>".$nova_dataCompra."</td>";
-			$html .= "<td>".substr($res->cpValorTotal,0,6)."</td>";
-			$html .= "<td>".substr($res->cpValorLiquidoTotal,0,6)."</td>";
+			$html .= "<td>R$ ".substr($res->cpValorTotal,0,6)."</td>";
+			$html .= "<td>R$ ".substr($res->cpValorLiquidoTotal,0,6)."</td>";
 			$html .= "<td>".$nova_dataLancamento."</td>";
 			$html .= "</tr>";
 			
@@ -97,11 +99,8 @@
 		$html .= "</table>";	
 		
 	endif;
-		
-	
-	$mpdf = new mPDF('','A4','','',20,20,30,10); // DEFINE FORMATO, ESPAÇAMENTO DO PDF
-	
-	
+			
+	$mpdf = new mPDF('','A4',8,'',20,20,20,10); //8 = TAMANHO TR >TH >TD  -  DEFINE FORMATO, ESPAÇAMENTO DO PDF
 	
     date_default_timezone_set('America/Sao_Paulo');
 	
@@ -117,7 +116,7 @@
 	
 	$mpdf->SetHeader($logo."<h3 class='isTituloPDF'>GECSistemas para Internet</h3>");
 	
-	$mpdf->SetFooter('Impresso em '.date('d/m/Y / H:i:s').'|{PAGENO}/{nb}|GECSistemas para Internet'); // CRIAR RODAPÉ NAS PÁGINAS
+	$mpdf->SetFooter('Impresso em '.date('d/m/Y / H:i:s').'|{PAGENO}/{nb}|Contagem MG'); // CRIAR RODAPÉ NAS PÁGINAS
 	
 	$css = file_get_contents('css/stilo.css');
 	

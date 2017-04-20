@@ -28,6 +28,8 @@
 	endif;
 ?>
 
+<!-- RUA DA BAHIA 11408 sala 1209 - sociis RH - as 09:00 -->
+
 <div class="col-md-6">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -80,13 +82,13 @@
 						<textarea name="cpObservacaoConta" id="cpObservacaoConta" class="form-control"><?php echo (!empty($_GET["id"])) ? $getInfoContas->cpObservacaoConta : ""; ?></textarea>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-4">
 					<div class="form-group">
 					
 						<input type="submit" name="acao" value="<?php echo (!empty($_GET["id"])) ? $acao : "cadastrar"; ?>" id="btnCadastrarConta" class="form-control btn btn-info" />
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-4">
 					<div class="form-group">
 						<input type="reset" class="form-control btn btn-warning" />
 					</div>
@@ -128,10 +130,10 @@
 					<label for="">Total valor / recebido</label>
 					<input type="text" name="cpTotalValorRecebido" id="cpTotalValorRecebido" readonly class="form-control" />
 				</div>
-			</div>	
+			</div>
 		</div>
 		<div class="panel-footer">
-			
+			<button type="button" id="btnPrintTelaConta" class="form-control btn btn-danger">printa tela</button>
 		</div>
 	</div>	
 </div>
@@ -139,7 +141,7 @@
 	<div class="panel panel-danger">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				Listar contas a pagar
+				Lista contas a pagar
 			</h3>
 		</div>
 		<div class="rolagem">
@@ -174,7 +176,7 @@
 	<div class="panel panel-success">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				Listar contas a receber
+				Lista contas a receber
 			</h3>
 		</div>
 		<div class="rolagem">
