@@ -9,7 +9,7 @@
 		<div class="col-md-12 login">
 		<div class="page">
 			<h4>
-				Login - <small> StartDemand vacilão</small>
+				Login - <small> StartDemand</small>
 			</h4>
 		</div>
 		</div>
