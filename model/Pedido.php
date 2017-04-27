@@ -49,6 +49,7 @@
 					:cpBandeiraCartaoPedido,:cpPorcentagemJurosPedido,:cpValorTaxaJurosPedido,:cpValorTotalLiquidoPedido,:cpObservacaoPedido)";
 			
 			$in=DB::prepare($sql);
+
 			$in->bindParam(":tuProduto_idProduto",$this->tuProduto_idProduto,PDO::PARAM_INT);
 			$in->bindParam(":tsPreparaProduto_idPreparaProduto",$this->tsPreparaProduto_idPreparaProduto,PDO::PARAM_INT);
 			$in->bindParam(":cpCodPedido", $this->cpCodPedido,PDO::PARAM_INT);
@@ -81,7 +82,7 @@
 			
 			$sql="SELECT 
 					idPedido,cpCodPedido,cpFormaPagamento,cpQtdParcela,cpValorParcela,cpStatusPedido,
-					cpValorTotalPedido,cpValorTotalLiquidoPedido,cpDataBaixa,cpHoraPedido
+					tsPreparaProduto_idPreparaProduto,cpValorTotalPedido,cpValorTotalLiquidoPedido,cpDataBaixa,cpHoraPedido
 				  FROM 
 					$this->table
 				  WHERE 
@@ -99,6 +100,7 @@
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine(); 
 			}
 		}
+		
 			
 		//NÃO BUSCA PEDIDOS EM ANDAMENTO
 		public function getPedidoInProduto() {
@@ -187,6 +189,58 @@
 			}
 		}
 		
+		
+		public function VerificaStatus($FkPreparaProduto) {
+		
+			$sql="SELECT
+		
+				cpStatusPedido,tsPreparaProduto_idPreparaProduto
+		
+			FROM
+		
+				$this->table
+			 
+			WHERE
+				tsPreparaProduto_idPreparaProduto=:tsPreparaProduto_idPreparaProduto  AND cpStatusPedido = 'F'";
+		
+			$s=DB::prepare($sql);
+			$s->bindParam(":tsPreparaProduto_idPreparaProduto", $FkPreparaProduto,PDO::PARAM_INT);
+			$s->execute();
+			
+			try {
+					
+				return $s->rowCount();
+		
+			}catch(PDOException $e) {
+					
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
+			}
+		}
+		
+		//	RETORNA INFORMAÇÕES ATRAVÉS DA FK tsPreparaPedido_idPreparaPedido
+		public function getInfoPedidoFK($fkPreparaProduto) {
+		
+			$sql="SELECT
+			 	idPedido,tsPreparaProduto_idPreparaProduto,cpStatusPedido
+			FROM
+				$this->table
+			WHERE
+				tsPreparaProduto_idPreparaProduto=:tsPreparaProduto_idPreparaProduto";
+		
+			$s=DB::prepare($sql);
+			$s->bindParam(":tsPreparaProduto_idPreparaProduto",$fkPreparaProduto,PDO::PARAM_INT);
+			$s->execute();
+		
+			try{
+					
+				return $s->fetch();
+		
+			}catch(PDOException $e) {
+					
+				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getFile." na linha ".$e->getLine();
+			}
+		}
+		
 		public function UPDATESTATUS($id) {
 			
 			$sql = "UPDATE 
@@ -262,7 +316,7 @@
 				  FROM 
 					$this->table as ped INNER JOIN tsPreparaProduto as prepProd ON ped.tsPreparaProduto_idPreparaProduto = prepProd.idPreparaProduto
 				  WHERE 
-				  	ped.tsPreparaProduto_idPreparaProduto = prepProd.idPreparaProduto AND cpStatusPedido = 'A'";
+				  	ped.tsPreparaProduto_idPreparaProduto = prepProd.idPreparaProduto AND ped.cpStatusPedido = 'A'";
 			
 		    $row=DB::prepare($sql);
 		    $row->execute(array($this->idPedido,$this->tsPreparaProduto_idPreparaProduto,$this->cpStatusPedido));

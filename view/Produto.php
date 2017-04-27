@@ -115,7 +115,7 @@
 								<th>Quantidade</th>
 								<th>Tipo</th>
 								<th>Valor</th>
-								<th>Tipo</th>
+								<th>Classificação</th>
 								<th>Observação</th>
 								<th></th>
 								<th></th>

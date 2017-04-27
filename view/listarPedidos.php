@@ -1,3 +1,4 @@
+<?php require_once 'blocksUrlAction.php';?>
 <html>
 	<head>
 	    <meta charset="UTF-8" />
@@ -21,7 +22,7 @@
 							<th class="warning">1º complemento</th>
 							<th class="success">2ª complemento</th>
 							<th class="danger">Data criação</th>
-							<th class="success">Observação pedido</th>
+							<th class="success">Observação</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -40,7 +41,7 @@
 							<th class="warning">Tipo</th>
 							<th class="danger">Código</th>
 							<th class="info">Acréscimo</th>
-							<th class="danger">Quantidade acréscimo</th>
+							<th class="danger">QTDE</th>
 							<th class="success">Observação</th>
 						</tr>
 					</thead>
@@ -55,10 +56,10 @@
 					<thead>
 						<tr>
 							<th class="success">Status</th>
-							<th class="info">código</th>
+							<th class="info">Código</th>
 							<th class="danger">Acréscimo</th>
 							<th class="warning">Tipo</th>
-							<th class="danger">Quantidade</th>
+							<th class="danger">QTDE</th>
 							<th class="success">Observação</th>
 							<th class="success"></th>
 						</tr>

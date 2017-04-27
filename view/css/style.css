@@ -7,7 +7,7 @@ body {
 .rolagem
 {
 	 overflow: auto; auto;
-	 height: 200px;   /* QUANTO CHEGAR AO TAMANHO 200PX,APARECE A BARRA DE ROLAGEM VERTICAL*/
+	 height: 170px;   /* QUANTO CHEGAR AO TAMANHO 200PX,APARECE A BARRA DE ROLAGEM VERTICAL*/
 	 text-align:center;
 	 font-family:arial; 
 	 font-size:20px;  
@@ -107,7 +107,8 @@ body {
 .msgRelatorioFinanceiro,
 .isResultadoPesquisaFinanceiro,
 .msgPesquisaPedido,
-.msgPreparaPDF
+.msgPreparaPDF,
+.versao
 {
 	
 	text-align: center;

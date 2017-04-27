@@ -15,21 +15,13 @@ var Service_Prepara_Pedido = (function() {
 				
 				$(".listaPreparaPedido").html("Carregando pedido para preparação...");
 				
-			}
-			,
+			},
 			
 			error:function() {
 				
 				$(".listaPreparaPedido").html("Houve algum erro com a fonte de dados !");
 			},
     		success:function(retorno) {
-				
-//				if(retorno[0].erro) {
-//					
-//					$(".listaPreparaPedido").html(retorno[0].erro);
-//				
-//				}
-//				else{
 				
 				setTimeout(function() {
 					
@@ -52,7 +44,7 @@ var Service_Prepara_Pedido = (function() {
 							itens += "<td>R$ "+i.cpValorTotalLiquidoPedido+"</td>";
 							itens += "<td>"+i.cpObservacaoPedido+"</td>";
 							itens += "<td><a href='Pedido.php?panel=193158&acao=editar&id="+i.idPreparaProduto+"' title='editar'><span class='glyphicon glyphicon-pencil super'  aria-hidden='true'></span></a></td>";
-							itens += "<td><a href='../controller/Prepara_Pedido_Acrescimo_Controller.php?acao=deletarProdPedido&id="+i.idPreparaProduto+"' title='excluir'><span class='glyphicon glyphicon-trash super excluirProdPreparaPedido' aria-hidden='true'></span></a></td>";
+							itens += "<td><a href='../controller/Prepara_Pedido_Acrescimo_Controller.php?acao=deletarProdPedido&id="+i.idPreparaProduto+"' title='excluir / cancelar'><span class='glyphicon glyphicon-trash super excluirProdPreparaPedido' aria-hidden='true'></span></a></td>";
 							itens += "</tr>";
 							
 							$("#tuPedido_cpCodPedido").html("<option value='"+i.cpCodPedido+"'>"+i.cpCodPedido+"</option>");
@@ -68,7 +60,6 @@ var Service_Prepara_Pedido = (function() {
 					setTimeout(function(){
 						FormHelperPedidoAcrescimo.painelEmenuAcrescimoHide(umiTem);
 					},020);
-				//}
 			}
 		});
 	}
@@ -92,12 +83,7 @@ var Service_Prepara_Pedido = (function() {
 			},
 		   success:function(retorno) {
 				
-//				if(retorno[0].erro) {
-//					
-//					$(".").html(retorno[0].erro)
-//				}else {
-//				
-					setTimeout(function(){
+				setTimeout(function(){
 						retorno.map(function(dados) {
 							
 							itens += "<tr>";
@@ -114,7 +100,6 @@ var Service_Prepara_Pedido = (function() {
 						$("#tablePreparaAcrescimo tbody").html(itens);
 						$(".listaPreparaAcrescimo").html("");
 					},1000);	
-				//}
 			}
 		});
 	}

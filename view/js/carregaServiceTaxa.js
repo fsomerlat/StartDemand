@@ -33,7 +33,7 @@ var Service_Taxa =  (function() {
 					
 					if(formaPagamento == "PagSeguro") {
 						itens += "<td class='tdPagSeguroPagTaxa'>Receber em "+dados.cpPlanoPagSeguro+" dias</td>";
-					}else {
+					  } else {
 						itens += "<td><a href=''><span class='glyphicon glyphicon-credit-card' aria-hidden='true'></span></a></td>";
 					}
 					itens += "<td>"+dados.cpBandeiraCartaoTaxa+"</td>";

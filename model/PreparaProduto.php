@@ -79,23 +79,21 @@ class PreparaProduto extends Pedido{
 	}
 
 
-	public function listId($id) { // PARACE QUE NÃO ESTÁ SENDO UTILIZADO
+	public function listId($id) { //PARA VERIFICAR SE PRODUTO AINDA ESTÁ SENDO PREPARADO COM ACŔESICMO (SE ESTÁ ABERTO )
 
 		$sql="SELECT
-			prep.cpCodPedido,prep.cpQtdProduto,prep.cpComplementoUm,
-			prep.cpComplementoDois,prod.cpValorProduto,prep.cpValorTotalProduto,
-			prep.cpStatusPedido,prep.cpObservacaoPedido
-		FROM
-			$this->table as prep INNER JOIN tuProduto as prod
-			ON prod.idProduto  = prep.tuProduto_idProduto
-		WHERE idPreparaProduto=:idPreparaProduto";
+				idPreparaProduto
+			FROM
+				$this->table 
+			WHERE 
+				idPreparaProduto=:idPreparaProduto";
 			
 		$list=DB::prepare($sql);
 		$list->bindParam(":idPreparaProduto",$id,PDO::PARAM_INT);
 		$list->execute();
 		try {
 
-			return $list->fetch();
+			return $list->rowCount();
 				
 		}catch(PDOException $e) {
 
@@ -227,7 +225,8 @@ class PreparaProduto extends Pedido{
 			echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 		}
 	}
-	
+
+
 	public function getRowCodPedido() {
 		
 		$sql="SELECT 

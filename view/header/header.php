@@ -42,7 +42,7 @@
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
 							<li class="dropdown">
-								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pedidos<strong class="caret"></strong></a>
+								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pedido<strong class="caret"></strong></a>
 								<ul class="dropdown-menu">
 									<li>
 										<a href="Pedido.php?panel=193158">Gerar</a>
@@ -61,7 +61,7 @@
 						
 						<ul class="nav navbar-nav">
 							<li class="dropdown">
-								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produtos<strong class="caret"></strong></a>
+								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produto<strong class="caret"></strong></a>
 								<ul class="dropdown-menu">
 									<li>
 										<a href="Produto.php?panel=193157">Cadastrar</a>
@@ -79,7 +79,7 @@
 						</ul>
 						<ul class="nav navbar-nav">
 							<li class="dropdown">
-								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Finaceiro<strong class="caret"></strong></a>
+								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Financeiro<strong class="caret"></strong></a>
 								<ul class="dropdown-menu">
 									<li>
 										<a href="Contas.php">Lançar contas</a>
@@ -118,11 +118,9 @@
 								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sair<strong class="caret"></strong></a>
 								<ul class="dropdown-menu">
 									<li>
-										<a href="#">Cadastrar</a>
+										<a href="http://www.gecsistemas.hol.es" target="_blank">site</a>
 									</li>
-									<li>
-										<a href="#">Listar</a>
-									</li>
+	
 									<li class="divider">
 									</li>
 									<li>
@@ -154,7 +152,7 @@
 								<a href="Acrescimo.php?panel=387270"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> acréscimo</a>
  							</li>
  							<li class="acitve">
-								<a href="PainelDePedidos.php"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> painel de pedidos</a>
+								<a href="PainelDePedidos.php"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> painel de controle</a>
  							</li>	 							
 						</ul>
 					</div>

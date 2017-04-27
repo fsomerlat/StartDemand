@@ -51,8 +51,7 @@ var Service_Contas = (function(){
 						
 						usuario = dados.cpUsuario;
 						msgcadastro = usuario +" no dia " +dataCadastroConta+" - " + horaCad;
-													
-						
+														
 						//LOG DE ULTIMA ALTERÇÃO DO POR USUÁRIO
 						if(dados.cpDataUltimaAlteracao != null) {
 							

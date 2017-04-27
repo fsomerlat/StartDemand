@@ -139,7 +139,7 @@
 	endif;
 	
 	
-	if($_REQUEST["acao"] == "gerar pedido com acrescimo"):
+	if($_REQUEST["acao"] == "gerar pedido com acrescimo"):  // INSERIR IDPREPARA PEDIDO NA TABELA PEDIDO PARA CANCELAR 
 		
 		$fk =  $_REQUEST["tuProduto_idProduto"];
 	
@@ -327,7 +327,7 @@
 	    	$ped->__set("cpValorParcela", 0);
 	    }
 	    
-	    $ped->__set("cpObservacaoPedido", addslashes($obsPedido));
+	    $ped->__set("cpObservacaoPedido", addslashes(trim($obsPedido)));
 	    
 	    $getInfoPreparaProduto = $preparaProduto->getProduto(); 
 	  
@@ -339,7 +339,7 @@
 	   if($preparaAcrescimo->getRow() > 0 && $preparaProduto->getRow() > 0 && $comparaIdsDuplicados == 0) { 
 	    	
 	   		
-	   		$ped->INSERT();
+	   		$ped->INSERT(); 
 		   	
 	    	$getInfoPedido = $ped->getInfoPedido(); //RETORNA SEMPRE O ULTIMO REGISTRO DA TABELA tuPedido para ser inserido na tsPreparaProduto
 	    	$idPedido = $getInfoPedido->idPedido;
@@ -363,7 +363,7 @@
 		    	$acrescimo->__set("cpValorTaxaJuros", 0);
 		    	$acrescimo->__set("cpValorTotalLiquido", 0);
 		    	$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
-		    	$acrescimo->__set("cpObservacaoAcrescimo", addslashes($res->cpObservacaoAcrescimo));
+		    	$acrescimo->__set("cpObservacaoAcrescimo", addslashes(trim($res->cpObservacaoAcrescimo)));
 		    	 
 		    	$acrescimo->INSERT();
 	    
@@ -426,7 +426,7 @@
 				$acrescimo->__set("cpValorTaxaJuros", 0);
 				$acrescimo->__set("cpValorTotalLiquido", 0);
 				$acrescimo->__set("cpValorTotalAcrescimo", addslashes($res->cpValorTotalAcrescimo));
-				$acrescimo->__set("cpObservacaoAcrescimo", addslashes($res->cpObservacaoAcrescimo));
+				$acrescimo->__set("cpObservacaoAcrescimo", addslashes(trim($res->cpObservacaoAcrescimo)));
 						
 				$acrescimo->INSERT();
 				
@@ -468,16 +468,30 @@
 	
 	if($_REQUEST["acao"] == "finalizar"):
 		
-		$id = $_REQUEST["id"];
-	
-		$ped->__set("cpStatusPedido", "F");
-		$acrescimo->__set("cpStatusAcrescimo", "F");
+		$id = $_REQUEST["id"]; 
+		$getInfoPedido = $ped->getId($id);
+			
+		$idPreparaProduto = $getInfoPedido->tsPreparaProduto_idPreparaProduto;
+		$preparaProduto->__set("idPreparaProduto", addslashes($idPreparaProduto));
 		
-		$ped->UPDATESTATUS($id);
-		$acrescimo->UPDATESTATUS($id);
+		if($preparaProduto->listId($idPreparaProduto)):
 		
-		header("location:../view/listarPedidos.php");
+			echo "<script language='javascript'>
+						window.alert('Pedido a disposição do cliente. Aguarde um momento...');
+						window.history.go(-1);
+					</script>";
 		
+		else:
+			
+			$ped->__set("cpStatusPedido", "F");
+			$acrescimo->__set("cpStatusAcrescimo", "F");
+			
+			$ped->UPDATESTATUS($id);
+			$acrescimo->UPDATESTATUS($id);
+			
+			header("location:../view/listarPedidos.php");
+			
+		endif;
 	endif;
 	
 	if($_REQUEST["acao"] == "atualizar"):
@@ -489,7 +503,7 @@
 		$preparaProduto->__set("cpComplementoUm", addslashes($_REQUEST["cpComplementoUm"]));
 		$preparaProduto->__set("cpComplementoDois", addslashes($_REQUEST["cpComplementoDois"]));
 		$preparaProduto->__set("cpValorTotalProduto", addslashes($_REQUEST["cpValorTotalProduto"]));
-		$preparaProduto->__set("cpObservacaoPedido", addslashes($_REQUEST["cpObservacaoPedido"]));
+		$preparaProduto->__set("cpObservacaoPedido", addslashes(trim($_REQUEST["cpObservacaoPedido"])));
 			
 		$preparaProduto->UPDATE($id);
 		 

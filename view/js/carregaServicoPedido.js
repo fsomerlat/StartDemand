@@ -20,12 +20,6 @@ var Service_Pedido = (function() {
 			},
 			success: function(retorno) {
 				
-//				if(retorno[0].erro) {
-//					
-//					$(".listaPedidoProdutos").html(retorno[0].erro);
-//				
-//				} else {
-					
 					retorno.map(function(dados) {
 							
 						var status = dados.cpStatusPedido,
@@ -79,6 +73,7 @@ var Service_Pedido = (function() {
 								case "Em andamento" : painelPedidosProdutos += "<td class='statusAndamentoPedido'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+opcaoStatus+" ...</td>"; break;
 								case "Finalizado": painelPedidosProdutos += "<td class='statusFinalizadoPedido'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+opcaoStatus+"</td>"; break;
 							}
+							painelPedidosProdutos += "<td class='danger'>"+dados.idPedido+"</td>";
 							painelPedidosProdutos += "<td>"+dados.cpNomeProduto+"</td>";
 							painelPedidosProdutos += "<td>"+dados.cpCodPedido+"</td>";
 							painelPedidosProdutos += "<td>"+dataPedido+"</td>";
@@ -94,9 +89,8 @@ var Service_Pedido = (function() {
 					
 					$("#tablePedidoProdutos tbody").html(itensProdutos);
 					$("#painelPedidosProdutos tbody").html(painelPedidosProdutos);
-					$(".h3listaPedidoProduto").html("LISTA DE PRODUTOS");
-					
-				//}
+					$(".h3listaPedidoProduto").html("LISTA DE PRODUTOS PRINCIPAIS");
+
 			}
 		});	
 		

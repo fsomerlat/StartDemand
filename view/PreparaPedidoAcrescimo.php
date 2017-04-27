@@ -52,7 +52,7 @@
 
 					<div class="col-md-2">
 						<div class="form-group">
-							<label for="Codifo do pedido">Códido do pedido atual</label>
+							<label for="Codifo do pedido">Pedido atual</label>
 							<select type="text" name="tuPedido_cpCodPedido" id="tuPedido_cpCodPedido" class="form-control" readonly >
 								<!-- CAREEGA FORMHELPERPREPARAPEDIDODACRESCIMO -->
 							</select>

@@ -8,65 +8,65 @@ $acrescimo = new Acrescimo();
 ob_start();
 $html = ob_get_clean();
 
-// 	if($_REQUEST["tipoPesquisa"] == "T"): //<img src='http://localhost/startDemand/view/img/logoPDF.png'>
+	if($_REQUEST["tipoPesquisa"] == "T"): //<img src='http://localhost/startDemand/view/img/logoPDF.png'>
 	
-// 	$html .= "<h3 class='isH3TituloPDF'>Pedidos finalizado e cancelados</h3>";
-// 	$html .= "<p>Os valores aqui apresentados podem conter algum desconto referente a vendas incluindo possíveis taxas de cartões de crédito / débito
-// 				ou algum outro plano contrato pela empresa.</p>";
-// 	$html .= "<table class='table table-bordered'>";
-// 	$html .= "<head>";
-// 	$html .= "<tr>";
-// 	$html .= "<th>Status</th>";
-// 	$html .= "<th>Produto</th>";
-// 	$html .= "<th>QT/prod</th>";
-// 	$html .= "<th>Acréscimo</th>";
-// 	$html .= "<th>QT/acres</th>";
-// 	$html .= "<th>Val/base/acr</th>";
-// 	$html .= "<th>Val/T/acr</th>";
-// 	$html .= "<th>Valor/T/Ped</th>";
-// 	$html .= "<th>QT/parcelas</th>";
-// 	$html .= "<th>val/parcela</th>";
-// 	$html .= "<th>Forma/pag</th>";
-// 	$html .= "<th>Band/cartão</th>";
-// 	$html .= "<th>%</th>";
-// 	$html .= "<th>val/%</th>";
-// 	$html .= "<th>Val/líq/Ped</th>";
-// 	$html .= "<th>baixa</th>";
-// 	$html .= "</tr>";
-// 	$html .= "</head>";
+	$html .= "<h3 class='isH3TituloPDF'>Pedidos finalizado e cancelados</h3>";
+	$html .= "<p>Os valores aqui apresentados podem conter algum desconto referente a vendas incluindo possíveis taxas de cartões de crédito / débito
+				ou algum outro plano contrato pela empresa.</p>";
+	$html .= "<table class='table table-bordered'>";
+	$html .= "<head>";
+	$html .= "<tr>";
+	$html .= "<th>Status</th>";
+	$html .= "<th>Produto</th>";
+	$html .= "<th>QT/prod</th>";
+	$html .= "<th>Acréscimo</th>";
+	$html .= "<th>QT/acres</th>";
+	$html .= "<th>Val/base/acr</th>";
+	$html .= "<th>Val/T/acr</th>";
+	$html .= "<th>Valor/T/Ped</th>";
+	$html .= "<th>QT/parcelas</th>";
+	$html .= "<th>val/parcela</th>";
+	$html .= "<th>Forma/pag</th>";
+	$html .= "<th>Band/cartão</th>";
+	$html .= "<th>%</th>";
+	$html .= "<th>val/%</th>";
+	$html .= "<th>Val/líq/Ped</th>";
+	$html .= "<th>baixa</th>";
+	$html .= "</tr>";
+	$html .= "</head>";
 	
-// 	$getInfoALL= $pedido->getPedidoInProduto();
+	$getInfoALL= $pedido->getPedidoInProduto();
 	
-// 	foreach($getInfoALL as $key => $res):
+	foreach($getInfoALL as $key => $res):
 		
-// 		($res->cpStatusPedido == "F") ? $status = "Finalizado" : $status = "Cancelado";
-// 		$getInfoAcrescimo = $acrescimo->getId($res->idPedido);	
+		($res->cpStatusPedido == "F") ? $status = "Finalizado" : $status = "Cancelado";
+		$getInfoAcrescimo = $acrescimo->getId($res->idPedido);	
 		
 		
-// 		$html.= "<tr>";
-// 		$html.= "<td>".$status."</td>";
-// 		$html.= "<td>".$res->cpNomeProduto."</td>";
-// 		$html.= "<td>".$res->cpQtdProduto."</td>";
-// 		$html.= "<td>".$getInfoAcrescimo->cpAcrescimo."</td>";
-// 		$html.= "<td>".$getInfoAcrescimo->cpQtdAcrescimo."</td>";
-// 		$html.= "<td>R$ ".$getInfoAcrescimo->cpValorBaseAcrescimo."</td>";
-// 		$html.= "<td>R$ ".$getInfoAcrescimo->cpValorTotalAcrescimo."</td>";
-// 		$html.= "<td>R$ ".$res->cpValorTotalPedido."</td>";
-// 		$html.= "<td>".$res->cpQtdParcela."</td>";
-// 		$html.= "<td>R$ ".$res->cpValorParcela."</td>";
-// 		$html.= "<td>".$res->cpFormaPagamento."</td>";
-// 		$html.= "<td>".$res->cpBandeiraCartaoPedido."</td>";
-// 		$html.= "<td>".$res->cpPorcentagemJurosPedido."</td>";
-// 		$html.= "<td>R$ ".$res->cpValorTaxaJurosPedido."</td>";
-// 		$html.= "<td>R$ ".$res->cpValorTotalLiquidoPedido."</td>";
-// 		$html.= "<td>".$res->cpDataBaixa."</td>";
-// 		$html.= "</tr>";
+		$html.= "<tr>";
+		$html.= "<td>".$status."</td>";
+		$html.= "<td>".$res->cpNomeProduto."</td>";
+		$html.= "<td>".$res->cpQtdProduto."</td>";
+		$html.= "<td>".$getInfoAcrescimo->cpAcrescimo."</td>";
+		$html.= "<td>".$getInfoAcrescimo->cpQtdAcrescimo."</td>";
+		$html.= "<td>R$ ".$getInfoAcrescimo->cpValorBaseAcrescimo."</td>";
+		$html.= "<td>R$ ".$getInfoAcrescimo->cpValorTotalAcrescimo."</td>";
+		$html.= "<td>R$ ".$res->cpValorTotalPedido."</td>";
+		$html.= "<td>".$res->cpQtdParcela."</td>";
+		$html.= "<td>R$ ".$res->cpValorParcela."</td>";
+		$html.= "<td>".$res->cpFormaPagamento."</td>";
+		$html.= "<td>".$res->cpBandeiraCartaoPedido."</td>";
+		$html.= "<td>".$res->cpPorcentagemJurosPedido."</td>";
+		$html.= "<td>R$ ".$res->cpValorTaxaJurosPedido."</td>";
+		$html.= "<td>R$ ".$res->cpValorTotalLiquidoPedido."</td>";
+		$html.= "<td>".$res->cpDataBaixa."</td>";
+		$html.= "</tr>";
 	
-// 	endforeach;
+	endforeach;
 	
-// 	$html .= "</table>";
+	$html .= "</table>";
 	
-// endif;
+endif;
 
 if($_REQUEST["tipoPesquisa"] == "D"):
  

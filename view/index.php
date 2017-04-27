@@ -8,9 +8,9 @@
 		<div class="container-fluid">
 		<div class="col-md-12 login">
 		<div class="page">
-			<h4>
+			<h3>
 				Login - <small> StartDemand</small>
-			</h4>
+			</h3>
 		</div>
 		</div>
 			<div class="row">
@@ -40,10 +40,17 @@
 									<button type="reset"  class="btn btn-warning form-control">limpar</button>
 								</div>
 							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<div class="versao">Versão 1.2.1</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</form>
-				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					
+				</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>

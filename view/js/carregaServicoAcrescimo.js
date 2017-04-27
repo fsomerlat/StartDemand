@@ -10,13 +10,6 @@ var Service_Acrescimo = (function() {
 			cache:false,
 			dataType:"json",
 			success: function(retorno) {
-				
-//				if(retorno[0].erro) {
-//					
-//					$("").html(retorno[0].erro);
-//				
-//				}else{
-
 					
 				retorno.map(function(dados) {
 					
@@ -55,7 +48,8 @@ var Service_Acrescimo = (function() {
 							case "Em andamento": itensTableAcrescimo += "<td class='statusAndamentoPedido'><span class='glyphicon glyphicon-hourglass' aria-hidden='true'></span> "+status+" ...</td>"; break;
 							case "Cancelado" : itensTableAcrescimo += "<td class='statusCancelPedido'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+status+"</td>"; break;
 							case "Finalizado": itensTableAcrescimo += "<td class='statusFinalizadoPedido'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+status+"</td>"; break;
-						}			
+						}		
+						itensTableAcrescimo += "<td class='danger'>"+dados.tuPedido_idPedido+"</td>";
 						itensTableAcrescimo += "<td>"+dados.cpCodPedido+"</td>";
 						itensTableAcrescimo += "<td>"+tipo+"</td>";
 						itensTableAcrescimo += "<td>"+dados.cpAcrescimo+"</td>";
@@ -72,7 +66,7 @@ var Service_Acrescimo = (function() {
 					$("#tablePedidoAcrescimo tbody").html(itensAcrescimoTablePedido);
 					$("#tableAcrescimo tbody").html(itensTableAcrescimo);
 					$("#painelAcrescimosPedidos tbody").html(itensTableAcrescimo);
-					$(".h3listaPedidoAcrescimo").html("LISTA DE ACRÉSCIMOS RELACIONADOS A PEDIDOS");
+					$(".h3listaPedidoAcrescimo").html("ACRÉSCIMOS DOS PRODUTOS PRINCIPAIS");
 					$("").html("");
 			}
 		});

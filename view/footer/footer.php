@@ -2,7 +2,7 @@
 		<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 			<div class="navbar-header">	 
 			  <div class="navbar-brand"> 
-			  	 &copy; Todos direitos reservados - GECSistemas para internet / Rua Pégaso, 276, Jardim Riacho das Pedras - Contagem MG / Brasil
+			  	 &copy; Todos direitos reservados - GECSistemas para internet / gecsistemasparainternet@gmail.com / 31991803131 - Contagem MG / Brasil
 			  </div>
 			</div>		
 		</nav>

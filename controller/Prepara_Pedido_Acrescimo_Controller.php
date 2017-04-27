@@ -71,7 +71,7 @@
 						window.location.href='../view/PreparaPedidoAcrescimo.php?panel=655955';
 					</script>";
 		
-		elseif($_REQUEST["cpQtdAcrescimo"]== 0):
+		elseif($_REQUEST["cpQtdAcrescimo"] == 0):
 		
 			echo "<script language='javascript'>
 							window.alert('O campo [ QUANTIDADE ] DEVE SER SELECIONADO !');
@@ -85,14 +85,41 @@
 		endif;
 	endif;
 	
-	if($_REQUEST["acao"] == "deletarProdPedido"):
+	if($_REQUEST["acao"] == "deletarProdPedido"): // EXCLUI OU CANCELA PRODUTO SENDO PREPARADO
 	
-		$id = (int)$_REQUEST["id"];
+		$idPreparaProduto = (int)$_REQUEST["id"];
+		
+		$getInfoPedido = $ped->getInfoPedidoFK($idPreparaProduto);
+		$idPedido = $getInfoPedido->idPedido;
+		
+		$ped->__set("tsPreparaProduto_idPreparaProduto", addslashes($idPreparaProduto));
+		$ped->__set("cpStatusPedido", "C");
+		$acrescimo->__set("cpStatusAcrescimo","C");
+		
+		if($ped->comparaRelacionamentoIds() > 0): 	//CANCELA PEDIDO E ACŔESCIMO RELACIONADOS E ATUALIZA STATUS SE ESTIVER EM ANDAMENTO
 	
-		$preparaProdPed->DELETE($id);
-		
-		header("location:../view/PreparaPedidoAcrescimo.php?panel=655955");
-		
+			$ped->UPDATESTATUS($idPedido);
+			$acrescimo->UPDATESTATUS($idPedido);
+			$preparaProdPed->DELETE($idPreparaProduto);
+			
+			echo "<script language='javascript'>
+						window.alert('O pedido foi [ CANCELADO ] com sucesso !');
+						window.location.href='../view/Pedido.php?panel=193158';
+					</script>";
+			
+		elseif($ped->VerificaStatus($idPreparaProduto)):
+			
+			echo "<script language='javascript'>
+						window.alert('Pedido [ FINALIZADO ] não pode ser excluído ou cancelado ! !');
+						window.history.go(-1);
+					</script>";
+			
+		else:
+			
+			$preparaProdPed->DELETE($idPreparaProduto);
+			header("location:../view/PreparaPedidoAcrescimo.php?panel=655955");
+			
+		endif;
 	endif;
 	
 	if($_REQUEST["acao"] == "deletarPreparaAcrescimo"):
