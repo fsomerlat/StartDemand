@@ -36,7 +36,7 @@
 						 
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 							 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-						</button> <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Inicio</a>
+						</button> <a class="navbar-brand" href="mobile.php"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Inicio</a>
 					</div>
 					
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -82,16 +82,12 @@
 								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Financeiro<strong class="caret"></strong></a>
 								<ul class="dropdown-menu">
 									<li>
-										<a href="Contas.php">Lançar contas</a>
-									</li>
-									<li>
-										<a href="Financeiro.php">Listar</a>
-									</li>
-									<li class="divider">
+										<a href="Contas.php">Contas</a>
 									</li>
 									<li>
 										<a href="Taxas.php">Taxas</a>
-									</li>									
+									</li>
+									<li class="divider"></li>									
 									<li>
 										<a href="Relatorio_Financeiro.php">relatórios</a>
 									</li>
@@ -153,7 +149,10 @@
  							</li>
  							<li class="acitve">
 								<a href="PainelDePedidos.php"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> painel de controle</a>
- 							</li>	 							
+ 							</li>
+  							<li class="acitve">
+								<a href="PainelDePedidos.php"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> fila de pedidos aguardando...</a>
+ 							</li>								 							
 						</ul>
 					</div>
 				</div>

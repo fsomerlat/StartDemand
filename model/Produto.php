@@ -94,6 +94,9 @@
 			}
 		}
 		
+	
+		
+		
 		public function UPDATE($id) {
 			
 			$sql="UPDATE $this->table 
@@ -120,6 +123,12 @@
 				
 				echo "Erro no arquivo ".$e->getFile()." referente a mensagem ".$e->getMessage()." na linha ".$e->getLine();
 			}
+		}
+		
+		public function getAll() {
+			
+			
+
 		}
 		
 		

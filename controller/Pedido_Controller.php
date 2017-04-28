@@ -649,8 +649,8 @@
 						</a>
 				</td>";
 				$td .= "<td>".$res->cpBandeiraCartaoPedido."</td>";
-				$td .= "<td>".$res->cpValorTotalPedido."</td>";
-				$td .= "<td>".$res->cpValorTotalLiquidoPedido."</td>";
+				$td .= "<td>R$ ".$res->cpValorTotalPedido."</td>";
+				$td .= "<td>R$ ".$res->cpValorTotalLiquidoPedido."</td>";
 			    $td .= "</tr>";
 				
 			endforeach;
@@ -732,8 +732,8 @@
 							</a>
 					</td>";
 			$td .= "<td>".$res->cpBandeiraCartaoPedido."</td>";
-			$td .= "<td>".$res->cpValorTotalPedido."</td>";
-			$td .= "<td>".$res->cpValorTotalLiquidoPedido."</td>";
+			$td .= "<td>R$ ".$res->cpValorTotalPedido."</td>";
+			$td .= "<td>R$ ".$res->cpValorTotalLiquidoPedido."</td>";
 			$td .= "</tr>";
 
 		endforeach;

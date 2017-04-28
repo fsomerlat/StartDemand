@@ -32,6 +32,7 @@
 	<script type="text/javascript" src="js/formHelperUsuario.js"></script>
 	<script type="text/javascript" src="js/formHelperRelatorioFinanceiro.js"></script>
 	<script type="text/javascript" src="js/formHelperRelatorioPedido.js"></script>
+	<script type="text/javascript" src="js/multiselect.js"></script>
 	<script type="text/javascript" src="js/carregaServicoProduto.js"></script>
 	<script type="text/javascript" src="js/carregaServicoPedido.js"></script>
 	<script type="text/javascript" src="js/carregaServicoAcrescimo.js"></script>
@@ -40,6 +41,7 @@
 	<script type="text/javascript" src="js/carregaServicoContas.js"></script>
 	<script type="text/javascript" src="js/carregaServicoUsuario.js"></script>
 	<script type="text/javascript" src="js/maskinput.js"></script>
+	<script type="text/javascript" src="js/formHelperMobile.js"></script>
 	<script type="text/javascript" src="js/view.js"></script>
 
 	</body>
