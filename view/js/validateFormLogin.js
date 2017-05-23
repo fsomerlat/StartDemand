@@ -15,7 +15,7 @@ $(document).ready(function() {
 		} else if(password) {
 			
 			$('msgNome').html("");
-			$('msgSenha').html("Por favor, preencha  esse campo com 4 caracteres !").css({color:"red"}); return false;
+			$('msgSenha').html("Por favor, preencha  esse campo !").css({color:"red"}); return false;
 			
 		} else {
 			

@@ -37,6 +37,7 @@
 				case "S": header("location:../view/Pedido.php?panel=193158");  $_SESSION["logado"] = true; break;
 				case "C": header("location:../view/Pedido.php?panel=193158"); $_SESSION["logado"] = true; break;
 				default: $_SESSION['logado'] = false;
+				
 			endswitch;
 	    
 		else:

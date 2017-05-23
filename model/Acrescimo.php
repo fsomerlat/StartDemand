@@ -2,7 +2,7 @@
 
 	class Acrescimo {
 		
-		protected $table ="tuAcrescimo";
+		protected $table;
 		private $idAcrescimo,
 				$cpStatusAcrescimo,
 				$cpSituacaoAcrescimo,
@@ -23,6 +23,14 @@
 				$cpValorTotalLiquido,
 				$cpObservacaoAcrescimo;
 		
+				
+		public function __construct($table = "tuAcrescimo") {
+			
+			parent::__construct();
+			
+			$this->table = $table;
+		}
+				
 		public function __set($attr,$valor){
 			
 			$this->$attr = $valor;

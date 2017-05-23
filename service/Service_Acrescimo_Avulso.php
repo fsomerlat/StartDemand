@@ -1,4 +1,4 @@
-<?php require_once '../core/include.php';
+z<?php require_once '../core/include.php';
 
 	header("Content-Type: application/json");
 	
